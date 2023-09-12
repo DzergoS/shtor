@@ -7,7 +7,7 @@ import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 import Product from "../pages/Product/Product";
 import Header from "../ui-components/Header";
 import Footer from "../ui-components/Footer";
-import './App.css';
+import './AppRouter.css';
 
 const AppRouter = () => {
   return (
