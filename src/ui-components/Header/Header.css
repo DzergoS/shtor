@@ -1,0 +1,58 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*filter: invert();*/
+}
+
+.header img {
+    filter: invert();
+}
+
+.header.absolute {
+    position: absolute;
+    left: 46px;
+    right: 46px;
+    top: 46px;
+}
+
+.header.absolute img {
+    filter: none;
+}
+
+.header nav a, .header .lang-cart button {
+    margin-right: 36px;
+    white-space: nowrap;
+}
+
+.header .lang-cart button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+}
+
+.header.absolute nav a, .header.absolute .lang-cart button {
+    color: white;
+}
+
+.header.absolute .lang-cart path, .header.absolute .lang-cart circle {
+    /*filter: invert();*/
+    stroke: white;
+}
+
+.header nav, .header .lang-cart {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    min-width: 167px;
+}
+
+.header .lang-cart {
+    justify-content: flex-end;
+}
+
+.header img {
+    width: 180px;
+}
