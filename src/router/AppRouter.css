@@ -4,6 +4,12 @@ body {
   color: black;
 }
 
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+  }
+}
+
 a, a:active, a:visited {
   text-decoration: none;
   color: black;

@@ -56,3 +56,24 @@
 .header img {
     width: 180px;
 }
+
+.header .menu {
+    filter: invert();
+    width: 45px;
+    height: 45px;
+}
+
+@media (max-width: 768px) {
+    .header {
+        width: 100%;
+    }
+    .header.absolute {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+    }
+
+    .header img {
+        width: 150px;
+    }
+}
