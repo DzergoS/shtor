@@ -13,12 +13,15 @@ const AppRouter = () => {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route path="/" exact component={Main} />
-        <Route path="/product" component={Product} />
-        <Route path="/simple" component={Info} />
-        <Route path="/cart" component={ShoppingCart} />
-      </Switch>
+      <main>
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route path="/product" component={Product} />
+          <Route path="/simple" component={Info} />
+          <Route path="/about-us" component={Info} />
+          <Route path="/cart" component={ShoppingCart} />
+        </Switch>
+      </main>
       <Footer />
     </Router>
   );
