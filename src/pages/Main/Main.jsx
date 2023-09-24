@@ -3,9 +3,9 @@ import './Main.css'
 
 const MainPage = () => {
   return (
-    <main>
+    <>
       {/* Your main page content goes here */}
-    </main>
+    </>
   );
 };
 

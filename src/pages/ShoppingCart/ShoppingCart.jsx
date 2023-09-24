@@ -3,9 +3,9 @@ import './ShoppingCart.css'
 
 const ShoppingCart = () => {
   return (
-    <main>
+    <>
 
-    </main>
+    </>
   );
 };
 

@@ -3,9 +3,9 @@ import './Product.css'
 
 const Product = () => {
   return (
-    <main>
+    <>
 
-    </main>
+    </>
   );
 };
 
