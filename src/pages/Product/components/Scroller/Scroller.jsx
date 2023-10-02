@@ -10,20 +10,20 @@ const Scroller = () => {
             <div className="scroller-items">
                 <div className="scroller-item">
                     <div className="product-item">
-                        <img src={ScrollImg} alt="product" />
-                        <p>OBERIH/clay collar</p>
+                        <img className='product-img' src={ScrollImg} alt="product" />
+                        <p className='scroller-subtitle'>OBERIH/clay collar</p>
                     </div>
                     <div className="product-item">
-                        <img src={ScrollImg} alt="product" />
-                        <p>OBERIH/clay collar</p>
+                        <img className='product-img' src={ScrollImg} alt="product" />
+                        <p className='scroller-subtitle'>OBERIH/clay collar</p>
                     </div>
                     <div className="product-item">
-                        <img src={ScrollImg} alt="product" />
-                        <p>OBERIH/clay collar</p>
+                        <img className='product-img' src={ScrollImg} alt="product" />
+                        <p className='scroller-subtitle'>OBERIH/clay collar</p>
                     </div>
                     <div className="product-item">
-                        <img src={ScrollImg} alt="product" />
-                        <p>OBERIH/clay collar</p>
+                        <img className='product-img' src={ScrollImg} alt="product" />
+                        <p className='scroller-subtitle'>OBERIH/clay collar</p>
                     </div>
                 </div>
             </div>

@@ -47,8 +47,8 @@ const ProductInfo = () => {
                     <h2 className="product-title">OBJECT/pendant</h2>
                     <div className="tabs-description">
                         <div className="tab-buttons">
-                            <button onClick={() => setIsDescriptionActive(true)}>Discription</button>
-                            <button onClick={() => setIsDescriptionActive(false)}>Care</button>
+                            <button class="button-description" onClick={() => setIsDescriptionActive(true)}>Discription</button>
+                            <button class="button-care" onClick={() => setIsDescriptionActive(false)}>Care</button>
                         </div>
                         <div className="tab-content">
                             {isDescriptionActive ? (
