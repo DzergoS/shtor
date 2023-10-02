@@ -52,16 +52,20 @@ const Products = () => {
       {macap.map((product, index) => (
         <Link to={'/product'} className="product-item" key={index}>
           <img src={product.img} alt={'product-image'}/>
-          <h3>{product.category}/{product.title}</h3>
-          <p>₴{product.price}</p>
+          <div className="product-info">
+            <h3>{product.category}/{product.title}</h3>
+            <p>₴{product.price}</p>
+          </div>
         </Link>
       ))}
       {showMore
         ? macap.map((product, index) => (
           <Link to={'/product'} className="product-item" key={index}>
             <img src={product.img} alt={'product-image'}/>
-            <h3>{product.category}/{product.title}</h3>
-            <p>₴{product.price}</p>
+            <div className="product-info">
+              <h3>{product.category}/{product.title}</h3>
+              <p>₴{product.price}</p>
+            </div>
           </Link>
         ))
         : ''

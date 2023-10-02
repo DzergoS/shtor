@@ -21,7 +21,9 @@ const Header = () => {
           <NavLink to="/about-us">About Us</NavLink>
           <NavLink to="/">Shop</NavLink>
         </nav>}
-      <img src={logo} alt="logo"/>
+      <NavLink to="/" className="logo">
+        <img src={logo} alt="logo"/>
+      </NavLink>
       {isMobile
         ? <Menu className="menu"/>
         : <div className='lang-cart'>
