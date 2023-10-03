@@ -1,11 +1,13 @@
 .scroller-container img {
     width: 100%;
-    height: 370px;
+}
+
+.product-item:last-child {
+    margin-right: 0;
 }
 
 .product-item {
-    width: 25%;
-    margin-right: 24px;
+    width: calc(25% - 18px);
 }
 
 .scroller-container .scroller-title {
@@ -14,7 +16,7 @@
     font-weight: 400;
 }
 
-.scroller-container .scroller-item {
+.scroller-container .scroller-items {
     display: flex;
     justify-content: space-between;
 }

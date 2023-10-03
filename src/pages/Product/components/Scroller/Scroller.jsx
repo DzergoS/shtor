@@ -8,23 +8,21 @@ const Scroller = () => {
         <div className='scroller-container'>
             <h4 className="scroller-title">You also may like</h4>
             <div className="scroller-items">
-                <div className="scroller-item">
-                    <div className="product-item">
-                        <img className='product-img' src={ScrollImg} alt="product" />
-                        <p className='scroller-subtitle'>OBERIH/clay collar</p>
-                    </div>
-                    <div className="product-item">
-                        <img className='product-img' src={ScrollImg} alt="product" />
-                        <p className='scroller-subtitle'>OBERIH/clay collar</p>
-                    </div>
-                    <div className="product-item">
-                        <img className='product-img' src={ScrollImg} alt="product" />
-                        <p className='scroller-subtitle'>OBERIH/clay collar</p>
-                    </div>
-                    <div className="product-item">
-                        <img className='product-img' src={ScrollImg} alt="product" />
-                        <p className='scroller-subtitle'>OBERIH/clay collar</p>
-                    </div>
+                <div className="product-item">
+                    <img className='product-img' src={ScrollImg} alt="product" />
+                    <p className='scroller-subtitle'>OBERIH/clay collar</p>
+                </div>
+                <div className="product-item">
+                    <img className='product-img' src={ScrollImg} alt="product" />
+                    <p className='scroller-subtitle'>OBERIH/clay collar</p>
+                </div>
+                <div className="product-item">
+                    <img className='product-img' src={ScrollImg} alt="product" />
+                    <p className='scroller-subtitle'>OBERIH/clay collar</p>
+                </div>
+                <div className="product-item">
+                    <img src={ScrollImg} alt="product" />
+                    <p className='scroller-subtitle'>OBERIH/clay collar</p>
                 </div>
             </div>
         </div>

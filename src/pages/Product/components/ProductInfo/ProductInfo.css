@@ -5,11 +5,18 @@
     height: 100%;
 }
 
-.product-info button {
-    font-size: 16px;
+.product-info .tab-button.active {
+    font-weight: 600;
 }
 
-.product-info .tab-buttons .button-care,.button-description {
+.product-info .tab-button {
+    min-width: 84px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.product-info .tab-buttons .tab-button {
     margin-right: 36px;
 }
 
@@ -69,12 +76,11 @@
 }
 
 .product-info .button-container {
-    display: flex;
-    justify-content: center;
     width: 100%;
     max-width: 363px;
     height: 32px;
     border: 1px solid #000;
+    cursor: pointer;
 }
 
 .product-info .product-title {

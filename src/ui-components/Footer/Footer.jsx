@@ -2,7 +2,8 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import FooterLogo from "../../assets/logo-footer.jpg";
-import './Footer.css'
+import FooterIcon from "../../assets/arrow-email.svg";
+import './Footer.css';
 
 const Footer = () => {
   return (
@@ -10,13 +11,16 @@ const Footer = () => {
       <div className="footer-block">
           <div className="footer-logo">
               <Link to="/" className='homeBtn'>
-                  <img src={FooterLogo} />
+                  <img src={FooterLogo} alt="footer-main__logo"/>
               </Link>
           </div>
           <div className="footer-nav">
               <div className="footer-info">
                   <p className="footer-title">Stay informed about releases and special events</p>
-                  <input className="email-send" type="email" placeholder="Email"></input>
+                  <div className="email-input">
+                      <input className="email-send" type="email" placeholder="Email"></input>
+                      <img className="icon-img" src={FooterIcon} alt="icon-arrow" />
+                  </div>
               </div>
               <div className="footer-links">
                   <a className="links-text" href="src/ui-components/Footer/Footer">Privat Policy</a>
