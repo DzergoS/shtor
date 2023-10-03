@@ -1,0 +1,5 @@
+.banner-img {
+    width: calc(100% + 92px);
+    margin-left: -46px;
+    margin-top: -46px;
+}

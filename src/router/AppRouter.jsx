@@ -5,7 +5,7 @@ import Main from "../pages/Main/Main";
 import Info from "../pages/Info/Info";
 import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 import Product from "../pages/Product/Product";
-import Header from "../ui-components/Header";
+import Header from "../ui-components/Header/Header";
 import Footer from "../ui-components/Footer/Footer";
 import './AppRouter.css';
 

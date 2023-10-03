@@ -1,0 +1,31 @@
+.utp {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    padding: 260px 0;
+}
+
+.utp h1 {
+    margin-top: 0;
+    margin-bottom: 138px;
+    white-space: nowrap;
+    text-align: right;
+    color: black;
+    font-size: 60px;
+    font-weight: 300;
+    word-wrap: break-word
+}
+
+.utp p {
+    margin-top: 102.5px;
+    margin-bottom: 0;
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 50%;
+}
+
+.utp p span {
+    font-weight: 600;
+}
