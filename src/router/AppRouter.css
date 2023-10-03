@@ -1,6 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+button {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
 body {
   padding: 46px;
   margin: 0;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 400;
   color: black;
 }
 
