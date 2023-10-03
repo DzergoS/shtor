@@ -1,12 +1,21 @@
 import React from 'react';
 import './Main.css'
+import Banner from "./components/Banner/Banner";
+import UTP from "./components/UTP/UTP";
+import Products from "./components/Products/Products";
 
-const MainPage = () => {
+const Main = () => {
   return (
     <>
-      {/* Your main page content goes here */}
+
+      <Banner/>
+
+      <UTP/>
+
+      <Products/>
+
     </>
   );
 };
 
-export default MainPage;
+export default Main;
