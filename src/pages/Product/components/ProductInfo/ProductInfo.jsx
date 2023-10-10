@@ -37,6 +37,12 @@ const ProductInfo = () => {
                     <div className="slide">
                         <img src={ProductImg} alt="product" />
                     </div>
+                    <div className="slide">
+                        <img src={ProductImg} alt="product" />
+                    </div>
+                    <div className="slide">
+                        <img src={ProductImg} alt="product" />
+                    </div>
                 </div>
                 <button onClick={goToPrevSlide} className="slider-button prev-button">
                     <img src={ArrowLeft}  alt="arrow-icon"/>

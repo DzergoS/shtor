@@ -106,4 +106,12 @@
     main .scroller-container .scroller-title {
         padding-top: 49px;
     }
+    .product-info .slider-button.prev-button,.next-button {
+        display: none;
+        pointer-events: none;
+    }
+    .product-info .slider {
+        flex-direction: column;
+        pointer-events: none;
+    }
 }
