@@ -29,3 +29,21 @@
 .utp p span {
     font-weight: 600;
 }
+
+@media (max-width: 769px) {
+    .utp {
+        padding: 160px 0;
+        display: block;
+    }
+    .utp h1 {
+        font-size: 24px;
+        font-weight: 400;
+        margin: 0;
+    }
+    .utp p {
+        max-width: initial;
+        margin: 24px 0 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+}

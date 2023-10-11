@@ -3,3 +3,11 @@
     margin-left: -46px;
     margin-top: -46px;
 }
+
+@media (max-width: 769px) {
+    .banner-img {
+        width: calc(100% + 24px);
+        margin-left: -12px;
+        margin-right: -12px;
+    }
+}

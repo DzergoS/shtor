@@ -53,3 +53,18 @@
     top: 17px;
 }
 
+@media (max-width: 769px) {
+    .footer-block .footer-nav{
+        flex-wrap: wrap;
+    }
+    .footer-block .footer-info {
+        margin-bottom: 42px;
+    }
+    .footer-block .footer-links {
+        align-items: flex-start;
+    }
+    .footer-block .social {
+        align-items: flex-end;
+    }
+}
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import './Scroller.css'
-import ScrollImg from "../../../../assets/frstProduct.jpg"
+import ScrollImg from "assets/frstProduct.jpg"
 
 const Scroller = () => {
 

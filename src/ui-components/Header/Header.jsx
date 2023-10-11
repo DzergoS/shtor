@@ -1,12 +1,12 @@
 import React from 'react';
-import useAPI from "../../provider/useAPI";
+import useAPI from "provider/useAPI";
 
 import {NavLink, useLocation} from "react-router-dom";
 import {isMobile} from "../../utils/isMobile";
 
-import {ReactComponent as Cart} from '../../assets/cart.svg';
-import {ReactComponent as Menu} from '../../assets/menu.svg';
-import logo from '../../assets/logo.png';
+import {ReactComponent as Cart} from 'assets/cart.svg';
+import {ReactComponent as Menu} from 'assets/menu.svg';
+import logo from 'assets/logo.png';
 
 import './Header.css';
 

@@ -69,3 +69,11 @@ a, a:active, a:visited {
     transform: rotate(360deg);
   }
 }
+
+.title {
+  font-size: 32px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 45px;
+  margin-bottom: 60px;
+}
