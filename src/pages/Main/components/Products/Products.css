@@ -1,42 +1,40 @@
-.products {
+.product-list {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
 }
 
-.products .product-item {
+.product-list .product-list__item {
     width: calc(33% - 36px);
     margin-right: 54px;
     margin-bottom: 46px;
 }
 
-.products .product-item:nth-child(3n) {
+.product-list .product-list__item:nth-child(3n) {
     margin-right: 0;
 }
 
-.products .product-item img {
+.product-list .product-list__item img {
     width: 100%;
     margin-bottom: 24px;
 }
 
-.products .product-item .product-info {
-    min-height: 55px;
-}
-
-.products .product-item h3 {
+.product-list .product-list__item h3 {
     margin-top: 0;
     font-size: 24px;
     font-weight: 400;
     margin-bottom: 12px;
+    min-height: 60px;
 }
 
-.products .product-item p {
+.product-list .product-list__item p {
     font-size: 18px;
     font-weight: 400;
+    margin: 0;
 }
 
-.products .see-more {
+.product-list .see-more {
     text-align: center;
     font-size: 16px;
     font-weight: 400;
@@ -47,33 +45,50 @@
     cursor: pointer;
 }
 
-.products .see-more img {
+.product-list .see-more img {
     margin-bottom: 9px;
     width: 54px;
 }
 
 @media (max-width: 767px) {
-    .products .product-item {
+    .product-list .product-list__item {
         width: calc(50% - 27px);
+        margin-bottom: 36px;
     }
 
-    .products .product-item:nth-child(3n) {
+    .product-list .product-list__item:nth-child(3n) {
         margin-right: 54px;
     }
 
-    .products .product-item:nth-child(2n) {
+    .product-list .product-list__item:nth-child(2n) {
         margin-right: 0;
+    }
+    .product-list .product-list__item h3{
+        font-size: 20px;
+        font-weight: 400;
+        min-height: 50px;
+    }
+    .product-list .product-list__item p {
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+    .product-list .product-list__item img {
+        margin-bottom: 12px;
     }
 }
 
 @media (max-width: 550px) {
-    .products .product-item {
+    .product-list .product-list__item {
         width: 100%;
     }
 
-    .products .product-item:nth-child(2n),
-    .products .product-item {
+    .product-list .product-list__item:nth-child(3n),
+    .product-list .product-list__item {
         margin-right: 0;
     }
 
+    .product-list .product-list__item h3 {
+        min-height: 0;
+    }
 }

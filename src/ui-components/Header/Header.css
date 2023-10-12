@@ -57,23 +57,27 @@
     width: 180px;
 }
 
-.header .menu {
-    filter: invert();
-    width: 45px;
-    height: 45px;
-}
-
 @media (max-width: 768px) {
     .header {
-        width: 100%;
+        margin-top: 71px;
+        filter: invert();
     }
     .header.absolute {
         top: 12px;
         left: 12px;
         right: 12px;
+        filter: none;
     }
 
-    .header img {
-        width: 150px;
+    .header a.logo {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 50%;
     }
+    .header img {
+        width: 100px;
+        filter: none;
+    }
+
 }

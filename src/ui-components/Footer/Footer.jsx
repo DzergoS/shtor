@@ -1,8 +1,8 @@
 // Header.js
 import React from 'react';
 import {Link} from "react-router-dom";
-import FooterLogo from "../../assets/logo-footer.jpg";
-import FooterIcon from "../../assets/arrow-email.svg";
+import FooterLogo from "assets/logo-footer.jpg";
+import FooterIcon from "assets/arrow-email.svg";
 import './Footer.css';
 
 const Footer = () => {
@@ -27,7 +27,7 @@ const Footer = () => {
                   <a className="links-text">Payment and delivery</a>
                   <a className="links-text">Returns</a>
               </div>
-              <div className="footer-links">
+              <div className="footer-links social">
                   <span className="custom-language">
                       EN/USD
                   </span>

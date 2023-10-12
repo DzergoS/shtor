@@ -54,7 +54,6 @@
     top: 17px;
 }
 
-
 @media(max-width: 768px) {
     .footer-block {
         padding-top: 90px;
@@ -85,5 +84,3 @@
         font-size: 16px;
     }
 }
-
-

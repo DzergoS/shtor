@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 
-import product1 from '../../../../assets/product1.png'
-import product2 from '../../../../assets/product2.png'
-import product3 from '../../../../assets/product3.png'
-import product4 from '../../../../assets/product4.png'
-import product5 from '../../../../assets/product5.png'
-import product6 from '../../../../assets/product6.png'
+import product1 from 'assets/product1.png'
+import product2 from 'assets/product2.png'
+import product3 from 'assets/product3.png'
+import product4 from 'assets/product4.png'
+import product5 from 'assets/product5.png'
+import product6 from 'assets/product6.png'
 
-import seeMore from '../../../../assets/seeMore.png'
+import seeMore from 'assets/seeMore.png'
 
 import './Products.css'
 import {Link} from "react-router-dom";
@@ -48,11 +48,11 @@ const macap = [ {
 const Products = () => {
   const [showMore, setShowMore] = useState(false);
   return (
-    <div className="products">
+    <div className="product-list">
       {macap.map((product, index) => (
-        <Link to={'/product'} className="product-item" key={index}>
-          <img src={product.img} alt={'product-image'}/>
-          <div className="product-info">
+        <Link to={'/product'} className="product-list__item" key={index}>
+          <img src={product.img} alt={'product-list__item-image'}/>
+          <div className="product-list__item-info">
             <h3>{product.category}/{product.title}</h3>
             <p>₴{product.price}</p>
           </div>
@@ -60,9 +60,9 @@ const Products = () => {
       ))}
       {showMore
         ? macap.map((product, index) => (
-          <Link to={'/product'} className="product-item" key={index}>
-            <img src={product.img} alt={'product-image'}/>
-            <div className="product-info">
+          <Link to={'/product'} className="product-list__item" key={index}>
+            <img src={product.img} alt={'product-list__item-image'}/>
+            <div className="product-list__item-info">
               <h3>{product.category}/{product.title}</h3>
               <p>₴{product.price}</p>
             </div>
