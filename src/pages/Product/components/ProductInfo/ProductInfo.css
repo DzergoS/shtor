@@ -95,7 +95,8 @@
         align-items: center;
     }
     .product-info .slider-container {
-        width: 342px;
+        width: 100%;
+        max-width: 500px;
     }
     .product-info .info-right {
         width: 100%;
@@ -113,5 +114,12 @@
     .product-info .slider {
         flex-direction: column;
         pointer-events: none;
+    }
+    .product-info img {
+        height: initial;
+        width: 100%;
+    }
+    .product-info .slide {
+        margin-bottom: -4px;
     }
 }

@@ -4,6 +4,11 @@
     margin-top: -46px;
 }
 
+@media (min-width: 769px) {
+    .banner-img {
+        min-height: 70vh;
+    }
+}
 @media (max-width: 769px) {
     .banner-img {
         width: calc(100% + 24px);

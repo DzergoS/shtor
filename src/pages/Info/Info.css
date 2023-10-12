@@ -1,0 +1,3 @@
+.info-page-wrapper {
+    min-height: calc(100vh - (46px * 2) - 37px);
+}

@@ -3,10 +3,10 @@ import './Info.css'
 
 const Info = ({ title, text }) => {
   return (
-    <>
-      <h2>{title}</h2>
-      <p>{text}</p>
-    </>
+    <div className="info-page-wrapper">
+      <h2 className="title">{title}</h2>
+      {text}
+    </div>
   );
 };
 

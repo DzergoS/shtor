@@ -31,18 +31,10 @@ const ProductInfo = () => {
         <div className="product-info">
             <div className="slider-container">
                 <div className="slider">
-                    <div className="slide">
-                        <img src={ProductImg} alt="product" />
-                    </div>
-                    <div className="slide">
-                        <img src={ProductImg} alt="product" />
-                    </div>
-                    <div className="slide">
-                        <img src={ProductImg} alt="product" />
-                    </div>
-                    <div className="slide">
-                        <img src={ProductImg} alt="product" />
-                    </div>
+                    <div className="slide"><img src={ProductImg} alt="product" /></div>
+                    <div className="slide"><img src={ProductImg} alt="product" /></div>
+                    <div className="slide"><img src={ProductImg} alt="product" /></div>
+                    <div className="slide"><img src={ProductImg} alt="product" /></div>
                 </div>
                 <button onClick={goToPrevSlide} className="slider-button prev-button">
                     <img src={ArrowLeft}  alt="arrow-icon"/>

@@ -23,9 +23,9 @@ const Footer = () => {
                   </div>
               </div>
               <div className="footer-links">
-                  <a className="links-text" href="src/ui-components/Footer/Footer">Privat Policy</a>
-                  <a className="links-text">Payment and delivery</a>
-                  <a className="links-text">Returns</a>
+                  <Link className="links-text" to={'/privacy-policy'}>Privacy Policy</Link>
+                  <Link className="links-text" to={'/payment-and-delivery'}>Payment and delivery</Link>
+                  <Link className="links-text" to={'/returns'}>Returns</Link>
               </div>
               <div className="footer-links social">
                   <span className="custom-language">
