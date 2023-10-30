@@ -9,10 +9,21 @@
         min-height: 70vh;
     }
 }
-@media (max-width: 769px) {
-    .banner-img {
-        width: calc(100% + 24px);
-        margin-left: -12px;
-        margin-right: -12px;
+@media (max-width: 768px) {
+    .banner__container .banner-img {
+        width: calc(100% + 40px);
+        max-height: 100vh;
+        margin: -20px 0 0 -20px;
+        height: 100vh;
+    }
+}
+@media (max-width: 489px) {
+    .banner__container {
+        display: flex;
+        justify-content: center;
+    }
+    .banner__container .banner-img {
+        width: initial;
+        margin: -20px auto 0;
     }
 }

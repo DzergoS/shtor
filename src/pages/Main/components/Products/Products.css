@@ -50,6 +50,17 @@
     width: 54px;
 }
 
+.product-list .see-more img.rotate-270 {
+    transition: transform 1.6s ease-in-out;
+    transform: rotate(270deg);
+}
+
+.product-list .see-more img.rotate-ended-270.rotate-360 {
+    transition: transform 0.5s ease-in-out;
+    transform: rotate(360deg);
+}
+
+
 @media (max-width: 767px) {
     .product-list .product-list__item {
         width: calc(50% - 27px);
