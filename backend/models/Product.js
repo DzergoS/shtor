@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Define the common properties for all products
 const baseProductSchema = new mongoose.Schema({
   en_name: String,
   ua_name: String,
