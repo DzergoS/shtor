@@ -1,0 +1,8 @@
+{
+    "name": "backend-shtor",
+    "version": "1.0.0",
+    "description": "Backend for My Node.js and React App",
+    "main": "server.js", 
+    "dependencies": {
+    }
+  }
