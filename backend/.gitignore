@@ -1,4 +1,5 @@
 .env
+.forestadmin-schema.json
 
 /node_modules
 
