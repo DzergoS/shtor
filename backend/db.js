@@ -1,19 +1,17 @@
 const mongoose = require('mongoose');
-
 require('dotenv').config();
 
-const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:\
-${process.env.DB_PASS}@\
-${process.env.DB_CLUSTER}.moffsmc.mongodb.net/\
-?retryWrites=true&w=majority`; 
 
-mongoose.connect(MONGO_URI);
+const connectToDB = async () => {
+  try {
+    const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}.moffsmc.mongodb.net/shtor?retryWrites=true&w=majority`;
+    await mongoose.connect(MONGO_URI);
+    console.log('Connected to MongoDB');
+    return mongoose.connection.useDb('products');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    throw error;
+  }
+};
 
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
-
-module.exports = db;
+module.exports = connectToDB;

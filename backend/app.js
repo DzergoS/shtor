@@ -1,30 +1,42 @@
-const express = require('express');
-const db = require('./db'); 
-const Product = require('./models/Product');
-
+const express = require('express'),
+  // session = require('express-session'),
+  // path = require('path'),
+  router = require('./routes'),
+  connectToDB = require('./db');
 require('dotenv').config();
 
-const app = express();
+
 const PORT = process.env.PORT || 3001;
 
-const { createAgent } = require('@forestadmin/agent');
-const { createMongooseDataSource } = require('@forestadmin/datasource-mongoose');
-createAgent({
-  authSecret: process.env.FOREST_AUTH_SECRET,
-  envSecret: process.env.FOREST_ENV_SECRET,
-  isProduction: process.env.NODE_ENV === 'production',
 
-})
-  .addDataSource(createMongooseDataSource(db))
-  .mountOnExpress(app)
-  .start();
+const startServer = async () => {
+  const app = express();
+  // app.use(
+  //   session({
+  //     secret: process.env.SESSION_SECRET,
+  //     resave: false,
+  //     saveUninitialized: true,
+  //   })
+  // );
 
+  app.use('/', router);
 
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  // app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-server.on('close', async () => {
-  await db.close();
-  console.log('MongoDB connection closed.');
-});
+  const db = await connectToDB();
+
+  const server = app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+
+  server.on('close', async () => {
+    try {
+      await db.close();
+      console.log('MongoDB connection closed.');
+    } catch (error) {
+      console.error('Error closing MongoDB connection:', error);
+    }
+  });
+}
+
+startServer();

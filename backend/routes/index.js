@@ -1,0 +1,22 @@
+const express = require('express'),
+    session = require('express-session'),
+    AdminBroExpressjs = require('@admin-bro/express'),
+    apiRoutes = require('./api'),
+    adminBro = require('../admin.config'),
+    admin = require('../auth'),
+    router = express.Router();
+
+
+router.use('/', apiRoutes);
+
+const adminRouter = AdminBroExpressjs.buildAuthenticatedRouter(
+    adminBro,
+    admin, router, 
+    {
+        resave: false,
+        saveUninitialized: false,
+    }
+);
+router.use(adminBro.options.rootPath, adminRouter);
+
+module.exports = router;
