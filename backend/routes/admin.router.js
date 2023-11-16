@@ -1,13 +1,12 @@
 const express = require('express'),
-    session = require('express-session'),
     AdminBroExpressjs = require('@admin-bro/express'),
-    apiRoutes = require('./api'),
-    adminBro = require('../admin.config'),
+    // apiRoutes = require('./api'),
+    adminBro = require('../admin/admin.config'),
     admin = require('../auth'),
     router = express.Router();
 
 
-router.use('/', apiRoutes);
+// router.use('/', apiRoutes);
 
 const adminRouter = AdminBroExpressjs.buildAuthenticatedRouter(
     adminBro,

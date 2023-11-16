@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const imageSchema = new mongoose.Schema({
-  originalFilename: { type: String, required: true },
-  mimetype: { type: String, required: true },
+  filename: { type: String, required: true },
+  mimeType: { type: String, required: true },
 });
 
 
