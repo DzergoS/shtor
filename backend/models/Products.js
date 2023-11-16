@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose')
 
-const imageSchema = new mongoose.Schema({
+const imageSchema = new Schema({
   filename: { type: String, required: true },
   mimeType: { type: String, required: true },
 });
 
 
-const baseProductSchema = new mongoose.Schema({
+const baseProductSchema = new Schema({
   en_name: { type: String, required: true },
   ua_name: { type: String, required: true },
   group: { type: String, required: true },
@@ -16,31 +16,31 @@ const baseProductSchema = new mongoose.Schema({
   ua_price: { type: Number, required: true, min: 0 },
   images: [imageSchema],
 });
-const BaseProduct = mongoose.model('BaseProduct', baseProductSchema);
+const BaseProduct = model('BaseProduct', baseProductSchema);
 
 
-const attachmentProductSchema = new mongoose.Schema({
+const attachmentProductSchema = new Schema({
   en_name: { type: String, required: true },
   ua_name: { type: String, required: true },
   en_price: { type: Number, required: true, min: 0 },
   ua_price: { type: Number, required: true, min: 0 },
 })
-const AttachmentProduct = mongoose.model('AttachmentProduct', attachmentProductSchema);
+const AttachmentProduct = model('AttachmentProduct', attachmentProductSchema);
 
-const normalProductSchema = new mongoose.Schema({
-  attachment: { type: mongoose.Schema.Types.ObjectId, ref: 'AttachmentProduct', default: null }
+const normalProductSchema = new Schema({
+  attachment: { type: Schema.Types.ObjectId, ref: 'AttachmentProduct', default: null }
 });
 const NormalProduct = BaseProduct.discriminator('NormalProduct', normalProductSchema);
 
 
-const braceletProductSchema = new mongoose.Schema({
+const braceletProductSchema = new Schema({
   size: { type: String, required: true },
   color: { type: String, required: true },
 });
 const BraceletProduct = BaseProduct.discriminator('Bracelet', braceletProductSchema);
 
 
-const shellProductSchema = new mongoose.Schema({
+const shellProductSchema = new Schema({
   size: { type: String, required: true },
 });
 const ShellProduct = BaseProduct.discriminator('Shell', shellProductSchema);

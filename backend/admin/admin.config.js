@@ -1,6 +1,5 @@
 const AdminBro = require('admin-bro'),
     uploadFeature = require('@admin-bro/upload'),
-    bcrypt = require('bcrypt'),
     UserResource = require('./resources/UserResource'),
   {
     AttachmentProduct,

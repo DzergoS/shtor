@@ -1,11 +1,12 @@
-User = require('../../models/User');
+const bcrypt = require('bcrypt'),
+  User = require('../../models/User');
 
 const haveAccess = ({ currentAdmin }) => currentAdmin && currentAdmin.role === 'admin'
 
 
 module.exports = { resource: User,
     options: {
-      parent: { name: 'Authentication' },
+      parent: { name: 'Admin Users' },
       properties: {
         encryptedPassword: { isVisible: false },
         password: {
