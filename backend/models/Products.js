@@ -1,7 +1,11 @@
 const { Schema, model } = require('mongoose')
 
 const imageSchema = new Schema({
-  filename: { type: String, required: true },
+  // file: { type: String, required: true },
+  // filePath: { type: String, required: true },
+  // filename: { type: String, required: true },
+  // filesToDelete: { type: String, required: true },
+  key: { type: String, required: true },
   mimeType: { type: String, required: true },
 });
 
@@ -27,10 +31,10 @@ const attachmentProductSchema = new Schema({
 })
 const AttachmentProduct = model('AttachmentProduct', attachmentProductSchema);
 
-const normalProductSchema = new Schema({
-  attachment: { type: Schema.Types.ObjectId, ref: 'AttachmentProduct', default: null }
-});
-const NormalProduct = BaseProduct.discriminator('NormalProduct', normalProductSchema);
+// const normalProductSchema = new Schema({
+//   attachment: { type: Schema.Types.ObjectId, ref: 'AttachmentProduct', default: null }
+// });
+// const NormalProduct = BaseProduct.discriminator('NormalProduct', normalProductSchema);
 
 
 const braceletProductSchema = new Schema({
@@ -47,7 +51,7 @@ const ShellProduct = BaseProduct.discriminator('Shell', shellProductSchema);
 
 
 module.exports = {
-  NormalProduct,
+  BaseProduct,
   AttachmentProduct,
   BraceletProduct,
   ShellProduct,
