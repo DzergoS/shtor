@@ -12,7 +12,6 @@ const connectToDB = async () => {
       }
     );
     console.log('Connected to MongoDB');
-    // return mongoose.connection.useDb('shtor');
     return mongoose.connection;
   } catch (error) {
     console.error('MongoDB connection error:', error);

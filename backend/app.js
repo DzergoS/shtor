@@ -1,7 +1,6 @@
 const express = require('express'),
   // session = require('express-session'),
   path = require('path'),
-  router = require('./routes/admin.router'),
   connectToDB = require('./db');
 require('dotenv').config();
 
@@ -19,7 +18,7 @@ const startServer = async () => {
   //   })
   // );
 
-  app.use('/', router);
+  // app.use('/', router);
 
   // app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
   app.use('/uploads', express.static('uploads'));
