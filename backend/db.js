@@ -4,10 +4,16 @@ require('dotenv').config();
 
 const connectToDB = async () => {
   try {
-    const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}.moffsmc.mongodb.net/shtor?retryWrites=true&w=majority`;
-    await mongoose.connect(MONGO_URI);
+    const MONGO_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_CLUSTER}.wbvi7g9.mongodb.net/?retryWrites=true&w=majority`;
+    await mongoose.connect(
+      MONGO_URI,
+      {
+        dbName: 'shtor'
+      }
+    );
     console.log('Connected to MongoDB');
-    return mongoose.connection.useDb('products');
+    // return mongoose.connection.useDb('shtor');
+    return mongoose.connection;
   } catch (error) {
     console.error('MongoDB connection error:', error);
     throw error;

@@ -8,14 +8,16 @@ const express = require('express'),
 
 // router.use('/', apiRoutes);
 
-const adminRouter = AdminBroExpressjs.buildAuthenticatedRouter(
-    adminBro,
-    admin, router, 
-    {
-        resave: false,
-        saveUninitialized: false,
-    }
-);
+const adminRouter = AdminBroExpressjs.buildRouter(adminBro);
+
+// const adminRouter = AdminBroExpressjs.buildAuthenticatedRouter(
+//     adminBro,
+//     admin, router, 
+//     {
+//         resave: false,
+//         saveUninitialized: false,
+//     }
+// );
 router.use(adminBro.options.rootPath, adminRouter);
 
 module.exports = router;
