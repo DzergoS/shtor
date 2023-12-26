@@ -2,7 +2,8 @@ const express = require('express'),
   bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
   authRouter = express.Router(),
-  User = require("./../models/User");
+  User = require('./../models/User'),
+  sendResponse = require('./../shortcuts/response')
 
 // Register
 // authRouter.post("/register", async (req, res) => {
@@ -41,33 +42,31 @@ const express = require('express'),
 
 
 authRouter.post("/login", async (req, res) => {
-    try {
-      const { email, password } = req.body;
-  
-      if (!(email && password)) {
-        res.status(400).send("All input is required");
-      }
-      
-      const user = await User.findOne({ email });
-  
-      if (user && (await bcrypt.compare(password, user.password))) {
-        const token = jwt.sign(
-          { user_id: user._id, email },
-            process.env.JWT_SECRET,
-          {
-            expiresIn: "2h",
-          }
-        );
-        res.cookie('access_token', token, { httpOnly: true });
+  try {
+    const { email, password } = req.body;
 
-        res.status(200).json(user);
-      } else {
-        res.status(400).send("Invalid Credentials");
-      }
-    } catch (err) {
-      console.log(err);
-      res.status(500).send("Internal Server Error");
+    if (!(email && password)) {
+      return sendResponse(res, 400, false, {}, "All input is required");
     }
+    
+    const user = await User.findOne({ email });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const token = jwt.sign(
+        { user_id: user._id, email },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "2h",
+        }
+      );
+      res.cookie('access_token', token, { httpOnly: true, secure: true });
+      return sendResponse(res, 200, true, { email: user.email }, "Login success");
+    } else {
+      return sendResponse(res, 400, false, {}, "Incorrect email or password");
+    }
+  } catch (err) {
+    return sendResponse(res, 500, false, {}, "Internal Server Error");
+  }
 });
 
 
