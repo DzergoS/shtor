@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './Auth.css'
 import {ReactComponent as User} from "../../assets/admin/user.svg";
 import {ReactComponent as Pass} from "../../assets/admin/pass.svg";
+import {useHistory} from "react-router-dom";
 import api from "../../api";
 import Loader from "../Loader";
 
@@ -11,6 +12,7 @@ const Auth = () => {
 		pass: "",
 	});
 	const [isLoading, setIsLoading] = useState(false);
+	const history = useHistory();
 
 	const reqLogin = () => api.admin.login(form)
 
@@ -20,7 +22,10 @@ const Auth = () => {
 
 		setTimeout(() => {
 			reqLogin()
-				.then(r => console.log('res', r))
+				.then(r => {
+					console.log('res', r)
+					history.push('/admin/panel');
+				})
 				.catch(e => alert(e))
 				.finally(() => setIsLoading(false));
 		}, 1000)

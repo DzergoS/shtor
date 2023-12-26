@@ -16,7 +16,7 @@ const AppRouter = () => {
 	return (
 		<Router>
 			<Switch>
-				<Route path="/admin" component={Auth}/>
+				<Route path="/admin" exact component={Auth}/>
 				<Route path="/admin/panel" component={Panel}/>
 				<Route path="/*">
 					<ScrollToTop/>
