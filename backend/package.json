@@ -9,9 +9,11 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1499.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "mongoose": "^7.0.0"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.6.7"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
