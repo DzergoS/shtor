@@ -9,14 +9,16 @@ import Orders from "../Content/Orders";
 const Menu = () => {
 	return (
 		<aside className="menu__container">
-			<NavLink to="/">Товари</NavLink>
-			<hr/>
-			<h5>Додати Товар</h5>
-			<NavLink to="/products/add/simple">Звичайний</NavLink>
-			<NavLink to="/products/add/bracelet">Браслет</NavLink>
-			<NavLink to="/products/add/shell">Ракушка</NavLink>
-			<hr/>
-			<NavLink to="/products/add/orders">Замовлення</NavLink>
+			<NavLink to="/admin/panel" exact>Товари</NavLink>
+
+			<div className="link__container">
+				<h5>Додати Товар</h5>
+				<NavLink to="/admin/panel/products/add/simple">Звичайний</NavLink>
+				<NavLink to="/admin/panel/products/add/bracelet">Браслет</NavLink>
+				<NavLink to="/admin/panel/products/add/shell">Ракушка</NavLink>
+			</div>
+
+			<NavLink to="/admin/panel/orders">Замовлення</NavLink>
 		</aside>
 	);
 };

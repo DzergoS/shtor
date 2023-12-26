@@ -1,7 +1,8 @@
-.header {
+.header__admin {
     border-bottom: 1px solid gray;
     padding: 15px;
+    background-color: black;
 }
-.header .logo {
-    filter: invert(1);
+.header__admin .logo {
+    width: 170px;
 }

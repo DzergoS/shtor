@@ -1,7 +1,33 @@
 .menu__container {
-    width: 200px;
+    min-width: 200px;
     border-right: 1px solid gray;
     padding: 15px;
     display: flex;
     flex-direction: column;
+}
+
+.menu__container a {
+    padding: 10px 15px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    color: black;
+    transition: .3s;
+}
+
+.menu__container a:hover, .menu__container a.active {
+    background-color: #e5e5e5;
+}
+
+.menu__container .link__container h5 {
+    margin-bottom: 10px;
+}
+
+.menu__container .link__container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fafafa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }

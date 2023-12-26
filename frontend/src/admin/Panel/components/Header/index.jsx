@@ -7,8 +7,8 @@ const Header = () => {
 	const [isOpenedMenu, setIsOpenedMenu] = useState(false);
 
 	return (
-		<header className="header">
-			<img src={logo} alt="logo"/>
+		<header className="header__admin">
+			<img src={logo} alt="logo" className="logo"/>
 		</header>
 	);
 };
