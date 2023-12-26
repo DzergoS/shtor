@@ -1,0 +1,28 @@
+.banner-img {
+    width: calc(100% + 92px);
+    margin-left: -46px;
+    margin-top: -46px;
+}
+
+@media (min-width: 769px) {
+    .banner-img {
+        min-height: 70vh;
+    }
+}
+@media (max-width: 1340px) {
+    .banner__container {
+        display: flex;
+        justify-content: center;
+    }
+    .banner__container .banner-img {
+        max-height: 100vh;
+        width: initial;
+        margin: -46px auto 0;
+        height: 100vh;
+    }
+}
+@media (max-width: 769px) {
+    .banner__container .banner-img {
+        margin: -20px auto 0;
+    }
+}
