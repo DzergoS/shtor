@@ -3,13 +3,17 @@ import './Auth.css'
 import {useHistory} from "react-router-dom";
 import api from "../../api";
 import Loader from "../Loader";
+import useAPI from "provider/useAPI";
+import {ADD_EMAIL} from "provider/actions/email";
 
 const Auth = () => {
 	const [form, setForm] = useState({
-		email: "",
-		password: "",
+		email: "shtorga@gmail.com",
+		password: "P$5gHj@9sL!2qR8u",
 	});
+	const {dispatch} = useAPI();
 	const [isLoading, setIsLoading] = useState(false);
+	const [isError, setIsError] = useState(false);
 	const history = useHistory();
 
 	const reqLogin = () => api.admin.auth.login(form)
@@ -21,27 +25,32 @@ const Auth = () => {
 		setTimeout(() => {
 			reqLogin()
 				.then(r => {
-					console.log('res', r)
-					history.push('/admin/panel');
+					console.log(r)
+					dispatch({
+						type: ADD_EMAIL,
+						payload: r.data.email
+					})
+					history.push('/admin');
 				})
 				.catch(e => {
-					alert(e)
-					history.push('/admin/panel');
+					setIsError(true);
 				})
 				.finally(() => setIsLoading(false));
 		}, 1000)
 	}
-	// const register = () => api.admin.registration({})
 
 	return (
 		<div className="container-login100">
 			<div className="wrap-login100">
-				<form className="login100-form validate-form" onSubmit={onSubmit}>
+				<form className={`login100-form validate-form ${isError ? "error" : ""}`} onSubmit={onSubmit}>
 					<div className="login100-form-logo"/>
 					<div className="wrap-input100 validate-input" data-validate="Enter username">
 						<input
 							value={form.email}
-							onChange={(e) => setForm({...form, email: e.target.value})}
+							onChange={(e) => {
+								setIsError(false)
+								setForm({...form, email: e.target.value})
+							}}
 							className="input100"
 							type="text"
 							name="username"
@@ -50,10 +59,13 @@ const Auth = () => {
 						/>
 						<span className="focus-input100" data-placeholder=""></span>
 					</div>
-					<div className="wrap-input100 validate-input" data-validate="Enter password">
+					<div className="wrap-input100 validate-input pass" data-validate="Enter password">
 						<input
 							value={form.password}
-							onChange={(e) => setForm({...form, password: e.target.value})}
+							onChange={(e) => {
+								setIsError(false);
+								setForm({...form, password: e.target.value})
+							}}
 							className="input100"
 							type="password"
 							name="pass"
@@ -62,6 +74,7 @@ const Auth = () => {
 						/>
 						<span className="focus-input100 pass" data-placeholder=""></span>
 					</div>
+					{isError ? <div className="error-message">*Невірні дані</div> : ""}
 					<div className="container-login100-form-btn">
 						<button className="login100-form-btn">
 							Вхід

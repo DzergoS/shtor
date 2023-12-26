@@ -10,10 +10,10 @@ const Content = () => {
 	return (
 		<div className="content__container">
 			<Switch>
-				<Route path="/admin/panel/" exact component={Products}/>
-				<Route path="/admin/panel/products/add" component={AddProduct}/>
-				<Route path="/admin/panel/products/edit/:product_id" component={EditProduct}/>
-				<Route path="/admin/panel/orders" component={Orders}/>
+				<Route path="/admin/" exact component={Products}/>
+				<Route path="/admin/products/add" component={AddProduct}/>
+				<Route path="/admin/products/edit/:product_id" component={EditProduct}/>
+				<Route path="/admin/orders" component={Orders}/>
 			</Switch>
 		</div>
 	);

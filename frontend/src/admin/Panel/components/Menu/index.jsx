@@ -9,16 +9,16 @@ import Orders from "../Content/Orders";
 const Menu = () => {
 	return (
 		<aside className="menu__container">
-			<NavLink to="/admin/panel" exact>Товари</NavLink>
+			<NavLink to="/admin" exact><i className="bi bi-basket"></i>Товари</NavLink>
 
 			<div className="link__container">
-				<h5>Додати Товар</h5>
-				<NavLink to="/admin/panel/products/add/simple">Звичайний</NavLink>
-				<NavLink to="/admin/panel/products/add/bracelet">Браслет</NavLink>
-				<NavLink to="/admin/panel/products/add/shell">Ракушка</NavLink>
+				<h5><i className="bi bi-plus-circle-fill"></i>Додати Товар</h5>
+				<NavLink to="/admin/products/add/simple">Звичайний</NavLink>
+				<NavLink to="/admin/products/add/bracelet">Браслет</NavLink>
+				<NavLink to="/admin/products/add/shell">Ракушка</NavLink>
 			</div>
 
-			<NavLink to="/admin/panel/orders">Замовлення</NavLink>
+			<NavLink to="/admin/orders"><i className="bi bi-cart-check"></i>Замовлення</NavLink>
 		</aside>
 	);
 };

@@ -1,11 +1,44 @@
 import React from 'react';
 import './Products.css'
 import logo from '../../../../../assets/product1.png';
+import {useHistory} from "react-router-dom";
+
+const good = [{
+	title: "title prod",
+	category: "category",
+	price: 20,
+	variants: 3,
+},{
+	title: "title prod",
+	category: "category",
+	price: 20,
+	variants: 3,
+},{
+	title: "title prod",
+	category: "category",
+	price: 20,
+	variants: 3,
+}];
 
 const Products = () => {
+
+	const history = useHistory();
+
+	const deleteProduct = (e, item) => {
+		e.stopPropagation()
+		alert(`delete ${item.title}`)
+	}
+
+	const editProduct = (item) => {
+		alert(`edit ${item.title}`)
+	}
+
 	return (
 		<div className="products__container">
-			<input className="search" type="search" placeholder="search"/>
+			<label className="search__label">
+				<i className="bi bi-search"></i>
+				<input className="search" type="search" placeholder="Шукати товар..."/>
+			</label>
 
 			<div className="product-titles">
 				<div className="pro-image">Картинка</div>
@@ -16,36 +49,21 @@ const Products = () => {
 				<div className="actions">Дії</div>
 			</div>
 			<div className="product-list">
-				<div className="product-list-item">
-					<div className="image">
-						<img src={logo} alt="" width="30px"/>
+				{good.map(item => (
+					<div className="product-list-item" onClick={() => editProduct(item)}>
+						<div className="image">
+							<img src={logo} alt="" width="30px"/>
+						</div>
+						<div className="pro-title">{item.title}</div>
+						<div className="category">{item.category}</div>
+						<div className="price">{item.price}</div>
+						<div className="variants">{item.variants}</div>
+						<div className="actions">
+							<button className="edit"><i className="bi bi-gear-fill"></i></button>
+							<button className="delete" onClick={(e) => deleteProduct(e, item)}><i className="bi bi-trash"></i></button>
+						</div>
 					</div>
-					<div className="pro-title">Ono</div>
-					<div className="category">One</div>
-					<div className="price">20</div>
-					<div className="variants">3</div>
-					<div className="actions">Edit, Delete</div>
-				</div>
-				<div className="product-list-item">
-					<div className="image">
-						<img src={logo} alt="" width="30px"/>
-					</div>
-					<div className="pro-title">Ono</div>
-					<div className="category">One</div>
-					<div className="price">20</div>
-					<div className="variants">3</div>
-					<div className="actions">Edit, Delete</div>
-				</div>
-				<div className="product-list-item">
-					<div className="image">
-						<img src={logo} alt="" width="30px"/>
-					</div>
-					<div className="pro-title">Ono</div>
-					<div className="category">One</div>
-					<div className="price">20</div>
-					<div className="variants">3</div>
-					<div className="actions">Edit, Delete</div>
-				</div>
+				))}
 			</div>
 		</div>
 	);

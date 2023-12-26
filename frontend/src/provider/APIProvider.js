@@ -2,6 +2,7 @@ import React, {useMemo, useReducer} from "react";
 import { APIContext } from "./APIContext";
 import langReducer from "provider/reducers/lang";
 import cartReducer from "provider/reducers/cart";
+import emailReducer from "./reducers/email";
 
 const APIProvider = (props) => {
 
@@ -9,6 +10,7 @@ const APIProvider = (props) => {
       (state, action) => ({
         lang: langReducer(state.lang, action),
         cart: cartReducer(state.cart, action),
+        email: emailReducer(state.email, action),
       }),
       {
         lang: 'ua',
@@ -23,6 +25,7 @@ const APIProvider = (props) => {
           quantity: 1,
           price: 80,
         }],
+        email: '',
       }
   );
 
