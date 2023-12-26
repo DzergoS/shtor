@@ -10,7 +10,7 @@ const Auth = () => {
 		email: "",
 		pass: "",
 	});
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const reqLogin = () => api.admin.login(form)
 
