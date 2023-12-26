@@ -1,8 +1,9 @@
 const express = require('express'),
-// session = require('express-session'),
-  genericRouter = require('./routes/index'),
+  // session = require('express-session'),
   connectToDB = require('./config/db'),
-  path = require('path');
+  genericRouter = require('./routes/index'),
+  // path = require('path');
+  cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 
@@ -14,6 +15,7 @@ const startServer = async () => {
   
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(cookieParser(process.env.COOKIE_SECRET));
   // app.use(
   //   session({
   //     secret: process.env.SESSION_SECRET,
