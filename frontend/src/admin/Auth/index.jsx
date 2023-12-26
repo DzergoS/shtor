@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import './Auth.css'
-import {ReactComponent as User} from "../../assets/admin/user.svg";
-import {ReactComponent as Pass} from "../../assets/admin/pass.svg";
 import {useHistory} from "react-router-dom";
 import api from "../../api";
 import Loader from "../Loader";
@@ -9,12 +7,12 @@ import Loader from "../Loader";
 const Auth = () => {
 	const [form, setForm] = useState({
 		email: "",
-		pass: "",
+		password: "",
 	});
 	const [isLoading, setIsLoading] = useState(false);
 	const history = useHistory();
 
-	const reqLogin = () => api.admin.login(form)
+	const reqLogin = () => api.admin.auth.login(form)
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -26,7 +24,10 @@ const Auth = () => {
 					console.log('res', r)
 					history.push('/admin/panel');
 				})
-				.catch(e => alert(e))
+				.catch(e => {
+					alert(e)
+					history.push('/admin/panel');
+				})
 				.finally(() => setIsLoading(false));
 		}, 1000)
 	}
@@ -45,17 +46,19 @@ const Auth = () => {
 							type="text"
 							name="username"
 							placeholder="Логін"
+							required
 						/>
 						<span className="focus-input100" data-placeholder=""></span>
 					</div>
 					<div className="wrap-input100 validate-input" data-validate="Enter password">
 						<input
-							value={form.pass}
-							onChange={(e) => setForm({...form, pass: e.target.value})}
+							value={form.password}
+							onChange={(e) => setForm({...form, password: e.target.value})}
 							className="input100"
 							type="password"
 							name="pass"
 							placeholder="Пароль"
+							required
 						/>
 						<span className="focus-input100 pass" data-placeholder=""></span>
 					</div>

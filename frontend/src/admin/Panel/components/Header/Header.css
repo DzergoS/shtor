@@ -1,0 +1,7 @@
+.header {
+    border-bottom: 1px solid gray;
+    padding: 15px;
+}
+.header .logo {
+    filter: invert(1);
+}

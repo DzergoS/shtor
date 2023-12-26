@@ -1,0 +1,7 @@
+.menu__container {
+    width: 200px;
+    border-right: 1px solid gray;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
