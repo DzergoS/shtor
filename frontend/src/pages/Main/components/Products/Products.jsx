@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 import product1 from 'assets/product1.png'
 import product2 from 'assets/product2.png'
@@ -46,7 +46,37 @@ const macap = [ {
 ]
 
 const Products = () => {
-  const [showMore, setShowMore] = useState(false);
+  const rotateElementRef = useRef(null);
+  const [show, setShow] = useState({
+    animation: false,
+    showMore: false,
+  });
+
+  const { animation, showMore } = show;
+
+  const handleRotateClick = () => {
+    setShow({
+      animation: true,
+      showMore: false,
+    })
+    if (rotateElementRef.current) {
+      rotateElementRef.current.classList.add('rotate-270');
+      setTimeout(() => {
+        rotateElementRef.current.classList.add('rotate-ended-270');
+      }, 1600)
+    }
+    setTimeout(() => setShow({
+      animation: true,
+      showMore: true,
+    }), 2200)
+  };
+
+  const handleMouseLeave = () => {
+    if (rotateElementRef.current && animation) {
+      rotateElementRef.current.classList.add('rotate-360');
+    }
+  };
+
   return (
     <div className="product-list">
       {macap.map((product, index) => (
@@ -70,8 +100,16 @@ const Products = () => {
         ))
         : ''
       }
-      <div className='see-more' onClick={() => setShowMore(!showMore)}  >
-        <img src={seeMore} alt="img-button" />
+      <div
+          className="see-more"
+          onClick={handleRotateClick}
+          onMouseLeave={handleMouseLeave}
+      >
+        <img
+            src={seeMore}
+            ref={rotateElementRef}
+            alt="img-button"
+        />
         See More
       </div>
     </div>

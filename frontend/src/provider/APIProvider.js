@@ -1,15 +1,38 @@
+import React, {useMemo, useReducer} from "react";
 import { APIContext } from "./APIContext";
-import React, {useMemo, useState} from "react";
+import langReducer from "provider/reducers/lang";
+import cartReducer from "provider/reducers/cart";
 
 const APIProvider = (props) => {
 
-  const [lang, setLang] = useState('ua');
-  const contextValue = useMemo(
-    () => ({ lang, setLang}),
-    [lang, setLang]
+  const [state, dispatch] = useReducer(
+      (state, action) => ({
+        lang: langReducer(state.lang, action),
+        cart: cartReducer(state.cart, action),
+      }),
+      {
+        lang: 'ua',
+        cart: [{
+          src: '',
+          _id: '12312412312',
+          category: 'OBERIH',
+          title: 'Comb pendant',
+          desc: 'Wood/9,5x4cm',
+          seashell: 'flex',
+          celestial: 'silver',
+          quantity: 1,
+          price: 80,
+        }],
+      }
   );
 
-  console.log('lang', lang);
+  const contextValue = useMemo(
+    () => ({ state, dispatch}),
+    [state, dispatch]
+  );
+
+  // console.log('lang', lang);
+  // console.log('lang', lang);
 
   return (
     <APIContext.Provider value={contextValue}>

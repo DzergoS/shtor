@@ -47,7 +47,7 @@ const ProductInfo = () => {
                 <h2 className="product-title">OBJECT/pendant</h2>
                 <div className="tabs-description">
                     <div className="tab-buttons">
-                        <button className={ isDescriptionActive ? "tab-button active" : "tab-button" } onClick={() => setIsDescriptionActive(true)}>Description</button>
+                        <button className={ isDescriptionActive ? "tab-button active" : "tab-button" } onClick={() => setIsDescriptionActive(true)}>Discription</button>
                         {/*<button className={ "tab-button" + isDescriptionActive ? " active" : "" } onClick={() => setIsDescriptionActive(true)}>Discription</button>*/}
                         {/*<button className={ `tab-button ${isDescriptionActive ? " active" : ""}`} onClick={() => setIsDescriptionActive(true)}>Discription</button>*/}
                         <button className={ isDescriptionActive ? "tab-button" : "tab-button active"} onClick={() => setIsDescriptionActive(false)}>Care</button>
