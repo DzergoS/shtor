@@ -1,20 +1,19 @@
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"),
+  sendResponse = require('./../shortcuts/response')
 
 const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;
 
   if (!token) {
-    return res.status(403).send("A token is required for authentication");
-    // return res.redirect('/auth/login');
+    return sendResponse(res, 400, false, {}, "A token is required for authentication");
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
+    next();
   } catch (err) {
-    return res.status(401).send("Invalid Token");
-    // return res.redirect('/auth/login');
+    return sendResponse(res, 401, false, {}, "Invalid Token");
   }
-  return next();
 };
 
 module.exports = verifyToken;
