@@ -1,4 +1,4 @@
-import {model, Schema} from "mongoose";
+const { Schema, model } = require('mongoose');
 
 const attachmentSchema = new Schema({
 	name: {
@@ -7,6 +7,6 @@ const attachmentSchema = new Schema({
 	},
 })
 
-const ATTACHMENT = model('Attachment', attachmentSchema);
+const Attachment = model('Attachment', attachmentSchema);
 
-export default ATTACHMENT;
+module.exports = Attachment;

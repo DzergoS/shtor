@@ -1,4 +1,5 @@
-import { Schema, model } from 'mongoose';
+const { Schema, model } = require('mongoose')
+
 
 const baseProductSchema = new Schema({
 	name: {
@@ -9,8 +10,12 @@ const baseProductSchema = new Schema({
 		en: { type: String, default: 'Product description' },
 		ua: { type: String, default: 'Опис товару' }
 	},
+	group: {
+		type: String,
+		default: "OBJECT",
+	},
 });
 
-const BASE_PRODUCT = model('BaseProduct', baseProductSchema);
+const BaseProduct = model('BaseProduct', baseProductSchema);
 
-export default BASE_PRODUCT;
+module.exports = BaseProduct;

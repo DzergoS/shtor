@@ -2,7 +2,7 @@ const express = require('express'),
   bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
   authRouter = express.Router(),
-  User = require('./../models/User'),
+  User = require('./../models/'),
   sendResponse = require('./../shortcuts/response')
 
 // Register
