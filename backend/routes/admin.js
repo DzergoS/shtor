@@ -1,12 +1,13 @@
 const express = require('express'),
   adminRouter = express.Router(),
-  authMiddleware = require('./../middleware/auth')
+  authMiddleware = require('./../middleware/auth'),
+  sendResponse = require('./../shortcuts/response');
 
 
 adminRouter.use(authMiddleware);
 
 adminRouter.get('/', (req, res) => {
-    res.status(200).send('Welcome to admin');
+  return sendResponse(res, 200, true, { email: req.user.email }, "");
 })
 
 

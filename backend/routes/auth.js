@@ -60,7 +60,7 @@ authRouter.post("/login", async (req, res) => {
         }
       );
       res.cookie('access_token', token, { httpOnly: true, secure: true });
-      return sendResponse(res, 200, true, { email: user.email }, "Login success");
+      return sendResponse(res, 200, true, {}, "Login success");
     } else {
       return sendResponse(res, 400, false, {}, "Incorrect email or password");
     }
