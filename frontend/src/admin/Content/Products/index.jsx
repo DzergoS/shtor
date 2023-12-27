@@ -1,6 +1,6 @@
 import React from 'react';
 import './Products.css'
-import logo from '../../../../../assets/product1.png';
+import logo from '../../../assets/product1.png';
 import {useHistory} from "react-router-dom";
 
 const good = [{
@@ -49,8 +49,8 @@ const Products = () => {
 				<div className="actions">Дії</div>
 			</div>
 			<div className="product-list">
-				{good.map(item => (
-					<div className="product-list-item" onClick={() => editProduct(item)}>
+				{good.map((item, key) => (
+					<div key={key} className="product-list-item" onClick={() => editProduct(item)}>
 						<div className="image">
 							<img src={logo} alt="" width="30px"/>
 						</div>

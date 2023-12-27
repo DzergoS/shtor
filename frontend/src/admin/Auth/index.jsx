@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import './Auth.css'
 import {useHistory} from "react-router-dom";
 import api from "../../api";
-import Loader from "../Loader";
 import useAPI from "provider/useAPI";
 import {ADD_EMAIL} from "provider/actions/email";
+import AdminLoader from "../../ui-components/AdminLoader";
 
 const Auth = () => {
 	const [form, setForm] = useState({
@@ -25,7 +25,6 @@ const Auth = () => {
 		setTimeout(() => {
 			reqLogin()
 				.then(r => {
-					console.log(r)
 					dispatch({
 						type: ADD_EMAIL,
 						payload: r.data.email
@@ -81,7 +80,7 @@ const Auth = () => {
 						</button>
 					</div>
 				</form>
-				<Loader isActive={isLoading}/>
+				<AdminLoader isActive={isLoading}/>
 			</div>
 		</div>
 );

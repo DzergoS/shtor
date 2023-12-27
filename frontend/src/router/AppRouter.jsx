@@ -10,14 +10,14 @@ import Header from "../ui-components/Header/Header";
 import Footer from "../ui-components/Footer/Footer";
 import './AppRouter.css';
 import Auth from "../admin/Auth";
-import Panel from "../admin/Panel";
+import Admin from "../admin";
 
 const AppRouter = () => {
 	return (
 		<Router>
 			<Switch>
 				<Route path="/auth/login" exact component={Auth}/>
-				<Route path="/admin" component={Panel}/>
+				<Route path="/admin" component={Admin}/>
 				<Route path="/*">
 					<ScrollToTop/>
 					<Header/>
