@@ -12,10 +12,17 @@ const Menu = () => {
 			<NavLink to="/admin" exact><i className="bi bi-basket"></i>Товари</NavLink>
 
 			<div className="link__container">
-				<h5><i className="bi bi-plus-circle-fill"></i>Додати Товар</h5>
-				<NavLink to="/admin/products/add/simple">Звичайний</NavLink>
-				<NavLink to="/admin/products/add/bracelet">Браслет</NavLink>
-				<NavLink to="/admin/products/add/shell">Ракушка</NavLink>
+				<h5><i className="bi bi-eye"></i>Товари</h5>
+				<NavLink to="/admin/products/">Усі</NavLink>
+				<NavLink to="/admin/products/simple">Звичайний</NavLink>
+				<NavLink to="/admin/products/bracelet">Браслет</NavLink>
+				<NavLink to="/admin/products/shell">Ракушка</NavLink>
+			</div>
+
+			<div className="link__container">
+				<h5><i className="bi bi-sliders"></i>Параметри</h5>
+				<NavLink to="/admin/colors">Колір</NavLink>
+				<NavLink to="/admin/attachments">Підвіс</NavLink>
 			</div>
 
 			<NavLink to="/admin/orders"><i className="bi bi-cart-check"></i>Замовлення</NavLink>
