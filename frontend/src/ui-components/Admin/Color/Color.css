@@ -1,0 +1,46 @@
+.color__block {
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    box-shadow: 0 0 8px 1px rgb(134, 134, 134);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.color__block .delete {
+    opacity: 0;
+    transition: .3s;
+    color: #fff;
+}
+
+.color__block:hover .delete {
+    opacity: 1;
+    background-color: red;
+    border-radius: 15px;
+    padding: 4px 5px;
+}
+
+.color__block.add {
+    border: 2px dashed rgb(105, 105, 105);
+    background-color: white;
+    color: rgb(103, 103, 103);
+    width: initial;
+    padding: 0 10px;
+    display: inline-flex;
+    gap: 5px;
+    position: relative;
+}
+
+.color__block.add .color-input {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}

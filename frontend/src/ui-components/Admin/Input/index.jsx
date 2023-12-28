@@ -1,21 +1,33 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import './Input.css'
+import Color from "../Color";
 
-const Input = ({label, type, disabled, onChange, value, icon, options = [], multiple, prefix}) => {
+const custom = (data) => ({
+	target: {
+		value: data
+	}
+})
 
-	if (type === 'colors') {
+const Input = ({label, type, disabled, onChange, value, icon, options = [], multiple, prefix, required}) => {
+	if (type === 'color') {
+
+		const handleInputChange = (e) => onChange(custom([...value, e.target.value]));
+
+		const handleRemoveImage = (index) => {
+			const updatedColors = [...value];
+			updatedColors.splice(index, 1);
+			onChange(custom(updatedColors));
+		};
+
 		return <div className="custom-input">
 			<label>{icon}{label}</label>
-			{value}
+			{value.map((color, index) => (
+				<Color color={color} key={index} index={index} onChange={handleRemoveImage}/>
+			))}
+			<Color type="add" onChange={handleInputChange} />
 		</div>
 	}
 	if (type === 'image') {
-
-		const custom = (data) => ({
-			target: {
-				value: data
-			}
-		})
 
 		const handleDrop = (e) => {
 			e.preventDefault();
@@ -24,7 +36,7 @@ const Input = ({label, type, disabled, onChange, value, icon, options = [], mult
 			// Filter only image files if needed
 			const imageFiles = files.filter((file) => file.type.startsWith('image/'));
 
-			onChange(custom([...value, ...imageFiles]));
+			onChange(custom(multiple ? [...value, ...imageFiles] : imageFiles[0]));
 		};
 
 		const handleInputChange = (e) => {
@@ -32,13 +44,17 @@ const Input = ({label, type, disabled, onChange, value, icon, options = [], mult
 			// Filter only image files if needed
 			const imageFiles = files.filter((file) => file.type.startsWith('image/'));
 
-			onChange(custom([...value, ...imageFiles]));
+			onChange(custom(multiple ? [...value, ...imageFiles] : imageFiles[0]));
 		};
 
 		const handleRemoveImage = (index) => {
-			const updatedImages = [...value];
-			updatedImages.splice(index, 1);
-			onChange((updatedImages));
+			if (index === -1) {
+				onChange(custom(null));
+			} else {
+				const updatedImages = [...value];
+				updatedImages.splice(index, 1);
+				onChange(custom(updatedImages));
+			}
 		};
 
 		const handleUpload = async () => {
@@ -63,12 +79,13 @@ const Input = ({label, type, disabled, onChange, value, icon, options = [], mult
 				});
 		};
 
-		const InputImages = () => (<>
+		const InputImages = () => <>
 			<input
 				type="file"
 				accept="image/*"
 				onChange={handleInputChange}
 				multiple={multiple}
+				required={required}
 			/>
 			<div
 				onDrop={handleDrop}
@@ -82,28 +99,31 @@ const Input = ({label, type, disabled, onChange, value, icon, options = [], mult
 			>
 				Drop images here
 			</div>
-		</>)
+		</>
 
+		const ImageBlock = ({image, index}) => useMemo(
+			() => <div key={index} className="images-item">
+				<img src={image?.key || URL.createObjectURL(image)} alt={`image-${index}`} width="100" />
+				<button className="remove__image" onClick={() => handleRemoveImage(index)}><i className="bi bi-trash"></i></button>
+			</div>,
+			[value.key])
 
 		return (
 			<div className="custom-input">
 				<label>{label}</label>
 				{multiple
 					? <InputImages/>
-					: value.length
+					: value
 						? ""
 						: <InputImages/>
 				}
 				<div className="images__container">
-					{value.map((image, index) => {
-						console.log('typeof image', typeof image);
-						return (
-							<div key={index} className="images-item">
-								<img src={URL.createObjectURL(image)} alt={`image-${index}`} width="100" />
-								<button className="remove__image" onClick={() => handleRemoveImage(index)}><i className="bi bi-trash"></i></button>
-							</div>
-						)
-					})}
+					{Array.isArray(value)
+						? value.map((image, index) => <ImageBlock image={image} index={index}/>)
+						: value
+							? <ImageBlock image={value} index={value.key}/>
+							: ""
+					}
 				</div>
 				{/*<button onClick={handleUpload}>Upload Images</button>*/}
 			</div>
@@ -112,7 +132,7 @@ const Input = ({label, type, disabled, onChange, value, icon, options = [], mult
 	if (type === 'select') {
 		return <div className="custom-input">
 			<label>{icon}{label}</label>
-			<select value={value} onChange={onChange} disabled={disabled}>
+			<select value={value} onChange={onChange} disabled={disabled} required={required}>
 				{options.map((option, key) => (
 					<option key={key} value={option}>
 						{option}
@@ -127,9 +147,9 @@ const Input = ({label, type, disabled, onChange, value, icon, options = [], mult
 			{prefix
 				? <label className="prefix__container textarea">
 					<span>{prefix}</span>
-					<textarea value={value} onChange={onChange} />
+					<textarea value={value} onChange={onChange} required={required} />
 				</label>
-				:  <textarea value={value} onChange={onChange} />
+				:  <textarea value={value} onChange={onChange} required={required} />
 			}
 		</div>
 	}
@@ -139,12 +159,12 @@ const Input = ({label, type, disabled, onChange, value, icon, options = [], mult
 			{prefix
 				? <label className="prefix__container">
 					<span>{prefix}</span>
-					<input type={type} value={value} onChange={onChange} disabled={disabled}/>
+					<input type={type} value={value} onChange={onChange} disabled={disabled} required={required} />
 				</label>
-				:  <input type={type} value={value} onChange={onChange} disabled={disabled}/>
+				:  <input type={type} value={value} onChange={onChange} disabled={disabled} required={required}/>
 			}
 		</div>
 	);
 };
 
-export default Input;
+export default React.memo(Input);

@@ -25,15 +25,16 @@ export const BRACELET_PRODUCT = {
 		en: 1,
 	},
 	group: OBERIH,
-	colors: ["red", 'white'],
+	colors: ["#FF0000FF", '#FFF'],
 	variations: [{
-		image: 'url',
+		image: {
+			key: 'vibe'
+		},
 		size: '1m',
 	},{
-		image: 'url',
-		size: '1m',
-	},{
-		image: 'url',
+		image: {
+			key: 'vibe'
+		},
 		size: '1m',
 	}],
 }
@@ -42,21 +43,27 @@ export const SHELL_PRODUCT = {
 	...BASE,
 	group: NATURE,
 	variations: [{
-		image: 'url',
+		image: {
+			key: 'vibe',
+		},
 		size: '1m',
 		price: {
 			ua: 36,
 			en: 1,
 		},
 	},{
-		image: 'url',
+		image: {
+			key: 'vibe',
+		},
 		size: '1m',
 		price: {
 			ua: 36,
 			en: 1,
 		},
 	},{
-		image: 'url',
+		image: {
+			key: 'vibe',
+		},
 		size: '1m',
 		price: {
 			ua: 36,

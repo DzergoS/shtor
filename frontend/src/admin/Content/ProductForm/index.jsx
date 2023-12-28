@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './ProductForm.css';
 import {
 	NATURE,
@@ -38,20 +38,25 @@ const ProductForm = ({ type }) => {
 
 
 	const handleVariationInputChange = (index, key, subKey, inputValue) => {
-		setForm((prevForm) => ({
-			...prevForm,
-			variations: prevForm.variations.map((item, indx) => (
-				indx === index
-					? {
-						...item,
-						[key]: subKey
-							? { ...item[key], [subKey]: inputValue }
-							: inputValue,
-					}
-					: item
-			)),
-		}));
+		setForm((prevForm) => {
+			const newVariations = prevForm.variations;
+			const variationToUpdate = newVariations[index];
+
+			if (subKey) {
+				variationToUpdate[subKey] = inputValue;
+			} else {
+				variationToUpdate[key] = inputValue;
+			}
+
+			newVariations[index] = variationToUpdate;
+
+			return {
+				...prevForm,
+				variations: newVariations,
+			};
+		});
 	};
+
 
 
 	const renderPriceInput = (value, i) => (
@@ -62,12 +67,14 @@ const ProductForm = ({ type }) => {
 				label="Ціна варіації"
 				value={value.ua}
 				onChange={(event) => handleVariationInputChange(i, 'price', 'ua', event.target.value)}
+				required
 			/>
 			<Input
 				type="number"
 				prefix="EN"
 				value={value.en}
 				onChange={(event) => handleVariationInputChange(i, 'price', 'en', event.target.value)}
+				required
 			/>
 		</div>
 	);
@@ -79,6 +86,7 @@ const ProductForm = ({ type }) => {
 				label="Розмір варіації"
 				value={value}
 				onChange={(event) => handleVariationInputChange(i, 'size', null, event.target.value)}
+				required
 			/>
 		</div>
 	);
@@ -90,6 +98,7 @@ const ProductForm = ({ type }) => {
 				label="Картинка варіації"
 				value={value}
 				onChange={(event) => handleVariationInputChange(i, 'image', null, event.target.value)}
+				required
 			/>
 		</div>
 	);
@@ -109,11 +118,11 @@ const ProductForm = ({ type }) => {
 		<div className="variations-item" key={i}>
 			<h4>#{i + 1}</h4>
 			{Object.entries(variation).map(([key, value], e) => (
-				<div key={`${i}${e}`} className="input__row variations">
+				<div key={`${i}${e}`} className={`input__row ${key}`}>
 					{key === 'price' && renderPriceInput(value, i)}
 					{key === 'size' && renderSizeInput(value, i)}
-					{key === 'image' && renderImageInput(value, i)}
 					{key === 'attachment' && renderAttachmentInput(value, i)}
+					{key === 'image' && renderImageInput(value, i)}
 				</div>
 			))}
 		</div>
@@ -126,27 +135,27 @@ const ProductForm = ({ type }) => {
 
 	const renderDoubleInput = (label, valueUA, onChangeUA, valueEN, onChangeEN) => (
 		<div className="input__container double">
-			<Input type="text" prefix="UA" label={label} value={valueUA} onChange={onChangeUA} />
-			<Input type="text" prefix="EN" value={valueEN} onChange={onChangeEN} />
+			<Input type="text" prefix="UA" label={label} value={valueUA} onChange={onChangeUA} required />
+			<Input type="text" prefix="EN" value={valueEN} onChange={onChangeEN} required />
 		</div>
 	);
 
 	const renderTextAreaInput = (label, valueUA, onChangeUA, valueEN, onChangeEN) => (
 		<div className="input__container double">
-			<Input type="textarea" prefix="UA" label={label} value={valueUA} onChange={onChangeUA} />
-			<Input type="textarea" prefix="EN" value={valueEN} onChange={onChangeEN} />
+			<Input type="textarea" prefix="UA" label={label} value={valueUA} onChange={onChangeUA} required />
+			<Input type="textarea" prefix="EN" value={valueEN} onChange={onChangeEN} required />
 		</div>
 	);
 
-	const renderSelectInput = (label, options, value, onChange) => (
+	const renderSelectInput = (label, options, value) => (
 		<div className="input__container group">
-			<Input type="select" label={label} options={options} value={value} onChange={onChange} />
+			<Input type="select" label={label} options={options} value={value} disabled required />
 		</div>
 	);
 
 	const renderSingleInput = (type, label, value, onChange, multiple) => (
 		<div className={`input__container ${type}`}>
-			<Input type={type} label={label} value={value} onChange={onChange} multiple={multiple} />
+			<Input type={type} label={label} value={value} onChange={onChange} multiple={multiple} required />
 		</div>
 	);
 
@@ -171,7 +180,7 @@ const ProductForm = ({ type }) => {
 		}
 
 		if (key === 'images' || key === 'colors') {
-			const type = key === 'images' ? 'image' : 'colors';
+			const type = key === 'images' ? 'image' : 'color';
 			content = renderSingleInput(type, key === 'images' ? 'Картинки товару' : 'Кольори товару', value, (e) => setForm({ ...form, [key]: e.target.value }), key === 'images');
 		}
 
@@ -199,4 +208,4 @@ const ProductForm = ({ type }) => {
 	);
 };
 
-export default ProductForm;
+export default React.memo(ProductForm);

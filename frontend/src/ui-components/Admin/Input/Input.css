@@ -30,6 +30,7 @@
     border-radius: 10px;
     position: relative;
     display: flex;
+    min-height: 55px;
 }
 .custom-input .images__container .images-item img {
     border-radius: 10px;
@@ -66,4 +67,7 @@
 .custom-input .prefix__container span {
     padding: 10px;
     color: #fff;
+}
+.input__row.group__container select{
+    color: #000;
 }

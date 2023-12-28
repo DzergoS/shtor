@@ -45,6 +45,7 @@
     border-radius: 10px;
     font-size: 20px;
     transition: .3s;
+    margin-left: 10px;
 }
 .product__form .submit:hover {
     background-color: #049b04;
@@ -55,12 +56,14 @@
     font-size: 16px;
     margin-top: 20px;
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 .variations__container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 10px;
+    padding: 10px;
 }
 .variations__container .variations-item {
     /*min-width: 450px;*/
@@ -70,4 +73,8 @@
     display: inline-block;
     color: #fff;
     width: 320px;
+}
+
+.variations__container .input__row.image {
+    min-height: 111.5px;
 }
