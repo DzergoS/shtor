@@ -5,8 +5,8 @@ const express = require('express'),
     productRoutes = require('./api/products');
     
 
-genericRouter.use('/auth', authRoutes);
-genericRouter.use('/admin', adminRoutes);
+genericRouter.use('/api/auth', authRoutes);
+genericRouter.use('/api/admin', adminRoutes);
 genericRouter.use('/api/products', productRoutes);
 
 module.exports = genericRouter;

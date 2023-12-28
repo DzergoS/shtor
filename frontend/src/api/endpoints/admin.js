@@ -1,8 +1,8 @@
 import {server} from "../axios";
 
 const auth = {
-	login: (data) => server.post("/auth/login", data),
-	checkAuth: (data) => server.get("/admin", data),
+	login: (data) => server.post("/api/auth/login", data),
+	checkAuth: (data) => server.get("/api/admin", data),
 }
 
 const products = {
