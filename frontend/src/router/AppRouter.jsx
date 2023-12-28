@@ -28,13 +28,38 @@ const AppRouter = () => {
 							<Route path="/payment-and-delivery">
 								<Info
 									title="Payment and delivery"
-									text=""
+									text={<>
+										<p>Dear customers,</p>
+										<p>Please note that all shipments are from our warehouse in Odesa (Ukraine). Due to the war in our country, there are slight changes in delivery terms.The production of the item will take till 10 business days. Please note that the brand is not responsible for local taxes.</p>
+										<ul>
+											<li>DELIVERY TO RUSSIA AND BELARUS IS NOT AVAILABLE. We are praying for peace!Stand with Ukraine!</li>
+										</ul>
+										<p><strong>International orders:</strong></p>
+										<p>All international orders will be shipped by Ukrposhta service and DHL Express.</p>
+										<ul>
+											<li>Standard delivery - $30 (10-20 business days)</li>
+											<li>Express delivery - $60 (5-10 business days)</li>
+										</ul>
+										<p><strong>Ukraine:</strong></p>
+										<p>All orders within Ukraine we will be delivered via the Nova Poshta service. The delivery time during martial law is 2-5 business days.</p>
+										<p>Free delivery</p>
+									</>}
 								/>
 							</Route>
 							<Route path="/returns">
 								<Info
-									title="Returns"
-									text=""
+									title="Returns and Exchange"
+									text={<>
+										<p>Exchange and return of products are possible within 14 days after receiving the order. To arrange a return or an exchange of goods, please contact us at: Shtorga@icloud.com</p>
+										<p>Make sure that the returned product has not been used, is placed in its original packaging, and contains original tags, price tags, and all additional attachments.</p>
+										<p>We reserve the right to refuse returns or exchanges if the item does not comply with the above-mentioned rules.</p>
+										<ul>
+											<li>Goods from the OUTLET section and products made according to individual measurements are not subject to return and exchange.</li>
+										</ul>
+										<p>You can use any express delivery service for a return (please note that the delivery time should NOT exceed 10 days). SHTOR is not responsible for return shipping costs and customs duties.</p>
+										<p>After dispatching the package, please let us know the tracking number of the parcel and leave a link to the tracking website.</p>
+										<p>Any disputes which do not fall under the Returns and Exchange policy are subject to individual resolvement through negotiation between the parties involved.</p>
+									</>}
 								/>
 							</Route>
 							<Route path="/privacy-policy">

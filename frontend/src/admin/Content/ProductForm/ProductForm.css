@@ -1,0 +1,73 @@
+.product__form {
+    height: 100%;
+    overflow-y: scroll;
+}
+.product__form h2 {
+    margin-bottom: 13px;
+    margin-left: 10px;
+}
+.product__form .custom-input {
+    width: 100%;
+}
+.product__form input,
+.product__form textarea,
+.product__form select {
+    width: 100%;
+    font-size: 18px;
+}
+.product__form label {
+    font-size: 17px;
+}
+
+.product__form .input__row {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.product__form .input__row.description__container textarea {
+    height: 100px;
+}
+
+.product__form .input__row .input__container.double {
+    display: flex;
+    gap: 10px;
+}
+.product__form .input__row .input__container.double .custom-input{
+    width: calc(50% - 5px);
+}
+
+.product__form .submit {
+    background-color: green;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    transition: .3s;
+}
+.product__form .submit:hover {
+    background-color: #049b04;
+}
+
+.variations__title {
+    text-align: left;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.variations__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.variations__container .variations-item {
+    /*min-width: 450px;*/
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #363636;
+    display: inline-block;
+    color: #fff;
+    width: 320px;
+}

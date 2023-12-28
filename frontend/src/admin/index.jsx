@@ -5,22 +5,21 @@ import Menu from "./Menu";
 import Content from "./Content";
 import {useHistory} from "react-router-dom";
 import api from "../api";
-import AdminLoader from "../ui-components/AdminLoader";
+import Loader from "../ui-components/Admin/Loader";
 
 const Admin = () => {
 
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const history = useHistory();
+
+	const reqAuth = () => api.admin.auth.checkAuth()
 
 	const reqProducts = () => api.admin.products.get()
 
 	useEffect(() => {
-		// reqProducts()
-		// 	.then(r => console.log('r', r))
-		// 	.catch(e => {
-		// 		console.log(e)
-		// 	})
-		// 	.finally(() => setIsLoading(false))
+		reqAuth()
+			.catch(e => history.push('/auth/login'))
+			.finally(() => setIsLoading(false))
 	}, [])
 
 	return (<>
@@ -41,7 +40,7 @@ const Admin = () => {
 
 			</div>}
 
-		<AdminLoader isActive={isLoading}/>
+		<Loader isActive={isLoading}/>
 
 		</>)
 };

@@ -1,5 +1,5 @@
-import React from 'react';
-import './Products.css'
+import React, {useEffect, useState} from 'react';
+import './List.css'
 import logo from '../../../assets/product1.png';
 import {useHistory} from "react-router-dom";
 
@@ -20,7 +20,15 @@ const good = [{
 	variants: 3,
 }];
 
-const Products = () => {
+export const PRODUCTS = "PRODUCTS";
+export const ORDERS = "ORDERS";
+export const REGULAR_PRODUCTS = "REGULAR_PRODUCTS";
+export const BRACELET_PRODUCTS = "BRACELET_PRODUCTS";
+export const SHELL_PRODUCTS = "SHELL_PRODUCTS";
+export const COLORS = "COLORS";
+export const ATTACHMENTS = "ATTACHMENTS";
+
+const List = ({type}) => {
 
 	const history = useHistory();
 
@@ -33,14 +41,43 @@ const Products = () => {
 		alert(`edit ${item.title}`)
 	}
 
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		if (type === PRODUCTS) {
+			setData(good)
+		}
+		if (type === ORDERS) {
+			setData(good)
+		}
+		if (type === REGULAR_PRODUCTS) {
+			setData(good)
+		}
+		if (type === BRACELET_PRODUCTS) {
+			setData(good)
+		}
+		if (type === SHELL_PRODUCTS) {
+			setData(good)
+		}
+		if (type === COLORS) {
+			setData(good)
+		}
+		if (type === ATTACHMENTS) {
+			setData(good)
+		}
+		if (type === PRODUCTS) {
+			setData(good)
+		}
+	}, []);
+
 	return (
-		<div className="products__container">
+		<div className="list__container">
 			<label className="search__label">
 				<i className="bi bi-search"></i>
 				<input className="search" type="search" placeholder="Шукати товар..."/>
 			</label>
 
-			<div className="product-titles">
+			<div className="list-titles">
 				<div className="pro-image">Картинка</div>
 				<div className="pro-title">Ім'я</div>
 				<div className="category">Категорія</div>
@@ -48,9 +85,9 @@ const Products = () => {
 				<div className="variants">Варіанти</div>
 				<div className="actions">Дії</div>
 			</div>
-			<div className="product-list">
+			<div className="list-items">
 				{good.map((item, key) => (
-					<div key={key} className="product-list-item" onClick={() => editProduct(item)}>
+					<div key={key} className="list-item" onClick={() => editProduct(item)}>
 						<div className="image">
 							<img src={logo} alt="" width="30px"/>
 						</div>
@@ -69,4 +106,4 @@ const Products = () => {
 	);
 };
 
-export default Products;
+export default List;

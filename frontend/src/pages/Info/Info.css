@@ -1,3 +1,26 @@
 .info-page-wrapper {
     min-height: calc(100vh - (46px * 2) - 37px);
 }
+
+.info-page-wrapper ol,
+.info-page-wrapper ul {
+    padding-left: 25px;
+}
+
+.info-page-wrapper ol li {
+    list-style-type: decimal;
+    padding-left: 10px;
+    font-size: 16px;
+    color: #000;
+}
+.info-page-wrapper ul li {
+    list-style-type: disc;
+    font-size: 16px;
+    color: #000;
+    padding-left: 10px;
+}
+.info-page-wrapper p, .info-page-wrapper ul, .info-page-wrapper ol {
+    margin-bottom: 24px;
+    font-size: 16px;
+    color: #000;
+}
