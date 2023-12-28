@@ -8,6 +8,11 @@ const braceletProductSchema = new Schema({
 		en: { type: Number, required: true },
 		ua: { type: Number, required: true },
 	},
+	colors: [{
+		type: Schema.Types.ObjectId,
+		ref: "ProductColor",
+		required: true,
+	}],
 	variations: [{
 		image: {
 			type: Schema.Types.ObjectId,
@@ -18,11 +23,6 @@ const braceletProductSchema = new Schema({
 			type: "String",
 			required: true,
 		},
-	}],
-	color: [{
-		type: Schema.Types.ObjectId,
-		ref: "ProductColor",
-		required: true,
 	}]
 });
 

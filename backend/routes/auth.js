@@ -2,7 +2,7 @@ const express = require('express'),
   bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
   authRouter = express.Router(),
-  User = require('./../models/'),
+  User = require('./../models/Users/User'),
   sendResponse = require('./../shortcuts/response')
 
 // Register
@@ -38,7 +38,7 @@ const express = require('express'),
 //     } catch (err) {
 //       console.log(err);
 //     }
-//   });
+// });
 
 
 authRouter.post("/login", async (req, res) => {
