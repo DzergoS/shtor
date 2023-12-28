@@ -20,8 +20,8 @@ const regularProductSchema = new Schema({
 			required: false,
 		},
 		price: {
-			type: Number,
-			required: true,
+			en: { type: Number, required: true },
+			ua: { type: Number, required: true },
 		}
 	}]
 });

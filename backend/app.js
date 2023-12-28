@@ -1,21 +1,22 @@
 const express = require('express'),
-  // session = require('express-session'),
+  HTTP = require('http'),
   cors = require('cors'),
   cookieParser = require('cookie-parser'),
   connectToDB = require('./config/db'),
   genericRouter = require('./routes/index');
-  // path = require('path');
 
 require('dotenv').config();
 
+const PORT = process.env.PORT;
+const HOSTNAME = process.env.HOSTNAME;
 
-const PORT = process.env.PORT || 3001;
+
 const corsOptions = {
   origin: process.env.FRONTEND_ORIGIN, 
   credentials: true,            
-  optionSuccessStatus: 200,
-  
+  optionSuccessStatus: 200, 
 }
+
 
 const startServer = async () => {
   const app = express();
@@ -24,26 +25,16 @@ const startServer = async () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser(process.env.COOKIE_SECRET));
-  // app.use(
-  //   session({
-  //     secret: process.env.SESSION_SECRET,
-  //     resave: false,
-  //     saveUninitialized: true,
-  //   })
-  // );
   app.use('/', genericRouter);
 
-
-  // app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
-  // app.use('/uploads', express.static('uploads'));
-
   const db = await connectToDB();
+  const server = HTTP.createServer(app);
 
-  const server = app.listen(PORT, () => {
+  const WebServer = server.listen(PORT, HOSTNAME, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 
-  server.on('close', async () => {
+  WebServer.on('close', async () => {
     try {
       await db.close();
       console.log('MongoDB connection closed.');
