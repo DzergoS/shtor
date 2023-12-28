@@ -8,8 +8,8 @@ import Loader from "../../ui-components/Admin/Loader";
 
 const Auth = () => {
 	const [form, setForm] = useState({
-		email: "shtorga@gmail.com",
-		password: "P$5gHj@9sL!2qR8u",
+		email: "",
+		password: "",
 	});
 	const {dispatch} = useAPI();
 	const [isLoading, setIsLoading] = useState(false);

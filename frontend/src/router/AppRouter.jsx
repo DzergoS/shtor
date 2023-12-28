@@ -135,7 +135,15 @@ const AppRouter = () => {
 									}
 								/>
 							</Route>
-							<Route path="/about-us" component={Info}/>
+							<Route path="/about-us">
+								<Info
+									title="About Us"
+									text={<>
+										<h2>THE WOMAN U ARE</h2>
+										<p>I didn't have to think for long about embodying the brand in a single image. In the photo, a young Lyudmila is my mother. I haven't encountered greater freedom, sensitivity, authenticity, and strength in a gaze anywhere else. This is what I convey and talk about through my products at <strong>shtorsstore</strong>.</p>
+									</>}
+								/>
+							</Route>
 							<Route path="/cart" component={ShoppingCart}/>
 						</Switch>
 					</main>
