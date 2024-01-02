@@ -30,6 +30,9 @@ const startServer = async () => {
 
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
+  // Serve static files from the ../productPhotos directory
+  app.use('/productPhotos', express.static(path.join(__dirname, '../productPhotos')));
+
 // Handle other routes by serving the index.html
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
