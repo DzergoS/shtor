@@ -5,16 +5,17 @@ import './ShoppingCart.css'
 import CartProducts from "./CartProducts/CartProducts";
 import CartTotal from "./CartTotal/CartTotal";
 import {Link} from "react-router-dom";
+import {translations} from "../../info";
 
 const ShoppingCart = () => {
 
-	const {state: {cart}} = useAPI()
+	const {state: {cart, lang}} = useAPI()
 
 	if (cart.length) {
 		return (
 			<div className="cart-wrapper">
 
-				<h2 className="title">Cart</h2>
+				<h2 className="client__title">{translations.cart.title[lang]}</h2>
 
 				<div className="cart-container">
 
@@ -30,9 +31,9 @@ const ShoppingCart = () => {
 
 	return (
 		<div className="empty-cart">
-			<h2 className="title">Cart</h2>
-			<p className="cart-description">Your cart is currently empty</p>
-			<Link to={'/'} className="cart-button__continue-shopping">Continue shopping</Link>
+			<h2 className="title">{translations.cart.title[lang]}</h2>
+			<p className="cart-description">{translations.cart.empty[lang]}</p>
+			<Link to={'/#product-list'} className="cart-button__continue-shopping">{translations.cart.continueShopping[lang]}</Link>
 		</div>
 	)
 }

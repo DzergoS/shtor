@@ -17,6 +17,7 @@ body {
   font-family: 'Lexend', sans-serif;
   font-weight: 400;
   color: black;
+  overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
@@ -70,7 +71,7 @@ a, a:active, a:visited {
   }
 }
 
-.title {
+.client__title {
   font-size: 32px;
   font-weight: 400;
   text-align: center;

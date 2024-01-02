@@ -3,7 +3,7 @@ const express = require('express'),
   cors = require('cors'),
   cookieParser = require('cookie-parser'),
   connectToDB = require('./config/db'),
-  genericRouter = require('./routes/index');
+  genericRouter = require('./routes/index')
   // path = require('path');
 
 require('dotenv').config();
@@ -11,15 +11,15 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
 const corsOptions = {
-  origin: process.env.FRONTEND_ORIGIN, 
-  credentials: true,            
+  origin: process.env.FRONTEND_ORIGIN,
+  credentials: true,
   optionSuccessStatus: 200,
-  
+
 }
 
 const startServer = async () => {
   const app = express();
-  
+
   app.use(cors(corsOptions))
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -31,7 +31,7 @@ const startServer = async () => {
   //     saveUninitialized: true,
   //   })
   // );
-  app.use('/', genericRouter);
+  app.use('/api', genericRouter);
 
 
   // app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));

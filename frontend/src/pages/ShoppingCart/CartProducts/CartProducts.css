@@ -18,6 +18,11 @@
     font-size: 16px;
 }
 
+.cart-product .cart-product-desc .cart-product__title strong,
+.cart-product .cart-product-desc .cart-product__desc strong {
+    font-weight: 500;
+}
+
 .cart-product .cart-product-desc .cart-product__title {
     margin-bottom: 16px;
 }

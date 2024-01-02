@@ -1,209 +1,322 @@
 import React, {useEffect, useState} from 'react';
 import './ProductForm.css';
-import {
-	NATURE,
-	OBERIH,
-	OBJECT,
-	PRODUCT_EDIT,
-	SHELL_PRODUCT,
-	REGULAR_PRODUCT,
-	BRACELET_PRODUCT,
-	ATTACHMENT_ORBIT, ATTACHMENT_CHAIN, ATTACHMENT_EMPTY
-} from "./constants";
 import Input from "../../../ui-components/Admin/Input";
+import {
+	formatKeyToLabel, formatKeyToType, isArrayKeys, isDoubleInputKeys,
+	isSingleTextKeys, pushKeyOrderedToInputs, validate,
+} from "./productUtils";
+import {useLocation} from "react-router-dom";
+import {attachmentOptions, inputsData, OBJECT, requiredInputs} from "./constants";
+import {Button, Typography} from "@mui/material";
+import api from "../../../api";
 
 const ProductForm = ({ type }) => {
-	const [form, setForm] = useState({});
+	const [form, setForm] = useState({
+		group: OBJECT,
+	});
+	const location = useLocation();
+	const isAdding = location.pathname.includes('add')
+	const [inputs, setInputs] = useState(inputsData)
+	const [isError, setIsError] = useState(false);
+	const [variation, setVariation] = useState({})
 
-	const onSubmit = (e) => {
-		e.preventDefault()
-		console.log('formData', form)
+	const hasInputAddButtonError = (key) => (key === 'images' && !Object.keys(form).includes(key) && !Object.keys(variation).includes(key)) || (key !== 'images' && requiredInputs.includes(key))
+
+	const isValidForm = () => {
+		const isRequiredInputsValid = inputs.every(requiredInput => !hasInputAddButtonError(requiredInput));
+
+		const {group, ...formData} = form;
+		const isFormValuesValid = Object.entries(formData).every(([key, value]) => key === 'variations'
+			? value.every(variation => Object.entries(variation).every(([variationKey, variationValue]) => validate(variationKey, variationValue)))
+			: validate(key, value));
+
+		return isRequiredInputsValid && isFormValuesValid;
+	};
+
+	const uploadImage = async (image) => {
+		try {
+			const formData = new FormData();
+			formData.append('image', image);
+			const { data: { file }} = await api.admin.image.add(formData);
+			return file
+		} catch (error) {
+			console.error('Error uploading image:', error.message);
+			throw error;
+		}
+	};
+
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		if (isValidForm()) {
+			try {
+				const allImages = [];
+
+				if (form?.images) form.images.map((image) => allImages.push(image))
+				console.log('form', form)
+				console.log('variation', variation)
+				if (form?.variations?.length && variation?.images) {
+					console.log('flex?')
+					form.variations.map(({images}) => {
+						if (images && images.length) images.map((image) => allImages.push(image));
+						return variation;
+					})
+				}
+
+				console.log('allImages', allImages)
+				const uploadPromises = allImages.map(uploadImage);
+				const responses = await Promise.all(uploadPromises);
+				console.log('responses', responses)
+
+				const newForm = {...form};
+				if (newForm?.images) newForm.images = newForm.images.map((image) => responses.find(responseFile => image.name === responseFile.originalname).filename)
+				if (newForm?.variations?.length && variation?.images) newForm.variations = newForm.variations.map((variation) => ({
+					...variation,
+					images: variation.images.map(image => responses.find(responseFile => image.name === responseFile.originalname).filename)
+				}))
+
+				console.log('newForm', newForm)
+
+				const response = isAdding ? await api.admin.products.add(newForm) : await api.admin.products.edit(newForm)
+				console.log(response)
+				alert(isAdding ? 'Товар успішно додан до бази' : 'Товар успішно змінен')
+			} catch (e) {
+				console.error(e)
+				alert(isAdding ? 'Не вдалось додати товар до бази' : 'Не вдалось змінити товар')
+			}
+		} else setIsError(true)
 	}
 
 	useEffect(() => {
-		switch (type) {
-			case OBERIH:
-				setForm(BRACELET_PRODUCT);
-				break;
-			case OBJECT:
-				setForm(REGULAR_PRODUCT);
-				break;
-			case NATURE:
-				setForm(SHELL_PRODUCT);
-				break;
-			default:
-				setForm({});
+		if (isValidForm()) {
+			setIsError(false)
 		}
-	}, [type]);
+	}, [inputs])
 
+	const generateFormValueByKey = (key) => {
+		let value;
 
-	const handleVariationInputChange = (index, key, subKey, inputValue) => {
+		if (key ===  'feature' || key ===  'material') value = ""
+		if (key === 'size' || key === 'images' || key === 'color') value = []
+		if (key === 'attachment') value = attachmentOptions[((form?.variations?.length) || 0) % 3]
+		if (key === 'name' || key === 'description') value = {
+			en: "",
+			ua: "",
+		};
+		if (key === 'price') value = {
+			en: 0,
+			ua: 0
+		}
+
+		return value;
+	}
+
+	const moveFromInputKeysToVariationsForm = (e, key) => {
+		e.preventDefault();
+
+		if (e.key === 'Enter') return;
+
+		const value = generateFormValueByKey(key);
+
+		setVariation((prevVariation) => ({...prevVariation, [key]: value}))
+		setForm((prevForm) => ({
+			...prevForm,
+			variations: prevForm?.variations
+				? prevForm.variations.map(variation => ({
+					...variation,
+					[key]: value,
+				}))
+				: [{[key]: value}]
+		}))
+		if (key !== 'images') setInputs((prevInputs) => prevInputs.filter(input => input !== key))
+	}
+
+	const moveFromVariationsFormToInputKeys = (e, key) => {
+		e.preventDefault();
+
+		if (e.key === 'Enter') return;
+
+		setVariation((prevVariation) => {
+			const updatedObject = { ...prevVariation };
+			delete updatedObject[key];
+			return updatedObject
+		})
 		setForm((prevForm) => {
-			const newVariations = prevForm.variations;
-			const variationToUpdate = newVariations[index];
+			const updatedObject = { ...prevForm };
+			updatedObject.variations = updatedObject.variations.map((variation) => {
+				const updatedVariation = { ...variation };
+				delete updatedVariation[key];
+				return updatedVariation;
+			});
 
-			if (subKey) {
-				variationToUpdate[subKey] = inputValue;
-			} else {
-				variationToUpdate[key] = inputValue;
-			}
-
-			newVariations[index] = variationToUpdate;
-
-			return {
-				...prevForm,
-				variations: newVariations,
-			};
+			if (!Object.keys(updatedObject.variations[0]).length) delete updatedObject.variations;
+			return updatedObject
 		});
+		setInputs((prevInputs) => pushKeyOrderedToInputs(key, prevInputs))
+	}
+
+	const moveFromInputKeysToFormKeys = (e, key) => {
+		e.preventDefault();
+
+		if (e.key === 'Enter') return;
+
+		const value = generateFormValueByKey(key);
+
+		setForm((prevForm) => ({...prevForm, [key]: value}))
+		if (key !== 'images') setInputs((prevInputs) => prevInputs.filter(input => input !== key))
+	}
+
+	const moveFromFormKeysToInputKeys = (e, key) => {
+		e.preventDefault();
+
+		if (e.key === 'Enter') return;
+
+		setInputs((prevInputs) => pushKeyOrderedToInputs(key, prevInputs))
+		setForm((prevForm) => {
+			const updatedObject = { ...prevForm };
+			delete updatedObject[key];
+			return updatedObject
+		})
+	}
+
+	const handleInputChange = (key, value, lang) => setForm((prevForm) => ({
+		...prevForm,
+		[key]: lang ? { ...form[key], [lang]: value } : value,
+	}));
+
+	const handleVariationInputChange = (key, value, lang, index) => setForm((prevForm) => ({
+		...prevForm,
+		variations: prevForm.variations.map((variation, indx) => indx === index
+			? ({...variation, [key]: lang ? { ...variation[key], [lang]: value } : value})
+			: variation
+	)}))
+
+
+	const createInput = (key, value, lang, isVariation, variationIndex) => {
+		const inputProps = {
+			type: formatKeyToType(key),
+			error: isError && !validate(key, value),
+			label: formatKeyToLabel(key, isVariation),
+			value: lang ? value[lang] : value,
+			onChange: isVariation
+				? (event) => handleVariationInputChange(key, event.target.value, lang, variationIndex)
+				: (event) => handleInputChange(key, event.target.value, lang),
+		};
+
+		if (lang) inputProps.prefix = lang.toUpperCase();
+		if ((!isVariation && (key === 'color' || key === 'size')) || key === 'images' ) inputProps.multiple = true;
+
+		return <Input {...inputProps} />
 	};
 
+	console.log(form)
+	const renderVariation = (key, value, variationIndex, keyIndex) => {
+		let content;
 
+		if (isSingleTextKeys(key) || isArrayKeys(key)) content = createInput(key, value, null, true, variationIndex)
+		if (isDoubleInputKeys(key)) content = <>
+			{createInput(key, value, 'ua', true, variationIndex)}
+			{createInput(key, value, 'en', true, variationIndex)}
+		</>
 
-	const renderPriceInput = (value, i) => (
-		<div className="input__container double">
-			<Input
-				type="number"
-				prefix="UA"
-				label="Ціна варіації"
-				value={value.ua}
-				onChange={(event) => handleVariationInputChange(i, 'price', 'ua', event.target.value)}
-				required
-			/>
-			<Input
-				type="number"
-				prefix="EN"
-				value={value.en}
-				onChange={(event) => handleVariationInputChange(i, 'price', 'en', event.target.value)}
-				required
-			/>
-		</div>
-	);
+		return (
+			<div key={`${variationIndex}${keyIndex}`} className={`input__row ${key}__container ${isDoubleInputKeys(key) ? 'double' : ''}`}>
+				{content}
+				<button className="remove__value variation" onClick={(e) => moveFromVariationsFormToInputKeys(e, key)}>
+					<i className="delete bi bi-trash"></i>Видалити властивість варіації
+				</button>
+			</div>
+		)
+	}
 
-	const renderSizeInput = (value, i) => (
-		<div className="input__container plain">
-			<Input
-				type="text"
-				label="Розмір варіації"
-				value={value}
-				onChange={(event) => handleVariationInputChange(i, 'size', null, event.target.value)}
-				required
-			/>
-		</div>
-	);
+	const renderValue = (key) => {
+		const value = form[key]
+		const content = isSingleTextKeys(key) || isArrayKeys(key)
+			? createInput(key, value)
+			: <>
+				{createInput(key, value, 'ua')}
+				{createInput(key, value, 'en')}
+			</>;
 
-	const renderImageInput = (value, i) => (
-		<div className="input__container image">
-			<Input
-				type="image"
-				label="Картинка варіації"
-				value={value}
-				onChange={(event) => handleVariationInputChange(i, 'image', null, event.target.value)}
-				required
-			/>
-		</div>
-	);
+		return (
+			<div key={key} className={`input__row ${key}__container ${isDoubleInputKeys(key) ? 'double' : ''}`}>
+				{content}
+				{key !== 'group' ? <button className="remove__value" onClick={(e) => moveFromFormKeysToInputKeys(e, key)}><i className="delete bi bi-trash"></i>Видалити властивість</button> : ""}
+			</div>
+		);
+	}
 
-	const renderAttachmentInput = (value, i) => (
-		<div className="input__container attachment">
-			<Input
-				type="text"
-				disabled
-				label="Підвіс товару"
-				value={value}
-			/>
-		</div>
-	);
+	const addVariation = () => setForm(prevForm => ({...prevForm, variations: [...prevForm.variations, variation]}))
+	const removeVariation = (variationIndex) => setForm(prevForm => ({...prevForm, variations: prevForm.variations.filter((variation, index) => index !== variationIndex)}))
 
-	const renderVariation = (variation, i) => (
-		<div className="variations-item" key={i}>
-			<h4>#{i + 1}</h4>
-			{Object.entries(variation).map(([key, value], e) => (
-				<div key={`${i}${e}`} className={`input__row ${key}`}>
-					{key === 'price' && renderPriceInput(value, i)}
-					{key === 'size' && renderSizeInput(value, i)}
-					{key === 'attachment' && renderAttachmentInput(value, i)}
-					{key === 'image' && renderImageInput(value, i)}
-				</div>
-			))}
-		</div>
-	);
-
-	const renderVariations = (variations) => (
-		variations.map((variation, i) => renderVariation(variation, i))
-	);
-
-
-	const renderDoubleInput = (label, valueUA, onChangeUA, valueEN, onChangeEN) => (
-		<div className="input__container double">
-			<Input type="text" prefix="UA" label={label} value={valueUA} onChange={onChangeUA} required />
-			<Input type="text" prefix="EN" value={valueEN} onChange={onChangeEN} required />
-		</div>
-	);
-
-	const renderTextAreaInput = (label, valueUA, onChangeUA, valueEN, onChangeEN) => (
-		<div className="input__container double">
-			<Input type="textarea" prefix="UA" label={label} value={valueUA} onChange={onChangeUA} required />
-			<Input type="textarea" prefix="EN" value={valueEN} onChange={onChangeEN} required />
-		</div>
-	);
-
-	const renderSelectInput = (label, options, value) => (
-		<div className="input__container group">
-			<Input type="select" label={label} options={options} value={value} disabled required />
-		</div>
-	);
-
-	const renderSingleInput = (type, label, value, onChange, multiple) => (
-		<div className={`input__container ${type}`}>
-			<Input type={type} label={label} value={value} onChange={onChange} multiple={multiple} required />
-		</div>
-	);
-
-	const renderContent = (key, value) => {
-		let content = value;
-
-		if (key === 'name' || key === 'price' || key === 'description') {
-			const label = key === 'name' ? 'Назва товару' : key === 'price' ? 'Ціна товару' : 'Опис товару';
-			content = key === 'description'
-				? renderTextAreaInput(label, form[key].ua, (e) => setForm({ ...form, [key]: { ...form[key], ua: e.target.value } }),
-					form[key].en, (e) => setForm({ ...form, [key]: { ...form[key], en: e.target.value } }))
-				: renderDoubleInput(label, form[key].ua, (e) => setForm({ ...form, [key]: { ...form[key], ua: e.target.value } }),
-					form[key].en, (e) => setForm({ ...form, [key]: { ...form[key], en: e.target.value } }));
-		}
-
-		if (key === 'group') {
-			content = renderSelectInput('Група товару', [OBJECT, OBJECT, NATURE], form.group, (e) => setForm({ ...form, group: e.target.value }));
-		}
-
-		if (key === 'size') {
-			content = renderSingleInput('plain', 'Розмір товару', form.size, (e) => setForm({ ...form, size: e.target.value }));
-		}
-
-		if (key === 'images' || key === 'colors') {
-			const type = key === 'images' ? 'image' : 'color';
-			content = renderSingleInput(type, key === 'images' ? 'Картинки товару' : 'Кольори товару', value, (e) => setForm({ ...form, [key]: e.target.value }), key === 'images');
-		}
-
-		if (key === 'variations') {
-			return (
-				<React.Fragment key={key}>
-					<h5 className="variations__title">Варіації: </h5>
-					<div className="variations__container">{renderVariations(value)}</div>
-				</React.Fragment>
-			);
-		}
-
-		return <div key={key} className={`input__row ${key}__container`}>{content}</div>;
-	};
-
-
-	const title = type === PRODUCT_EDIT ? 'Редагування товару' : 'Додавання товару';
+	const title = !isAdding ? 'Редагування товару' : 'Додавання товару';
+	const showStaticValues = Object.keys(form).filter(key => key !== 'variations' && key !== 'group').length || inputs.filter((input => input !== 'attachment')).length
+	const areThereStaticButtons = inputs.filter((input => input !== 'attachment')).length
+	const showAddVariationButton = form?.variations ? Object.keys(form?.variations)?.length : false
 
 	return (
-		<form className="product__form" onSubmit={onSubmit}>
-			<h2>{title}</h2>
-			{Object.keys(form).map((key) => renderContent(key, form[key]))}
-			<button type="submit" className="submit">Створити Товар</button>
+		<form className="product__form" onSubmit={onSubmit} onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}>
+			<Typography variant="h4" gutterBottom>{title}</Typography>
+
+			<div className="input__part">
+
+				{renderValue('group')}
+
+				{showStaticValues ? <Typography variant="h5" gutterBottom>Постійні дані товару: </Typography> : ""}
+
+				{areThereStaticButtons ? <Typography variant="subtitle1" gutterBottom>- додати до постійних даних товару</Typography> : ""}
+
+				<div className="choose__container">
+					{inputs?.filter((input => input !== 'attachment')).map((key, index) => {
+						if (key === 'images' && typeof form?.images === 'object') return "";
+						return (
+							<Button variant="contained" color={isError && hasInputAddButtonError(key) ? "error" : "primary"} key={index} onClick={(e) => moveFromInputKeysToFormKeys(e, key)} className="choose__button">{formatKeyToLabel(key)} товару</Button>
+						)
+					})}
+				</div>
+
+				<div className="values__container">
+					{Object.keys(form).filter(key => key !== 'group' && key !== 'variations').map(renderValue)}
+				</div>
+
+			</div>
+
+			<div className="input__part">
+
+				<Typography variant="h5" gutterBottom>Дані варіацій товару: </Typography>
+
+				{inputs.length
+					? <Typography variant="subtitle1" gutterBottom>- додати до варіацій товару</Typography> : ""}
+
+				<div className="choose__container">
+					{inputs?.map((key, index) => {
+						if (key === 'images' && typeof variation?.images === 'object') return "";
+						return (
+							<Button
+								variant="contained"
+								key={index}
+								color={isError && hasInputAddButtonError(key) ? "error" : "primary"}
+								onClick={(e) => moveFromInputKeysToVariationsForm(e, key)}
+								className="choose__item"
+							>
+								{formatKeyToLabel(key, true)} варіації
+							</Button>
+						)
+					})}
+				</div>
+
+				<div className="values__container variations__container">
+					{form?.variations?.map((variation, variationIndex) => (
+						<div className="variations-item" variation_number={variationIndex + 1} key={variationIndex}>
+							{Object.entries(variation).map(([key, value], keyindex) => renderVariation(key, value, variationIndex, keyindex))}
+							{form.variations.length > 1 ? <Button variant="contained" className="remove__variation-item" onClick={() => removeVariation(variationIndex)}><i className="delete bi bi-trash"></i> Видалити варіацію</Button> : ""}
+						</div>
+					))}
+					{showAddVariationButton ? <Button variant="contained" className="add__variation-item" size="large" color="secondary" onClick={addVariation}>Додати варіацію</Button> : ""}
+				</div>
+
+			</div>
+			{showAddVariationButton ? <Button variant="contained" className="add__variation-item" color="secondary" onClick={addVariation} fullWidth>Додати варіацію</Button> : ""}
+			<Button variant="contained" className="add__product" color="success" size="large" onClick={onSubmit} fullWidth>Створити Товар</Button>
 		</form>
 	);
 };

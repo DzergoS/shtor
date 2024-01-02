@@ -1,7 +1,7 @@
 import {server} from "../axios";
 
 const endpoints = {
-	get: (data) => server.post("/products", data),
+	get: () => server.get("/products"),
 };
 
 export default endpoints;

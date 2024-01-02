@@ -2,8 +2,8 @@ const express = require('express'),
   bcrypt = require('bcryptjs'),
   jwt = require('jsonwebtoken'),
   authRouter = express.Router(),
-  User = require('./../models/Users/User'),
-  sendResponse = require('./../shortcuts/response')
+  { User } = require('../models'),
+  sendResponse = require('../utils/response')
 
 // Register
 // authRouter.post("/register", async (req, res) => {
@@ -13,18 +13,18 @@ const express = require('express'),
 //         res.status(400).send("All input is required");
 //       }
 //       const createdUser = await User.findOne({ email });
-  
+
 //       if (createdUser) {
 //         return res.status(409).send("User Already Exist. Please Login");
 //       }
-  
+
 //       encryptedPassword = await bcrypt.hash(password, 10);
-  
+
 //       const user = await User.create({
 //         email: email.toLowerCase(),
 //         password: encryptedPassword,
 //       });
-  
+
 //       const token = jwt.sign(
 //         { user_id: user._id, email },
 //         process.env.JWT_SECRET,
@@ -33,7 +33,7 @@ const express = require('express'),
 //         }
 //       );
 //       user.token = token;
-  
+
 //       res.status(201).json(user);
 //     } catch (err) {
 //       console.log(err);
@@ -48,7 +48,7 @@ authRouter.post("/login", async (req, res) => {
     if (!(email && password)) {
       return sendResponse(res, 400, false, {}, "All input is required");
     }
-    
+
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
