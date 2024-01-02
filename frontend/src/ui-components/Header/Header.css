@@ -114,9 +114,13 @@
         width: 100px;
         filter: none;
     }
-    .header.absolute img,
-    .header.absolute svg.menu {
+    .header svg.menu,
+    .header.absolute img {
         filter: invert(1);
+    }
+    .header img,
+    .header.absolute svg.menu {
+        filter: none;
     }
 
     .header .menu {
