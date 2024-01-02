@@ -115,7 +115,7 @@
         filter: none;
     }
     .header.absolute img,
-    .header.absolute img.menu {
+    .header.absolute svg.menu {
         filter: invert(1);
     }
 
