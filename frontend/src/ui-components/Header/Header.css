@@ -114,6 +114,10 @@
         width: 100px;
         filter: none;
     }
+    .header.absolute img.logo,
+    .header.absolute img.menu {
+        filter: invert(1);
+    }
 
     .header .menu {
         cursor: pointer;
