@@ -114,7 +114,7 @@
         width: 100px;
         filter: none;
     }
-    .header.absolute img.logo,
+    .header.absolute img,
     .header.absolute img.menu {
         filter: invert(1);
     }
