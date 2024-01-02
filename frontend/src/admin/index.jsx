@@ -14,8 +14,6 @@ const Admin = () => {
 
 	const reqAuth = () => api.admin.auth.checkAuth()
 
-	const reqProducts = () => api.admin.products.get()
-
 	useEffect(() => {
 		reqAuth()
 			.catch(e => history.push('/auth/login'))

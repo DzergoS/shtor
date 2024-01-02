@@ -4,7 +4,7 @@ const express = require('express'),
   cors = require('cors'),
   cookieParser = require('cookie-parser'),
   connectToDB = require('./config/db'),
-  genericRouter = require('./routes/index');
+  genericRouter = require('./routes/index')
 
 require('dotenv').config();
 
@@ -14,20 +14,19 @@ const HOSTNAME = process.env.HOSTNAME;
 
 
 const corsOptions = {
-  origin: process.env.FRONTEND_ORIGIN, 
-  credentials: true,            
-  optionSuccessStatus: 200, 
+  origin: process.env.FRONTEND_ORIGIN,
+  credentials: true,
+  optionSuccessStatus: 200,
 }
-
 
 const startServer = async () => {
   const app = express();
-  
+
   app.use(cors(corsOptions))
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser(process.env.COOKIE_SECRET));
-  app.use('/', genericRouter);
+  app.use('/api', genericRouter);
 
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 

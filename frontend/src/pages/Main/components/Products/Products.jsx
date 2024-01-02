@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import product1 from 'assets/product1.png'
 import product2 from 'assets/product2.png'
@@ -11,109 +11,91 @@ import seeMore from 'assets/seeMore.png'
 
 import './Products.css'
 import {Link} from "react-router-dom";
-
-const macap = [ {
-  category: 'OBERIH',
-  title: 'глиняне намисто',
-  price: 2800,
-  img: product1
-}, {
-  category: 'OBERIH',
-  title: 'підвіс гребінь',
-  price: 3000,
-  img: product2
-}, {
-  category: 'OBERIH',
-  title: 'автентичні сережки',
-  price: 2500,
-  img: product3
-}, {
-  category: 'NATURE',
-  title: 'підвіс мушля',
-  price: 2000,
-  img: product4
-}, {
-  category: 'NATURE',
-  title: 'гребінь для волосся',
-  price: 2000,
-  img: product5
-}, {
-  category: 'NATURE',
-  title: 'гребінь для волосся',
-  price: 2500,
-  img: product6
-},
-]
+import api from "../../../../api";
+import {get} from "axios";
+import products from "api/endpoints/products";
+import useAPI from "provider/useAPI";
+import getUrlByImageName from "../../../../utils/getUrlByImageName";
+import ProductItem from "./ProductItem/ProductItem";
+// import {allProducts} from "../../../../products";
 
 const Products = () => {
-  const rotateElementRef = useRef(null);
-  const [show, setShow] = useState({
-    animation: false,
-    showMore: false,
-  });
 
-  const { animation, showMore } = show;
+	const {state: { products }} = useAPI()
+	const rotateElementRef = useRef(null);
+	const [animation, setAnimation] = useState({
+		on: false,
+		maxElements: 15,
+		classList: '',
+	});
 
-  const handleRotateClick = () => {
-    setShow({
-      animation: true,
-      showMore: false,
-    })
-    if (rotateElementRef.current) {
-      rotateElementRef.current.classList.add('rotate-270');
-      setTimeout(() => {
-        rotateElementRef.current.classList.add('rotate-ended-270');
-      }, 1600)
-    }
-    setTimeout(() => setShow({
-      animation: true,
-      showMore: true,
-    }), 2200)
-  };
+	const { on, classList, maxElements } = animation;
 
-  const handleMouseLeave = () => {
-    if (rotateElementRef.current && animation) {
-      rotateElementRef.current.classList.add('rotate-360');
-    }
-  };
+	const handleRotateClick = () => {
+		setAnimation((prevAnimation) => ({
+			...prevAnimation,
+			on: true,
+			classList: 'rotate-270',
+		}));
 
-  return (
-    <div className="product-list">
-      {macap.map((product, index) => (
-        <Link to={'/product'} className="product-list__item" key={index}>
-          <img src={product.img} alt={'product-list__item-image'}/>
-          <div className="product-list__item-info">
-            <h3>{product.category}/{product.title}</h3>
-            <p>₴{product.price}</p>
-          </div>
-        </Link>
-      ))}
-      {showMore
-        ? macap.map((product, index) => (
-          <Link to={'/product'} className="product-list__item" key={index}>
-            <img src={product.img} alt={'product-list__item-image'}/>
-            <div className="product-list__item-info">
-              <h3>{product.category}/{product.title}</h3>
-              <p>₴{product.price}</p>
-            </div>
-          </Link>
-        ))
-        : ''
-      }
-      <div
-          className="see-more"
-          onClick={handleRotateClick}
-          onMouseLeave={handleMouseLeave}
-      >
-        <img
-            src={seeMore}
-            ref={rotateElementRef}
-            alt="img-button"
-        />
-        See More
-      </div>
-    </div>
-  );
+		setTimeout(() => {
+			setAnimation((prevAnimation) => ({
+				...prevAnimation,
+				classList: `${prevAnimation.classList} rotate-ended-270 rotate-360`,
+			}));
+		}, 1600);
+
+		setTimeout(() => {
+			setAnimation((prevAnimation) => ({
+				...prevAnimation,
+				maxElements: maxElements + 15,
+			}));
+		}, 2200);
+	};
+
+	const productList = products.reduce((accumulator, currentObject) => {
+		if (currentObject?.name?.ua === 'Браслет-підвіс') {
+			accumulator.push({
+				...currentObject,
+				images: currentObject?.variations?.[0]?.images
+			})
+		}
+		else if (currentObject?.variations?.[0]?.images?.length) {
+			currentObject.variations.map((variation, variationIndex) => {
+				accumulator.push({
+					...currentObject,
+					...variation,
+					_id: currentObject._id,
+					variationIndex,
+				})
+			})
+		} else accumulator.push(currentObject)
+		return accumulator;
+	}, []);
+
+	// console.log('products', products)
+	// console.log('productList', productList);
+
+	return (<>
+		<div className="product-list" id="product-list">
+			{productList.slice(0, maxElements).map((product, index) => <ProductItem {...product} key={index} index={index}/>)}
+		</div>
+		{maxElements < productList?.length
+			? <div
+				className="see-more"
+				onClick={handleRotateClick}
+			>
+				<img
+					src={seeMore}
+					ref={rotateElementRef}
+					className={animation.classList}
+					alt="img-button"
+				/>
+				See More
+			</div>
+			: ""}
+	</>
+	);
 };
 
-export default Products;
+export default React.memo(Products);

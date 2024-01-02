@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken"),
-  sendResponse = require('./../shortcuts/response')
+  sendResponse = require('./../utils/response')
 
 const verifyToken = (req, res, next) => {
   const token = req.cookies.access_token;

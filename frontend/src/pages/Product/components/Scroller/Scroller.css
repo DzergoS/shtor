@@ -1,7 +1,6 @@
-
 .scroller-title {
     font-size: 16px;
-    padding: 91px 0 30px 0;
+    margin: 91px 0 30px 0;
     font-weight: 400;
 }
 
@@ -40,17 +39,21 @@
     .product-item {
         width: calc(50% - 18px);
     }
-    .scroller-container {
-
+    .scroller-title {
+        margin-top: 36px;
+        margin-bottom: 24px;
     }
-    .scroller-container::after {
-        content: '';
+    .progress-bar__container {
+        position: relative;
+    }
+    .progress-bar__container .progress-bar {
         display: block;
         background: black;
-        width: 120px;
+        margin: 0 -20px;
+        width: calc(12.5% + 40px);
         height: 0.8px;
-        position: relative;
-        left: -11px;
-        top: 32px;
+        position: absolute;
+        left: 0;
+        transition: .3s;
     }
 }

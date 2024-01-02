@@ -4,3 +4,7 @@
     width: 100%;
     background-color: #dcdcdc;
 }
+
+.admin__title {
+    margin-bottom: 10px;
+}

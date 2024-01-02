@@ -15,7 +15,7 @@
     min-height: calc(100vh - (46px * 2) - 37px);
 }
 
-.empty-cart .title {
+.empty-cart .client__title {
     margin-bottom: 16px;
 }
 .empty-cart .cart-description {

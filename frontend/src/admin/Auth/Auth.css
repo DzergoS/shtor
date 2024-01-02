@@ -1,157 +1,11 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box
-}
-
-body,html {
-    height: 100%;
-    font-family: 'Lexend', sans-serif;
-}
-
-a {
-    font-family: 'Lexend', sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #666;
-    margin: 0;
-    transition: all .4s;
-    -webkit-transition: all .4s;
-    -o-transition: all .4s;
-    -moz-transition: all .4s
-}
-
-a:focus {
-    outline: none!important
-}
-
-a:hover {
-    text-decoration: none;
-    color: #000;
-}
-
-h1,h2,h3,h4,h5,h6 {
-    margin: 0
-}
-
-p {
-    font-family: 'Lexend', sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #666;
-    margin: 0
-}
-
-ul,li {
-    margin: 0;
-    list-style-type: none
-}
-
-input {
-    outline: none;
-    border: none
-}
-
-textarea {
-    outline: none;
-    border: none
-}
-
-textarea:focus,input:focus {
-    border-color: transparent!important
-}
-
-input:focus::-webkit-input-placeholder {
-    color: transparent
-}
-
-input:focus:-moz-placeholder {
-    color: transparent
-}
-
-input:focus::-moz-placeholder {
-    color: transparent
-}
-
-input:focus:-ms-input-placeholder {
-    color: transparent
-}
-
-textarea:focus::-webkit-input-placeholder {
-    color: transparent
-}
-
-textarea:focus:-moz-placeholder {
-    color: transparent
-}
-
-textarea:focus::-moz-placeholder {
-    color: transparent
-}
-
-textarea:focus:-ms-input-placeholder {
-    color: transparent
-}
-
-input::-webkit-input-placeholder {
-    color: #000;
-}
-
-input:-moz-placeholder {
-    color: #000;
-}
-
-input::-moz-placeholder {
-    color: #000;
-}
-
-input:-ms-input-placeholder {
-    color: #000;
-}
-
-textarea::-webkit-input-placeholder {
-    color: #000;
-}
-
-textarea:-moz-placeholder {
-    color: #000;
-}
-
-textarea::-moz-placeholder {
-    color: #000;
-}
-
-textarea:-ms-input-placeholder {
-    color: #000;
-}
-
-label {
-    margin: 0;
-    display: block
-}
-
-button {
-    outline: none!important;
-    border: none;
-    background: 0 0
-}
-
-button:hover {
-    cursor: pointer
-}
-
-iframe {
-    border: none!important
-}
-
-.txt1 {
+.container-login100 .txt1 {
     font-family: 'Lexend', sans-serif;
     font-size: 13px;
     color: #e5e5e5;
     line-height: 1.5
 }
 
-.limiter {
+.container-login100 .limiter {
     width: 100%;
     margin: 0 auto
 }
@@ -261,6 +115,8 @@ iframe {
     background: 0 0;
     padding: 0 5px 0 38px;
     transition: 0.4s padding;
+    border: none;
+    outline: none;
 }
 
 
@@ -408,9 +264,9 @@ iframe {
 }
 
 .login100-form-btn {
+    cursor: pointer;
     font-family: 'Lexend', sans-serif;
     font-size: 16px;
-    color: #555;
     line-height: 1.2;
     display: -webkit-box;
     display: -webkit-flex;

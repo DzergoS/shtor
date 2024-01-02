@@ -2,11 +2,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     /*filter: invert();*/
 }
 
 .header img {
     filter: invert();
+}
+
+.header .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .header.absolute {
@@ -23,6 +31,7 @@
 .header nav a, .header .lang-cart button {
     margin-right: 36px;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .header .lang-cart button {
@@ -57,15 +66,41 @@
     width: 180px;
 }
 
+.header .change__language {
+    cursor: pointer;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 300;
+    font-family: 'Lexend', sans-serif;
+}
+
+.header:not(.absolute) .change__language {
+    color: #000;
+}
+
+.header .cart-link {
+    position: relative;
+}
+.header.absolute .cart-link .cart-count {
+    position: absolute;
+    bottom: -1px;
+    color: #fff;
+}
+.header:not(.absolute) .cart-link .cart-count {
+    color: #000;
+}
 @media (max-width: 768px) {
+    .header .logo,
+    .header .menu {
+        filter: invert(1);
+    }
     .header {
-        margin-top: 71px;
-        filter: invert();
+        z-index: 10000;
     }
     .header.absolute {
-        top: 12px;
-        left: 12px;
-        right: 12px;
+        top: 20px;
+        left: 20px;
+        right: 20px;
         filter: none;
     }
 
@@ -78,6 +113,48 @@
     .header img {
         width: 100px;
         filter: none;
+    }
+
+    .header .menu {
+        cursor: pointer;
+    }
+
+    .header .menu__container-mobile {
+        padding: 20px;
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        height: 100vh;
+        width: 100vw;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        transform: translateX(-100%);
+        transition: .3s;
+    }
+    .header .menu__container-mobile.opened {
+        transform: translateX(0);
+    }
+    .header .menu__container-mobile a,
+    .header .menu__container-mobile button {
+        font-size: 26px;
+        padding: 20px;
+        color: #000;
+        width: 100%;
+    }
+    .header .menu__container-mobile button.change__language {
+        width: initial;
+    }
+
+    .header .cart-link .cart-count {
+        position: absolute;
+        left: 46px;
+        bottom: 13px;
+    }
+    .header .cart-link svg {
+        margin-left: 15px;
     }
 
 }
