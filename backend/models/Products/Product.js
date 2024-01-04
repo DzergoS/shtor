@@ -23,9 +23,9 @@ const productSchema = new Schema({
 	size: [{
 		type: String,
 	}],
-	seashells: [{
+	seashells: [[{
 		type: String,
-	}],
+	}]],
 	images: [{
 		type: String,
 	}],

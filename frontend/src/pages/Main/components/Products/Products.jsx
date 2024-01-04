@@ -61,7 +61,7 @@ const Products = () => {
 		} else accumulator.push(currentObject)
 		return accumulator;
 	}, []);
-
+	console.log('productList', productList)
 	return (<>
 		<div className="product-list" id="product-list">
 			{productList.slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
