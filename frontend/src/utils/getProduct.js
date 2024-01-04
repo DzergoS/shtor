@@ -1,8 +1,6 @@
 export const getProductName = (product, lang) => product?.name?.[lang] || product.variations[0].name
 
 export const getProductImageName = (product) => {
-	console.log('product', product)
-
 	return product?.variations?.[0]?.images?.[0] || product?.images?.[0] || product?.seashells?.[0]
 }
 

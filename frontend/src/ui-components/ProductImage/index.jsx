@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {isMobile} from "../../utils/isMobile";
 
-const addFolderLocation = (url) => `/productPhotos/${url}`;
+const addFolderLocation = (url) => `https://shtor.com.ua/productPhotos/${url}`;
 const getFileNameAndExtension = (fullFileName) => {
 	const lastDotIndex = fullFileName.lastIndexOf('.');
 	const fileName = lastDotIndex !== -1 ? fullFileName.substring(0, lastDotIndex) : fullFileName;
@@ -11,7 +11,6 @@ const getFileNameAndExtension = (fullFileName) => {
 }
 
 const ProductImage = ({ imageName = '', ...props }) => {
-	console.log('imageName', imageName)
 	const [imageExists, setImageExists] = useState(true);
 
 	const desktopSrc = addFolderLocation(imageName);

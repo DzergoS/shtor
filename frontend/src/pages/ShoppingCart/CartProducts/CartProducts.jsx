@@ -31,8 +31,6 @@ const CartProducts = () => {
 		type: DELETE_PRODUCT,
 		payload: _id,
 	})
-	console.log('cart', cart)
-
 	const currency = translations.product.currency[lang]
 	const formatDesc = (description) => description[description?.length - 1] === '.'
 		? description.slice(0, -1)
