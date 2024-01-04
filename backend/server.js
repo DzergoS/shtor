@@ -1,10 +1,11 @@
-const express = require('express'),
-  path = require('path'),
-  HTTP = require('http'),
-  cors = require('cors'),
-  cookieParser = require('cookie-parser'),
-  connectToDB = require('./config/db'),
-  genericRouter = require('./routes/index')
+const express = require('express')
+const path = require('path')
+const HTTP = require('http')
+const cors = require('cors')
+const cookieParser = require('cookie-parser')
+const connectToDB = require('./config/db')
+const genericRouter = require('./routes/index')
+const checkFileExists = require("./utils/checkFileExists")
 
 require('dotenv').config();
 
@@ -31,7 +32,7 @@ const startServer = async () => {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
   // Serve static files from the ../productPhotos directory
-  app.use('/productPhotos', express.static(path.join(__dirname, '../productPhotos')));
+  app.use('/productPhotos', checkFileExists, express.static(path.join(__dirname, '../productPhotos')));
 
 // Handle other routes by serving the index.html
   app.get('*', (req, res) => {

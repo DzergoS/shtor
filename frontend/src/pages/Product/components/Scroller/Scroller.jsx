@@ -5,8 +5,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ScrollImg from "assets/frstProduct.jpg"
 import useAPI from "../../../../provider/useAPI";
-import getUrlByImageName from "../../../../utils/getUrlByImageName";
 import {isMobile} from "../../../../utils/isMobile";
+import ProductImage from "../../../../ui-components/ProductImage";
+import {getProductName, getProductImageName} from "../../../../utils/getProduct";
 
 const Scroller = () => {
     const {state: { products, lang }} = useAPI();
@@ -48,16 +49,14 @@ const Scroller = () => {
         return shuffleArray([...products]);
     }, [products]);
 
-    console.log('currentIndex', currentIndex)
-    console.log('currentIndex * 12.5', currentIndex * 12.5)
     return (
         <div className="scroller-container">
             <h4 className="scroller-title">You also may like</h4>
             <Slider class="" {...settings}>
                 {shuffledProducts?.slice(0, 8).map((product, index) => (
                     <div key={index} className="product-item">
-                        <img className='product-img' src={getUrlByImageName(product?.variations?.[0]?.images?.[0] || product?.images?.[0])} alt="product" />
-                        <p className='scroller-subtitle'>{product.group}/{product?.variations?.[0]?.name?.[lang] || product?.name?.[lang]}</p>
+                        <ProductImage className='product-img' imageName={getProductImageName(product)}/>
+                        <p className='scroller-subtitle'>{product.group}/{getProductName(product, lang)}</p>
                     </div>
                 ))}
             </Slider>

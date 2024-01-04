@@ -9,16 +9,12 @@ import CustomRadio from "ui-components/CustomRadio";
 import {ADD_PRODUCT} from "provider/actions/cart";
 
 const ProductInfo = ({
-     product, currentOptions, setCurrentOptions, receivedVariationsIndex,
+     product, currentOptions, setCurrentOptions,
      currentVariationIndex, setCurrentVariationIndex, productText,
 }) => {
     const {state: { lang }, dispatch} = useAPI()
 
-    const [sliders, setSliders] = useState({
-        nav1: null,
-        nav2: null,
-        nav3: null,
-    })
+    const [slider, setSlider] = useState(null)
 
     const images = [
         ...(product?.variations?.flatMap(variant => variant?.images) || []),
@@ -47,7 +43,6 @@ const ProductInfo = ({
     const productAttachments = !isAttachmentInVariations ? [] : getVariationsProperty('attachment')
     const productFeatures = !isFeatureInVariations ? [] : getVariationsProperty('feature')
 
-    console.log('productFeatures', productFeatures)
     const getImageIndexInVariation = (variationIndex) => {
         if (variationIndex >= 0 && variationIndex < variations.length) {
             return variations
@@ -58,12 +53,12 @@ const ProductInfo = ({
     };
 
     const pickVariation = (variationIndex) => {
-        if (sliders.nav1) {
+        if (slider) {
             setCurrentVariationIndex(variationIndex)
 
             if (isImagesInVariations) {
                 const slideIndex = getImageIndexInVariation(variationIndex)
-                sliders.nav1.slickGoTo(slideIndex);
+                slider.slickGoTo(slideIndex);
             }
         }
     };
@@ -75,8 +70,6 @@ const ProductInfo = ({
         material: currentMaterial,
         attachment: currentAttachment,
     } = currentOptions;
-    console.log('productAttachments', productAttachments)
-    console.log('currentAttachment', currentAttachment)
 
     const { title, description, price } = productText || {};
     const setCurrentOption = (key, value) => setCurrentOptions((prevOptions) => ({
@@ -93,7 +86,6 @@ const ProductInfo = ({
         if (!isColorInVariations && currentColor) pickedProduct.color = currentColor
         if (!isMaterialInVariations && currentMaterial) pickedProduct.material = currentMaterial
 
-        console.log('pickedProduct', pickedProduct)
         dispatch({
             type: ADD_PRODUCT,
             payload: pickedProduct
@@ -104,7 +96,6 @@ const ProductInfo = ({
         || productMaterials?.length > 1 || productAttachments?.length > 1
         || productFeatures?.length > 1
 
-    console.log('product', product)
     const renderVariationOptions = (variations, currentVariation, setCurrentOption, isInVariations, name) => {
         if (!variations || variations.length <= 1) return null;
 
@@ -144,10 +135,10 @@ const ProductInfo = ({
                         <div className="slider-container">
                             {images?.length
                                 ? <Sliders
-                                    sliders={sliders}
-                                    setSliders={setSliders}
+                                    slider={slider}
+                                    setSlider={setSlider}
                                     sliderImages={images}
-                                    initialSlide={getImageIndexInVariation(receivedVariationsIndex)}
+                                    initialSlide={getImageIndexInVariation(currentVariationIndex)}
                                     setCurrentVariationIndex={
                                         isPricesInVariations && isImagesInVariations
                                         && !isAttachmentInVariations && !isMaterialInVariations

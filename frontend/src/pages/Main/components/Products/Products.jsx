@@ -1,23 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import product1 from 'assets/product1.png'
-import product2 from 'assets/product2.png'
-import product3 from 'assets/product3.png'
-import product4 from 'assets/product4.png'
-import product5 from 'assets/product5.png'
-import product6 from 'assets/product6.png'
-
 import seeMore from 'assets/seeMore.png'
 
 import './Products.css'
-import {Link} from "react-router-dom";
-import api from "../../../../api";
-import {get} from "axios";
-import products from "api/endpoints/products";
 import useAPI from "provider/useAPI";
-import getUrlByImageName from "../../../../utils/getUrlByImageName";
 import ProductItem from "./ProductItem/ProductItem";
-// import {allProducts} from "../../../../products";
 
 const Products = () => {
 
@@ -54,10 +41,12 @@ const Products = () => {
 	};
 
 	const productList = products.reduce((accumulator, currentObject) => {
-		if (currentObject?.name?.ua === 'Браслет-підвіс') {
+		if (currentObject?.name?.ua === 'Браслет-підвіс' || currentObject?.seashells?.length) {
 			accumulator.push({
 				...currentObject,
-				images: currentObject?.variations?.[0]?.images
+				images: currentObject?.seashells?.length
+					? currentObject.seashells.flatMap(images => images)
+					: currentObject?.variations?.[0]?.images
 			})
 		}
 		else if (currentObject?.variations?.[0]?.images?.length) {
@@ -73,12 +62,9 @@ const Products = () => {
 		return accumulator;
 	}, []);
 
-	// console.log('products', products)
-	// console.log('productList', productList);
-
 	return (<>
 		<div className="product-list" id="product-list">
-			{productList.slice(0, maxElements).map((product, index) => <ProductItem {...product} key={index} index={index}/>)}
+			{productList.slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
 		</div>
 		{maxElements < productList?.length
 			? <div

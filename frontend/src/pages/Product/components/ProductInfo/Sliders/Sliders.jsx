@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Slider from 'react-slick';
-import ArrowRight from '../../../../../assets/arrow-right.svg';
-import ArrowLeft from '../../../../../assets/arrow-left.svg';
-import getUrlByImageName from '../../../../../utils/getUrlByImageName';
+import ArrowRight from 'assets/arrow-right.svg';
+import ArrowLeft from 'assets/arrow-left.svg';
 import './Sliders.css';
+import ProductImage from "ui-components/ProductImage";
+import {calculateIsBackWay} from "utils/calculateIsBackWay";
 
 const NextArrow = (props) => (
 	<button {...props} className="slider-button next-button">
@@ -29,20 +30,30 @@ const CustomDots = ({ slides, currentSlide, goToSlide }) => (
 	</div>
 );
 
-const Sliders = ({ sliders, setSliders, sliderImages, initialSlide, setCurrentVariationIndex }) => {
+const Sliders = ({ slider, setSlider, sliderImages, initialSlide, setCurrentVariationIndex }) => {
 	const slider1 = useRef(null);
-	const slider2 = useRef(null);
-	const slider3 = useRef(null);
+	const [currentSlide, setCurrentSlide] = useState(initialSlide)
+	useEffect(() => setSlider(slider1.current), []);
 
-	useEffect(() => {
-		setSliders({
-			nav1: slider1.current,
-			nav2: slider2.current,
-			nav3: slider3.current,
-		})
-	}, []);
+	const [animation, setAnimation] = useState({
+		back: [],
+		forth: [],
+	})
 
-	const { nav1, nav2, nav3 } = sliders;
+	const startDotAnimation = (isBack) => {
+		setAnimation(prevAnimation => ({
+			...prevAnimation,
+			[isBack ? 'back' : 'forth']: [...(isBack ? back : forth), 1]
+		}))
+		setTimeout(() => setAnimation(prevAnimation => ({
+			...prevAnimation,
+			[isBack ? 'back' : 'forth']: (isBack ? back : forth).slice(0, -1)
+		})), 500)
+	}
+
+	const { back, forth } = animation
+
+	const goToSlide = (e, slideIndex) => slider.slickGoTo(slideIndex)
 
 	return (
 		<>
@@ -54,55 +65,41 @@ const Sliders = ({ sliders, setSliders, sliderImages, initialSlide, setCurrentVa
 				slidesToShow={1}
 				slidesToScroll={1}
 				className="main-slider"
-				beforeChange={(oldIndex, newIndex) => setCurrentVariationIndex(newIndex)}
+				beforeChange={(oldIndex, newIndex) => {
+					let isBackWay;
+					if (oldIndex > newIndex) isBackWay = true
+					if (!oldIndex && newIndex === (sliderImages?.length - 1)) isBackWay = true
+					if (!newIndex && oldIndex === (sliderImages?.length - 1) ) isBackWay = false
+
+					if (oldIndex !== newIndex) startDotAnimation(isBackWay);
+					setCurrentSlide(newIndex)
+					setCurrentVariationIndex && setCurrentVariationIndex(newIndex)
+				}}
 				nextArrow={<NextArrow />}
 				prevArrow={<PrevArrow />}
 				initialSlide={initialSlide}
-				asNavFor={nav3}
 				ref={slider1}
 			>
-				{sliderImages?.map((slide, index) => (
-					<img key={index} src={getUrlByImageName(slide)} alt={`Slide ${index + 1}`} />
+				{sliderImages?.map((imageName, index) => (
+					<ProductImage key={index} imageName={imageName} alt={`Slide ${index + 1}`}/>
 				))}
 			</Slider>
-			{sliderImages?.length > 1
-				? <Slider
-					centerMode
-					speed={500}
-					infinite
-					focusOnSelect
-					slidesToShow={sliderImages?.length > 2 ? 3 : 2}
-					className={`dots-slider ${sliderImages?.length === 2 ? 'double-items' : ''}`}
-					asNavFor={nav1}
-					initialSlide={initialSlide}
-					ref={slider2}
-				>
-					{sliderImages?.map((_, index) => (
-						<div key={index} className="custom-slick-dot" />
-					))}
-				</Slider>
-				: ""
-			}
+			<div className={`dots-slider ${back.length ? 'back-animation' : forth.length ? 'forth-animation' : ''}`}>
+				<div className="dots-slider__dot back-hidden" onClick={(e) => goToSlide(e,currentSlide - 1)}/>
+				<div className="dots-slider__dot back-color" onClick={(e) => goToSlide(e, currentSlide - 1)}/>
+				<div className="dots-slider__dot active"/>
+				<div className="dots-slider__dot forth-color" onClick={(e) => goToSlide(e, currentSlide + 1)}/>
+				<div className="dots-slider__dot forth-hidden" onClick={(e) => goToSlide(e, currentSlide + 1)}/>
+			</div>
 			{window.innerWidth > 548
-				? <Slider
-					infinite={false}
-					speed={500}
-					focusOnSelect
-					slidesToScroll={1}
-					initialSlide={initialSlide}
-					asNavFor={nav2}
-					className="thumbnail-slider"
-					ref={slider3}
-					slidesToShow={sliderImages?.length}
-				>
-					{sliderImages?.map((slide, index) => (
-						<div key={index}>
-							<img src={getUrlByImageName(slide)} alt={`Thumbnail ${index + 1}`} />
+				? <div className="thumbnail-slider">
+					{sliderImages?.map((imageName, index) => (
+						<div className="thumbnail-slider__item" key={index} onClick={() => index !== currentSlide && slider.slickGoTo(index)}>
+							<ProductImage imageName={imageName} alt={`Thumbnail ${index + 1}`} />
 						</div>
 					))}
-				</Slider>
-				: ''
-			}
+				</div>
+				: ""}
 		</>
 	);
 };

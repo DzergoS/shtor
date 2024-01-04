@@ -12,7 +12,8 @@ import cartProduct from 'assets/cart-product.png'
 import './CartProducts.css'
 import {isMobile} from "../../../utils/isMobile";
 import {translations} from "../../../info";
-import getUrlByImageName from "../../../utils/getUrlByImageName";
+import ProductImage from "../../../ui-components/ProductImage";
+import {getProductImageName} from "../../../utils/getProduct";
 
 const MINUS = 'MINUS'
 const PLUS = 'PLUS'
@@ -41,9 +42,7 @@ const CartProducts = () => {
 		<div className="cart-products">
 			{cart.map((item, index) => (
 				<div className="cart-product" key={index}>
-					<img
-						src={getUrlByImageName(item?.images[0])}
-						alt="product" className="cart-product__img"/>
+					<ProductImage src={getProductImageName(item)} alt="product" className="cart-product__img"/>
 					<div className="cart-product-desc">
 						{!isMobile
 							? <>
