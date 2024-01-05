@@ -135,6 +135,9 @@
         width: 100%;
         min-height: 491px;
     }
+    .product-info .main-slider .slick-slide > div {
+        aspect-ratio: initial;
+    }
     .product-info .slider-button {
         display: none !important;
     }
