@@ -21,7 +21,7 @@ const getSortedVariationsProduct = (product) => {
 	}
 
 	const sortedVariationsProduct = {...product};
-	if (product?.variations?.[0].attachment) {
+	if (product?.variations?.[0]?.attachment) {
 		sortedVariationsProduct.variations = sortedVariationsProduct.variations.sort((a, b) => {
 			const indexA = customSortOrder.indexOf(a.attachment);
 			const indexB = customSortOrder.indexOf(b.attachment);

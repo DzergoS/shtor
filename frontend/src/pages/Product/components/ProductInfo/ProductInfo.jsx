@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import './ProductInfo.css';
 import {useParams} from "react-router-dom";
 import useAPI from "provider/useAPI";
@@ -19,11 +19,11 @@ const ProductInfo = ({
 
     const [slider, setSlider] = useState(null)
 
-    const images = [
+    const images = useMemo(() => ([
         ...(product?.variations?.flatMap(variant => variant?.images) || []),
         ...(product?.images || []),
         ...(product?.seashells?.flatMap(array => array) || []),
-    ];
+    ]), [product]);
 
     const { group, size, color, seashells, variations } = product || {};
 
@@ -114,16 +114,15 @@ const ProductInfo = ({
         if (slider) {
             if (key !== 'seashell') setCurrentVariationIndex(variationIndex)
 
-            if (isImagesInVariations || isSeashellsInProduct) {
+            if (isImagesInVariations || (isSeashellsInProduct && key === 'seashell')) {
                 const slideIndex = isSeashellsInProduct ? getSeashellIndex(variationIndex) : getImageIndexInVariation(variationIndex)
                 slider.slickGoTo(slideIndex);
             }
         }
     };
 
-    const showImagePicker = !isSizeInVariations && !isColorInVariations && !isMaterialInVariations
-    && !isFeatureInVariations
-
+    const showImagePicker = product?.name?.en?.toLowerCase() === 'seashell pendant' || product?.name?.en?.toLowerCase() === 'seashell set'
+    console.log('showImagePicker', showImagePicker)
     return (
         <div className="product-info">
             {product
@@ -132,7 +131,11 @@ const ProductInfo = ({
                         slider={slider}
                         setSlider={setSlider}
                         sliderImages={images}
-                        initialSlide={getImageIndexInVariation(currentVariationIndex)}
+                        initialSlide={
+                            getImageIndexInVariation(currentVariationIndex) === -1
+                                ? 0
+                                : getImageIndexInVariation(currentVariationIndex)
+                        }
                         setCurrentVariationIndex={
                             isPricesInVariations && isImagesInVariations
                             && !isAttachmentInVariations && !isMaterialInVariations
@@ -158,34 +161,29 @@ const ProductInfo = ({
                                         {description?.map(string => (
                                             <li key={string}>{string}</li>
                                         ))}
-                                        <li>
-                                            {translations.product.size.title[lang]}: {currentSize} {translations.product.size.cm[lang]}
-                                        </li>
+                                        {currentSize
+                                            ? <li>
+                                                {translations.product.size.title[lang]}: {currentSize} {translations.product.size.cm[lang]}
+                                            </li>
+                                            : ""
+                                        }
                                     </ul>
                             </div>
                         </div>
 
                         {showVariations
                             ? <div className="tabs-variations">
-                                {showImagePicker && isImagesInVariations
-                                    ? <VariationsItem
-                                        variations={images}
-                                        currentVariation={currentImage}
-                                        setCurrentOption={setCurrentOption}
-                                        isInVariations={isImagesInVariations}
-                                        name="image"
-                                        pickVariation={pickVariation}
-                                    />
-                                    : ""}
-                                {showImagePicker && isSeashellsInProduct
-                                    ? <VariationsItem
-                                        variations={productSeashells}
-                                        currentVariation={currentSeashell}
-                                        setCurrentOption={setCurrentOption}
-                                        isInVariations={isSeashellsInProduct}
-                                        name="seashell"
-                                        pickVariation={pickVariation}
-                                    />
+                                {showImagePicker
+                                    ? <>
+                                        <VariationsItem
+                                            variations={productSeashells}
+                                            currentVariation={currentSeashell}
+                                            setCurrentOption={setCurrentOption}
+                                            isInVariations={isSeashellsInProduct}
+                                            name="seashell"
+                                            pickVariation={pickVariation}
+                                        />
+                                    </>
                                     : ""}
                                 <VariationsItem
                                     variations={productSizes}
@@ -208,7 +206,7 @@ const ProductInfo = ({
                                     currentVariation={currentMaterial}
                                     setCurrentOption={setCurrentOption}
                                     isInVariations={isMaterialInVariations}
-                                    name="materials"
+                                    name="material"
                                     pickVariation={pickVariation}
                                 />
                                 <VariationsItem

@@ -21,7 +21,7 @@ const ProductImage = ({ imageName = '', ...props }) => {
 	useEffect(() => {
 		const checkImage = async () => {
 			try {
-				const response = await fetch(isMobile ? mobileSrc : desktopSrc, { method: 'HEAD' });
+				const response = await fetch(isMobile ? mobileSrc : desktopSrc);
 				if (!response.ok) {
 					setImageExists(false);
 				}
