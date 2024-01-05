@@ -5,7 +5,7 @@ import Menu from "./Menu";
 import Content from "./Content";
 import {useHistory} from "react-router-dom";
 import api from "../api";
-import Loader from "../ui-components/Admin/Loader";
+import Loader from "ui-components/Loader";
 
 const Admin = () => {
 

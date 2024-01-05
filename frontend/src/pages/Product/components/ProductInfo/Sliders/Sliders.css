@@ -1,5 +1,23 @@
+.product-info .slider-container {
+    position: relative;
+    overflow: hidden;
+}
 .product-info .main-slider {
     margin-bottom: 24px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../../../../../assets/admin/Vanilla-1s-280px.svg");
+}
+.product-info .main-slider .slick-slide > div {
+    position: relative;
+    aspect-ratio: 1 / 1;
+}
+.product-info .main-slider .slick-slide img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
 }
 .product-info .main-slider .slider-button{
     z-index: 1;
@@ -71,22 +89,21 @@
     max-width: 60px;
     aspect-ratio: 1 / 1;
     overflow: hidden;
+    width: 100%;
+    background-color: #000;
+    position: relative;
 }
 .product-info .thumbnail-slider .thumbnail-slider__item img {
     width: 100%;
-}
-
-.product-info .slider-container {
-    position: relative;
-    overflow: hidden;
-    width: 508px;
-    height: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .product-info .slider-button {
     position: absolute;
     top: 50%;
-    transform: translate(-50%);
+    transform: translateY(-50%);
     background-color: transparent;
     border: none;
     outline: none;
@@ -104,6 +121,10 @@
 }
 
 @media (min-width: 769px) {
+    .product-info .slider-container {
+        min-width: 508px;
+        max-width: 508px;
+    }
     .product-info .main-slider {
         aspect-ratio: 1 / 1;
         overflow: hidden;
@@ -112,6 +133,7 @@
 @media (max-width: 768px) {
     .product-info .slider-container {
         width: 100%;
+        min-height: 491px;
     }
     .product-info .slider-button {
         display: none !important;

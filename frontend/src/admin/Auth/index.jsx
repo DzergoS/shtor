@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 import api from "../../api";
 import useAPI from "provider/useAPI";
 import {ADD_EMAIL} from "provider/actions/email";
-import Loader from "../../ui-components/Admin/Loader";
+import Loader from "ui-components/Loader";
 
 const Auth = () => {
 	const [form, setForm] = useState({

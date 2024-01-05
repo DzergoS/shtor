@@ -1,9 +1,8 @@
 .product-info {
-    min-height: 800px;
+    min-height: 628px;
 }
 
 .product-info .tab-button {
-    min-width: 84px;
     font-size: 16px;
     text-align: left;
     color: #000;
@@ -19,6 +18,13 @@
 }
 .product-info .tab-buttons .tab-button {
     margin-right: 36px;
+}
+.product-info .tab-buttons .tab-button.active {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .product-info .tabs-description {
@@ -86,13 +92,45 @@
     max-width: 363px;
     border: 1px solid #000;
     cursor: pointer;
-    padding: 6px 0;
+    padding: 1px 0;
     font-weight: 400;
     font-size: 16px;
+    border-radius: 0;
+    text-transform: initial;
+    position: relative;
+    transition: none;
+}
+.product-info .add-to-cart svg {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: .5s;
+}
+.product-info .add-to-cart svg path {
+    fill: white;
+}
+.product-info .add-to-cart span {
+    color: #000;
+    transition: .5s opacity;
 }
 .product-info .add-to-cart:hover {
+    background-color: #000;
+}
+.product-info .add-to-cart:hover span {
+    color: #fff;
+}
+
+.product-info .add-to-cart.adding-animation {
     color: #fff;
     background-color: #000;
+}
+.product-info .add-to-cart.adding-animation span {
+    opacity: 0;
+}
+.product-info .add-to-cart.adding-animation svg {
+    opacity: 1;
 }
 
 .product-info .product-title {
@@ -105,6 +143,7 @@
     .product-info {
         flex-direction: column;
         align-items: center;
+        margin-bottom: 36px;
     }
     .product-info .info-right {
         width: 100%;
@@ -113,13 +152,30 @@
     }
     .product-info .product-title {
         margin-bottom: 16px;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
     .product-info .tab-buttons .tab-button {
         min-width: initial;
         margin-right: 36px;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
-    .product-info .tab-buttons {
+    .product-info .tabs-description {
+        margin-bottom: 18px;
+    }
+    .product-info .tabs-description .tab-buttons {
         margin-bottom: 12px;
+    }
+    .product-info .tabs-description .tab-content {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
     .product-info .tabs-variations {
         margin-bottom: 16px;
@@ -135,5 +191,10 @@
     .product-info .add-to-cart {
         width: 100%;
         max-width: initial;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 6px 0;
     }
 }

@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import { ReactComponent as CartIcon } from 'assets/cart.svg';
 import { ReactComponent as MenuIcon } from 'assets/menu.svg';
+import { ReactComponent as CrossIcon } from 'assets/cross.svg';
 import logo from 'assets/logo.png';
 import { CHANGE_LANG } from 'provider/actions/lang';
 import { isMobile } from '../../utils/isMobile';
@@ -10,6 +11,7 @@ import { isMobile } from '../../utils/isMobile';
 import './Header.css';
 import {translations} from "../../info";
 import useAPI from "../../provider/useAPI";
+import FooterLinks, {HEADER_MENU} from "../FooterLinks";
 
 const Header = () => {
     const { state: { lang, cart }, dispatch } = useAPI();
@@ -44,20 +46,28 @@ const Header = () => {
                 <>
                     <MenuIcon className="menu" onClick={openMenu} />
                     <div className={`menu__container-mobile ${isOpenMenu ? 'opened' : ''}`} onClick={closeMenu}>
-                        <NavLink to="/#about-us" onClick={closeMenu}>{translations.header.aboutUs[lang]}</NavLink>
-                        <NavLink to="/#product-list" onClick={closeMenu}>{translations.header.shop[lang]}</NavLink>
-                        <NavLink className="cart-link" onClick={closeMenu} to="/cart">
-                            {translations.cart.title[lang]}
-                            <CartIcon />
-                            <span className="cart-count">{sumOfQuantities ? sumOfQuantities : ''}</span>
-                        </NavLink>
-                        <div className="languages-items">
-                            <button className="change__language" onClick={() => setLanguage('ua')}>
-                                UA
-                            </button>
-                            <button className="change__language" onClick={() => setLanguage('en')}>
-                                EN
-                            </button>
+                        <div className="menu-link-mobile__container">
+                            <CrossIcon className="cross-icon"/>
+                            <NavLink className="nav-link" to="/#about-us" onClick={closeMenu}>{translations.header.aboutUs[lang]}</NavLink>
+                            <NavLink className="nav-link"  to="/#product-list" onClick={closeMenu}>{translations.header.shop[lang]}</NavLink>
+                            <NavLink className="nav-link cart-link" onClick={closeMenu} to="/cart">
+                                {translations.cart.title[lang]}
+                                <span className="cart-icon__container">
+                                    <CartIcon />
+                                    <bdi className="cart-count">{sumOfQuantities ? sumOfQuantities : ''}</bdi>
+                                </span>
+                            </NavLink>
+                        </div>
+                        <div className="menu-footer-mobile__container">
+                            <FooterLinks type={HEADER_MENU}/>
+                            {/*<div className="languages-items">*/}
+                            {/*    <button className="change__language" onClick={() => setLanguage('ua')}>*/}
+                            {/*        UA*/}
+                            {/*    </button>*/}
+                            {/*    <button className="change__language" onClick={() => setLanguage('en')}>*/}
+                            {/*        EN*/}
+                            {/*    </button>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                 </>
@@ -67,8 +77,10 @@ const Header = () => {
                         {lang}
                     </button>
                     <NavLink className="cart-link" to="/cart">
-                        <CartIcon />
-                        <span className="cart-count">{sumOfQuantities ? sumOfQuantities : ''}</span>
+                        <span className="cart-icon__container">
+                            <CartIcon />
+                            <bdi className="cart-count">{sumOfQuantities ? sumOfQuantities : ''}</bdi>
+                        </span>
                     </NavLink>
                 </div>
             )}

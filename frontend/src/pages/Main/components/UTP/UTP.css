@@ -24,6 +24,8 @@
     font-size: 18px;
     font-weight: 400;
     max-width: 50%;
+    font-style: normal;
+    line-height: normal;
 }
 
 .utp p span {
@@ -43,7 +45,10 @@
     .utp p {
         max-width: initial;
         margin: 24px 0 0;
-        font-size: 18px;
-        font-weight: 500;
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 }

@@ -7,7 +7,8 @@ import ScrollImg from "assets/frstProduct.jpg"
 import useAPI from "../../../../provider/useAPI";
 import {isMobile} from "../../../../utils/isMobile";
 import ProductImage from "../../../../ui-components/ProductImage";
-import {getProductName, getProductImageName} from "../../../../utils/getProduct";
+import {getProductName, getProductImageName, getProductImageNameHover, getProductPrice} from "../../../../utils/getProduct";
+import {translations} from "../../../../info";
 
 const Scroller = () => {
     const {state: { products, lang }} = useAPI();
@@ -52,11 +53,15 @@ const Scroller = () => {
     return (
         <div className="scroller-container">
             <h4 className="scroller-title">You also may like</h4>
-            <Slider class="" {...settings}>
+            <Slider className="scroller-items" {...settings}>
                 {shuffledProducts?.slice(0, 8).map((product, index) => (
                     <div key={index} className="product-item">
-                        <ProductImage className='product-img' imageName={getProductImageName(product)}/>
+                        <div className="product-image__container">
+                            <ProductImage className='product-img' imageName={getProductImageName(product)}/>
+                            <ProductImage className='product-img-hover' imageName={getProductImageNameHover(product)}/>
+                        </div>
                         <p className='scroller-subtitle'>{product.group}/{getProductName(product, lang)}</p>
+                        <p className='scroller-price'>{translations.product.currency[lang]}{getProductPrice(product, lang)}</p>
                     </div>
                 ))}
             </Slider>

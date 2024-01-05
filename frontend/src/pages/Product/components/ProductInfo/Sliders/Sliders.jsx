@@ -5,6 +5,7 @@ import ArrowLeft from 'assets/arrow-left.svg';
 import './Sliders.css';
 import ProductImage from "ui-components/ProductImage";
 import {calculateIsBackWay} from "utils/calculateIsBackWay";
+import Loader from "ui-components/Loader";
 
 const NextArrow = (props) => (
 	<button {...props} className="slider-button next-button">
@@ -55,53 +56,55 @@ const Sliders = ({ slider, setSlider, sliderImages, initialSlide, setCurrentVari
 
 	const goToSlide = (e, slideIndex) => slider.slickGoTo(slideIndex)
 
-	return (
-		<>
-			<Slider
-				infinite
-				speed={500}
-				adaptiveHeight
-				focusOnSelect
-				slidesToShow={1}
-				slidesToScroll={1}
-				className="main-slider"
-				beforeChange={(oldIndex, newIndex) => {
-					let isBackWay;
-					if (oldIndex > newIndex) isBackWay = true
-					if (!oldIndex && newIndex === (sliderImages?.length - 1)) isBackWay = true
-					if (!newIndex && oldIndex === (sliderImages?.length - 1) ) isBackWay = false
+	return <div className="slider-container">
+		{sliderImages?.length
+			? <>
+				<Slider
+					infinite
+					speed={500}
+					adaptiveHeight
+					focusOnSelect
+					slidesToShow={1}
+					slidesToScroll={1}
+					className="main-slider"
+					beforeChange={(oldIndex, newIndex) => {
+						let isBackWay;
+						if (oldIndex > newIndex) isBackWay = true
+						if (!oldIndex && newIndex === (sliderImages?.length - 1)) isBackWay = true
+						if (!newIndex && oldIndex === (sliderImages?.length - 1) ) isBackWay = false
 
-					if (oldIndex !== newIndex) startDotAnimation(isBackWay);
-					setCurrentSlide(newIndex)
-					setCurrentVariationIndex && setCurrentVariationIndex(newIndex)
-				}}
-				nextArrow={<NextArrow />}
-				prevArrow={<PrevArrow />}
-				initialSlide={initialSlide}
-				ref={slider1}
-			>
-				{sliderImages?.map((imageName, index) => (
-					<ProductImage key={index} imageName={imageName} alt={`Slide ${index + 1}`}/>
-				))}
-			</Slider>
-			<div className={`dots-slider ${back.length ? 'back-animation' : forth.length ? 'forth-animation' : ''}`}>
-				<div className="dots-slider__dot back-hidden" onClick={(e) => goToSlide(e,currentSlide - 1)}/>
-				<div className="dots-slider__dot back-color" onClick={(e) => goToSlide(e, currentSlide - 1)}/>
-				<div className="dots-slider__dot active"/>
-				<div className="dots-slider__dot forth-color" onClick={(e) => goToSlide(e, currentSlide + 1)}/>
-				<div className="dots-slider__dot forth-hidden" onClick={(e) => goToSlide(e, currentSlide + 1)}/>
-			</div>
-			{window.innerWidth > 548
-				? <div className="thumbnail-slider">
+						if (oldIndex !== newIndex) startDotAnimation(isBackWay);
+						setCurrentSlide(newIndex)
+						setCurrentVariationIndex && setCurrentVariationIndex(newIndex)
+					}}
+					nextArrow={<NextArrow />}
+					prevArrow={<PrevArrow />}
+					initialSlide={initialSlide}
+					ref={slider1}
+				>
 					{sliderImages?.map((imageName, index) => (
-						<div className="thumbnail-slider__item" key={index} onClick={() => index !== currentSlide && slider.slickGoTo(index)}>
-							<ProductImage imageName={imageName} alt={`Thumbnail ${index + 1}`} />
-						</div>
+						<ProductImage key={index} imageName={imageName} alt={`Slide ${index + 1}`}/>
 					))}
+				</Slider>
+				<div className={`dots-slider ${back.length ? 'back-animation' : forth.length ? 'forth-animation' : ''}`}>
+					<div className="dots-slider__dot back-hidden" onClick={(e) => goToSlide(e,currentSlide - 1)}/>
+					<div className="dots-slider__dot back-color" onClick={(e) => goToSlide(e, currentSlide - 1)}/>
+					<div className="dots-slider__dot active"/>
+					<div className="dots-slider__dot forth-color" onClick={(e) => goToSlide(e, currentSlide + 1)}/>
+					<div className="dots-slider__dot forth-hidden" onClick={(e) => goToSlide(e, currentSlide + 1)}/>
 				</div>
-				: ""}
-		</>
-	);
+				{window.innerWidth > 768
+					? <div className="thumbnail-slider">
+						{sliderImages?.map((imageName, index) => (
+							<div className="thumbnail-slider__item" key={index} onClick={() => index !== currentSlide && slider.slickGoTo(index)}>
+								<ProductImage imageName={imageName} alt={`Thumbnail ${index + 1}`} />
+							</div>
+						))}
+					</div>
+					: ""}
+			</>
+			: ""}
+	</div>
 };
 
 export default Sliders;

@@ -43,7 +43,7 @@ const Product = ({match}) => {
 	const receivedVariationsIndex = variationIndex ? Number(variationIndex) : 0
 
 	const getDefaultOptions = (foundProduct = product) => {
-		const { size, color, material, feature, variations } = foundProduct || {};
+		const { size, color, material, feature, seashells, variations } = foundProduct || {};
 		let options = {};
 		if (size?.length || variations?.[0]?.size?.length)
 			options.size = size?.[0] || variations[receivedVariationsIndex].size[0]
@@ -55,8 +55,20 @@ const Product = ({match}) => {
 			options.attachment = variations[receivedVariationsIndex].attachment
 		if (feature || variations?.[0]?.feature)
 			options.feature = feature || variations?.[receivedVariationsIndex]?.feature
+
+		if (
+			!color?.length && !variations?.[0]?.color?.length &&
+			!material && !variations?.[0]?.material &&
+			!feature && !variations?.[0]?.feature &&
+			!variations?.[0]?.size?.length && variations?.[0]?.images?.length
+		) options.image = variations?.images?.[receivedVariationsIndex ? receivedVariationsIndex : 0]
+
+		if (seashells?.[0]?.[0].length) options.seashell = seashells?.flatMap(array => array)?.[receivedVariationsIndex ? receivedVariationsIndex : 0]
+
 		return options
 	}
+
+	console.log('product', product)
 	const [currentOptions, setCurrentOptions] = useState(getDefaultOptions())
 
 	const [currentVariationIndex, setCurrentVariationIndex] = useState(receivedVariationsIndex)

@@ -17,6 +17,7 @@ import Main from "../pages/Main/Main";
 import api from "../api";
 import useAPI from "../provider/useAPI";
 import {ADD_PRODUCTS} from "../provider/actions/products";
+import AcceptCookies from "../ui-components/AcceptCookies";
 
 const Root = () => {
 
@@ -81,6 +82,7 @@ const Root = () => {
 						</Switch>
 					</main>
 					<Footer/>
+					<AcceptCookies/>
 				</Route>
 			</Switch>
 		</Router>
