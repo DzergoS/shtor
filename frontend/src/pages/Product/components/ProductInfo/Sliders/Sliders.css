@@ -9,16 +9,6 @@
     background-repeat: no-repeat;
     background-image: url("../../../../../assets/admin/Vanilla-1s-280px.svg");
 }
-.product-info .main-slider .slick-slide > div {
-    position: relative;
-    aspect-ratio: 1 / 1;
-}
-.product-info .main-slider .slick-slide img {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-}
 .product-info .main-slider .slider-button{
     z-index: 1;
 }
@@ -129,11 +119,22 @@
         aspect-ratio: 1 / 1;
         overflow: hidden;
     }
+
+    .product-info .main-slider .slick-slide > div {
+        position: relative;
+        aspect-ratio: 1 / 1;
+    }
+    .product-info .main-slider .slick-slide img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+    }
 }
 @media (max-width: 768px) {
     .product-info .slider-container {
         width: 100%;
-        min-height: 491px;
+        aspect-ratio: 335 / 447;
     }
     .product-info .main-slider .slick-slide > div {
         aspect-ratio: initial;

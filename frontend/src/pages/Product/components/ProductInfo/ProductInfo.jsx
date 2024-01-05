@@ -47,17 +47,22 @@ const ProductInfo = ({
     const productMaterials = !isMaterialInVariations ? [] : getVariationsProperty('material')
     const productAttachments = !isAttachmentInVariations ? [] : getVariationsProperty('attachment')
     const productFeatures = !isFeatureInVariations ? [] : getVariationsProperty('feature')
+    const productSeashells = !isSeashellsInProduct ? [] : product.seashells
 
     const getImageIndexInVariation = (variationIndex) => {
-        if (isSeashellsInProduct && variationIndex >= 0 && variationIndex < seashells?.length) {
-            return seashells
-                .slice(0, variationIndex)
-                .reduce((totalCount, seashellArr) => totalCount + seashellArr.length, 0);
-        }
         if (variationIndex >= 0 && variationIndex < variations.length) {
             return variations
                 .slice(0, variationIndex)
                 .reduce((totalCount, variation) => totalCount + variation.images.length, 0);
+        }
+        return -1;
+    };
+
+    const getSeashellIndex = (variationIndex) => {
+        if (variationIndex >= 0 && variationIndex < seashells?.length) {
+            return seashells
+                .slice(0, variationIndex)
+                .reduce((totalCount, seashellArr) => totalCount + seashellArr.length, 0);
         }
         return -1;
     };
@@ -110,7 +115,7 @@ const ProductInfo = ({
             if (key !== 'seashell') setCurrentVariationIndex(variationIndex)
 
             if (isImagesInVariations || isSeashellsInProduct) {
-                const slideIndex = getImageIndexInVariation(variationIndex)
+                const slideIndex = isSeashellsInProduct ? getSeashellIndex(variationIndex) : getImageIndexInVariation(variationIndex)
                 slider.slickGoTo(slideIndex);
             }
         }
@@ -162,6 +167,26 @@ const ProductInfo = ({
 
                         {showVariations
                             ? <div className="tabs-variations">
+                                {showImagePicker && isImagesInVariations
+                                    ? <VariationsItem
+                                        variations={images}
+                                        currentVariation={currentImage}
+                                        setCurrentOption={setCurrentOption}
+                                        isInVariations={isImagesInVariations}
+                                        name="image"
+                                        pickVariation={pickVariation}
+                                    />
+                                    : ""}
+                                {showImagePicker && isSeashellsInProduct
+                                    ? <VariationsItem
+                                        variations={productSeashells}
+                                        currentVariation={currentSeashell}
+                                        setCurrentOption={setCurrentOption}
+                                        isInVariations={isSeashellsInProduct}
+                                        name="seashell"
+                                        pickVariation={pickVariation}
+                                    />
+                                    : ""}
                                 <VariationsItem
                                     variations={productSizes}
                                     currentVariation={currentSize}
@@ -202,26 +227,6 @@ const ProductInfo = ({
                                     name="feature"
                                     pickVariation={pickVariation}
                                 />
-                                {showImagePicker && isImagesInVariations
-                                    ? <VariationsItem
-                                        variations={images}
-                                        currentVariation={currentImage}
-                                        setCurrentOption={setCurrentOption}
-                                        isInVariations={isImagesInVariations}
-                                        name="image"
-                                        pickVariation={pickVariation}
-                                    />
-                                    : ""}
-                                {showImagePicker && isSeashellsInProduct
-                                    ? <VariationsItem
-                                        variations={images}
-                                        currentVariation={currentSeashell}
-                                        setCurrentOption={setCurrentOption}
-                                        isInVariations={isSeashellsInProduct}
-                                        name="seashell"
-                                        pickVariation={pickVariation}
-                                    />
-                                    : ""}
                             </div>
                             : ""}
                         <p className="price">{translations.product.currency[lang]}{price}</p>
