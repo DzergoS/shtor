@@ -15,7 +15,7 @@ const ProductItem = ({product}) => {
 		<Link to={`/${_id}${variationIndex ? `/${variationIndex}` : ""}`} className="product-list__item">
 
 			<div className="image__container">
-				<ProductImage className="image" imageName={product?.images[0]} alt="product list item image"/>
+				<ProductImage className="image" imageName={getProductImageName(product)} alt="product list item image"/>
 				{product?.images[1]
 					? <ProductImage className="hover-image" imageName={product?.images[1]}
 							   alt="product item image hover"/>

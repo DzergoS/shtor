@@ -41,15 +41,7 @@ const Products = () => {
 	};
 
 	const productList = products.reduce((accumulator, currentObject) => {
-		if (currentObject?.name?.ua === 'Браслет-підвіс' || currentObject?.seashells?.length) {
-			accumulator.push({
-				...currentObject,
-				images: currentObject?.seashells?.length
-					? currentObject.seashells.flatMap(images => images)
-					: currentObject?.variations?.[0]?.images
-			})
-		}
-		else if (currentObject?.variations?.[0]?.images?.length) {
+		if (currentObject?.name?.ua === "намисто з мушлями" || currentObject?.name?.en === "seashell pendant *long spiral")
 			currentObject.variations.map((variation, variationIndex) => {
 				accumulator.push({
 					...currentObject,
@@ -58,7 +50,7 @@ const Products = () => {
 					variationIndex,
 				})
 			})
-		} else accumulator.push(currentObject)
+		else accumulator.push(currentObject)
 		return accumulator;
 	}, []);
 	console.log('productList', productList)

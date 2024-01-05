@@ -23,7 +23,13 @@
     }
 }
 @media (max-width: 769px) {
+    .banner__container {
+        overflow: hidden;
+        width: calc(100vw);
+        margin: -20px -20px 0 -20px;
+    }
     .banner__container .banner-img {
-        margin: -20px auto 0;
+        object-fit: cover;
+        width: 100%;
     }
 }
