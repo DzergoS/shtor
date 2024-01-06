@@ -18,7 +18,10 @@ const APIProvider = (props) => {
 			lang: 'ua',
 			cart: [],
 			email: '',
-			products: [],
+			products: {
+				allProducts: [],
+				productsToShow: [],
+			},
 		}
 	);
 

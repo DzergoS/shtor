@@ -3,17 +3,18 @@ import './Scroller.css'
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import ScrollImg from "assets/frstProduct.jpg"
-import useAPI from "../../../../provider/useAPI";
-import {isMobile} from "../../../../utils/isMobile";
-import ProductImage from "../../../../ui-components/ProductImage";
+import useAPI from "provider/useAPI";
+import ProductImage from "ui-components/ProductImage";
 import {getProductName, getProductImageName, getProductImageNameHover, getProductPrice} from "../../../../utils/getProduct";
-import {translations} from "../../../../info";
+import {translations} from "info";
+import {Link, useParams} from "react-router-dom";
 
 const Scroller = () => {
-    const {state: { products, lang }} = useAPI();
+    const { id, variationIndex } = useParams()
+    const {state: { products: {productsToShow}, lang }} = useAPI();
+
     const [currentIndex, setCurrentIndex] = useState(0);
-    const settings = {
+    const settings = useMemo(() => ({
         dots: false,
         infinite: true,
         speed: 500,
@@ -26,17 +27,19 @@ const Scroller = () => {
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                 },
             },
             {
-                breakpoint: 480,
+                breakpoint: 568,
                 settings: {
                     slidesToShow: 2,
                 },
             },
         ],
-    };
+    }), [productsToShow.length])
+
+    console.log('productsToShow', productsToShow)
 
     const shuffledProducts = useMemo(() => {
         const shuffleArray = (array) => {
@@ -47,22 +50,22 @@ const Scroller = () => {
             return array;
         };
 
-        return shuffleArray([...products]);
-    }, [products]);
+        return shuffleArray([...productsToShow]);
+    }, [productsToShow.length, id, variationIndex]);
 
     return (
         <div className="scroller-container">
             <h4 className="scroller-title">You also may like</h4>
             <Slider className="scroller-items" {...settings}>
                 {shuffledProducts?.slice(0, 8).map((product, index) => (
-                    <div key={index} className="product-item">
+                    <Link to={product.link} key={index} className="product-item">
                         <div className="product-image__container">
                             <ProductImage className='product-img' imageName={getProductImageName(product)}/>
                             <ProductImage className='product-img-hover' imageName={getProductImageNameHover(product)}/>
                         </div>
                         <p className='scroller-subtitle'>{product.group}/{getProductName(product, lang)}</p>
                         <p className='scroller-price'>{translations.product.currency[lang]}{getProductPrice(product, lang)}</p>
-                    </div>
+                    </Link>
                 ))}
             </Slider>
             <div className="progress-bar__container">

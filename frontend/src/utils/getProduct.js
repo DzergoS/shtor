@@ -11,5 +11,6 @@ export const getProductPrice = (product, lang) => product?.price?.[lang] || prod
 export const getProductImageName = (product) =>
 	product?.variations?.[0]?.images?.[0] || product?.images?.[0] || product?.seashells?.[0]?.[0]
 
-export const getProductImageNameHover = (product) => product?.variations?.[0]?.images?.[1] || product?.images?.[1]
-	|| product?.seashells?.[0]?.[1] || product?.seashells?.[1]?.[0] || product?.variations?.[0]?.images?.[0] || product?.images?.[0]
+export const getProductImageNameHover = (product) => product?.variations?.[0]?.images?.[1] || product?.variations?.[1]?.images?.[0]
+	|| product?.images?.[1] || product?.seashells?.[0]?.[1] || product?.seashells?.[1]?.[0] || product?.variations?.[0]?.images?.[0]
+	|| product?.images?.[0]

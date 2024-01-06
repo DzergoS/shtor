@@ -1,8 +1,13 @@
 import {createContext} from "react";
 
 export const APIContext = createContext({
-  cart: [],
-  dispatchCart: () => {},
-  lang: '',
-  setLang: () => {},
+  state: {
+    cart: [],
+    lang: '',
+    products: {
+      allProducts: [],
+      productsToShow: [],
+    },
+  },
+  dispatch: () => {},
 });

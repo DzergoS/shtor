@@ -7,13 +7,12 @@ import {
 } from "provider/actions/cart";
 
 import {ReactComponent as Cross} from "assets/cross.svg";
-import cartProduct from 'assets/cart-product.png'
 
 import './CartProducts.css'
-import {isMobile} from "../../../utils/isMobile";
-import {translations} from "../../../info";
-import ProductImage from "../../../ui-components/ProductImage";
-import {getProductImageName} from "../../../utils/getProduct";
+import isMobile from "utils/isMobile";
+import {translations} from "info";
+import ProductImage from "ui-components/ProductImage";
+import {getProductImageName} from "utils/getProduct";
 
 const MINUS = 'MINUS'
 const PLUS = 'PLUS'

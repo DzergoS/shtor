@@ -1,12 +1,11 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Link } from 'react-scroll';
 import { ReactComponent as CartIcon } from 'assets/cart.svg';
 import { ReactComponent as MenuIcon } from 'assets/menu.svg';
 import { ReactComponent as CrossIcon } from 'assets/cross.svg';
 import logo from 'assets/logo.png';
 import { CHANGE_LANG } from 'provider/actions/lang';
-import { isMobile } from '../../utils/isMobile';
+import isMobile from 'utils/isMobile';
 
 import './Header.css';
 import {translations} from "../../info";
@@ -22,8 +21,6 @@ const Header = () => {
     const openMenu = () => setIsOpenMenu(true)
 
     const toggleLanguage = () => dispatch({ type: CHANGE_LANG, payload: lang === 'en' ? 'ua' : 'en' });
-
-    const setLanguage = (value) => dispatch({ type: CHANGE_LANG, payload: value });
 
     const isMainPage = location.pathname === '/'
 
@@ -60,14 +57,6 @@ const Header = () => {
                         </div>
                         <div className="menu-footer-mobile__container">
                             <FooterLinks type={HEADER_MENU}/>
-                            {/*<div className="languages-items">*/}
-                            {/*    <button className="change__language" onClick={() => setLanguage('ua')}>*/}
-                            {/*        UA*/}
-                            {/*    </button>*/}
-                            {/*    <button className="change__language" onClick={() => setLanguage('en')}>*/}
-                            {/*        EN*/}
-                            {/*    </button>*/}
-                            {/*</div>*/}
                         </div>
                     </div>
                 </>

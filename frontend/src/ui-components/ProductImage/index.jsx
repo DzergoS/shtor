@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {isMobile} from "../../utils/isMobile";
+import isMobile from "utils/isMobile";
 
 const addFolderLocation = (url) => `https://shtor.com.ua/productPhotos/${url}`;
 const getFileNameAndExtension = (fullFileName) => {

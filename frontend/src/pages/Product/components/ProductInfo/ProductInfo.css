@@ -26,14 +26,6 @@
     font-weight: 600;
     line-height: normal;
 }
-
-.product-info .tabs-description {
-    margin-bottom: 18px;
-}
-.product-info .tabs-description ul {
-    padding-left: 23px;
-    margin: 0;
-}
 .product-info .tabs-variations {
     display: flex;
     gap: 17px;
@@ -161,18 +153,6 @@
         min-width: initial;
         margin-right: 36px;
         font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
-    .product-info .tabs-description {
-        margin-bottom: 18px;
-    }
-    .product-info .tabs-description .tab-buttons {
-        margin-bottom: 12px;
-    }
-    .product-info .tabs-description .tab-content {
-        font-size: 14px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;

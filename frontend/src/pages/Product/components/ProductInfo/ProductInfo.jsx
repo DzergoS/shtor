@@ -10,13 +10,15 @@ import {ADD_PRODUCT} from "provider/actions/cart";
 import CheckIcon from '@mui/icons-material/Check';
 import {Button} from "@mui/material";
 import VariationsItem from "./VariationsItem";
+import {isProductToSetVariationBySliding} from "./filters";
+import {getImageIndexInVariation, getSeashellIndex} from "../../../../utils/getImageIndexInVariation";
+import Description from "./Description/Description";
 
 const ProductInfo = ({
      product, currentOptions, setCurrentOptions,
      currentVariationIndex, setCurrentVariationIndex, productText,
 }) => {
     const {state: { lang }, dispatch} = useAPI()
-
     const [slider, setSlider] = useState(null)
 
     const images = useMemo(() => ([
@@ -42,30 +44,14 @@ const ProductInfo = ({
     const isPricesInVariations = variations?.[0]?.price?.ua
     const isSeashellsInProduct = seashells?.[0]?.[0]?.length
 
-    const productSizes = !isSizeInVariations ? size : getVariationsProperty('size');
-    const productColors = !isColorInVariations ? color : getVariationsProperty('color')
+    const productSizes = !isSizeInVariations ? size : getVariationsProperty('size', []);
+    const productColors = !isColorInVariations ? color : getVariationsProperty('color', [])
     const productMaterials = !isMaterialInVariations ? [] : getVariationsProperty('material')
     const productAttachments = !isAttachmentInVariations ? [] : getVariationsProperty('attachment')
     const productFeatures = !isFeatureInVariations ? [] : getVariationsProperty('feature')
     const productSeashells = !isSeashellsInProduct ? [] : product.seashells
 
-    const getImageIndexInVariation = (variationIndex) => {
-        if (variationIndex >= 0 && variationIndex < variations.length) {
-            return variations
-                .slice(0, variationIndex)
-                .reduce((totalCount, variation) => totalCount + variation.images.length, 0);
-        }
-        return -1;
-    };
-
-    const getSeashellIndex = (variationIndex) => {
-        if (variationIndex >= 0 && variationIndex < seashells?.length) {
-            return seashells
-                .slice(0, variationIndex)
-                .reduce((totalCount, seashellArr) => totalCount + seashellArr.length, 0);
-        }
-        return -1;
-    };
+    console.log('product', product)
 
     const {
         size: currentSize,
@@ -106,23 +92,21 @@ const ProductInfo = ({
         })
     }
 
-    const showVariations = productSizes?.length > 1 || productColors?.length > 1
-        || productMaterials?.length > 1 || productAttachments?.length > 1
-        || productFeatures?.length > 1
+    const showVariations = productSizes?.length > 1 || productColors?.length > 1 || productAttachments?.length > 1
 
     const pickVariation = (variationIndex, key) => {
         if (slider) {
             if (key !== 'seashell') setCurrentVariationIndex(variationIndex)
-
             if (isImagesInVariations || (isSeashellsInProduct && key === 'seashell')) {
-                const slideIndex = isSeashellsInProduct ? getSeashellIndex(variationIndex) : getImageIndexInVariation(variationIndex)
+                const slideIndex = isSeashellsInProduct ? getSeashellIndex(seashells, variationIndex) : getImageIndexInVariation(variations, variationIndex)
                 slider.slickGoTo(slideIndex);
             }
         }
     };
 
     const showImagePicker = product?.name?.en?.toLowerCase() === 'seashell pendant' || product?.name?.en?.toLowerCase() === 'seashell set'
-    console.log('showImagePicker', showImagePicker)
+    const initialSlide = getImageIndexInVariation(currentVariationIndex) === -1 ? 0 : getImageIndexInVariation(currentVariationIndex)
+
     return (
         <div className="product-info">
             {product
@@ -130,61 +114,28 @@ const ProductInfo = ({
                     <Sliders
                         slider={slider}
                         setSlider={setSlider}
-                        sliderImages={images}
-                        initialSlide={
-                            getImageIndexInVariation(currentVariationIndex) === -1
-                                ? 0
-                                : getImageIndexInVariation(currentVariationIndex)
-                        }
-                        setCurrentVariationIndex={
-                            isPricesInVariations && isImagesInVariations
-                            && !isAttachmentInVariations && !isMaterialInVariations
-                            && !isFeatureInVariations && !isSizeInVariations
-                            && !isColorInVariations
-                                ? setCurrentVariationIndex
-                                : () => {}
-                        }
+                        slides={images}
+                        initialSlide={initialSlide}
+                        setCurrentVariationIndex={isProductToSetVariationBySliding(product) ? setCurrentVariationIndex : () => {}}
                     />
                     <div className="info-right">
                         <h2 className="product-title">{group}/{title}</h2>
-                        <div className="tabs-description">
-                            <div className="tab-buttons">
-                                <button className="tab-button active">
-                                    {translations.product.description[lang]}
-                                </button>
-                                <a className="tab-button" href="/care" target="_blank">
-                                    {translations.infoPages.care.title[lang]}
-                                </a>
-                            </div>
-                            <div className="tab-content">
-                                    <ul>
-                                        {description?.map(string => (
-                                            <li key={string}>{string}</li>
-                                        ))}
-                                        {currentSize
-                                            ? <li>
-                                                {translations.product.size.title[lang]}: {currentSize} {translations.product.size.cm[lang]}
-                                            </li>
-                                            : ""
-                                        }
-                                    </ul>
-                            </div>
-                        </div>
+                        <Description description={description} currentSize={currentSize}/>
 
                         {showVariations
                             ? <div className="tabs-variations">
-                                {showImagePicker
-                                    ? <>
-                                        <VariationsItem
-                                            variations={productSeashells}
-                                            currentVariation={currentSeashell}
-                                            setCurrentOption={setCurrentOption}
-                                            isInVariations={isSeashellsInProduct}
-                                            name="seashell"
-                                            pickVariation={pickVariation}
-                                        />
-                                    </>
-                                    : ""}
+                                {/*{showImagePicker*/}
+                                {/*    ? <>*/}
+                                {/*        <VariationsItem*/}
+                                {/*            variations={productSeashells}*/}
+                                {/*            currentVariation={currentSeashell}*/}
+                                {/*            setCurrentOption={setCurrentOption}*/}
+                                {/*            isInVariations={isSeashellsInProduct}*/}
+                                {/*            name="seashell"*/}
+                                {/*            pickVariation={pickVariation}*/}
+                                {/*        />*/}
+                                {/*    </>*/}
+                                {/*    : ""}*/}
                                 <VariationsItem
                                     variations={productSizes}
                                     currentVariation={currentSize}
@@ -202,14 +153,6 @@ const ProductInfo = ({
                                     pickVariation={pickVariation}
                                 />
                                 <VariationsItem
-                                    variations={productMaterials}
-                                    currentVariation={currentMaterial}
-                                    setCurrentOption={setCurrentOption}
-                                    isInVariations={isMaterialInVariations}
-                                    name="material"
-                                    pickVariation={pickVariation}
-                                />
-                                <VariationsItem
                                     variations={productAttachments}
                                     currentVariation={currentAttachment}
                                     setCurrentOption={setCurrentOption}
@@ -217,22 +160,12 @@ const ProductInfo = ({
                                     name="attachment"
                                     pickVariation={pickVariation}
                                 />
-                                <VariationsItem
-                                    variations={productFeatures}
-                                    currentVariation={currentFeature}
-                                    setCurrentOption={setCurrentOption}
-                                    isInVariations={isFeatureInVariations}
-                                    name="feature"
-                                    pickVariation={pickVariation}
-                                />
                             </div>
                             : ""}
                         <p className="price">{translations.product.currency[lang]}{price}</p>
                         <Button className={`add-to-cart ${isAddingAnimation ? 'adding-animation' : ''}`} onClick={addToCart}>
                             <CheckIcon/>
-                            <span>
-                                {translations.product.addToCart[lang]}
-                            </span>
+                            <span>{translations.product.addToCart[lang]}</span>
                         </Button>
                     </div>
                 </>

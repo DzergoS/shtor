@@ -1,9 +1,9 @@
 import React from 'react';
 
 import './CartTotal.css'
-import useAPI from "../../../provider/useAPI";
-import {isMobile} from "../../../utils/isMobile";
-import {translations} from "../../../info";
+import useAPI from "provider/useAPI";
+import isMobile from "utils/isMobile";
+import {translations} from "info";
 
 const CartTotal = () => {
 	const {state: {cart, lang}} = useAPI();

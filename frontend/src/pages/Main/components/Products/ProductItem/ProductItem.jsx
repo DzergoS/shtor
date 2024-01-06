@@ -8,18 +8,18 @@ import ProductImage from "../../../../../ui-components/ProductImage";
 
 const ProductItem = ({product}) => {
 
-	const { _id, name, group, price, variations, variationIndex } = product
 	const { state: { lang } } = useAPI()
+	const { group, price, variations, link } = product
+
+	console.log('product', product)
+	console.log('product', product?.images)
 
 	return (
-		<Link to={`/${_id}${variationIndex ? `/${variationIndex}` : ""}`} className="product-list__item">
+		<Link to={link} className="product-list__item">
 
 			<div className="image__container">
 				<ProductImage className="image" imageName={getProductImageName(product)} alt="product list item image"/>
-				{product?.images[1]
-					? <ProductImage className="hover-image" imageName={product?.images[1]}
-							   alt="product item image hover"/>
-					: ""}
+				<ProductImage className="hover-image" imageName={getProductImageNameHover(product)} alt="product item image hover"/>
 			</div>
 
 			<div className="product-list__item-info">

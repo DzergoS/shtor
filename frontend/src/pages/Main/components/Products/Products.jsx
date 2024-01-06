@@ -8,7 +8,7 @@ import ProductItem from "./ProductItem/ProductItem";
 
 const Products = () => {
 
-	const {state: { products }} = useAPI()
+	const {state: { products: {productsToShow} }} = useAPI()
 	const rotateElementRef = useRef(null);
 	const [animation, setAnimation] = useState({
 		on: false,
@@ -40,25 +40,11 @@ const Products = () => {
 		}, 2200);
 	};
 
-	const productList = products.reduce((accumulator, currentObject) => {
-		if (currentObject?.name?.ua === "намисто з мушлями" || currentObject?.name?.en === "seashell pendant *long spiral")
-			currentObject.variations.map((variation, variationIndex) => {
-				accumulator.push({
-					...currentObject,
-					...variation,
-					_id: currentObject._id,
-					variationIndex,
-				})
-			})
-		else accumulator.push(currentObject)
-		return accumulator;
-	}, []);
-	console.log('productList', productList)
 	return (<>
 		<div className="product-list" id="product-list">
-			{productList.slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
+			{productsToShow.slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
 		</div>
-		{maxElements < productList?.length
+		{maxElements < productsToShow?.length
 			? <div
 				className="see-more"
 				onClick={handleRotateClick}
