@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import './ProductInfo.css';
 import {useParams} from "react-router-dom";
 import useAPI from "provider/useAPI";
-import Sliders from "./Sliders/Sliders";
+import Sliders from "../Sliders/Sliders";
 import {translations} from "info";
 import capitalizeFirstLetter from "utils/capitalizeFirstLetter";
 import CustomRadio from "ui-components/CustomRadio";

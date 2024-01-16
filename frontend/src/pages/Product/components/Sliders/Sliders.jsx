@@ -53,7 +53,7 @@ const Sliders = ({ slider, setSlider, slides, initialSlide, setCurrentVariationI
 		},
 		nextArrow: <NextArrow />,
 		prevArrow: <PrevArrow />,
-		initialSlide: initialSlide,
+		initialSlide,
 	}), [slides?.length])
 
 	const goToSlide = (slideIndex) => currentSlide !== slideIndex && slider.slickGoTo(slideIndex)

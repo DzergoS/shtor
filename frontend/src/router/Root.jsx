@@ -18,6 +18,7 @@ import api from "../api";
 import useAPI from "../provider/useAPI";
 import {ADD_PRODUCTS} from "../provider/actions/products";
 import AcceptCookies from "../ui-components/AcceptCookies";
+import {data} from '../data'
 
 const Root = () => {
 
@@ -32,6 +33,10 @@ const Root = () => {
 					payload,
 				})
 			} catch (e) {
+				dispatch({
+					type: ADD_PRODUCTS,
+					payload: data,
+				})
 				console.error(e)
 			}
 		}
