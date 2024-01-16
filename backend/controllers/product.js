@@ -1,4 +1,4 @@
-const { Product} = require("../models");
+const { Product } = require("../models");
 const genericController = require("../controllers");
 const sendResponse = require('./../utils/response');
 

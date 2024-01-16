@@ -16,16 +16,27 @@ const Footer = () => {
 
 	const handleChange = (event) => {
 		const inputEmail = event.target.value;
-		let newError = null;
+		var errorMessage = null;
 	  
 		if (inputEmail.trim() !== '' && !isValidEmail(inputEmail)) {
-		  newError = 'Email is invalid';
+		  errorMessage = 'Email is invalid';
 		}
 	  
-		setError(newError);
+		setError(errorMessage);
 		setEmail(inputEmail);
 	};
 
+	const handleSubmit = event => {
+		event.preventDefault();
+		setError(null);
+	
+		if (isValidEmail(email)) {
+		  // Заглушка для Серго. Отправляешь запрос на /api/subscribe и передаёшь email в body
+		  console.log('The email is valid'); 
+		} else {
+		  setError('Email is invalid');
+		}
+	};
 
 	return (
 		<footer className="footer">
@@ -34,7 +45,7 @@ const Footer = () => {
 					<img src={FooterLogo} alt="footer-main__logo"/>
 				</Link>
 				<p className="footer-title">Stay informed about releases and special events</p>
-				<form method='POST'>
+				<form method='POST' onSubmit={handleSubmit}>
 					<div className="email-input">
 						<input
 							className="email-send"
