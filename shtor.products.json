@@ -1,0 +1,636 @@
+[{
+  "group": "OBJECT",
+  "name": {
+    "en": "Bracelet-pendant",
+    "ua": "Браслет-підвіс"
+  },
+  "description": {
+    "en": "Wood.\nBlack waxed cord included.\nHandcrafted. Each piece is unique.",
+    "ua": "Дерево.\nВ комплекті вощений шнур 1 мм чорного кольору.\nРучна робота, кожен виріб унікальний."
+  },
+  "price": {
+    "en": 125,
+    "ua": 4500
+  },
+  "size": [
+    "21,5",
+    "22",
+    "23,4",
+    "25"
+  ],
+  "variations": [
+    {
+      "color": "Black",
+      "size": [],
+      "images": [
+        "IMG_4014.png",
+        "IMG_4015.png",
+        "IMG_1058.png"
+      ]
+    },
+    {
+      "color": "Dark Brown",
+      "size": [],
+      "images": [
+        "IMG_4016.png",
+        "IMG_4017.png",
+        "IMG_1061.png"
+      ]
+    },
+    {
+      "color": "Brown",
+      "size": [],
+      "images": [
+        "IMG_4018.png",
+        "IMG_4019.png",
+        "IMG_1030.png"
+      ]
+    }
+  ]
+},
+{
+  "group": "OBERIH",
+  "name": {
+    "en": "Authentic earrings",
+    "ua": "Автентичні сережки"
+  },
+  "price": {
+    "en": 80,
+    "ua": 3000
+  },
+  "size": [
+    "3x2"
+  ],
+  "description": {
+    "en": "Silver with rhodium. Matte finish.\nRiver pearls.\nHandcrafted. Each piece is unique.",
+    "ua": "Срібло з покриттям родій. Матовий фініш.\nРічкові перли.\nРучна робота. Кожна унікальна."
+  },
+  "material": "rhodium",
+  "images": [
+    "IMG_0070.png",
+    "IMG_1042.png"
+  ]
+},
+{
+  "group": "OBERIH",
+  "name": {
+    "en": "Authentic earrings",
+    "ua": "Автентичні сережки"
+  },
+  "price": {
+    "en": 80,
+    "ua": 3000
+  },
+  "size": [
+    "3x2"
+  ],
+  "description": {
+    "en": "Silver with gilding. Matte finish.\nRiver pearl.\nHandcrafted. Each piece is unique.",
+    "ua": "Срібло з покриттям золото 24К. Матовий фініш.\nРічкові перли.\nРучна робота. Кожна унікальна."
+  },
+  "material": "gold",
+  "images": [
+    "IMG_1316.png",
+    "IMG_1730_2.png",
+    "IMG_1062_1.png"
+  ]
+},
+{
+  "group": "OBERIH",
+  "name": {
+    "en": "Comb-pendant",
+    "ua": "Гребінь підвіс"
+  },
+  "description": {
+    "en": "Wood.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nHandcrafted. Each piece is unique.",
+    "ua": "Дерево.\nВ комплекті три вощених шнури: 1/2мм чорні, 1мм молочний.\nРучна робота. Кожна унікальна."
+  },
+  "price": {
+    "en": 80,
+    "ua": 3000
+  },
+  "material": "wood",
+  "size": [
+    "9,5x4"
+  ],
+  "images": [
+    "IMG_1310.png",
+    "IMG_1735_1.png",
+    "IMG_1046.png"
+  ]
+},
+{
+  "group": "OBERIH",
+  "name": {
+    "en": "Comb-pendant",
+    "ua": "Гребінь підвіс"
+  },
+  "description": {
+    "en": "Brass-nickel.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nHandcrafted. Each piece is unique.",
+    "ua": "Латунь з покриттям нікель.\nВ комплекті три вощених шнури: 1/2мм чорні, 1мм молочний.\nРучна робота. Кожна унікальна."
+  },
+  "price": {
+    "en": 170,
+    "ua": 6000
+  },
+  "material": "brass-nickel",
+  "size": [
+    "7х2,6"
+  ],
+  "images": [
+    "IMG_1727.png",
+    "IMG_1067_2.png"
+  ]
+},
+{
+  "group": "OBERIH",
+  "name": {
+    "en": "Comb-pendant",
+    "ua": "Гребінь підвіс"
+  },
+  "images": "IMG_2024_1.png",
+  "price": {
+    "en": 170,
+    "ua": 6000
+  },
+  "description": {
+    "en": "Brass-nickel.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nHandcrafted. Each piece is unique.",
+    "ua": "Латунь з покриттям нікель.\nВ комплекті три вощених шнури: 1/2мм чорні, 1мм молочний.\nРучна робота. Кожна унікальна."
+  },
+  "material": "silver/wood imitation",
+  "size": [
+    "7х2,6"
+  ]
+},
+{
+  "group": "OBERIH",
+  "name": {
+    "en": "Comb-pendant",
+    "ua": "Гребінь підвіс"
+  },
+  "description": {
+    "en": "Brass with gliding 24K.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nHandcrafted.",
+    "ua": "Латунь з покриттям золото 24К.\nВ комплекті три вощених шнура: 1/2мм чорні, 1мм молочний.\nРучна робота."
+  },
+  "price": {
+    "en": 170,
+    "ua": 6000
+  },
+  "material": "gold",
+  "size": [
+    "7х2,6"
+  ],
+  "images": [
+    "IMG_1728.png",
+    "IMG_2023.png"
+  ]
+},
+{
+  "group": "OBERIH",
+  "name": {
+    "en": "Comb-pendant",
+    "ua": "Гребінь підвіс"
+  },
+  "description": {
+    "en": "Brass with gliding 24K.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nHandcrafted.",
+    "ua": "Латунь з покриттям золото 24К.\nВ комплекті три вощених шнура: 1/2мм чорні, 1мм молочний.\nРучна робота."
+  },
+  "price": {
+    "en": 170,
+    "ua": 6000
+  },
+  "material": "gold/wood imitation",
+  "size": [
+    "7х2,6"
+  ],
+  "images": [
+    "IMG_1317.png",
+    "IMG_1043.png"
+  ]
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "Hair comb-pendant",
+    "ua": "гребінь-підвіс"
+  },
+  "price": {
+    "en": 170,
+    "ua": 6000
+  },
+  "size": [
+    "6х7"
+  ],
+  "description": {
+    "en": "Brass-nickel.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nHandcrafted. Each piece is unique.",
+    "ua": "Латунь з нікелем.\nВ комплекті три вощених шнура: 1/2мм чорні,1мм молочний.\nРучна робота. Кожна унікальна."
+  },
+  "material": "brass-nickel",
+  "images": [
+    "IMG_1770.png",
+    "IMG_1774_1.png",
+    "IMG_1048.png",
+    "IMG_1050.png"
+  ]
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "Hair comb-pendant",
+    "ua": "гребінь-підвіс"
+  },
+  "price": {
+    "en": 170,
+    "ua": 6000
+  },
+  "size": [
+    "6х7"
+  ],
+  "description": {
+    "en": "Brass-gilding 24k.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nHandcrafted. Each piece is unique.",
+    "ua": "Латунь з позолотою 24k.\nВ комплекті три вощених шнура: 1/2мм чорні, 1мм молочний.\nРучна робота. Кожна унікальна."
+  },
+  "material": "gold",
+  "images": [
+    "IMG_1769.png",
+    "IMG_1775_1.png",
+    "IMG_1066_2.png"
+  ]
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "pearl pendant",
+    "ua": "підвіс перлина"
+  },
+  "description": {
+    "en": "Baroque pearl.\nSilver eyelet.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nEach piece is unique.",
+    "ua": "Барочна перлина.\nСрібне вушко.\nКожна унікальна. В комплекті три вощених шнура: 1/2мм чорні, 1мм молочний."
+  },
+  "size": [
+    "1,5х1"
+  ],
+  "images": [
+    "IMG_1167.png",
+    "IMG_1288_1.png"
+  ],
+  "variations": [
+    {
+      "price": {
+        "en": 85,
+        "ua": 3200
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Без підвісу"
+    },
+    {
+      "price": {
+        "en": 110,
+        "ua": 4200
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Срібний ланцюг"
+    },
+    {
+      "price": {
+        "en": 170,
+        "ua": 6000
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Срібна орбіта"
+    }
+  ]
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "Swan comb",
+    "ua": "гребінь лебідь"
+  },
+  "price": {
+    "en": 170,
+    "ua": 6000
+  },
+  "size": [
+    "12х6"
+  ],
+  "description": {
+    "en": "Brass with nickel.\nHandcrafted",
+    "ua": "Латунь з покриттям нікель.\nРучна робота"
+  },
+  "material": "silver",
+  "images": [
+    "IMG_1314.png",
+    "IMG_0035.png",
+    "IMG_1047.png"
+  ]
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "Swan comb",
+    "ua": "гребінь лебідь"
+  },
+  "price": {
+    "en": 170,
+    "ua": 6000
+  },
+  "size": [
+    "12х6"
+  ],
+  "description": {
+    "en": "Brass with gilding 24K.\nHandcrafted",
+    "ua": "Латунь з покриттям золото 24К.\nРучна робота"
+  },
+  "material": "gold",
+  "images": [
+    "IMG_1315.png",
+    "IMG_1055_1.png",
+    "IMG_1052_1.png"
+  ]
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "seashell pendant",
+    "ua": "підвіс мушля"
+  },
+  "size": [
+    "12x6"
+  ],
+  "seashells": [
+    ["IMG_1240.png", "IMG_1225_2.png"],
+    ["IMG_4006.png", "IMG_4006_1.png"],
+    ["IMG_1222_1.png", "IMG_1223_1.png"],
+    ["IMG_1272.png", "IMG_1275.png"],
+    ["photo_2023-10-16_14.38_mobile.png"]
+  ],
+  "variations": [
+    {
+      "price": {
+        "en": 85,
+        "ua": 3200
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Без підвісу"
+    },
+    {
+      "price": {
+        "en": 110,
+        "ua": 4200
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Срібний ланцюг"
+    },
+    {
+      "price": {
+        "en": 170,
+        "ua": 6000
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Срібна орбіта"
+    }
+  ],
+  "description": {
+    "ua": "Натуральна мушля.\nСрібне вушко.\nКожна унікальна.",
+    "en": "Seashell.\nSilver eyelet.\nEach piece is unique."
+  }
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "seashell pendant",
+    "ua": "підвіс мушля"
+  },
+  "description": {
+    "en": "Seashell. Silver eyelet. Jewelry stone. Each piece is unique.",
+    "ua": "Натуральна мушля. Срібне вушко. Кожна унікальна."
+  },
+  "size": [
+    "12x6"
+  ],
+  "seashells": [
+    ["IMG_1264.png", "IMG_1263_2.png"],
+    ["IMG_1203.png", "IMG_1205.png"],
+    ["IMG_1200.png", "IMG_1199.png"],
+    ["IMG_1329.png", "IMG_1330.png"],
+    ["IMG_1327.png", "IMG_1328.png"],
+    ["IMG_1326.png", "IMG_1325.png"],
+    ["IMG_1266.png", "IMG_1265_1.png"],
+    ["IMG_1267.png", "IMG_1269.png"],
+    ["IMG_1277.png", "IMG_1278.png"],
+    ["IMG_1279.png", "IMG_1281.png"],
+    ["IMG_1290.png", "IMG_1289.png"],
+    ["seashell_2223.png","seashell_2223_1.png"]
+  ],
+  "feature": "w/stone",
+  "variations": [
+    {
+      "price": {
+        "en": 100,
+        "ua": 3700
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Без підвісу"
+    },
+    {
+      "price": {
+        "en": 130,
+        "ua": 4700
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Срібний ланцюг"
+    },
+    {
+      "price": {
+        "en": 180,
+        "ua": 6900
+      },
+      "size": [],
+      "images": [],
+      "attachment": "Срібна орбіта"
+    }
+  ]
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "seashell set",
+    "ua": "намисто з мушлями"
+  },
+  "description": {
+    "en": "Seashells.\nSilver eyelet.\nEach piece is unique.",
+    "ua": "Натуральна мушля.\nСрібне вушко.\nКожна унікальна."
+  },
+  "size": [],
+  "images": [],
+  "variations": [
+    {
+      "price": {
+        "en": 350,
+        "ua": 13000
+      },
+      "size": [],
+      "images": [
+        "photo_2023-10-24_11.32_2.png"
+      ]
+    },
+    {
+      "price": {
+        "en": 260,
+        "ua": 10000
+      },
+      "size": [],
+      "images": [
+        "photo_2023-10-24_11.37_2.png"
+      ]
+    },
+    {
+      "price": {
+        "en": 230,
+        "ua": 8600
+      },
+      "size": [],
+      "images": [
+        "photo_2023-10-24_11.43_1.png"
+      ]
+    },
+    {
+      "price": {
+        "en": 210,
+        "ua": 8000
+      },
+      "size": [],
+      "images": [
+        "photo_2023-10-24_11.45_2.png"
+      ]
+    },
+    {
+      "price": {
+        "en": 230,
+        "ua": 8600
+      },
+      "size": [],
+      "images": [
+        "photo_2023-10-24_11.46_1.png"
+      ]
+    },
+    {
+      "price": {
+        "en": 310,
+        "ua": 11800
+      },
+      "size": [],
+      "images": [
+        "photo_2023-10-24_11.48_1.png"
+      ]
+    },
+    {
+      "price": {
+        "en": 315,
+        "ua": 12000
+      },
+      "size": [],
+      "images": [
+        "IMAGE_2023-10-24_11_49_41_1.png"
+      ]
+    },
+    {
+      "price": {
+        "en": 600,
+        "ua": 23000
+      },
+      "size": [],
+      "images": [
+        "photo_2023-10-24_11.52_1.png"
+      ]
+    },
+    {
+      "price": {
+        "en": 800,
+        "ua": 30000
+      },
+      "size": [],
+      "images": [
+        "photo_2023-10-24_11.53_1.png"
+      ]
+    }
+  ]
+},
+{
+  "group": "OBJECT",
+  "name": {
+    "en": "Hair comb",
+    "ua": "Гребінь для волося"
+  },
+  "description": {
+    "en": "Wooden.\nHandcrafted. Each piece is unique.",
+    "ua": "Дерево.\nРучна робота. Кожен індвиідуальний."
+  },
+  "price": {
+    "en": 125,
+    "ua": 4500
+  },
+  "size": [
+    "15,5х8"
+  ],
+  "images": ["IMG_1188.png", "IMG_1054_1.png"]
+},
+{
+  "group": "NATURE",
+  "name": {
+    "en": "seashell pendant *long spiral",
+    "ua": "Підвіс мушля"
+  },
+  "description": {
+    "en": "Wooden.\nSilver eyelet.\nHandcrafted. Each piece is unique.",
+    "ua": "Дерево.\nСрібне вушко.\nРучна робота. Кожна унікальна."
+  },
+  "size": [
+    "11х1,5"
+  ],
+  "images": [],
+  "variations": [
+    {
+      "price": {
+        "en": 90,
+        "ua": 3300
+      },
+      "size": [],
+      "images": [
+        "IMG_1171.png"
+      ],
+      "attachment": "Срібний ланцюг"
+    },
+    {
+      "price": {
+        "en": 60,
+        "ua": 2300
+      },
+      "size": [],
+      "images": [
+        "IMG_1195.png"
+      ],
+      "attachment": "Без підвісу"
+    },
+    {
+      "price": {
+        "en": 140,
+        "ua": 5500
+      },
+      "size": [],
+      "images": [
+        "IMG_1729_1.png"
+      ],
+      "attachment": "Срібна орбіта"
+    }
+  ]
+}]
