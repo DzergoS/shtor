@@ -1,0 +1,74 @@
+.button-container {
+    width: 100%;
+    max-width: 363px;
+    height: 32px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer !important;
+}
+
+.button-container-white {
+    width: 100%;
+    max-width: 363px;
+    height: 36px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+}
+
+.button-container-danger {
+    width: 100%;
+    max-width: 363px;
+    height: 36px;
+    border: 1px solid rgba(218, 0, 0, 1);
+    cursor: pointer;
+    background: rgba(255, 157, 157, 1);
+    color: rgba(218, 0, 0, 1);
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+}
+
+p {
+    font-family: 'Lexend', sans-serif !important;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+.add-cart {
+    padding: 6px 0;
+    font-size: 16px;
+}
+
+button:disabled,
+button[disabled] {
+    opacity: 0.6;
+}
+
+.MuiRadio-label {
+    color: #fff;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 300;
+}
+
+.MuiRadio-radio {
+    width: 13px !important;
+    height: 13px !important;
+    margin: auto !important;
+    background: transparent !important;
+}
+
+.Mui-checked .MuiRadio-icon {
+    color: #fff;
+}

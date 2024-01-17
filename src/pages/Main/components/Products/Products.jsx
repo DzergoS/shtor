@@ -13,36 +13,36 @@ import './Products.css'
 import {Link} from "react-router-dom";
 
 const macap = [ {
-  category: 'OBERIH',
-  title: 'глиняне намисто',
-  price: 2800,
-  img: product1
-}, {
-  category: 'OBERIH',
-  title: 'підвіс гребінь',
-  price: 3000,
-  img: product2
-}, {
-  category: 'OBERIH',
-  title: 'автентичні сережки',
-  price: 2500,
-  img: product3
-}, {
-  category: 'NATURE',
-  title: 'підвіс мушля',
-  price: 2000,
-  img: product4
-}, {
-  category: 'NATURE',
-  title: 'гребінь для волосся',
-  price: 2000,
-  img: product5
-}, {
-  category: 'NATURE',
-  title: 'гребінь для волосся',
-  price: 2500,
-  img: product6
-},
+    category: 'OBERIH',
+    title: 'глиняне намисто',
+    price: 2800,
+    img: product1
+  }, {
+    category: 'OBERIH',
+    title: 'підвіс гребінь',
+    price: 3000,
+    img: product2
+  }, {
+    category: 'OBERIH',
+    title: 'автентичні сережки',
+    price: 2500,
+    img: product3
+  }, {
+    category: 'NATURE',
+    title: 'підвіс мушля',
+    price: 2000,
+    img: product4
+  }, {
+    category: 'NATURE',
+    title: 'гребінь для волосся',
+    price: 2000,
+    img: product5
+  }, {
+    category: 'NATURE',
+    title: 'гребінь для волосся',
+    price: 2500,
+    img: product6
+  },
 ]
 
 const Products = () => {
@@ -80,7 +80,7 @@ const Products = () => {
   return (
     <div className="product-list">
       {macap.map((product, index) => (
-        <Link to={'/product'} className="product-list__item" key={index}>
+        <Link to={`/product/${product.title}`} className="product-list__item" key={index}>
           <img src={product.img} alt={'product-list__item-image'}/>
           <div className="product-list__item-info">
             <h3>{product.category}/{product.title}</h3>
@@ -90,7 +90,7 @@ const Products = () => {
       ))}
       {showMore
         ? macap.map((product, index) => (
-          <Link to={'/product'} className="product-list__item" key={index}>
+          <Link to={`/product/${product.title}`} className="product-list__item" key={index}>
             <img src={product.img} alt={'product-list__item-image'}/>
             <div className="product-list__item-info">
               <h3>{product.category}/{product.title}</h3>
