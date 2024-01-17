@@ -2,13 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AppRouter from "./router/AppRouter";
 import APIProvider from "provider/APIProvider";
+import { CartProvider } from "react-use-cart";
+import './global.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <APIProvider>
-      <AppRouter />
-    </APIProvider>
+    <CartProvider>
+      <APIProvider>
+        <AppRouter />
+      </APIProvider>
+    </CartProvider>
   </React.StrictMode>
 );
 
