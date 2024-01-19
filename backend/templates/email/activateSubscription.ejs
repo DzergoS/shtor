@@ -6,17 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Activate Your Subscription</title>
 </head>
-<body>
-  <p>Hi, <%= email %>,</p>
-  <p>Thank you for choosing to subscribe! To complete your subscription, please select your preferred language:</p>
+<body style="width: fit-content; font-weight: 600; font-size: 16px; line-height: 20px;">
+  <div style="text-align: center; filter: invert(1);">
+    <img src="cid:shtorlogo"/>
+  </div>
+  <p>Hi <%= email %>!</p>
+  <p>Thank you for your subscription!</p>
+  <p>To complete your subscription, please select your preferred language:</p>
 
-  <ul>
-    <li>EN | <a href="<%= activationLink %>/en">English</a></li>
-    <li>UK | <a href="<%= activationLink %>/uk">Українська</a></li>
+  <ul style="list-style-type: none; padding-left: 15px;">
+    <li>
+      <span style="font-size: 24px;">&#9675;</span>
+      EN | <a href="<%= activationLink %>/en">English</a>
+    </li>
+    <li>
+      <span style="font-size: 24px;">&#x25CB;</span>
+      UK | <a href="<%= activationLink %>/uk">Українська</a></li>
+    </li>
   </ul>
 
   <p>If you have any questions or need assistance, feel free to contact us.</p>
 
-  <p>Best regards,<br>Shtor Team</p>
+  <p>Best regards,<br>Shtor Team!</p>
 </body>
 </html>

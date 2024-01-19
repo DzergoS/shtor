@@ -29,6 +29,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const emailTemplatesDir = path.join(__dirname, '../templates/email');
+const logoImagePath = path.join(__dirname, '../images/logo.jpg');
 
 
 async function sendActivationEmail(userId, email) {
@@ -45,6 +46,11 @@ async function sendActivationEmail(userId, email) {
     to: email,
     subject: 'Activate your subscription for shtor.com.ua',
     html: htmlContent,
+    attachments: [{
+      filename: 'logo.jpg',
+      path: logoImagePath,
+      cid: 'shtorlogo'
+  }],
   };
 
   await transporter.sendMail(mailOptions);
