@@ -73,7 +73,7 @@ export const translations = {
 					<p>- Надягати прикраси слід в останню чергу -коли Ви вже одягнені.</p>
 				</>,
 				en: <>
-					<p>Exchange and return of products are possible within 14 days after receiving the order.To arrange a return or an exchange of goods, please contact us at: Shtorga@icloud.com</p>
+					<p>Exchange and return of products are possible within 14 days after receiving the order.To arrange a return or an exchange of goods, please contact us at: info@shtor.com.ua</p>
 					<p>Make sure that the returned product has not been used, is placed in its original packaging, and contains original tags, price tags, and all additional attachments.</p>
 					<ul>
 						<li>We reserve the right to refuse returns or exchanges if the item does not comply with the above-mentioned rules.</li>
@@ -132,7 +132,7 @@ export const translations = {
 			},
 			text: {
 				ua: <>
-					<p>Обмін і повернення товару можливі протягом 14 днів після отримання замовлення. Для оформлення повернення або обміну товару, будь ласка, зв'яжіться з нами за адресою: Shtorga@icloud.com</p>
+					<p>Обмін і повернення товару можливі протягом 14 днів після отримання замовлення. Для оформлення повернення або обміну товару, будь ласка, зв'яжіться з нами за адресою: info@shtor.com.ua</p>
 					<p>Переконайтеся, що повернений товар не використовувався, він знаходиться в оригінальній упаковці та містить оригінальні бирки, цінники та всі додаткові вкладення.</p>
 					<p>Ми залишаємо за собою право відмовити у поверненні або обміні, якщо товар не відповідає вищезазначеним правилам.</p>
 					<ul>
@@ -143,7 +143,7 @@ export const translations = {
 					<p>Будь-які суперечки, які не підпадають під політику повернення та обміну, підлягають індивідуальному вирішенню шляхом переговорів між залученими сторонами.</p>
 				</>,
 				en: <>
-					<p>Exchange and return of products are possible within 14 days after receiving the order. To arrange a return or an exchange of goods, please contact us at: Shtorga@icloud.com</p>
+					<p>Exchange and return of products are possible within 14 days after receiving the order. To arrange a return or an exchange of goods, please contact us at: info@shtor.com.ua</p>
 					<p>Make sure that the returned product has not been used, is placed in its original packaging, and contains original tags, price tags, and all additional attachments.</p>
 					<p>We reserve the right to refuse returns or exchanges if the item does not comply with the above-mentioned rules.</p>
 					<ul>
@@ -169,14 +169,14 @@ export const translations = {
 					<p><strong>Контактна інформація:</strong> Якщо ви робите покупку онлайн, ми отримаємо ваше ім’я, адресу, адресу електронної пошти, номер телефону та країну проживання. Ми використовуватимемо вашу контактну інформацію, щоб:</p>
 					<ul>
 						<li>Обробляти ваші покупки/замовлення та будь-які повернення, обміни та скарги, які можуть виникнути щодо вашої покупки</li>
-						<li>Спілкуватися з вами щодо вашої покупки, відповідати на будь-які запитання чи коментарі, які можуть виникнути щодо наших продуктів або послуг, і керувати ними. Юридична підстава полягає в тому, що обробка ваших даних необхідна для того, щоб ми могли виконати наші договірні зобов’язання перед вами за договором купівлі-продажу. Ми зберігатимемо ваші дані стільки часу, скільки необхідно для цієї мети. Ми також можемо обробляти ваші контактні дані, щоб інформувати вас електронною поштою, SMS, листами, телефоном, WeChat, Whatsapp та іншими соціальними мережами про наші спеціальні події чи акції. Ви маєте право відхилити наші маркетингові повідомлення в будь-який час, натиснувши посилання для скасування підписки в кожному повідомленні або зв’язавшись зі службою підтримки клієнтів за адресою Shtorga@icloud.com</li>
+						<li>Спілкуватися з вами щодо вашої покупки, відповідати на будь-які запитання чи коментарі, які можуть виникнути щодо наших продуктів або послуг, і керувати ними. Юридична підстава полягає в тому, що обробка ваших даних необхідна для того, щоб ми могли виконати наші договірні зобов’язання перед вами за договором купівлі-продажу. Ми зберігатимемо ваші дані стільки часу, скільки необхідно для цієї мети. Ми також можемо обробляти ваші контактні дані, щоб інформувати вас електронною поштою, SMS, листами, телефоном, WeChat, Whatsapp та іншими соціальними мережами про наші спеціальні події чи акції. Ви маєте право відхилити наші маркетингові повідомлення в будь-який час, натиснувши посилання для скасування підписки в кожному повідомленні або зв’язавшись зі службою підтримки клієнтів за адресою info@shtor.com.ua</li>
 					</ul>
 					<p>Дані кредитної картки: Якщо ви робите покупку в Інтернеті та вирішуєте оплатити кредитною карткою, ви надасте інформацію про свою кредитну картку на нашому веб-сайті, щоб завершити покупку. Дані вашої кредитної картки будуть захищені за допомогою Global Sign Encryption. Усі платежі на сайті здійснюються платіжною системою FONDY.</p>
 					<p><strong>Інформаційні листи</strong></p>
 					<ul>
 						<li><strong>Інформаційні листи</strong></li>
 					</ul>
-					<p>Якщо ви підписалися на одну з наших інформаційних бюлетенів, ми обробимо ваше ім’я, адресу електронної пошти, країну та інформацію про те, чи цікавитеся ви жіночим чи чоловічим одягом, з метою розсилки такого інформаційного бюлетеня. Ви маєте право скасувати підписку на нашу розсилку в будь-який час, натиснувши посилання для скасування підписки, яке міститься в кожній розсилці, або зв’язавшись зі службою підтримки клієнтів за адресою Shtorga@icloud.com</p>
+					<p>Якщо ви підписалися на одну з наших інформаційних бюлетенів, ми обробимо ваше ім’я, адресу електронної пошти, країну та інформацію про те, чи цікавитеся ви жіночим чи чоловічим одягом, з метою розсилки такого інформаційного бюлетеня. Ви маєте право скасувати підписку на нашу розсилку в будь-який час, натиснувши посилання для скасування підписки, яке міститься в кожній розсилці, або зв’язавшись зі службою підтримки клієнтів за адресою info@shtor.com.ua</p>
 				</>,
 				en: <>
 					<p>SHTOR recognizes the importance of protecting the privacy of your personal data. We have instituted strict policies and security measures to protect the information you provide us.</p>
@@ -186,14 +186,14 @@ export const translations = {
 					<p><strong>Contact details:</strong> If you make a purchase online we will collect your name, address, e-mail address, telephone number, and country of residence. We will use your contact information to:</p>
 					<ul>
 						<li>Process your purchase/orders and any returns, exchanges and complaints you may have relating to your purchase</li>
-						<li>Communicate with you regarding your purchase and answer and administer any questions or comments you may have regarding our products or services. The legal basis is that it is necessary to process your data in order for us to be able to fulfill our contractual obligations to you under the purchase agreement. We will retain your data for as long as necessary for this purpose. We may also process your contact details to keep you informed, via email, SMS, letters, telephone, WeChat, Whatsapp and other social media, of our special events or promotions. You are entitled to reject our marketing messages at any time by clicking on the unsubscribe link included in each message or by contacting customer service at Shtorga@icloud.com</li>
+						<li>Communicate with you regarding your purchase and answer and administer any questions or comments you may have regarding our products or services. The legal basis is that it is necessary to process your data in order for us to be able to fulfill our contractual obligations to you under the purchase agreement. We will retain your data for as long as necessary for this purpose. We may also process your contact details to keep you informed, via email, SMS, letters, telephone, WeChat, Whatsapp and other social media, of our special events or promotions. You are entitled to reject our marketing messages at any time by clicking on the unsubscribe link included in each message or by contacting customer service at info@shtor.com.ua</li>
 					</ul>
 					<p>Credit card details: If you make a purchase online and choose to pay by credit card, you will provide your credit card information on our website to finalize your purchase. Your credit card details will be protected using Global Sign Encryption. All the payments on the website are carried out by FONDY Payment System.</p>
 					<p>Newsletter</p>
 					<ul>
 						<li><strong>Newsletter</strong></li>
 					</ul>
-					<p>If you have subscribed to one of our newsletters, we will process your name, email address, country and information on whether you are interested in womenswear or menswear for the purpose of sending out such a newsletter. You are entitled to unsubscribe to our newsletter at any time by clicking on the unsubscribe link included in each newsletter or by contacting customer service at Shtorga@icloud.com </p>
+					<p>If you have subscribed to one of our newsletters, we will process your name, email address, country and information on whether you are interested in womenswear or menswear for the purpose of sending out such a newsletter. You are entitled to unsubscribe to our newsletter at any time by clicking on the unsubscribe link included in each newsletter or by contacting customer service at info@shtor.com.ua </p>
 				</>
 			}
 		}

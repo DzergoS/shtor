@@ -51,7 +51,7 @@ const Product = ({match}) => {
 				setCurrentVariationIndex={setCurrentVariationIndex}
 			/>
 			<Scroller/>
-			<CartPickerPopUp product={product} currentOptions={currentOptions} showPicker={showPicker} setShowPicker={setShowPicker} />
+			{/* <CartPickerPopUp product={product} currentOptions={currentOptions} showPicker={showPicker} setShowPicker={setShowPicker} /> */}
 		</>
 	);
 };

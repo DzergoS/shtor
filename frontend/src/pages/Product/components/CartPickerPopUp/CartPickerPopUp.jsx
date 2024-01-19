@@ -16,9 +16,9 @@ const CartPickerPopUp = ({ currentOptions, product, showPicker, setShowPicker })
 			<Sliders
 				slider={slider}
 				setSlider={setSlider}
-				slides={images}
-				initialSlide={initialSlide}
-				setCurrentVariationIndex={isProductToSetVariationBySliding(product) ? setCurrentVariationIndex : () => {}}
+				// slides={images}
+				// initialSlide={initialSlide}
+				// setCurrentVariationIndex={isProductToSetVariationBySliding(product) ? setCurrentVariationIndex : () => {}}
 			/>
 			<div className="quantity__container">
 				<div className="quantity">

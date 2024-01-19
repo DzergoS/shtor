@@ -7,7 +7,7 @@
     margin: 0 0 30px;
 }
 
-.scroller-container. .scroller-items {
+.scroller-container .scroller-items {
     display: flex;
     justify-content: space-between;
 }
