@@ -48,7 +48,6 @@ subscriberRouter.get('/activate/:userId/:token/:lang', async (req, res) => {
     }
 })
 
-
 subscriberRouter.get('/deactivate/:userId/:token', async (req, res) => {
     const { userId, token } = req.params
 
