@@ -24,7 +24,13 @@ const CartTotal = () => {
 					<p className="cart-total__total">{translations.cart.deliveryAlert[lang]}</p>
 				</>
 			}
-			<button className="cart-total__check-out">{translations.cart.checkOut[lang]}</button>
+			<a
+				href="https://pay.fondy.eu/api/checkout?button=1ebdc2cfb376b9962e96bb9c1caa0da30234ad55"
+				className="f-p-b cart-total__check-out"
+				data-button="">
+				{translations.cart.checkOut[lang]}
+			</a>
+
 		</div>
 	);
 };
