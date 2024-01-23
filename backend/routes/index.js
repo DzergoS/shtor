@@ -5,14 +5,17 @@ const express = require('express'),
     adminRoutes = require('./admin'),
     productRoutes = require('./products'),
 	orderRoutes = require('./orders'),
-    subscriberRoutes = require('./subscribers')
+    subscriberRoutes = require('./subscribers'),
+    paymentRouter = require('./payments')
 
 
 genericRouter.use('/auth', authRoutes);
 genericRouter.use('/admin', authMiddleware, adminRoutes);
 
 genericRouter.use('/products', productRoutes);
-genericRouter.use('/orders', orderRoutes);
 genericRouter.use('/subscribe', subscriberRoutes)
+
+genericRouter.use('/payments', paymentRouter)
+genericRouter.use('/orders', orderRoutes);
 
 module.exports = genericRouter;
