@@ -35,46 +35,48 @@ const CartProducts = () => {
 		? description.slice(0, -1)
 		: description;
 
+	console.log('cart', cart);
+
 	return (
 		<div className="cart-products">
 			{cart.map((item, index) => (
 				<div className="cart-product" key={index}>
-					<ProductImage imageName={getProductImageName(item)} alt="product" className="cart-product__img"/>
+					<div className="custom-img">
+						<ProductImage imageName={getProductImageName(item)} alt="product" className="cart-product__img"/>
+					</div>
 					<div className="cart-product-desc">
 						{!isMobile
 							? <>
 								<h4 className="cart-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
-								<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color ? `/ ${item.color}` : "" }</p>
+								<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color?.length ? `/ ${item.color}` : "" }</p>
 								<div className="cart-product__quantity">
-									{translations.cart.quantity[lang]}
 									<div className="cart-product__quantity-label">
 										<button className="minus" onClick={() => onChangeQuantity(item._id, MINUS)}>-</button>
 										{item.quantity}
 										<button className="plus"  onClick={() => onChangeQuantity(item._id, PLUS)}>+</button>
 									</div>
+									<div className="price">{currency}{item.price[lang] * item.quantity}</div>
 								</div>
-								<div className="price">{currency}{item.price[lang] * item.quantity}</div>
 							</>
 							: <>
 								<div className="top">
 									<h4 className="cart-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
-									<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color ? `/ ${item.color}` : "" }</p>
+									<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color?.length ? `/ ${item.color}` : "" }</p>
 								</div>
 								<div className="bottom">
 									<div className="cart-product__quantity">
-										{translations.cart.quantity[lang]}
 										<div className="cart-product__quantity-label">
 											<button className="minus" onClick={() => onChangeQuantity(item._id, MINUS)}>-</button>
 											{item.quantity}
 											<button className="plus"  onClick={() => onChangeQuantity(item._id, PLUS)}>+</button>
 										</div>
+										<div className="price">{currency}{item.price[lang] * item.quantity}</div>
 									</div>
-									<div className="price">{currency}{item.price[lang] * item.quantity}</div>
 								</div>
 							</>
 						}
 
-						<Cross className="cross" onClick={() => deleteProductFromCart(item._id)}/>
+						{/*<Cross className="cross" onClick={() => deleteProductFromCart(item._id)}/>*/}
 					</div>
 				</div>
 			))}

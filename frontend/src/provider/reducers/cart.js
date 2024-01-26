@@ -15,10 +15,11 @@ const cartReducer = (state, action) => {
 			);
 		case DECREMENT_PRODUCT:
 			return state.map(item =>
-				item._id === action.payload && item.quantity > 1
+				item._id === action.payload
 					? { ...item, quantity: item.quantity - 1 }
 					: item
-			);
+			).filter(item => item.quantity); // Filter out items with quantity equal to 1
+
 		case ADD_PRODUCT:
 			const existingProductIndex = state.findIndex(item => item._id === action.payload._id);
 			if (existingProductIndex !== -1) {
