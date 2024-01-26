@@ -3,14 +3,6 @@ const express = require('express'),
     sendResponse = require('../utils/response');
 
 
-// const fondy = new CloudIpsp(
-//     {
-//       merchantId: 1396424,
-//       secretKey: 'test'
-//     }
-//   )
-
-
 const fondyPassword = 'test'
 
 const orderBody = {

@@ -17,10 +17,11 @@ const orderSchema = new Schema({
     city: { type: String, required: true },
     address: { type: String, required: true },
     price: { type: Number, required: true },
-    novaPoshtaBranch: { type: String },
+    state: { type: String },
     country: { type: String },
     postalCode: { type: String },
   },
+  createdAt: { type: Date, default: Date.now }
 });
 
 const Order = model('Order', orderSchema);

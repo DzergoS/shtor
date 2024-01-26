@@ -1,9 +1,10 @@
-const { Order } = require("../models");
-const genericController = require("../controllers");
-const sendResponse = require('./../utils/response');
+const { Order } = require("../models"),
+	  genericController = require("../controllers"),
+	  sendResponse = require('./../utils/response')
 
 const createOrder = async (req, res) => {
 	try {
+		console.log(req.body);
 		const savedOrder = await Order.create(req.body);
 		return genericController.getObjectByType(res, savedOrder.constructor, savedOrder._id);
 	} catch (error) {

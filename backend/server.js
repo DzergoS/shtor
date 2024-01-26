@@ -1,21 +1,17 @@
-const express = require('express')
-const path = require('path')
-const HTTP = require('http')
-const cors = require('cors')
-const cookieParser = require('cookie-parser')
-const connectToDB = require('./config/db')
-const genericRouter = require('./routes/index')
-const checkFileExists = require("./utils/checkFileExists")
+const express = require('express'),
+      path = require('path'),
+      HTTP = require('http'),
+      cors = require('cors'),
+      cookieParser = require('cookie-parser'),
+      connectToDB = require('./config/db'),
+      genericRouter = require('./routes/index'),
+      checkFileExists = require('./utils/checkFileExists'),
+      { PORT, HOSTNAME, FRONTEND_ORIGIN } = require('./config')
 
-require('dotenv').config();
-
-
-const PORT = process.env.PORT;
-const HOSTNAME = process.env.HOSTNAME;
 
 
 const corsOptions = {
-  origin: process.env.FRONTEND_ORIGIN,
+  origin: FRONTEND_ORIGIN,
   credentials: true,
   optionSuccessStatus: 200,
 }
