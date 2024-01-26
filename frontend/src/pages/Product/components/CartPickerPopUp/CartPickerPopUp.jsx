@@ -42,7 +42,7 @@ const CartPickerPopUp = ({ popUpSlider, setPopUpSlider, currentSlide, currentVar
 					isQuantityPicker
 				/>
 				: <div className="popup-image__container">
-					<ProductImage className="popup-image" imageName={images[currentSlide]}/>
+					<ProductImage className="popup-image" imageName={product?.variations?.[currentVariationIndex]?.images?.[0] || images?.[0]}/>
 				</div>
 			}
 			<div className="popup-quantity__container">

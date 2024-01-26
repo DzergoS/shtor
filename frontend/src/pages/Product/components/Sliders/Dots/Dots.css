@@ -63,6 +63,15 @@
     visibility: hidden;
 }
 
+.product-info .cart__pop-up .dots-slider {
+    top: -28px;
+}
+.product-info .cart__pop-up .dots-slider .dots-slider__dot {
+    width: 6px;
+    height: 6px;
+    margin: 0 4px;
+}
+
 @media (max-width: 768px) {
     .product-info .dots-slider .dots-slider__dot {
         width: 6px;

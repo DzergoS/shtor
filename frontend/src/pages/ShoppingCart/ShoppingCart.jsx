@@ -11,11 +11,11 @@ const ShoppingCart = () => {
 	const {state: {cart, lang}} = useAPI()
 
 	const orderPrice = cart.reduce((accumulator, currentObject) => {
-		return accumulator + (currentObject.price[lang] * currentObject.quantity);
+		return accumulator + (currentObject?.price?.[lang] * currentObject?.quantity);
 	}, 0);
 
 
-	const orderDesc = cart.map(({ name, quantity }) => `${name[lang]} x${quantity}`).join(' ')
+	const orderDesc = cart?.map(({ name, quantity }) => `${name[lang]} x${quantity}`).join(' ')
 	console.log('cart', cart)
 
 	const Options = {

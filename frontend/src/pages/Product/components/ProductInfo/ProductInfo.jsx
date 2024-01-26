@@ -75,7 +75,7 @@ const ProductInfo = ({
     }))
 
     const [isAddingAnimation, setIsAddingAnimation] = useState(false);
-    const addToCart = (quantity) => {
+    const addToCart = (quantity, image) => {
         setIsAddingAnimation(true)
         setTimeout(() => {
             setIsAddingAnimation(false)
@@ -90,8 +90,8 @@ const ProductInfo = ({
         if (!isMaterialInVariations && currentMaterial) pickedProduct.material = currentMaterial
         if (!isAttachmentInVariations && currentAttachment) pickedProduct.attachment = currentAttachment
         if (!isSeashellsInProduct && currentImage) pickedProduct.image = currentImage
-        if (isSeashellsInProduct && currentSeashell) pickedProduct.seashell = currentSeashell
 
+        if (isSeashellsInProduct) pickedProduct = {...product, images: [image]}
         dispatch({
             type: ADD_PRODUCT,
             payload: {...pickedProduct, quantity}
