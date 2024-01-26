@@ -52,20 +52,15 @@ const ProductForm = ({ type }) => {
 				const allImages = [];
 
 				if (form?.images) form.images.map((image) => allImages.push(image))
-				console.log('form', form)
-				console.log('variation', variation)
 				if (form?.variations?.length && variation?.images) {
-					console.log('flex?')
 					form.variations.map(({images}) => {
 						if (images && images.length) images.map((image) => allImages.push(image));
 						return variation;
 					})
 				}
 
-				console.log('allImages', allImages)
 				const uploadPromises = allImages.map(uploadImage);
 				const responses = await Promise.all(uploadPromises);
-				console.log('responses', responses)
 
 				const newForm = {...form};
 				if (newForm?.images) newForm.images = newForm.images.map((image) => responses.find(responseFile => image.name === responseFile.originalname).filename)
@@ -74,10 +69,9 @@ const ProductForm = ({ type }) => {
 					images: variation.images.map(image => responses.find(responseFile => image.name === responseFile.originalname).filename)
 				}))
 
-				console.log('newForm', newForm)
 
 				const response = isAdding ? await api.admin.products.add(newForm) : await api.admin.products.edit(newForm)
-				console.log(response)
+
 				alert(isAdding ? 'Товар успішно додан до бази' : 'Товар успішно змінен')
 			} catch (e) {
 				console.error(e)
@@ -208,7 +202,6 @@ const ProductForm = ({ type }) => {
 		return <Input {...inputProps} />
 	};
 
-	console.log(form)
 	const renderVariation = (key, value, variationIndex, keyIndex) => {
 		let content;
 

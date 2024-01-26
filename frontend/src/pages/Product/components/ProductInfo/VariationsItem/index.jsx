@@ -11,17 +11,10 @@ const VariationsItem = ({variations, currentVariation, setCurrentOption, isInVar
 	if (!variations || variations.length <= 1) return null;
 	if (name === 'size' && variations?.length > 1 && isInVariations) return;
 
-	console.log('name', name)
-	console.log('isInVariations', isInVariations)
 	return (
 		<ul className={`variation ${name}`}>
 			{variations.map((variation, index) => {
 				const value = typeof variation === 'object' ? variation[0] : variation
-				if (name === 'seashell') {
-					console.log('`#${index + 1}`', `#${index + 1}`)
-					console.log('value', value)
-					console.log('currentVariation', currentVariation)
-				}
 				return (
 					<li key={variation}>
 						<CustomRadio

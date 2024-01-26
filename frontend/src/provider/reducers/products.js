@@ -11,7 +11,7 @@ const productsReducer = (state, action) => {
 			return {
 				...state,
 				allProducts: action.payload,
-				productsToShow: action.payload.reduce((accumulator, currentObject) => {
+				productsToShow: action.payload?.reduce((accumulator, currentObject) => {
 					const { _id } = currentObject
 					currentObject.link = `/${currentObject._id}`
 					if (PRODUCTS_TO_SPREAD_VARIATIONS_FOR_LIST.includes(currentObject?.name?.ua || currentObject?.name?.en))

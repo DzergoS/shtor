@@ -26,6 +26,14 @@
     right: 40px;
 }
 
+.product-info .slider-container.popup-slider {
+    min-width: initial;
+    max-width: initial;
+}
+.product-info .slider-container.popup-slider .slider-button {
+    display: none !important;
+}
+
 @media (min-width: 769px) {
     .product-info .slider-container {
         min-width: 508px;

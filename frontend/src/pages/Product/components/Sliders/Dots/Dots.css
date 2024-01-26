@@ -1,7 +1,7 @@
 .product-info .dots-slider {
     position: relative;
     top: -64px;
-    z-index: 1000;
+    z-index: 0;
     margin: 0 auto;
     height: 0;
     width: fit-content;

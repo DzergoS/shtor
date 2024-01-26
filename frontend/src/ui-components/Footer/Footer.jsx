@@ -21,11 +21,11 @@ const Footer = () => {
 	const onChange = (e) => {
 		const inputEmail = e.target.value;
 		var errorMessage = null;
-	  
+
 		if (inputEmail.trim() !== '' && !isValidEmail(inputEmail)) {
 		  errorMessage = 'Email is invalid';
 		}
-	  
+
 		setError(errorMessage);
 		setEmail(inputEmail);
 	};
@@ -33,12 +33,12 @@ const Footer = () => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		setError(null);
-	
+
 		if (isValidEmail(email)) {
 		  try {
 			const response = await reqSubscribe()
-	
-			console.log('Subscribe successful:', response);
+
+			// console.log('Subscribe successful:', response);
 		  } catch (error) {
 			console.error('Subscribe failed:', error);
 		  }

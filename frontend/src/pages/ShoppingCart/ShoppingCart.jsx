@@ -16,8 +16,7 @@ const ShoppingCart = () => {
 
 
 	const orderDesc = cart.map(({ name, quantity }) => `${name[lang]} x${quantity}`).join(' ')
-	
-	console.log();
+	console.log('cart', cart)
 
 	const Options = {
         options: {
@@ -53,23 +52,23 @@ const ShoppingCart = () => {
 		const script = document.createElement('script');
 		script.src = 'https://pay.fondy.eu/latest/checkout-vue/checkout.js';
 		script.async = true;
-	
+
 		script.onload = () => {
 		  const fondy = window.fondy;
 		  fondy("#checkout-container", Options);
 		};
-	
+
 		document.body.appendChild(script);
-	
+
 		return () => {
 		  document.body.removeChild(script);
 		};
 	  };
-	
+
 	  useEffect(() => {
 		loadFondyScript();
-	  }, []); 
-	
+	  }, []);
+
 	  const onCheckoutClick = () => {
 		const fondy = window.fondy;
 		fondy("#checkout-container", Options);
@@ -89,7 +88,7 @@ const ShoppingCart = () => {
 					<CartTotal sumOfPrices={orderPrice} checkoutOnClick={onCheckoutClick}/>
 
 				</div>
-				
+
 				<div id="checkout-container"></div>
 
 			</div>

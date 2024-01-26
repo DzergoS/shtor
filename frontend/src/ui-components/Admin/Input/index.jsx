@@ -72,7 +72,6 @@ const Input = ({label, type, disabled, onChange, value, multiple, prefix, error}
 			const files = Array.from(e.dataTransfer.files);
 			// Filter only image files if needed
 			const imageFiles = files.filter((file) => file.type.startsWith('image/'));
-			console.log('imageFiles', imageFiles)
 
 			onChange(custom(multiple ? [...value, ...imageFiles] : [imageFiles[0]]));
 		};
@@ -81,7 +80,6 @@ const Input = ({label, type, disabled, onChange, value, multiple, prefix, error}
 			const files = Array.from(e.target.files);
 			// Filter only image files if needed
 			const imageFiles = files.filter((file) => file.type.startsWith('image/'));
-			console.log('imageFiles', imageFiles)
 
 			onChange(custom(multiple ? [...value, ...imageFiles] : [imageFiles[0]]));
 		};

@@ -13,6 +13,7 @@ const getFileNameAndExtension = (fullFileName) => {
 const ProductImage = ({ imageName = '', ...props }) => {
 	const [imageExists, setImageExists] = useState(true);
 
+	console.log('imageName', imageName)
 	const desktopSrc = addFolderLocation(imageName);
 
 	const { fileName, fileExtension } = getFileNameAndExtension(imageName);

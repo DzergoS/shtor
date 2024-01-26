@@ -11,9 +11,6 @@ const ProductItem = ({product}) => {
 	const { state: { lang } } = useAPI()
 	const { group, price, variations, link } = product
 
-	console.log('product', product)
-	console.log('product', product?.images)
-
 	return (
 		<Link to={link} className="product-list__item">
 

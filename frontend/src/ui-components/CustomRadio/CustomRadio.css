@@ -29,6 +29,6 @@
     background-color: transparent;
     transition: .3s;
 }
-.custom-radio input:checked + .custom-radio__switch::before {
+.custom-radio.checked .custom-radio__switch::before {
     background-color: black;
 }

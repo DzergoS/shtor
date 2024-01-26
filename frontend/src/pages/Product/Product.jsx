@@ -5,17 +5,14 @@ import ProductInfo from "./components/ProductInfo/ProductInfo";
 import Scroller from "./components/Scroller/Scroller";
 import {useEffect, useState} from "react";
 import useAPI from "../../provider/useAPI";
-import {useParams} from "react-router-dom";
 import capitalizeFirstLetter from "../../utils/capitalizeFirstLetter";
 import getDefaultOptions from "../../utils/getDefaultOptions";
 import getSortedAttachmentsProduct from "../../utils/getSortedVariationProduct";
-import CartPickerPopUp from "./components/CartPickerPopUp/CartPickerPopUp";
 
 const Product = ({match}) => {
 
 	const {params: { id, variationIndex }} = match
 	const [currentVariationIndex, setCurrentVariationIndex] = useState(variationIndex ? Number(variationIndex) : 0)
-	const [showPicker, setShowPicker] = useState(false);
 
 	const {state: { lang, products: { allProducts } }} = useAPI()
 
@@ -51,7 +48,6 @@ const Product = ({match}) => {
 				setCurrentVariationIndex={setCurrentVariationIndex}
 			/>
 			<Scroller/>
-			{/* <CartPickerPopUp product={product} currentOptions={currentOptions} showPicker={showPicker} setShowPicker={setShowPicker} /> */}
 		</>
 	);
 };

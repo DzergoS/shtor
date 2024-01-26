@@ -93,7 +93,6 @@ const List = ({type}) => {
 	if (type === ATTACHMENTS) {
 		const saveAttachments = (e) => {
 			e.preventDefault();
-			console.log('request', data)
 			api.admin.attachments.save(data)
 				.then(({data: {data: response}}) => {
 					alert('Підвіси збережені')

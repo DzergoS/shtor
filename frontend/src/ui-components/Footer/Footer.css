@@ -18,6 +18,7 @@
 
 .footer .email-input {
     position: relative;
+    z-index: -1;
 }
 
 .footer .email-input .icon-img {

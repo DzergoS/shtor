@@ -39,12 +39,12 @@ const CartProducts = () => {
 		<div className="cart-products">
 			{cart.map((item, index) => (
 				<div className="cart-product" key={index}>
-					<ProductImage src={getProductImageName(item)} alt="product" className="cart-product__img"/>
+					<ProductImage imageName={getProductImageName(item)} alt="product" className="cart-product__img"/>
 					<div className="cart-product-desc">
 						{!isMobile
 							? <>
 								<h4 className="cart-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
-								<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong></p>
+								<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color ? `/ ${item.color}` : "" }</p>
 								<div className="cart-product__quantity">
 									{translations.cart.quantity[lang]}
 									<div className="cart-product__quantity-label">
@@ -58,7 +58,7 @@ const CartProducts = () => {
 							: <>
 								<div className="top">
 									<h4 className="cart-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
-									<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong></p>
+									<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color ? `/ ${item.color}` : "" }</p>
 								</div>
 								<div className="bottom">
 									<div className="cart-product__quantity">

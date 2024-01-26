@@ -252,7 +252,7 @@ export const translations = {
 		addToCart: {
 			ua: 'Додати у кошик',
 			en: 'Add to cart'
-		}
+		},
 	},
 	cart: {
 		title: {

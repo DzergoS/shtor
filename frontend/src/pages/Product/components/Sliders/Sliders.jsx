@@ -7,6 +7,11 @@ import ProductImage from "ui-components/ProductImage";
 import calculateIsAnimationDirection from "utils/calculateIsAnimationDirection";
 import Dots from "./Dots/Dots";
 import ThumbNails from "./ThumbNails/ThumbNails";
+import useAPI from "../../../../provider/useAPI";
+import {DECREMENT_PRODUCT, DELETE_PRODUCT, INCREMENT_PRODUCT} from "../../../../provider/actions/cart";
+import {translations} from "../../../../info";
+import product from "../../Product";
+import {getSeashellIndex} from "../../../../utils/getImageIndexInVariation";
 
 const Arrow = ({ direction, ...props }) => (
 	<button {...props} className={`slider-button ${direction}-button`}>
@@ -18,12 +23,11 @@ const NextArrow = (props) => <Arrow direction="next" {...props} />;
 const PrevArrow = (props) => <Arrow direction="prev" {...props} />;
 
 
-const Sliders = ({ slider, setSlider, slides, initialSlide, setCurrentVariationIndex }) => {
+const Sliders = ({ slider, setSlider, slides, initialSlide, setCurrentVariationIndex, isQuantityPicker, isSeashell, currentSlide, setCurrentSlide, seashells }) => {
 
 	const slider1 = useRef(null);
 	useEffect(() => setSlider(slider1.current), []);
 
-	const [currentSlide, setCurrentSlide] = useState(initialSlide)
 	const [animation, setAnimation] = useState({back: [], forth: []})
 	const { back, forth } = animation
 
@@ -57,10 +61,13 @@ const Sliders = ({ slider, setSlider, slides, initialSlide, setCurrentVariationI
 	}), [slides?.length])
 
 	const goToSlide = (slideIndex) => currentSlide !== slideIndex && slider.slickGoTo(slideIndex)
-	console.log('back', back)
-	console.log('forth', forth)
+	const thumbnailsComponent = useMemo(() =>
+		<ThumbNails isQuantityPicker={isQuantityPicker} slides={isQuantityPicker && isSeashell ? seashells?.map(item => item[0]) : slides} goToSlide={goToSlide} currentSlide={currentSlide}/>
+		,
+		[seashells, isQuantityPicker, slides, currentSlide])
+
 	return (
-		<div className="slider-container">
+		<div className={`slider-container ${isQuantityPicker ? 'popup-slider' : ""}`}>
 			{slides?.length
 				? <>
 					<Slider{...settings} ref={slider1}>
@@ -75,7 +82,13 @@ const Sliders = ({ slider, setSlider, slides, initialSlide, setCurrentVariationI
 						goToSlide={goToSlide}
 						currentSlide={currentSlide}
 					/>
-					<ThumbNails slides={slides} goToSlide={goToSlide} currentSlide={currentSlide}/>
+					{isQuantityPicker && isSeashell ? <h4 className="seashell-title">Your seashell</h4> : ""}
+					{isQuantityPicker
+						? isSeashell
+							? thumbnailsComponent
+							: ""
+						: thumbnailsComponent}
+
 				</>
 				: ""}
 		</div>
