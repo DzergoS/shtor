@@ -119,6 +119,9 @@
     cursor: pointer;
     text-transform: initial;
 }
+.cart-container .pay:hover {
+    background-color: #222;
+}
 .billing-address button,
 .shipping-method button {
     width: 100%;
@@ -203,5 +206,26 @@
     }
     .cart-container .double input {
         width: 100%;
+    }
+    .part h3 {
+        color: #000;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .part input {
+        color: rgba(58, 58, 58, 0.80);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+    }
+    .billing-address button, .shipping-method button {
+        color: #000;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
     }
 }
