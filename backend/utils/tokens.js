@@ -1,9 +1,5 @@
-const crypto = require('crypto');
-
-require('dotenv').config();
-
-
-const SECRET_KEY = process.env.JWT_SECRET
+const crypto = require('crypto'),
+      { SECRET_KEY } = require('../config')
 
 
 function generateActivationToken(userId) {

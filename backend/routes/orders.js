@@ -1,7 +1,22 @@
 const express = require('express'),
 	orderRouyter = express.Router(),
-	orderController = require("../controllers/order");
+	orderController = require('../controllers/order'),
+	sendResponse = require('../utils/response'),
+	{ sendOrderDetails } = require('../services/email')
 
 orderRouyter.post('/create', orderController.createOrder)
+
+orderRouyter.get('/send', async (req, res) => {
+	email = req.body.email
+
+	// try {
+    //     await sendOrderDetails(email)
+    // } catch (error) {
+    //     return sendResponse(res, 500, false, {}, 'Error sending activation email. Try again later')
+    // }
+
+	await sendOrderDetails(email)
+    return sendResponse(res, 200, true, {}, `Order details sent on ${email}. Thank You for purchase!`)
+});
 
 module.exports = orderRouyter;

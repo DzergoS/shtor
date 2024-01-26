@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activate Your Subscription</title>
+</head>
+<body style="width: fit-content; font-weight: 600; font-size: 14px; line-height: 20px;">
+  <div style="text-align: center; filter: invert(1);">
+    <img src="cid:shtorlogo"/>
+  </div>
+  <h4>Thank you for purchase!</h4>
+  <p>Dear <%= email %>!</p>
+  <p>Your order has been placed successfully. We thank you for your purchase and your confidence.</p>
+  <p style="font-size: 16px;">Your order details are:</p>
+  <p>
+    <%= products.length %>
+    <% if (products.length === 1) { %>
+        item
+    <% } else { %>
+        items
+    <% } %>
+  </p>
+  
+  <% products.forEach(function(product) { %>
+    <div>
+    </div>
+    <div>
+        <img src="<%= product.image_src %>"/>
+    </div>
+    <div>
+        <div><%= product.name.en %></div>
+        <div>$<%= product.price.en %></div>
+    </div>
+  <% }); %>
+  <div>
+        <div>Shipping</div>
+        <div>$<%= shipping_price %></div>
+  </div>
+  <div>
+    <div>TOTAL</div>
+    <div>$<%= amount %></div>
+  </div>
+  <p>If you have any questions or need assistance, feel free to contact us.</p>
+  <p>Best regards,<br>Shtor Team!</p>
+</body>
+</html>
