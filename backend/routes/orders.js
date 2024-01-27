@@ -7,7 +7,7 @@ const express = require('express'),
 orderRouyter.post('/create', orderController.createOrder)
 
 orderRouyter.get('/send', async (req, res) => {
-	email = req.body.email
+	const { email } = req.body;
 
 	// try {
     //     await sendOrderDetails(email)

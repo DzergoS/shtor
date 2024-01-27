@@ -27,9 +27,9 @@ const CartProductQuantityLabel = ({item}) => {
 			<div className="cart-product__quantity">
 				{translations.cart.quantity[lang]}
 				<div className="cart-product__quantity-label">
-					<button className="minus" onClick={() => onChangeQuantity(item._id, MINUS)}>-</button>
+					<button className="minus" onClick={() => onChangeQuantity(item, MINUS)}>-</button>
 					{item.quantity}
-					<button className="plus"  onClick={() => onChangeQuantity(item._id, PLUS)}>+</button>
+					<button className="plus"  onClick={() => onChangeQuantity(item, PLUS)}>+</button>
 				</div>
 			</div>
 			<div className="price">{currency}{item.price[lang] * item.quantity}</div>

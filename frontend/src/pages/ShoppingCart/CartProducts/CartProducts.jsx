@@ -21,15 +21,11 @@ const CartProducts = () => {
 
 	const {state: {cart, lang, products: {allProducts}}, dispatch} = useAPI();
 
-	const onChangeQuantity = (_id, sign) => dispatch({
+	const onChangeQuantity = (item, sign) => dispatch({
 		type: sign === 'MINUS' ? DECREMENT_PRODUCT : INCREMENT_PRODUCT,
-		payload: _id,
+		payload: item,
 	});
 
-	const deleteProductFromCart = (_id) => dispatch({
-		type: DELETE_PRODUCT,
-		payload: _id,
-	})
 	const currency = translations.product.currency[lang]
 	const formatDesc = (description) => description[description?.length - 1] === '.'
 		? description.slice(0, -1)
@@ -42,13 +38,17 @@ const CartProducts = () => {
 			{cart.map((item, index) => (
 				<div className="cart-product" key={index}>
 					<div className="custom-img">
-						<ProductImage imageName={item?.image || item?.images?.[0]} alt="product" className="cart-product__img"/>
+						<ProductImage imageName={item?.image} alt="product" className="cart-product__img"/>
 					</div>
 					<div className="cart-product-desc">
 						{!isMobile
 							? <>
 								<h4 className="cart-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
-								<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color?.length ? `/ ${item.color}` : "" }</p>
+								<p className="cart-product__desc">
+									{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>
+									{item?.color?.length ? `/ ${item.color}` : "" }
+									{item?.attachment ? `/ ${item.attachment}` : "" }
+								</p>
 								<div className="cart-product__quantity">
 									<div className="cart-product__quantity-label">
 										<button className="minus" onClick={() => onChangeQuantity(item._id, MINUS)}>-</button>

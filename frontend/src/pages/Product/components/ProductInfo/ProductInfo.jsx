@@ -92,10 +92,11 @@ const ProductInfo = ({
         if (!isMaterialInVariations && currentMaterial) pickedProduct.material = currentMaterial
         if (!isAttachmentInVariations && currentAttachment) pickedProduct.attachment = currentAttachment
         if (!isSeashellsInProduct && currentImage) pickedProduct.image = currentImage
-        if (!isImagesInVariations) pickedProduct.images = product.images
+        if (!isImagesInVariations) pickedProduct.image = product.images[0]
 
         console.log('seashellIdx', seashellIdx)
         if (isSeashellsInProduct) pickedProduct.image = product.seashells[seashellIdx][0]
+        if (!pickedProduct?.image) pickedProduct.image = pickedProduct.images[0]
         console.log('pickedProduct', pickedProduct)
         dispatch({
             type: ADD_PRODUCT,

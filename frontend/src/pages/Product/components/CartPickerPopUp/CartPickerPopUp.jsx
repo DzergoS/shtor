@@ -5,7 +5,6 @@ import {ReactComponent as Cross} from "../../../../assets/cross.svg";
 import Sliders from "../Sliders/Sliders";
 import {isProductToSetVariationBySliding} from "../ProductInfo/filters";
 import useAPI from "../../../../provider/useAPI";
-import {DECREMENT_PRODUCT, DELETE_PRODUCT, INCREMENT_PRODUCT} from "../../../../provider/actions/cart";
 import {translations} from "../../../../info";
 import ProductImage from "../../../../ui-components/ProductImage";
 import CheckIcon from "@mui/icons-material/Check";

@@ -1,27 +1,55 @@
-const { Schema, model } = require('mongoose');
+const {Schema, model} = require('mongoose');
+
+const baseAddressFields = (required) => ({
+	countryRegion: {type: String, required},
+	firstName: {type: String, required},
+	lastName: {type: String, required},
+	address: {type: String, required},
+	additional: {type: String, required},
+	postalCode: {type: String, required},
+	city: {type: String, required},
+	phone: {type: String, required},
+})
 
 const orderSchema = new Schema({
-  currency: { type: String, enum: ['UAH', 'USD'], required: true},
-  amount: { type: Number, min: 0, required: true },
-  orderDescription: { type: String, required: true },
-  language: { type: String, enum: ['en', 'uk'], required: true},
-  email: { type: String, required: true },
-  products: [{
-    product: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
-    quantity: { type: Number, required: true, min: 1 }
-  }],
-  shippingInfo: {
-    type: { type: String, enum: ['Ukraine', 'International'], required: true },
-    fullName: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
-    city: { type: String, required: true },
-    address: { type: String, required: true },
-    price: { type: Number, required: true },
-    state: { type: String },
-    country: { type: String },
-    postalCode: { type: String },
-  },
-  createdAt: { type: Date, default: Date.now }
+	currency: {type: String, enum: ['UAH', 'USD'], required: true},
+	amount: {type: Number, min: 0, required: true},
+	orderDescription: {type: String, required: true},
+	language: {type: String, enum: ['en', 'uk'], required: true},
+	email: {type: String},
+	order_id: {type: String, required: true},
+	products: [{
+		group: {type: String, required: true,},
+		name: {
+			en: {type: String},
+			ua: {type: String}
+		},
+		description: {
+			en: {type: String},
+			ua: {type: String}
+		},
+		price: {
+			en: {type: Number, min: 0},
+			ua: {type: Number, min: 0},
+		},
+		color: [{type: String}],
+		size: [{type: String}],
+		image: [{type: String}],
+		attachment: {type: String},
+		material: {type: String},
+		quantity: {type: Number, required: true, min: 1},
+	}],
+	shippingInfo: {
+		type: {type: String, enum: ['Ukraine', 'International'], required: true},
+		...baseAddressFields(true),
+	},
+	billingAddress: {
+		...baseAddressFields(false),
+	},
+	paymentDetails: {
+		type: Object,
+	},
+	createdAt: {type: Date, default: Date.now}
 });
 
 const Order = model('Order', orderSchema);

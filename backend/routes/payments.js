@@ -1,6 +1,7 @@
 const express = require('express'),
     paymentRouter = express.Router(),
     sendResponse = require('../utils/response');
+const {Order} = require("../models");
 
 
 const fondyPassword = 'test'
@@ -20,8 +21,31 @@ const orderedKeys = Object.keys(orderBody).sort((a, b) => {
 
 const signatureRow = orderedKeys.map((v) => orderBody[v]).join('|')
 
+// Function to update the paymentDetails based on order_id
+async function updatePaymentDetails(paymentDetails) {
+    try {
+        // Find the order by order_id and update the paymentDetails field
+        const updatedOrder = await Order.findOneAndUpdate(
+            { order_id: paymentDetails.order_id },
+            { $set: { paymentDetails } },
+            { new: true } // To return the updated document
+        );
+
+        if (!updatedOrder) {
+            console.log('Order not found');
+            return null;
+        }
+
+        console.log('Payment details updated successfully:', updatedOrder);
+        return updatedOrder;
+    } catch (error) {
+        console.error('Error updating payment details:', error);
+        throw error;
+    }
+}
+
 paymentRouter.get('/', async (req, res) => {
-    data = req.body
+    const { data } = req.body
     console.log(data);
     // const signature = crypto.createHash('sha1')
     // signature.update(`${fondyPassword}|${signatureRow}`)
@@ -32,6 +56,7 @@ paymentRouter.get('/', async (req, res) => {
     //     }
     // })
 
+    await updatePaymentDetails(data);
     return sendResponse(res, 200, true, { data }, '')
 });
 

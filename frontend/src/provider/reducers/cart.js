@@ -5,23 +5,33 @@ import {
 	DECREMENT_PRODUCT
 } from "provider/actions/cart";
 
+function areSimilarExceptQuantity(obj1, obj2) {
+	const keys1 = Object.keys(obj1).filter(key => key !== 'quantity');
+	const keys2 = Object.keys(obj2).filter(key => key !== 'quantity');
+
+	if (keys1.length !== keys2.length || !keys1.every(key => keys2.includes(key))) {
+		return false; // Different keys, not similar
+	}
+	return keys1.every(key => obj1[key] === obj2[key]);
+}
+
 const cartReducer = (state, action) => {
 	switch (action.type) {
 		case INCREMENT_PRODUCT:
 			return state.map(item =>
-				item._id === action.payload
+				item === action.payload
 					? { ...item, quantity: item.quantity + 1 }
 					: item
 			);
 		case DECREMENT_PRODUCT:
 			return state.map(item =>
-				item._id === action.payload
+				item === action.payload
 					? { ...item, quantity: item.quantity - 1 }
 					: item
 			).filter(item => item.quantity); // Filter out items with quantity equal to 1
 
 		case ADD_PRODUCT:
-			const existingProductIndex = state.findIndex(item => item._id === action.payload._id);
+			const existingProductIndex = state.findIndex(item => areSimilarExceptQuantity(item, action.payload));
 			if (existingProductIndex !== -1) {
 				console.log('action.payload', action.payload)
 				return state.map((item, index) => ({
