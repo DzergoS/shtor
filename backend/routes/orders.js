@@ -19,4 +19,13 @@ orderRouyter.get('/send', async (req, res) => {
     return sendResponse(res, 200, true, {}, `Order details sent on ${email}. Thank You for purchase!`)
 });
 
+orderRouyter.get('/sendTrackNumber', async (req, res) => {
+	const { trackNumber, email } = req.body;
+
+	//TODO: add trackNumber email with template
+
+	// await sendOrderDetails(email)
+    return sendResponse(res, 200, true, {}, `Order details sent on ${email}. Thank You for purchase!`)
+});
+
 module.exports = orderRouyter;
