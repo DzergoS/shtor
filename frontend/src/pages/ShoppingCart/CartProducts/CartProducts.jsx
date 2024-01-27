@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import useAPI from "provider/useAPI";
 import {
 	DECREMENT_PRODUCT,
@@ -19,7 +19,7 @@ const PLUS = 'PLUS'
 
 const CartProducts = () => {
 
-	const {state: {cart, lang}, dispatch} = useAPI();
+	const {state: {cart, lang, products: {allProducts}}, dispatch} = useAPI();
 
 	const onChangeQuantity = (_id, sign) => dispatch({
 		type: sign === 'MINUS' ? DECREMENT_PRODUCT : INCREMENT_PRODUCT,
@@ -42,7 +42,7 @@ const CartProducts = () => {
 			{cart.map((item, index) => (
 				<div className="cart-product" key={index}>
 					<div className="custom-img">
-						<ProductImage imageName={getProductImageName(item)} alt="product" className="cart-product__img"/>
+						<ProductImage imageName={item?.image || item?.images?.[0]} alt="product" className="cart-product__img"/>
 					</div>
 					<div className="cart-product-desc">
 						{!isMobile

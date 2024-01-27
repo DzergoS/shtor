@@ -61,11 +61,12 @@ const Sliders = ({ slider, setSlider, slides, initialSlide, setCurrentVariationI
 	}), [slides?.length])
 
 	const goToSlide = (slideIndex) => currentSlide !== slideIndex && slider.slickGoTo(slideIndex)
-	const thumbnailsComponent = useMemo(() =>
-		<ThumbNails isQuantityPicker={isQuantityPicker} slides={isQuantityPicker && isSeashell ? seashells?.map(item => item[0]) : slides} goToSlide={goToSlide} currentSlide={currentSlide}/>
-		,
-		[seashells, isQuantityPicker, slides, currentSlide])
-
+	const thumbnailsComponent = <ThumbNails
+			isQuantityPicker={isQuantityPicker}
+			slides={isQuantityPicker && isSeashell ? seashells?.map(item => item[0]) : slides}
+			goToSlide={goToSlide}
+			currentSlide={currentSlide}
+		/>
 	return (
 		<div className={`slider-container ${isQuantityPicker ? 'popup-slider' : ""}`}>
 			{slides?.length

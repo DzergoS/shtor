@@ -15,3 +15,9 @@ export const getSeashellIndex = (seashells, variationIndex) => {
 	}
 	return -1;
 };
+
+export const getSeashellVariationsIndxBySlide = (seashells, currentSlide) => {
+	const images = seashells.flatMap(shells => shells)
+	const findSeashell = images.find((img, idx) => idx === currentSlide)
+	return seashells.findIndex(shells => shells.find(shell => shell === findSeashell))
+};

@@ -19,14 +19,10 @@ const ProductInfo = ({
      product, currentOptions, setCurrentOptions,
      currentVariationIndex, setCurrentVariationIndex, productText,
 }) => {
-    const {state: { lang }, dispatch} = useAPI()
+    const {state: { lang, cart }, dispatch} = useAPI()
     const [slider, setSlider] = useState(null)
     const [popUpSlider, setPopUpSlider] = useState();
     const [showPicker, setShowPicker] = useState(false);
-
-    const initialSlide = getImageIndexInVariation(currentVariationIndex) === -1 ? 0 : getImageIndexInVariation(currentVariationIndex)
-    console.log('initialSlide', initialSlide)
-    const [currentSlide, setCurrentSlide] = useState(initialSlide)
 
     const images = useMemo(() => ([
         ...(product?.variations?.flatMap(variant => variant?.images) || []),
@@ -35,6 +31,12 @@ const ProductInfo = ({
     ]), [product]);
 
     const { group, size, color, seashells, variations } = product || {};
+
+    const initialSlide = getImageIndexInVariation(variations, currentVariationIndex) === -1
+        ? 0
+        : getImageIndexInVariation(variations, currentVariationIndex)
+
+    const [currentSlide, setCurrentSlide] = useState(initialSlide)
 
     const getVariationsProperty = (property, fallbackProperty) => product
         ? variations?.[0]?.[property]
@@ -75,7 +77,7 @@ const ProductInfo = ({
     }))
 
     const [isAddingAnimation, setIsAddingAnimation] = useState(false);
-    const addToCart = (quantity, image) => {
+    const addToCart = (quantity, seashellIdx) => {
         setIsAddingAnimation(true)
         setTimeout(() => {
             setIsAddingAnimation(false)
@@ -90,8 +92,11 @@ const ProductInfo = ({
         if (!isMaterialInVariations && currentMaterial) pickedProduct.material = currentMaterial
         if (!isAttachmentInVariations && currentAttachment) pickedProduct.attachment = currentAttachment
         if (!isSeashellsInProduct && currentImage) pickedProduct.image = currentImage
+        if (!isImagesInVariations) pickedProduct.images = product.images
 
-        if (isSeashellsInProduct) pickedProduct = {...product, images: [image]}
+        console.log('seashellIdx', seashellIdx)
+        if (isSeashellsInProduct) pickedProduct.image = product.seashells[seashellIdx][0]
+        console.log('pickedProduct', pickedProduct)
         dispatch({
             type: ADD_PRODUCT,
             payload: {...pickedProduct, quantity}
@@ -106,7 +111,7 @@ const ProductInfo = ({
             if (isImagesInVariations || (isSeashellsInProduct && key === 'seashell')) {
                 const slideIndex = isSeashellsInProduct ? getSeashellIndex(seashells, variationIndex) : getImageIndexInVariation(variations, variationIndex)
                 slider.slickGoTo(slideIndex);
-                popUpSlider.slickGoTo(slideIndex);
+                popUpSlider?.slickGoTo(slideIndex);
             }
         }
     };
@@ -114,6 +119,8 @@ const ProductInfo = ({
     const showImagePicker = product?.name?.en?.toLowerCase() === 'seashell pendant' || product?.name?.en?.toLowerCase() === 'seashell set'
     const productTitle = useMemo(() => `${group}/${title}`, [product, lang])
 
+
+    console.log('cart', cart)
 
     return (
         <div className="product-info">
@@ -177,7 +184,7 @@ const ProductInfo = ({
                         currentOptions={currentOptions}
                         initialSlide={initialSlide}
                         showPicker={showPicker}
-                        images={isSeashellsInProduct ? product?.seashells?.map(item => item?.[0]) : images}
+                        images={isSeashellsInProduct ? product?.seashells : images}
                         setShowPicker={setShowPicker}
                         setCurrentVariationIndex={setCurrentVariationIndex}
                         currentVariationIndex={currentVariationIndex}
