@@ -8,6 +8,9 @@ a {
     margin-top: 43px;
     margin-bottom: 32px;
 }
+.breadCrumbs .no-link {
+    color: #000;
+}
 
 .homeBtn {
     font-weight: 400;

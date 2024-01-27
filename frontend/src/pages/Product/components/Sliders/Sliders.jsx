@@ -76,19 +76,26 @@ const Sliders = ({ slider, setSlider, slides, initialSlide, setCurrentVariationI
 							<ProductImage key={index} imageName={imageName} alt={`Slide ${index + 1}`}/>
 						))}
 					</Slider>
-					<Dots
-						backAnimation={back.length}
-						forthAnimation={forth.length}
-						slidesLength={slides.length}
-						goToSlide={goToSlide}
-						currentSlide={currentSlide}
-					/>
+					{slides.length > 1
+						? <>
+							<Dots
+								backAnimation={back.length}
+								forthAnimation={forth.length}
+								slidesLength={slides.length}
+								goToSlide={goToSlide}
+								currentSlide={currentSlide}
+							/>
+						</>
+						: ""
+					}
 					{isQuantityPicker && isSeashell ? <h4 className="seashell-title">Your seashell</h4> : ""}
-					{isQuantityPicker
-						? isSeashell
-							? thumbnailsComponent
-							: ""
-						: thumbnailsComponent}
+					{slides.length > 1
+						? isQuantityPicker
+							? isSeashell
+								? thumbnailsComponent
+								: ""
+							: thumbnailsComponent
+						: ""}
 
 				</>
 				: ""}

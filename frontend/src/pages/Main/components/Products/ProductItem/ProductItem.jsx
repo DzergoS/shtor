@@ -21,7 +21,7 @@ const ProductItem = ({product}) => {
 
 			<div className="product-list__item-info">
 
-				<h3>{group}/{capitalizeFirstLetter(getProductName(product, lang))} {product?.feature ? product.feature : ''}</h3>
+				<h3>{group}/{capitalizeFirstLetter(getProductName(product, lang))}</h3>
 
 				<p>{lang === 'ua' ? '₴' : '$'}{price?.[lang] || variations[0].price[lang]}</p>
 
