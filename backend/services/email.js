@@ -91,7 +91,9 @@ const ProductImagePath = path.join(__dirname, '../../productPhotos/');
 
 
 
-function getMailOptions(htmlContent, subject, productImagesAttachment = null) {
+function getMailOptions(
+    email, htmlContent,
+    subject, productImagesAttachment = null) {
   return {
     from: EMAIL_USER, 
     to: email,
@@ -125,7 +127,6 @@ function productImagesAttachment(products) {
 
 
 
-
 async function sendActivationEmail(userId, email) {
   const activationTemplate = path.join(emailTemplatesDir, 'activateSubscription.ejs');
   const templateContent = await fs.readFile(activationTemplate, 'utf-8');
@@ -136,7 +137,7 @@ async function sendActivationEmail(userId, email) {
   const htmlContent = ejs.render(templateContent, { email, activationLink });
 
   const mailOptions = getMailOptions(
-    htmlContent,
+    email, htmlContent,
     'Activate your subscription for shtor.com.ua'
   )
 
@@ -144,7 +145,7 @@ async function sendActivationEmail(userId, email) {
 }
 
 
-async function sendOrderDetails(email) {
+async function sendOrderDetails(email, products, shipping_price, amount) {
   const orderDetailsTemplate = path.join(emailTemplatesDir, '/orderDetails/en.ejs');
   const templateContent = await fs.readFile(orderDetailsTemplate, 'utf-8');
   
@@ -152,13 +153,13 @@ async function sendOrderDetails(email) {
 
   const htmlContent = ejs.render(
     templateContent,
-    { email, products, shipping_price: '30', amount: '110' }
+    { email, products, shipping_price, amount }
   );
 
 
 
   const mailOptions = getMailOptions(
-    htmlContent,
+    email, htmlContent,
     'Product order details purchased on shtor.com.ua',
     
   )

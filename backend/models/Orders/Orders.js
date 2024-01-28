@@ -5,7 +5,7 @@ const baseAddressFields = (required) => ({
 	firstName: {type: String, required},
 	lastName: {type: String, required},
 	address: {type: String, required},
-	additional: {type: String, required},
+	additional: {type: String},
 	postalCode: {type: String, required},
 	city: {type: String, required},
 	phone: {type: String, required},
@@ -18,6 +18,7 @@ const orderSchema = new Schema({
 	language: {type: String, enum: ['en', 'uk'], required: true},
 	email: {type: String},
 	order_id: {type: String, required: true},
+	approved: {type: Boolean, required: true, default: false},
 	products: [{
 		group: {type: String, required: true,},
 		name: {
@@ -34,7 +35,7 @@ const orderSchema = new Schema({
 		},
 		color: [{type: String}],
 		size: [{type: String}],
-		image: [{type: String}],
+		image: {type: String},
 		attachment: {type: String},
 		material: {type: String},
 		quantity: {type: Number, required: true, min: 1},
@@ -45,9 +46,6 @@ const orderSchema = new Schema({
 	},
 	billingAddress: {
 		...baseAddressFields(false),
-	},
-	paymentDetails: {
-		type: Object,
 	},
 	createdAt: {type: Date, default: Date.now}
 });

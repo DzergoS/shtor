@@ -23,11 +23,11 @@
     <% } %>
   </p>
   
-  <% products.forEach(function(product) { %>
+  <% products.forEach(function(product, index) { %>
     <div>
     </div>
     <div>
-        <img src="<%= product.image_src %>"/>
+        <img src="cid:product_<%= index %>}"/>
     </div>
     <div>
         <div><%= product.name.en %></div>

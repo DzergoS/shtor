@@ -67,11 +67,12 @@ const ShoppingCart = () => {
 			// merchant_id: 1538293,
 			merchant_id: 1396424,
 			order_id,
-			required_rectoken: 'y',
 			currency: lang === 'ua' ? 'UAH' : 'USD',
 			amount: (orderPrice + deliveryPrice) * 100,
+			// amount: 100,
 			order_desc: orderDesc,
 			lang: lang === 'ua' ? 'uk' : 'en',
+			response_url: 'http://localhost:3001/api/orders/send',
 		}
 	})
 
@@ -103,20 +104,20 @@ const ShoppingCart = () => {
 		const newOrderId = `shtor_order_${Date.now()}`;
 		if (!hasErrors) {
 			//TODO: TEST ADD NEW ORDER
-			// const newOrder = {
-			// 	currency: lang === 'ua' ? 'UAH' : 'USD',
-			// 	amount: orderPrice + deliveryPrice,
-			// 	orderDescription: orderDesc,
-			// 	language: lang === 'ua' ? 'uk' : 'en',
-			// 	products: cart,
-			//  order_id: newOrderId,
-			// 	shippingInfo: {
-			// 		type: isUAShipping ? 'Ukraine' : 'International',
-			// 		...deliveryDetails,
-			// 	},
-			// };
-			// if(!sameBillingDetails) newOrder.billindAddress = billingDetails;
-			// api.order.create(newOrder);
+			const newOrder = {
+				currency: lang === 'ua' ? 'UAH' : 'USD',
+				amount: orderPrice + deliveryPrice,
+				orderDescription: orderDesc,
+				language: lang === 'ua' ? 'uk' : 'en',
+				products: cart,
+			 order_id: newOrderId,
+				shippingInfo: {
+					type: isUAShipping ? 'Ukraine' : 'International',
+					...deliveryDetails,
+				},
+			};
+			if(!sameBillingDetails) newOrder.billindAddress = billingDetails;
+			api.order.create(newOrder);
 			const fondy = window.fondy;
 			fondy("#checkout-container", Options(newOrderId));
 			setIsPaying(true);

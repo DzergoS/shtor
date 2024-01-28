@@ -6,20 +6,7 @@ const {Order} = require("../models");
 
 const fondyPassword = 'test'
 
-const orderBody = {
-    merchant_id: '1396424',
-    order_id: 'ID41234534345',
-    order_desc: 'Підвіс мушля x1',
-    currency: 'USD',
-    amount: '1000'
-}
-const orderedKeys = Object.keys(orderBody).sort((a, b) => {
-    if (a < b) return -1;
-    if (a > b) return 1;
-    return 0;
-})
 
-const signatureRow = orderedKeys.map((v) => orderBody[v]).join('|')
 
 // Function to update the paymentDetails based on order_id
 async function updatePaymentDetails(paymentDetails) {
