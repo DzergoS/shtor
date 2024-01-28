@@ -1,56 +1,40 @@
 const express = require('express'),
 	orderRouter = express.Router(),
-	axios = require('axios'),
+	// axios = require('axios'),
 	orderController = require('../controllers/order'),
-	sendResponse = require('../utils/response'),
+	// sendResponse = require('../utils/response'),
 	{ HOSTNAME, PORT } = require('../config'),
 	{ Order } = require('../models'),
 	{ sendOrderDetails } = require('../services/email');
-
 
 
 const HOST = HOSTNAME === 'localhost' ? `${HOSTNAME}:${PORT}` : HOSTNAME
 const PROTOCOL = HOSTNAME === 'localhost' ? 'http' : 'https';
 
 
-
 orderRouter.post('/create', orderController.createOrder)
-// orderRouter.post('/create', async (req, res) => {
-// 	console.log(req.body)
-// 	return await orderController.createOrder(req)
-// 	// await(orderController.createOrder)
-// })
-
 
 orderRouter.post('/send', async (req, res) => {
-	// try {
-		const order = await Order.findOneAndUpdate(
-			{ order_id: req.body.order_id },
-			{ $set: { approved: true } },
-			{ new: true }
-		)
-	// } catch (error) {
-	// 	return sendResponse(res, 500, false, {}, `Error: ${error}`)
-	// }
-	
-	let shippingPrice;
-
-	if (order.shippingInfo.type === 'Ukrainian') {
-	  shippingPrice = 0;
-	} else if (order.language === 'uk') {
-	  shippingPrice = 1125;
-	} else {
-	  shippingPrice = 30;
-	}
-	
-
-	await sendOrderDetails(
-		order.email, order.products,
-		shippingPrice, order.amount
+	const order = await Order.findOneAndUpdate(
+		{ order_id: req.body.order_id },
+		{ $set: {
+			approved: true,
+			email: req.body.sender_email
+		}},
+		{ new: true }
 	)
 
-	const redirectWithMessage = `${PROTOCOL}://${HOST}/thankyoupage`;
-	return res.redirect(redirectWithMessage);
+	await sendOrderDetails(
+		order.language,
+		order.email,
+		order.products,
+		order.currency,
+		order.amount,
+		order.shippingInfo.delivery_price
+	)
+
+	const thankYouPagePath = `${PROTOCOL}://${HOST}/thankyoupage`;
+	return res.redirect(thankYouPagePath);
 
     // const requestData = {
     //     request: {
@@ -74,6 +58,5 @@ orderRouter.post('/send', async (req, res) => {
     //     return sendResponse(res, 500, false, {}, `Error: ${error}`)
     // }
 })
-
 
 module.exports = orderRouter

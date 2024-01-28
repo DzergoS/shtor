@@ -113,7 +113,7 @@ const ShoppingCart = () => {
 			 	order_id: newOrderId,
 				shippingInfo: {
 					type: isUAShipping ? 'Ukraine' : 'International',
-					deliveryPrice,
+					delivery_price: deliveryPrice,
 					...deliveryDetails,
 				},
 			};

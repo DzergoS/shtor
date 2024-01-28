@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const server = axios.create({
-	// baseURL: 'https://shtor.com.ua/api',
 	baseURL: 'https://shtor.com.ua/api',
+	// baseURL: 'http://localhost:3001/api',
 	headers: {
 		'Content-Type': 'application/json',
 	},
@@ -10,7 +10,6 @@ export const server = axios.create({
 })
 
 export const imageServer = axios.create({
-	// baseURL: 'https://shtor.com.ua/api/admin/upload/image',
 	baseURL: 'https://shtor.com.ua/api/admin/upload/image',
 	headers: {
 		'Content-Type': 'multipart/form-data',

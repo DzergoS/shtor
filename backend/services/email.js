@@ -8,66 +8,6 @@ const fs = require('fs').promises,
       { generateActivationToken } = require('../utils/tokens');
 
 
-const products = [{
-  "group": "OBJECT",
-  "name": {
-    "ua": "Браслет-підвіс",
-    "en": "Bracelet-pendant"
-  },
-  "description": {
-    "ua": "Дерево.\nВ комплекті вощений шнур 1 мм чорного кольору.\nРучна робота, кожен виріб унікальний.",
-    "en": "Wood.\nBlack waxed cord included.\nHandcrafted. Each piece is unique."
-  },
-  "price": {
-    "ua": 4500,
-    "en": 125
-  },
-  "colors": [
-    "Black",
-    "Dark Brown",
-    "Brown"
-  ],
-  "images": [
-    "IMG_1030.png",
-    "IMG_1058.png",
-    "IMG_1061.png",
-  ],
-  "size": ["21,5", "22", "23,4", "25"],
-  "variations": [{
-    "color": "Black",
-    "images": ["IMG_4014.png", "IMG_4015.png"],
-  },{
-    "color": "Dark Brown",
-    "images": ["IMG_4016.png", "IMG_4017.png"],
-  },{
-    "color": "Dark Brown",
-    "images": ["IMG_4018.png", "IMG_4019.png"],
-  }]
-},
-{
-  "group": "OBJECT",
-  "size": ["15,5х8"],
-  "feature": "long spiral",
-  "name": {
-    "en": "hair comb",
-    "ua": "гребінь для волося"
-  },
-  "description": {
-    "en": "Wooden.\nHandcrafted. Each piece is unique.",
-    "ua": "Дерево.\nРучна робота. Кожен індвиідуальний."
-  },
-  "material": "silver",
-  "price": {
-    "en": 60,
-    "ua": 2300
-  },
-  "images": [
-    'IMG_1188.png',
-    'IMG_1054_1.png',
-  ]
-},
-]
-      
 
 const HOST = HOSTNAME === 'localhost' ? `${HOSTNAME}:${PORT}` : HOSTNAME
 const PROTOCOL = HOSTNAME === 'localhost' ? 'http' : 'https';
@@ -87,10 +27,6 @@ const logoImagePath = path.join(__dirname, '../images/logo.jpg');
 const ProductImagePath = path.join(__dirname, '../../productPhotos/');
 
 
-
-
-
-
 function getMailOptions(
     email, htmlContent,
     subject, productImagesAttachment = null) {
@@ -102,29 +38,18 @@ function getMailOptions(
     attachments: [
       {path: logoImagePath,
       cid: 'shtorlogo'},
-      productImagesAttachment,
+      ...(productImagesAttachment || []),
     ],
   }
 }
 
 
-// const productImagesAttachment = products.flatMap((product, index) => {
-
-//   return {
-//     path: path.join(ProductImagePath, product.images[0]),
-//     cid: `product_${index + 1}`
-//   }
-// });
-
-// console.log(productImagesAttachment);
-
 function productImagesAttachment(products) {
   return products.map((product, index) => ({
-    path: path.join(ProductImagePath, product.image[0]),
+    path: path.join(ProductImagePath, product.image),
     cid: `product_${index}`
   }));
 }
-
 
 
 async function sendActivationEmail(userId, email) {
@@ -145,28 +70,26 @@ async function sendActivationEmail(userId, email) {
 }
 
 
-async function sendOrderDetails(email, products, shipping_price, amount) {
-  const orderDetailsTemplate = path.join(emailTemplatesDir, '/orderDetails/en.ejs');
+async function sendOrderDetails(language, email, products, currency, amount, shipping_price) {
+  const templateName = language === 'uk' ? 'uk.ejs' : 'en.ejs';
+  const orderDetailsTemplate = path.join(emailTemplatesDir, '/orderDetails/', templateName);
   const templateContent = await fs.readFile(orderDetailsTemplate, 'utf-8');
   
-  
+  const total_products = products.reduce((sum, product) => sum + product.quantity, 0);
+  const currency_symbol = currency === 'UAH' ? '₴' : '$'
 
   const htmlContent = ejs.render(
     templateContent,
-    { email, products, shipping_price, amount }
+    { email, products, total_products, amount, currency_symbol, shipping_price }
   );
-
-
 
   const mailOptions = getMailOptions(
     email, htmlContent,
     'Product order details purchased on shtor.com.ua',
-    
+    productImagesAttachment(products)
   )
 
-  console.log(productImagesAttachment(products));
-
-  // await transporter.sendMail(mailOptions);
+  await transporter.sendMail(mailOptions);
 }
 
 

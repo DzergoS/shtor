@@ -42,6 +42,7 @@ const orderSchema = new Schema({
 	}],
 	shippingInfo: {
 		type: {type: String, enum: ['Ukraine', 'International'], required: true},
+		delivery_price: {type: Number, min: 0, required: true},
 		...baseAddressFields(true),
 	},
 	billingAddress: {
