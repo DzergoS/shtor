@@ -1,0 +1,107 @@
+.list__container {
+    width: 100%;
+    padding: 0 10px 10px;
+    background: #ededed;
+    border-radius: 11px;
+}
+
+.list__container .search {
+ background-color: transparent;
+}
+
+.list__container .search__label {
+    padding: 12px 15px;
+    background-color: #cccccc;
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.list__container .list-titles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: underline;
+    margin: 10px 0;
+}
+
+.list__container .list-items {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.list__container .list-items .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px 5px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.list__container .list-items .list-item:hover {
+    background-color: #1e1e1e;
+}
+
+.list__container .list-item > *,
+.list__container .list-titles > * {
+    width: 16.6%;
+    text-align: center;
+}
+
+.list-item img {
+    max-height: 30px;
+}
+
+.list-item .actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+.list-item .actions button {
+    background-color: white;
+    color: black;
+    padding: 3px;
+    border-radius: 3px;
+    transition: .3s;
+}
+
+.actions button.edit {
+    min-width: 50px;
+}
+
+.actions button.delete {
+    background-color: #f53d3d;
+}
+
+.actions button.edit:hover {
+    background-color: #d2d2d2;
+}
+
+.actions button.delete:hover {
+    background-color: #c93232;
+}
+
+.input__container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+.input__container .custom-input {
+    width: calc(50% - 5px);
+}
+.input__container .custom-input input {
+    width: 100%;
+    padding: 13px;
+}

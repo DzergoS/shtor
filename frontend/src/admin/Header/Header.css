@@ -1,0 +1,8 @@
+.header__admin {
+    border-bottom: 1px solid gray;
+    padding: 15px;
+    background-color: black;
+}
+.header__admin .logo {
+    width: 120px;
+}
