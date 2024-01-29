@@ -32,9 +32,9 @@
     display: inline-block;
 }
 
-.footer .homeBtn img {
-    filter: invert(1);
-}
+/*.footer .homeBtn img {*/
+    /*filter: invert(1);*/
+/*}*/
 
 .email-input-error {
     position: absolute;
