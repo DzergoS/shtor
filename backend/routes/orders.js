@@ -73,6 +73,11 @@ orderRouter.post('/send-tracking-id', authMiddleware, async (req, res) => {
 
 	try {
 		await sendTrackingId(requestData)
+		await Order.findOneAndUpdate(
+			{ order_id: req.body.order_id },
+			{ $set: {trackingSent: true}},
+			{ new: true }
+		)
 		return sendResponse(res, 500, false, {}, `Tracking id sent on: ${requestData.email}`)
 	} catch (err) {
 		return sendResponse(res, 500, false, {}, `Error sending tracking id: ${err}`)

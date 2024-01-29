@@ -1,10 +1,12 @@
-.orders__container .table .orders-row {
-    position: relative;
+.orders__container .table {
+    overflow: visible;
 }
 .orders__container .table .orders-row {
     cursor: pointer;
     transition: .3s;
     height: 60px;
+    position: relative;
+    overflow: visible;
 }
 .orders__container .table .orders-row:hover {
     background-color: #d9d9d9;
@@ -20,4 +22,34 @@
     align-items: center;
     justify-content: space-around;
     z-index: 1;
+}
+
+.hover-info {
+    background-color: #fff;
+    padding-bottom: 20%;
+}
+.hover-info ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style: none;
+}
+.hover-info ul li {
+    width: 30%;
+    margin: 10px 0;
+}
+.hover-info ul li .product-details {
+    max-width: 250px;
+}
+.hover-info ul li img {
+    max-width: 200px;
+}
+.hover-info ul li.products-li {
+    width: 100%;
+}
+.hover-info .virovni {
+    padding-left: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }

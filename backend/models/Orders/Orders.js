@@ -19,6 +19,7 @@ const orderSchema = new Schema({
 	email: {type: String},
 	order_id: {type: String, required: true},
 	approved: {type: Boolean, required: true, default: false},
+	trackingSent: {type: Boolean, default: false},
 	products: [{
 		group: {type: String, required: true,},
 		name: {

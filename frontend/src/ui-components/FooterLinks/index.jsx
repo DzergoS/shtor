@@ -37,12 +37,12 @@ const FooterLinks = ({ type }) => {
 							<InstIcon className="custom-language-icon"/>
 						</a>
 						<span className="custom-language" onClick={toggleLanguage}>
-							{lang === 'ua' ? 'EN' : 'UA'}
+							{lang === 'ua' ? 'UA' : 'EN'}
 						</span>
 					</>
 					: <>
 						<span className="custom-language" onClick={toggleLanguage}>
-							{lang === 'ua' ? 'EN/USD' : 'UA/UAH'}
+							{lang === 'ua' ? 'UA/UAH' : 'EN/USD'}
 						</span>
 						<a className="link-instagram" href="https://www.instagram.com/shtorsstore/" target="_blank">
 							INSTAGRAM

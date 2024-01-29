@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import './Orders.css'
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -15,6 +15,10 @@ import PendingIcon from '@mui/icons-material/Pending';
 import Button from "@mui/material/Button";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
+import product from "../../../pages/Product/Product";
+import ProductImage from "../../../ui-components/ProductImage";
+import {useParams, Redirect} from "react-router-dom";
+
 const ukrainianMonths = {
 	'01': 'січня',
 	'02': 'лютого',
@@ -56,25 +60,29 @@ const formattedDate = formatDate(originalDateString);
 console.log(formattedDate); // Output: 20:38 28.01.24
 
 
-const Orders = () => {
-	const [orders, setOrders] = useState([])
+const Orders = ({orders}) => {
+	console.log('page', orders)
 	const [trackingNumber, setTrackingNumber] = useState("")
 	const [pickedOrderIndex, setPickedOrderIndex] = useState(-1)
 	const [isLoading, setIsLoading] = useState("");
-	useEffect(() => {
-		const requestData = async () => {
-			const {data} = await api.order.get()
-			setOrders(data.data)
-		}
 
-		requestData()
-	}, [])
+	const { id } = useParams()
+
+	const [redirect, setRedirect] = useState(false);
+
+	// Function to handle the click event and set redirect state
+	const handleOrderClick = (orderId) => {
+		setRedirect(`/admin/order/${orderId}`);
+	};
+
+	const pickedOrder = useMemo(() => orders.find(item => item?._id === id), [id, orders])
 
 	const sendTrackingNumber = async () => {
 		setIsLoading("loading")
 		try {
-			const {email, language, shippingInfo, firstName, lastName} = orders[pickedOrderIndex]
+			const {email, language, shippingInfo, firstName, lastName, order_id } = id ? pickedOrder : orders[pickedOrderIndex]
 			await api.order.sendTrackingNumber({
+				order_id,
 				email,
 				language,
 				tracking_id: trackingNumber,
@@ -96,60 +104,113 @@ const Orders = () => {
 			console.error(e)
 		}
 	}
-	console.log(orders)
+
 	return (
 		<div className="orders__container">
-			<Typography variant="h4" gutterBottom>Замовлення</Typography>
+			<Typography variant="h4" gutterBottom>Замовлення {id ? `#${id}` : ''}</Typography>
 
-			<TableContainer component={Paper}>
-				<Table className="table" sx={{minWidth: 650}} size="small" aria-label="a dense table">
-					<TableHead>
-						<TableRow>
-							<TableCell>Опис</TableCell>
-							<TableCell align="center">Ім'я</TableCell>
-							<TableCell align="center">Адреса</TableCell>
-							<TableCell align="center">Сума</TableCell>
-							<TableCell align="center">Час</TableCell>
-							<TableCell align="center">Дата</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{orders.map((row, index) => (
-							<TableRow
-								key={index}
-								sx={{'&:last-child td, &:last-child th': {border: 0}}}
-								className={`orders-row ${index === pickedOrderIndex ? 'active' : '' }`}
-								onClick={() => setPickedOrderIndex(index)}
-							>
-								<TableCell component="th" scope="row">
-									{row.orderDescription}
-									{index === pickedOrderIndex
-										? <div className="tracking-number">
-											<TextField id="filled-basic" label="Tracking Number" />
-											<Button variant="contained" onClick={sendTrackingNumber}>
-												{isLoading === 'loading'
-													? <PendingIcon/>
-													:  isLoading === 'success'
-														? <DoneAllIcon/>
-														: isLoading === 'error'
-															? <ReportGmailerrorredIcon/>
-															: <>Віправити на {row.email}</>}
-											</Button>
-											<Button variant="outlined" onClick={() => setPickedOrderIndex(-1)}>Скасувати</Button>
-										</div>
-										: ""
-									}
-								</TableCell>
-								<TableCell align="center">{row.shippingInfo.firstName} {row.shippingInfo.lastName}</TableCell>
-								<TableCell align="center">{row.shippingInfo.city}, {row.shippingInfo.countryRegion}</TableCell>
-								<TableCell align="center">{row.amount} {row.language === 'uk' ? translations.product.currency.ua : translations.product.currency.en}</TableCell>
-								<TableCell align="center">{formatTime(row.createdAt)}</TableCell>
-								<TableCell align="center">{formatDate(row.createdAt)}</TableCell>
+			{id
+				? <div className="hover-info">
+					<ul>
+						{pickedOrder && Object.entries(pickedOrder).map(([key, value]) => {
+							if (key === 'currency' || (key === 'additional' && !value )) return
+							if (key === 'shippingInfo') {
+								return Object.entries(value).map(([shippingKey, shippingValue]) => {
+									return (<li key={shippingKey}><h4>{shippingKey}: </h4>{shippingValue}
+									</li>)
+								});
+							}
+							if (key === 'products') {
+								return value.map((product, index) => {
+									console.log('products value', product)
+									return (
+										<li className="products-li" key={index} style={{marginBottom: '10px'}}>
+											<div>
+												<ProductImage imageName={product.image}/>
+											</div>
+											<div className="product-details" style={{display: 'flex'}}>
+												<div>{product.name.en} {product.quantity}</div>
+												<div style={{marginLeft: 'auto'}}>
+													{pickedOrder?.language === 'uk'
+														? product.price.ua * product.quantity
+														: product.price.en * product.quantity}
+													{translations.product.currency[pickedOrder?.language === 'uk' ? 'ua' : 'en']}
+												</div>
+											</div>
+										</li>
+									)});
+							}
+							return (<li key={key}><h4>{key}: </h4>{typeof value === 'boolean' ? value ? 'так' : 'ні' : value}</li>);
+						})}
+					</ul>
+					<div className="virovni">
+						<TextField id="filled-basic" label="Tracking Number" value={trackingNumber} onChange={e => setTrackingNumber(e.target.value)}/>
+						<Button variant="contained" onClick={sendTrackingNumber}>
+							{isLoading === 'loading'
+								? <PendingIcon/>
+								:  isLoading === 'success'
+									? <DoneAllIcon/>
+									: isLoading === 'error'
+										? <ReportGmailerrorredIcon/>
+										: <>Віправити на {orders.find(item => item?._id === id)?.email}</>}
+						</Button>
+					</div>
+				</div>
+				: <TableContainer component={Paper}>
+					<Table className="table" sx={{minWidth: 650}} size="small" aria-label="a dense table">
+						<TableHead>
+							<TableRow>
+								<TableCell>Опис</TableCell>
+								<TableCell align="center">Actions</TableCell>
+								<TableCell align="center">Ім'я</TableCell>
+								<TableCell align="center">Адреса</TableCell>
+								<TableCell align="center">Сума</TableCell>
+								<TableCell align="center">Час</TableCell>
+								<TableCell align="center">Дата</TableCell>
 							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
+						</TableHead>
+						<TableBody>
+							{orders?.map((row, index) => (
+								<TableRow
+									key={index}
+									sx={{'&:last-child td, &:last-child th': {border: 0}}}
+									className={`orders-row ${index === pickedOrderIndex ? 'active' : '' }`}
+									onClick={() => handleOrderClick(row._id)}
+								>
+									<TableCell scope="row">
+										{row.approved && !row.trackingSent ? <Button variant="contained" onClick={() => setPickedOrderIndex(index)}>трекінг</Button> : ''}
+									</TableCell>
+									<TableCell component="th" scope="row">
+										{row.orderDescription}
+										{index === pickedOrderIndex
+											? <div className="tracking-number">
+												<TextField id="filled-basic" label="Tracking Number" value={trackingNumber} onChange={e => setTrackingNumber(e.target.value)}/>
+												<Button variant="contained" onClick={sendTrackingNumber}>
+													{isLoading === 'loading'
+														? <PendingIcon/>
+														:  isLoading === 'success'
+															? <DoneAllIcon/>
+															: isLoading === 'error'
+																? <ReportGmailerrorredIcon/>
+																: <>Віправити на {row.email}</>}
+												</Button>
+												<Button variant="outlined" onClick={() => setPickedOrderIndex(-1)}>Скасувати</Button>
+											</div>
+											: ""
+										}
+									</TableCell>
+									<TableCell align="center">{row.shippingInfo.firstName} {row.shippingInfo.lastName}</TableCell>
+									<TableCell align="center">{row.shippingInfo.city}, {row.shippingInfo.countryRegion}</TableCell>
+									<TableCell align="center">{row.amount} {row.language === 'uk' ? translations.product.currency.ua : translations.product.currency.en}</TableCell>
+									<TableCell align="center">{formatTime(row.createdAt)}</TableCell>
+									<TableCell align="center">{formatDate(row.createdAt)}</TableCell>
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			}
+			{redirect && <Redirect to={redirect} />}
 		</div>
 	);
 };
