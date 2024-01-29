@@ -22,15 +22,8 @@ const Products = () => {
 		setAnimation((prevAnimation) => ({
 			...prevAnimation,
 			on: true,
-			classList: 'rotate-270',
+			classList: 'rotate-360',
 		}));
-
-		setTimeout(() => {
-			setAnimation((prevAnimation) => ({
-				...prevAnimation,
-				classList: `${prevAnimation.classList} rotate-ended-270 rotate-360`,
-			}));
-		}, 1600);
 
 		setTimeout(() => {
 			setAnimation((prevAnimation) => ({

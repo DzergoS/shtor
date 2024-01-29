@@ -1,6 +1,9 @@
 .product-info {
     min-height: 592px;
 }
+.product-info.slides {
+    min-height: initial;
+}
 
 .product-info .tab-button {
     font-size: 16px;

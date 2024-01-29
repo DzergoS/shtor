@@ -7,12 +7,16 @@ const express = require('express'),
 	{ HOSTNAME, PORT } = require('../config'),
 	{ Order } = require('../models'),
 	{ sendOrderDetails, sendTrackingId } = require('../services/email');
+const genericController = require("../controllers");
 
 
 const HOST = HOSTNAME === 'localhost' ? `${HOSTNAME}:${PORT}` : HOSTNAME
 const PROTOCOL = HOSTNAME === 'localhost' ? 'http' : 'https';
 
 
+orderRouter.get('/', async (req, res) => {
+	return await genericController.getObjectByType(res, Order);
+});
 orderRouter.post('/create', orderController.createOrder)
 
 orderRouter.post('/send-order-details', async (req, res) => {

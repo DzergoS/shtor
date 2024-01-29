@@ -54,38 +54,11 @@
 }
 
 
-@media (min-width: 768px) {
-    .product-list .product-list__item .image__container {
-        aspect-ratio: 1 / 1;
-    }
-    .product-list .product-list__item .image__container .image.swanpendantpng {
-        top: 20%;
-    }
-    .product-list .product-list__item .image__container .hover-image.swanpendantpng {
-        top: 30%;
-    }
-    .product-list .product-list__item .image__container .image.set3jpg {
-        top: -2%;
-    }
-    .product-list .product-list__item .image__container .image.set6jpg {
-        top: -7%;
-        transform: scale(0.9);
-    }
-    .product-list .product-list__item .image__container .image.set7jpg {
-        top: -3%;
-        transform: scale(0.85);
-    }
-    .product-list .product-list__item .image__container .image.set8jpg {
-        transform: scale(0.75);
-    }
-    .product-list .product-list__item .image__container .image.set9jpg {
-        top: 15px;
-    }
-    .product-list .product-list__item .image__container .hover-image.seashellbackcombpng,
-    .product-list .product-list__item .image__container .hover-image.goldseashellpendantbackpng {
-        top: 32%;
-    }
-}
+/*@media (min-width: 768px) {*/
+    /*.product-list .product-list__item .image__container {*/
+    /*    aspect-ratio: 1 / 1;*/
+    /*}*/
+/*}*/
 @media (max-width: 767px) {
     .product-list .product-list__item {
         width: calc(50% - 27px);

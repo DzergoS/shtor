@@ -1,0 +1,23 @@
+.orders__container .table .orders-row {
+    position: relative;
+}
+.orders__container .table .orders-row {
+    cursor: pointer;
+    transition: .3s;
+    height: 60px;
+}
+.orders__container .table .orders-row:hover {
+    background-color: #d9d9d9;
+}
+.orders__container .table .tracking-number {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 1;
+}

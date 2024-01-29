@@ -120,7 +120,7 @@ const ProductInfo = ({
 
 
     return (
-        <div className="product-info">
+        <div className={`product-info ${images?.length ? 'slides' : ''}`}>
             {product
                 ? <>
                     <Sliders
