@@ -3,6 +3,7 @@ const express = require('express'),
 	// axios = require('axios'),
 	orderController = require('../controllers/order'),
 	sendResponse = require('../utils/response'),
+	authMiddleware = require('../middleware/auth'),
 	{ HOSTNAME, PORT } = require('../config'),
 	{ Order } = require('../models'),
 	{ sendOrderDetails, sendTrackingId } = require('../services/email');
@@ -56,7 +57,7 @@ orderRouter.post('/send-order-details', async (req, res) => {
 })
 
 
-orderRouter.post('/send-tracking-id', async (req, res) => {
+orderRouter.post('/send-tracking-id', authMiddleware, async (req, res) => {
 	const requestData = {
 		email: req.body.email,
 		language: req.body.language,
@@ -68,6 +69,7 @@ orderRouter.post('/send-tracking-id', async (req, res) => {
 
 	try {
 		await sendTrackingId(requestData)
+		return sendResponse(res, 500, false, {}, `Tracking id sent on: ${requestData.email}`)
 	} catch (err) {
 		return sendResponse(res, 500, false, {}, `Error sending tracking id: ${err}`)
 	}
