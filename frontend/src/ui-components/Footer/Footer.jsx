@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import FooterLogo from "assets/logo-footer.jpg";
-import FooterIcon from "assets/arrow-email.svg";
+import FooterIcon from "assets/logo-black.png";
 import './Footer.css';
 import FooterLinks from "../FooterLinks";
 import api from "../../api";
