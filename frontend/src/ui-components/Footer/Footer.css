@@ -15,10 +15,13 @@
     padding: 11px 22px;
     width: 100%;
 }
+.footer .email-send {
+    outline: none !important;
+}
 
 .footer .email-input {
     position: relative;
-    z-index: -1;
+    z-index: 0;
 }
 
 .footer .email-input .icon-img {

@@ -141,6 +141,7 @@
     .cart__pop-up {
         height: 100%;
         bottom: 0;
+        min-width: 100vw;
     }
     .cart__pop-up .dots-slider {
         top: -28px;
