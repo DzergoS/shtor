@@ -71,7 +71,7 @@ const ShoppingCart = () => {
 			// amount: 100,
 			order_desc: orderDesc,
 			lang: lang === 'ua' ? 'uk' : 'en',
-			response_url: 'http://localhost:3001/api/orders/send',
+			response_url: 'http://localhost:3001/api/orders/send-order-details',
 		}
 	})
 
