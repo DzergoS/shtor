@@ -27,6 +27,7 @@
 }
 .scroller-container .product-image__container .product-img {
     width: 100%;
+    position: relative;
 }
 
 .scroller-container .product-image__container .product-img-hover {
@@ -44,7 +45,6 @@
 .scroller-container .product-item:focus-visible {
     outline: none;
 }
-
 
 .scroller-container .product-image__container {
     margin-bottom: 16px;
@@ -64,6 +64,33 @@
 @media (min-width: 769px) {
     .scroller-container .product-image__container {
         aspect-ratio: 1 / 1;
+    }
+    .scroller-container .product-image__container .product-img.swanpendantpng {
+        top: 20%;
+    }
+    .scroller-container .product-image__container .product-img-hover.swanpendantpng {
+        top: 30%;
+    }
+    .scroller-container .product-image__container .product-img.set3jpg {
+        top: -2%;
+    }
+    .scroller-container .product-image__container .product-img.set6jpg {
+        top: -7%;
+        transform: scale(0.9);
+    }
+    .scroller-container .product-image__container .product-img.set7jpg {
+        top: -3%;
+        transform: scale(0.85);
+    }
+    .scroller-container .product-image__container .product-img.set8jpg {
+        transform: scale(0.75);
+    }
+    .scroller-container .product-image__container .product-img.set9jpg {
+        top: 15px;
+    }
+    .scroller-container .product-image__container .product-img-hover.seashellbackcombpng,
+    .scroller-container .product-image__container .product-img-hover.goldseashellpendantbackpng {
+        top: 32%;
     }
 }
 @media (max-width: 768px) {

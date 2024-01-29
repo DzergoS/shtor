@@ -55,16 +55,20 @@ const Scroller = () => {
         <div className="scroller-container">
             <h4 className="scroller-title">You also may like</h4>
             <Slider className="scroller-items" {...settings}>
-                {shuffledProducts?.slice(0, 8).map((product, index) => (
-                    <Link to={product.link} key={index} className="product-item">
-                        <div className="product-image__container">
-                            <ProductImage className='product-img' imageName={getProductImageName(product)}/>
-                            <ProductImage className='product-img-hover' imageName={getProductImageNameHover(product)}/>
-                        </div>
-                        <p className='scroller-subtitle'>{product.group}/{getProductName(product, lang)}</p>
-                        <p className='scroller-price'>{translations.product.currency[lang]}{getProductPrice(product, lang)}</p>
-                    </Link>
-                ))}
+                {shuffledProducts?.slice(0, 8).map((product, index) => {
+                    const imageName = getProductImageName(product)
+                    const hoverImage = getProductImageNameHover(product)
+                    return (
+                        <Link to={product.link} key={index} className="product-item">
+                            <div className="product-image__container">
+                                <ProductImage className='product-img' imageName={imageName}/>
+                                {imageName !== hoverImage ? <ProductImage className='product-img-hover' imageName={hoverImage}/> : ""}
+                            </div>
+                            <p className='scroller-subtitle'>{product.group}/{getProductName(product, lang)}</p>
+                            <p className='scroller-price'>{translations.product.currency[lang]}{getProductPrice(product, lang)}</p>
+                        </Link>)
+                })
+                }
             </Slider>
             <div className="progress-bar__container">
                 <div className="progress-bar" style={{left: `${(currentIndex % 8) * 12.5}%`}}/>

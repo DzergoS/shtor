@@ -5,7 +5,7 @@
     width: 100vw;
     max-width: 390px;
     transition: .3s;
-    background: rgba(0, 0, 0, 0.50);
+    background: rgba(0, 0, 0, 0.70);
     opacity: 0;
     padding: 24px 24px 46px 24px;
     pointer-events: none;
@@ -40,6 +40,9 @@
     position: relative;
     overflow: hidden;
     margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .cart__pop-up .popup-image {
     max-width: 100%;
