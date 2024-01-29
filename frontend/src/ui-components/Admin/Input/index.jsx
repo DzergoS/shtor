@@ -63,7 +63,6 @@ const Input = ({label, type, disabled, onChange, value, multiple, prefix, error}
 		</div>
 	}
 
-	console.log(type)
 	if (type === 'images') {
 
 		const handleDrop = (e) => {

@@ -94,10 +94,8 @@ const ProductInfo = ({
         if (!isSeashellsInProduct && currentImage) pickedProduct.image = currentImage
         if (!isImagesInVariations) pickedProduct.image = product.images[0]
 
-        console.log('seashellIdx', seashellIdx)
         if (isSeashellsInProduct) pickedProduct.image = product.seashells[seashellIdx][0]
         if (!pickedProduct?.image) pickedProduct.image = pickedProduct.images[0]
-        console.log('pickedProduct', pickedProduct)
         dispatch({
             type: ADD_PRODUCT,
             payload: {...pickedProduct, quantity}
@@ -120,8 +118,6 @@ const ProductInfo = ({
     const showImagePicker = product?.name?.en?.toLowerCase() === 'seashell pendant' || product?.name?.en?.toLowerCase() === 'seashell set'
     const productTitle = useMemo(() => `${group}/${title}`, [product, lang])
 
-
-    console.log('cart', cart)
 
     return (
         <div className="product-info">

@@ -59,7 +59,6 @@ const ShoppingCart = () => {
 	const deliveryPrice = useMemo(() => isUAShipping ? 0 : translations.cart.internationalDeliveryPrice[lang] , [isUAShipping, lang])
 
 	const orderDesc = cart?.map(({name, quantity}) => `${name[lang]} x${quantity}`).join(' ')
-	console.log('cart', cart)
 
 	const Options = (order_id) => ({
 		options: fondyOptions,
@@ -95,12 +94,10 @@ const ShoppingCart = () => {
 
 	useEffect(() => loadFondyScript(), []);
 
-	console.log(deliveryDetails)
 	const hasErrors = Object.entries(deliveryDetails).some(([key, value]) => key !== 'additional' && !value) ||
 		(!sameBillingDetails && Object.entries(billingDetails).some(([key, value]) => key !== 'additional' && !value));
 
 	const onCheckoutClick = () => {
-		console.log('hasErrors', hasErrors)
 		const newOrderId = `shtor_order_${Date.now()}`;
 		if (!hasErrors) {
 			//TODO: TEST ADD NEW ORDER
@@ -142,9 +139,6 @@ const ShoppingCart = () => {
 				[name]: value
 			}));
 		};
-
-		console.log('deliveryDetails', deliveryDetails)
-		console.log('billing', billingDetails);
 
 		const handleError = (value) => showError && !value ? "error" : ""
 

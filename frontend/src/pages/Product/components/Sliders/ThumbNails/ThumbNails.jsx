@@ -16,8 +16,6 @@ const ThumbNails = ({slides, goToSlide, currentSlide, isQuantityPicker}) => {
 					currentSlide < 3 && (index < 5) ||
 					currentSlide > (slides.length - 4) && (index > (slides.length - 6))
 					))) {
-					console.log('index', index)
-					console.log('currentSlide', currentSlide)
 					return (
 						<div className={`thumbnail-slider__item ${index === currentSlide ? 'active' : ""}`} key={index} onClick={() => goToSlide(index)}>
 							<ProductImage imageName={imageName} alt={`Thumbnail ${index + 1}`} />

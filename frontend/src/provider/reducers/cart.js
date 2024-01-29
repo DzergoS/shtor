@@ -33,7 +33,6 @@ const cartReducer = (state, action) => {
 		case ADD_PRODUCT:
 			const existingProductIndex = state.findIndex(item => areSimilarExceptQuantity(item, action.payload));
 			if (existingProductIndex !== -1) {
-				console.log('action.payload', action.payload)
 				return state.map((item, index) => ({
 					...item,
 					quantity: index === existingProductIndex

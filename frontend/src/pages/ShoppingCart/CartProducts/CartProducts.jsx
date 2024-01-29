@@ -31,8 +31,6 @@ const CartProducts = () => {
 		? description.slice(0, -1)
 		: description;
 
-	console.log('cart', cart);
-
 	return (
 		<div className="cart-products">
 			{cart.map((item, index) => (

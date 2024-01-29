@@ -22,7 +22,6 @@ const CartPickerPopUp = ({ popUpSlider, setPopUpSlider, currentSlide, currentVar
 	useEffect(() => {
 		if (!showPicker) setQuantity(1)
 		if (showPicker) {
-			console.log('isSeashell', isSeashell)
 			if (isSeashell) {
 				const neededIdx = getSeashellVariationsIndxBySlide(product?.seashells, currentSlide)
 				setPopUpSlide(neededIdx)
@@ -33,8 +32,6 @@ const CartPickerPopUp = ({ popUpSlider, setPopUpSlider, currentSlide, currentVar
 
 	const slides = isSeashell ? images.map(item => item[0]) : images
 
-	console.log('product', product)
-	console.log('currentSlide', currentSlide)
 	return (
 		<div className={`cart__pop-up ${showPicker ? 'active' : ''}`}>
 			<Cross className="cross" onClick={() => setShowPicker(false)}/>
