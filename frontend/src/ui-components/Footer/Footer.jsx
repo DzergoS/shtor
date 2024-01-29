@@ -6,13 +6,15 @@ import FooterIcon from "assets/arrow-email.svg";
 import './Footer.css';
 import FooterLinks from "../FooterLinks";
 import api from "../../api";
+import CheckIcon from "@mui/icons-material/Check";
 
 
 const Footer = () => {
 	const [email, setEmail] = useState('');
-  	const [error, setError] = useState(null);
+	const [error, setError] = useState(null);
+	const [isSuccess, setIsSuccess] = useState(false);
 
-	const reqSubscribe = () => api.subscribe.subscribe.activation({ email })
+	const reqSubscribe = () => api.subscribe.subscribe.activation({email})
 
 	function isValidEmail(email) {
 		return /\S+@\S+\.\S+/.test(email);
@@ -20,13 +22,6 @@ const Footer = () => {
 
 	const onChange = (e) => {
 		const inputEmail = e.target.value;
-		var errorMessage = null;
-
-		if (inputEmail.trim() !== '' && !isValidEmail(inputEmail)) {
-		  errorMessage = 'Email is invalid';
-		}
-
-		setError(errorMessage);
 		setEmail(inputEmail);
 	};
 
@@ -35,15 +30,15 @@ const Footer = () => {
 		setError(null);
 
 		if (isValidEmail(email)) {
-		  try {
-			const response = await reqSubscribe()
-
-			// console.log('Subscribe successful:', response);
-		  } catch (error) {
-			console.error('Subscribe failed:', error);
-		  }
+			try {
+				await reqSubscribe()
+			  	setIsSuccess(true)
+				// console.log('Subscribe successful:', response);
+			} catch (error) {
+				console.error('Subscribe failed:', error);
+			}
 		} else {
-		  setError('Email is invalid');
+			setError('Email is invalid');
 		}
 	};
 
@@ -61,9 +56,10 @@ const Footer = () => {
 							type="email"
 							placeholder="Email"
 							value={email}
-        					onChange={onChange}
+							onChange={onChange}
+							disabled={isSuccess}
 						/>
-						<img className="icon-img" src={FooterIcon} alt="icon-arrow"/>
+						{isSuccess ? <CheckIcon className="icon-img"/> : <img className="icon-img" src={FooterIcon} alt="icon-arrow" onClick={onSubmit}/>}
 					</div>
 					{error && <p className='email-input-error'>{error}</p>}
 				</form>

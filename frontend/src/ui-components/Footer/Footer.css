@@ -29,6 +29,9 @@
     right: 21px;
     top: 17px;
 }
+.footer .email-input svg.icon-img {
+    top: 8px;
+}
 
 .footer .homeBtn {
     margin-bottom: 36px;
