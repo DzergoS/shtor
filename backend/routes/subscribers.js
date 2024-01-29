@@ -20,7 +20,7 @@ subscriberRouter.post('/', async (req, res) => {
     try {
         await sendActivationEmail(subscriber.id, email)
     } catch (error) {
-        return sendResponse(res, 500, false, {}, 'Error sending activation email. Try again later')
+        return sendResponse(res, 500, false, {}, `Error sending activation email - ${error}`)
     }
     return sendResponse(res, 200, true, {}, `Email sent on ${email}. Please, activate subscription`)
 })
