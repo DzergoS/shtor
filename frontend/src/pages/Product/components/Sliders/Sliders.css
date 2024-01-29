@@ -54,6 +54,50 @@
         transform: translateY(-50%);
         width: 100%;
     }
+
+    .product-info .thumbnail-slider .thumbnail-slider__item img.set6jpg,
+    .product-info .main-slider .slick-slide img.set6jpg {
+        top: -24%;
+        transform: scale(0.9);
+    }
+
+    .product-info .thumbnail-slider .thumbnail-slider__item img.set7jpg,
+    .product-info .main-slider .slick-slide img.set7jpg {
+        top: -19%;
+        transform: scale(0.85);
+    }
+
+    .product-info .thumbnail-slider .thumbnail-slider__item img.set8jpg,
+    .product-info .main-slider .slick-slide img.set8jpg {
+        transform: scale(0.75);
+        top: -15%;
+    }
+
+    .product-info .thumbnail-slider .thumbnail-slider__item img.set9jpg,
+    .product-info .main-slider .slick-slide img.set9jpg {
+        top: 54%;
+    }
+
+    .product-info .thumbnail-slider .thumbnail-slider__item img.goldseashellpendant2png,
+    .product-info .thumbnail-slider .thumbnail-slider__item img.goldseashellpendantbackpng,
+    .product-info .main-slider .slick-slide img.goldseashellpendant2png,
+    .product-info .main-slider .slick-slide img.goldseashellpendantbackpng {
+        top: 40%;
+    }
+    .product-info .main-slider .slick-slide img.swanpendantpng,
+    .product-info .main-slider .slick-slide img.silverswanpng,
+    .product-info .main-slider .slick-slide img.vibe1png,
+    .product-info .main-slider .slick-slide img.woodencombpng,
+    .product-info .main-slider .slick-slide img.woodencombbwpng,
+    .product-info .main-slider .slick-slide img.seashellbackcombpng,
+    .product-info .thumbnail-slider .thumbnail-slider__item img.swanpendantpng,
+    .product-info .thumbnail-slider .thumbnail-slider__item img.vibe1png,
+    .product-info .thumbnail-slider .thumbnail-slider__item img.woodencombpng,
+    .product-info .thumbnail-slider .thumbnail-slider__item img.woodencombbwpng,
+    .product-info .thumbnail-slider .thumbnail-slider__item img.seashellbackcombpng,
+    .product-info .thumbnail-slider .thumbnail-slider__item img.silverswanpng {
+        top: 34%;
+    }
 }
 @media (max-width: 768px) {
     .product-info .slider-container {

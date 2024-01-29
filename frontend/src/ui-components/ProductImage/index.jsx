@@ -35,7 +35,7 @@ const ProductImage = ({ imageName = '', ...props }) => {
 
 	// const src = isMobile ? imageExists ? mobileSrc : src : imageExists ? src : mobileSrc
 
-	return <img {...props} src={src} />
+	return <img {...props} className={`${props?.className} ${imageName.replace('.','')}`} src={src} />
 };
 
 export default ProductImage;

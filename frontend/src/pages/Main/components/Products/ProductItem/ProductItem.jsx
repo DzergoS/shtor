@@ -11,12 +11,15 @@ const ProductItem = ({product}) => {
 	const { state: { lang } } = useAPI()
 	const { group, price, variations, link } = product
 
+	const imageName = getProductImageName(product)
+	const hoverImageName = getProductImageNameHover(product)
+
 	return (
 		<Link to={link} className="product-list__item">
 
 			<div className="image__container">
 				<ProductImage className="image" imageName={getProductImageName(product)} alt="product list item image"/>
-				<ProductImage className="hover-image" imageName={getProductImageNameHover(product)} alt="product item image hover"/>
+				{imageName !== hoverImageName ? <ProductImage className="hover-image" imageName={getProductImageNameHover(product)} alt="product item image hover"/> : ""}
 			</div>
 
 			<div className="product-list__item-info">
