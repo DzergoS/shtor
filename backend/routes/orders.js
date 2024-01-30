@@ -38,7 +38,7 @@ orderRouter.post('/send-order-details', async (req, res) => {
 		order.shippingInfo.delivery_price
 	)
 
-	const thankYouPagePath = `${PROTOCOL}://${HOST}/thankyoupage`;
+	const thankYouPagePath = `${PROTOCOL}://${HOST}/thank-you-page`;
 	return res.redirect(thankYouPagePath);
 
     // const requestData = {

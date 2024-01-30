@@ -15,15 +15,15 @@ const PROTOCOL = HOSTNAME === 'localhost' ? 'http' : 'https'
 const transporter = nodemailer.createTransport({
   host: EMAIL_HOST,
   port: EMAIL_PORT,
-  secure: true, 
+  secure: true,
   auth: {
-    user: EMAIL_USER, 
+    user: EMAIL_USER,
     pass: EMAIL_PASS,
   },
 })
 
 const emailTemplatesDir = path.join(__dirname, '../templates/email')
-const logoImagePath = path.join(__dirname, '../images/logo.jpg')
+const logoImagePath = path.join(__dirname, '../images/logo.png')
 const ProductImagePath = path.join(__dirname, '../../productPhotos/')
 
 
@@ -31,7 +31,7 @@ function getMailOptions(
     email, htmlContent,
     subject, productImagesAttachment = null) {
   return {
-    from: EMAIL_USER, 
+    from: EMAIL_USER,
     to: email,
     subject: subject,
     html: htmlContent,
@@ -58,7 +58,7 @@ async function sendActivationEmail(userId, email) {
 
   const activationToken = generateActivationToken(userId)
   const activationLink = `${PROTOCOL}://${HOST}/api/subscribe/activate/${encodeURIComponent(userId)}/${encodeURIComponent(activationToken)}`
-  
+
   const htmlContent = ejs.render(templateContent, { email, activationLink })
 
   const mailOptions = getMailOptions(
@@ -74,7 +74,7 @@ async function sendOrderDetails(language, email, products, currency, amount, shi
   const templateName = language === 'uk' ? 'uk.ejs' : 'en.ejs'
   const orderDetailsTemplate = path.join(emailTemplatesDir, '/orderDetails/', templateName)
   const templateContent = await fs.readFile(orderDetailsTemplate, 'utf-8')
-  
+
   const total_products = products.reduce((sum, product) => sum + product.quantity, 0)
   const currency_symbol = currency === 'UAH' ? '₴' : '$'
 
@@ -101,12 +101,12 @@ async function sendTrackingId({
   const trackingIdTemplate = path.join(emailTemplatesDir, '/clientTrackingId/', templateName)
   const templateContent = await fs.readFile(trackingIdTemplate, 'utf-8')
 
-  const email_subject = language === 'uk' 
+  const email_subject = language === 'uk'
         ? 'Відстеження номеру вашого замовлення'
         : 'Tracking Information for Your Package'
   const shipping_link = shipping_type === 'Ukraine'
         ? 'https://tracking.novaposhta.ua/'
-        : 'https://www.ups.com/' 
+        : 'https://www.ups.com/'
 
   const htmlContent = ejs.render(
     templateContent,

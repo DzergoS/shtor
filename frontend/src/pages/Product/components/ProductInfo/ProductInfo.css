@@ -1,6 +1,15 @@
 .product-info {
     min-height: 592px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
+
+.product-info .info-right {
+    width: 50%;
+    padding-left: 90px;
+}
+
 .product-info.slides {
     min-height: initial;
 }
@@ -69,17 +78,6 @@
     font-size: 18px;
     margin-top: 24px;
     margin-bottom: 24px;
-}
-
-.product-info {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.product-info .info-right {
-    width: 50%;
-    padding-left: 17%;
 }
 
 .product-info .add-to-cart {
@@ -162,6 +160,10 @@
     }
     .product-info .tabs-variations {
         margin-bottom: 16px;
+    }
+    .product-info .tabs-variations ul .custom-radio__value,
+    .product-info .tabs-variations ul .custom-radio__value::before {
+        font-size: 14px;
     }
     .product-info .price {
         margin-top: 0;

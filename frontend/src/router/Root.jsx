@@ -4,6 +4,7 @@ import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Info from "../pages/Info/Info";
 import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
+import CheckOut from "../pages/CheckOut/CheckOut";
 import Product from "../pages/Product/Product";
 import Header from "../ui-components/Header/Header";
 import Footer from "../ui-components/Footer/Footer";
@@ -22,7 +23,7 @@ import {data} from '../data'
 
 const Root = () => {
 
-	const {dispatch} = useAPI()
+	const {state: {lang}, dispatch} = useAPI()
 
 	useEffect(() => {
 		const getProducts = async () => {
@@ -44,7 +45,7 @@ const Root = () => {
 		getProducts();
 	}, [])
 
-	const { infoPages: { paymentDelivery, care, privacyPolicy, returnsExchange } } = translations;
+	const { infoPages: { paymentDelivery, care, privacyPolicy, returnsExchange, thankYou } } = translations;
 
 	return (
 		<Router>
@@ -81,7 +82,14 @@ const Root = () => {
 									text={care.text}
 								/>
 							</Route>
+							<Route path="/thank-you-page">
+								<div className="thank-you-container">
+									<h2 className="thank-you-title">{thankYou.title[lang]}</h2>
+									<p className="thank-you-desc">{thankYou.text[lang]}</p>
+								</div>
+							</Route>
 							<Route path="/cart" component={ShoppingCart}/>
+							<Route path="/checkout" component={CheckOut}/>
 							<Route path="/:id" exact component={Product}/>
 							<Route path="/:id/:variationIndex" component={Product}/>
 						</Switch>

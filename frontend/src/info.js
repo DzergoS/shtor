@@ -53,7 +53,31 @@ export const translations = {
 			en: "I didn't have to think for long about embodying the brand in a single image. In the photo, a young Lyudmila is my mother. I haven't encountered greater freedom, sensitivity, authenticity, and strength in a gaze anywhere else. This is what I convey and talk about through my products at ",
 		}
 	},
+	footer: {
+		thanksSubscribe: {
+			en: 'Thanks for subscribing',
+			ua: 'Дякуємо за підписку'
+		},
+		tryAgain: {
+			en: 'Try again',
+			ua: 'Спробуйте ще',
+		},
+		stayInformed: {
+			en: 'Stay informed about releases and special events',
+			ua: 'Будь в курсі випусків і спеціальних подій',
+		}
+	},
 	infoPages: {
+		thankYou: {
+			title: {
+				ua: "Дякуємо за замовлення ❤️",
+				en: "Thank you for ordering ❤️"
+			},
+			text: {
+				ua: "Чекайте email з tracking номером.",
+				en: "Wait for email with tracking number."
+			},
+		},
 		care: {
 			title: {
 				ua: "Догляд",
@@ -259,6 +283,18 @@ export const translations = {
 			ua: 'Кошик',
 			en: 'Cart'
 		},
+		delete: {
+			ua: 'Ви впевнені, що хочете видалити',
+			en: 'Are you sure you want to delete'
+		},
+		deliveryHint: {
+			ua: 'Доставка, податки та коди знижки розраховуються під час оформлення замовлення.',
+			en: 'Shopping,taxes and discount codes calculated at checkout.',
+		},
+		fromCart: {
+			ua: 'з вашого кошика ?',
+			en: 'from your cart ?',
+		},
 		empty: {
 			ua: 'Ваш кошик зараз порожній',
 			en: 'Your cart is currently empty'
@@ -359,7 +395,18 @@ export const translations = {
 			ua: "Використовувати іншу платіжну адресу",
 			en: "Use a different billing address",
 		},
-
+	},
+	yes: {
+		ua: "Так",
+		en: "Yes",
+	},
+	no: {
+		ua: "Ні",
+		en: "No",
+	},
+	money: {
+		en: 'USD',
+		ua: 'UAH',
 	}
 }
 

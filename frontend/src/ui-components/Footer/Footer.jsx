@@ -7,12 +7,17 @@ import './Footer.css';
 import FooterLinks from "../FooterLinks";
 import api from "../../api";
 import CheckIcon from "@mui/icons-material/Check";
+import {translations} from "../../info";
+import useAPI from "../../provider/useAPI";
 
 
 const Footer = () => {
 	const [email, setEmail] = useState('');
-	const [error, setError] = useState(null);
+	const [error, setError] = useState(false);
+	const [focus, setFocus] = useState(false)
 	const [isSuccess, setIsSuccess] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const { state: {lang}} = useAPI();
 
 	const reqSubscribe = () => api.subscribe.subscribe.activation({email})
 
@@ -27,18 +32,23 @@ const Footer = () => {
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		setError(null);
+		setError(false);
+		setIsLoading(true)
 
-		if (isValidEmail(email)) {
-			try {
-				await reqSubscribe()
-			  	setIsSuccess(true)
-				// console.log('Subscribe successful:', response);
-			} catch (error) {
-				console.error('Subscribe failed:', error);
-			}
-		} else {
-			setError('Email is invalid');
+		try {
+			await reqSubscribe()
+			setIsSuccess(true)
+			// console.log('Subscribe successful:', response);
+		} catch (error) {
+			setError(true);
+			console.error('Subscribe failed:', error);
+		} finally {
+			setIsLoading(false)
+			setTimeout(() => {
+				setError(false);
+				setIsSuccess(false)
+				setEmail('')
+			}, 2500)
 		}
 	};
 
@@ -48,20 +58,21 @@ const Footer = () => {
 				<Link to="/" className='homeBtn'>
 					<img src={FooterLogo} alt="footer-main__logo"/>
 				</Link>
-				<p className="footer-title">Stay informed about releases and special events</p>
+				<p className="footer-title">{translations.footer.stayInformed[lang]}</p>
 				<form method='POST' onSubmit={onSubmit}>
-					<div className="email-input">
+					<div className={`email-input ${isSuccess ? 'success' : ''} ${error ? 'error' : ''}`}>
 						<input
 							className="email-send"
 							type="email"
 							placeholder="Email"
-							value={email}
+							value={isSuccess || error ? translations.footer[isSuccess ? 'thanksSubscribe' : 'tryAgain'][lang] : email}
 							onChange={onChange}
-							disabled={isSuccess}
+							disabled={isSuccess || isLoading}
+							onFocus={() => setFocus(true)}
+							onBlur={() => setFocus(false)}
 						/>
-						{isSuccess ? <CheckIcon className="icon-img"/> : <img className="icon-img" src={FooterIcon} alt="icon-arrow" onClick={onSubmit}/>}
+						{focus || isSuccess || error ? "" : <img className="icon-img" src={FooterIcon} alt="icon-arrow" onClick={onSubmit}/>}
 					</div>
-					{error && <p className='email-input-error'>{error}</p>}
 				</form>
 			</div>
 			<FooterLinks/>

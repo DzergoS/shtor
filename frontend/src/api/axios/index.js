@@ -1,8 +1,8 @@
 import axios from "axios";
+import {isProduction} from "config";
 
 export const server = axios.create({
-	baseURL: 'https://shtor.com.ua/api',
-	// baseURL: 'http://localhost:3001/api',
+	baseURL: isProduction ? 'https://shtor.com.ua/api' : 'http://localhost:3001/api',
 	headers: {
 		'Content-Type': 'application/json',
 	},

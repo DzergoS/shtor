@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import useAPI from "provider/useAPI";
 import {
 	DECREMENT_PRODUCT,
@@ -8,7 +8,7 @@ import {
 
 import {ReactComponent as Cross} from "assets/cross.svg";
 
-import './CartProducts.css'
+import './CheckOutProducts.css'
 import isMobile from "utils/isMobile";
 import {translations} from "info";
 import ProductImage from "ui-components/ProductImage";
@@ -18,9 +18,9 @@ import DeletePopUp from "../../../ui-components/DeletePopUp";
 const MINUS = 'MINUS'
 const PLUS = 'PLUS'
 
-const CartProducts = () => {
+const CheckOutProducts = () => {
 
-	const {state: {cart, lang}, dispatch} = useAPI();
+	const {state: {cart, lang, products: {allProducts}}, dispatch} = useAPI();
 	const [deleteIndex, setDeleteIndex] = useState(-1);
 
 	const onChangeQuantity = (index, sign) => {
@@ -32,46 +32,51 @@ const CartProducts = () => {
 	}
 
 	const deleteProductFromCart = (index) => setDeleteIndex(index);
+
 	const currency = translations.product.currency[lang]
 	const formatDesc = (description) => description[description?.length - 1] === '.'
 		? description.slice(0, -1)
 		: description;
 
 	return (
-		<div className="cart-products">
+		<div className="checkout-products">
 			{cart.map((item, index) => (
-				<div className="cart-product" key={index}>
-					<ProductImage imageName={getProductImageName(item)} alt="product" className="cart-product__img"/>
-					<div className="cart-product-desc">
+				<div className="checkout-product" key={index}>
+					<div className="custom-img">
+						<ProductImage imageName={item?.image} alt="product" className="checkout-product__img"/>
+					</div>
+					<div className="checkout-product-desc">
 						{!isMobile
 							? <>
-								<h4 className="cart-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
-								<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color ? `/ ${item.color}` : "" }</p>
-								<div className="cart-product__quantity">
-									{translations.cart.quantity[lang]}
-									<div className="cart-product__quantity-label">
+								<h4 className="checkout-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
+								<p className="checkout-product__desc">
+									{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>
+									{item?.color?.length ? `/ ${item.color}` : "" }
+									{item?.attachment ? `/ ${item.attachment}` : "" }
+								</p>
+								<div className="checkout-product__quantity">
+									<div className="checkout-product__quantity-label">
 										<button className="minus" onClick={() => onChangeQuantity(index, MINUS)}>-</button>
 										{item.quantity}
 										<button className="plus"  onClick={() => onChangeQuantity(index, PLUS)}>+</button>
 									</div>
+									<div className="price">{currency}{item.price[lang] * item.quantity}</div>
 								</div>
-								<div className="price">{currency}{item.price[lang] * item.quantity}</div>
 							</>
 							: <>
 								<div className="top">
-									<h4 className="cart-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
-									<p className="cart-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color ? `/ ${item.color}` : "" }</p>
+									<h4 className="checkout-product__title"><strong>{item.group}</strong>/ {item.name[lang]}</h4>
+									<p className="checkout-product__desc">{formatDesc(item.description[lang])}/ <strong>{item.size}</strong>{item?.color?.length ? `/ ${item.color}` : "" }</p>
 								</div>
 								<div className="bottom">
-									<div className="cart-product__quantity">
-										{translations.cart.quantity[lang]}
-										<div className="cart-product__quantity-label">
+									<div className="checkout-product__quantity">
+										<div className="checkout-product__quantity-label">
 											<button className="minus" onClick={() => onChangeQuantity(index, MINUS)}>-</button>
 											{item.quantity}
 											<button className="plus"  onClick={() => onChangeQuantity(index, PLUS)}>+</button>
 										</div>
+										<div className="price">{currency}{item.price[lang] * item.quantity}</div>
 									</div>
-									<div className="price">{currency}{item.price[lang] * item.quantity}</div>
 								</div>
 							</>
 						}
@@ -100,4 +105,4 @@ const CartProducts = () => {
 	);
 };
 
-export default React.memo(CartProducts);
+export default React.memo(CheckOutProducts);

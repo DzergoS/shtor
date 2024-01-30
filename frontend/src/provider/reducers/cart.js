@@ -42,7 +42,7 @@ const cartReducer = (state, action) => {
 				);
 			} else return [...state, { ...action.payload, quantity: action.payload.quantity }];
 		case DELETE_PRODUCT:
-			return state.filter(item => item._id !== action.payload);
+			return state.filter((item, index) => index !== action.payload);
 		default:
 			return state;
 	}

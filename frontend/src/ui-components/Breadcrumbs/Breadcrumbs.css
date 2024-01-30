@@ -16,9 +16,15 @@ a {
     font-weight: 400;
 }
 
+.homeBtn img {
+    width: 100px;
+}
 @media (max-width: 769px) {
     .breadCrumbs {
         margin-top: 50px;
         margin-bottom: 16px;
+    }
+    .homeBtn img {
+        width: 80px;
     }
 }
