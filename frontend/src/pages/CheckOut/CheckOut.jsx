@@ -116,7 +116,7 @@ const ShoppingCart = () => {
 					...deliveryDetails,
 				},
 			};
-			if(!sameBillingDetails) newOrder.billindAddress = billingDetails;
+			if(!sameBillingDetails) newOrder.billingAddress = billingDetails;
 			api.order.create(newOrder);
 			const fondy = window.fondy;
 			fondy("#checkout-container", Options(newOrderId));
