@@ -2,7 +2,6 @@ import React from 'react';
 
 import './CartTotal.css'
 import useAPI from "provider/useAPI";
-import isMobile from "utils/isMobile";
 import {translations} from "info";
 
 const CartTotal = (props) => {

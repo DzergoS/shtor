@@ -178,6 +178,7 @@
 .payment-popup.active {
     opacity: 1;
     pointer-events: initial;
+    z-index: 1;
 }
 
 .payment-popup button.back {

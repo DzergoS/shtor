@@ -45,7 +45,7 @@ const Root = () => {
 		getProducts();
 	}, [])
 
-	const { infoPages: { paymentDelivery, care, privacyPolicy, returnsExchange, thankYou } } = translations;
+	const { infoPages: { paymentDelivery, care, privacyPolicy, returnsExchange, thankYou, thankYouSubscribe } } = translations;
 
 	return (
 		<Router>
@@ -86,6 +86,12 @@ const Root = () => {
 								<div className="thank-you-container">
 									<h2 className="thank-you-title">{thankYou.title[lang]}</h2>
 									<p className="thank-you-desc">{thankYou.text[lang]}</p>
+								</div>
+							</Route>
+							<Route path="/thank-you-subscribe">
+								<div className="thank-you-container">
+									<h2 className="thank-you-title">{thankYouSubscribe.title[lang]}</h2>
+									<p className="thank-you-desc">{thankYouSubscribe.text[lang]}</p>
 								</div>
 							</Route>
 							<Route path="/cart" component={ShoppingCart}/>

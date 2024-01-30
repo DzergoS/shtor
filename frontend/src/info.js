@@ -78,6 +78,16 @@ export const translations = {
 				en: "Wait for email with tracking number."
 			},
 		},
+		thankYouSubscribe: {
+			title: {
+				ua: "Дякуємо за підписку ❤️",
+				en: "Thank you for subscribing ❤️"
+			},
+			text: {
+				ua: "Ви успішно підписалися на наші новини.",
+				en: "You have successfully subscribed to our newsletter."
+			},
+		},
 		care: {
 			title: {
 				ua: "Догляд",

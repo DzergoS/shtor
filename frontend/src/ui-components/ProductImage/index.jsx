@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import isMobile from "utils/isMobile";
 import {isProduction} from "config";
 
 const addFolderLocation = (url) => isProduction ? `https://shtor.com.ua/productPhotos/${url}` : `http://localhost:3000/productPhotos/${url}` ;
