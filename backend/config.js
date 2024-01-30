@@ -3,7 +3,7 @@ require('dotenv').config()
 module.exports = {
     // APP Conf
     PORT: process.env.PORT,
-    HOSTNAME: process.env.HOSTNAME,
+    HOSTNAME: process.env.SHTOR_HOST,
     FRONTEND_ORIGIN: process.env.FRONTEND_ORIGIN,
 
     // DATABASE Conf

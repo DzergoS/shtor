@@ -8,9 +8,9 @@ const fs = require('fs').promises,
       { generateActivationToken } = require('../utils/tokens')
 
 
-
 const HOST = HOSTNAME === 'localhost' ? `${HOSTNAME}:${PORT}` : HOSTNAME
 const PROTOCOL = HOSTNAME === 'localhost' ? 'http' : 'https'
+
 
 const transporter = nodemailer.createTransport({
   host: EMAIL_HOST,
