@@ -36,7 +36,7 @@ const ukrainianMonths = {
 
 const orderKeys = {
 	amount: 'Вартість',
-	approved: 'Затверджено',
+	approved: 'Сплачено',
 	createdAt: 'Створено',
 	currency: 'Валюта',
 	email: 'Електронна пошта',
@@ -47,7 +47,6 @@ const orderKeys = {
 	shippingInfo: 'Інформація про доставку',
 	trackingSent: 'Відправлено відстеження',
 	_id: 'ID'
-	// Додайте інші ключі, якщо потрібно
 };
 
 const deliveryTranslations = {
@@ -143,18 +142,11 @@ const Orders = ({orders}) => {
 		<div className="orders__container">
 			<Typography variant="h4" gutterBottom>Замовлення {id ? `#${id}` : ''}</Typography>
 
-			{id
+			{id && pickedOrder
 				? <div className="hover-info">
 					<ul>
-						{pickedOrder && Object.entries(pickedOrder).map(([key, value]) => {
-							if (key === 'currency') return
-							if (key === 'shippingInfo') {
-								return Object.entries(value).map(([shippingKey, shippingValue]) => {
-									if (shippingValue) return (
-										<li key={shippingKey}><h4>{deliveryTranslations[shippingKey]}: </h4>{shippingValue}</li>
-									)
-								});
-							}
+						{Object.entries(pickedOrder).map(([key, value]) => {
+							if (key === 'billingAddress' || key === 'shippingInfo' || key === '_id') return;
 							if (key === 'products') {
 								return value.map((product, index) => {
 									console.log('products value', product)
@@ -183,6 +175,26 @@ const Orders = ({orders}) => {
 							if (value) return (<li key={key}><h4>{orderKeys[key]}: </h4>{typeof value === 'boolean' ? value ? 'так' : 'ні' : value}</li>);
 						})}
 					</ul>
+					<Typography variant="h6" gutterBottom>Address</Typography>
+					<ul>
+						{Object.entries(pickedOrder?.shippingInfo)?.map(([shippingKey, shippingValue]) => {
+							if (shippingValue) return (
+								<li key={shippingKey}><h4>{deliveryTranslations[shippingKey]}: </h4>{shippingValue}</li>
+							)
+						})}
+					</ul>
+					{pickedOrder?.billingAddress
+						? <>
+							<Typography variant="h6" gutterBottom>Billing address</Typography>
+							<ul>
+								{Object.entries(pickedOrder?.billingAddress)?.map(([shippingKey, shippingValue]) => {
+									if (shippingValue) return (
+										<li key={shippingKey}><h4>{deliveryTranslations[shippingKey]}: </h4>{shippingValue}</li>
+									)
+								})}
+							</ul>
+						</>
+						: ""}
 					<div className="virovni">
 						<TextField id="filled-basic" label="Tracking Number" value={trackingNumber} onChange={e => setTrackingNumber(e.target.value)}/>
 						<Button variant="contained" onClick={sendTrackingNumber}>
