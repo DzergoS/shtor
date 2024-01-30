@@ -34,6 +34,35 @@ const ukrainianMonths = {
 	'12': 'груденя'
 };
 
+const orderKeys = {
+	amount: 'Вартість',
+	approved: 'Затверджено',
+	createdAt: 'Створено',
+	currency: 'Валюта',
+	email: 'Електронна пошта',
+	language: 'Мова',
+	orderDescription: 'Опис замовлення',
+	order_id: 'Ідентифікатор замовлення',
+	products: 'Товари',
+	shippingInfo: 'Інформація про доставку',
+	trackingSent: 'Відправлено відстеження',
+	_id: 'ID'
+	// Додайте інші ключі, якщо потрібно
+};
+
+const deliveryTranslations = {
+	type: 'Тип',
+	delivery_price: 'Вартість доставки',
+	countryRegion: 'Країна/Регіон',
+	firstName: 'Ім\'я',
+	lastName: 'Прізвище',
+	address: 'Адреса',
+	additional: 'Додаткова інформація',
+	postalCode: 'Поштовий індекс',
+	city: 'Місто',
+	phone: 'Телефон'
+};
+
 function formatDate(dateString) {
 	const date = new Date(dateString);
 
@@ -108,6 +137,7 @@ const Orders = ({orders}) => {
 
 	const [search, setSearch] = useState('')
 	const onSearch = (e) => setSearch(e.target.value)
+	console.log('pickedOrder', pickedOrder)
 
 	return (
 		<div className="orders__container">
@@ -117,11 +147,12 @@ const Orders = ({orders}) => {
 				? <div className="hover-info">
 					<ul>
 						{pickedOrder && Object.entries(pickedOrder).map(([key, value]) => {
-							if (key === 'currency' || (key === 'additional' && !value )) return
+							if (key === 'currency') return
 							if (key === 'shippingInfo') {
 								return Object.entries(value).map(([shippingKey, shippingValue]) => {
-									return (<li key={shippingKey}><h4>{shippingKey}: </h4>{shippingValue}
-									</li>)
+									if (shippingValue) return (
+										<li key={shippingKey}><h4>{deliveryTranslations[shippingKey]}: </h4>{shippingValue}</li>
+									)
 								});
 							}
 							if (key === 'products') {
@@ -141,10 +172,15 @@ const Orders = ({orders}) => {
 													{translations.product.currency[pickedOrder?.language === 'uk' ? 'ua' : 'en']}
 												</div>
 											</div>
+											{product?.attachment ? <p>Підвіс: {product?.attachment}</p> : ""}
+											{product?.color ? <p>Колір: {product?.color}</p> : ""}
+											{product?.material ? <p>Матеріал: {product?.material}</p> : ""}
+											{product?.size ? <p>Розмір: {product?.size}</p> : ""}
 										</li>
 									)});
 							}
-							return (<li key={key}><h4>{key}: </h4>{typeof value === 'boolean' ? value ? 'так' : 'ні' : value}</li>);
+							if (key === 'amount') return (<li key={key}><h4>{orderKeys[key]}: </h4>{value} {pickedOrder?.currency}</li>);
+							if (value) return (<li key={key}><h4>{orderKeys[key]}: </h4>{typeof value === 'boolean' ? value ? 'так' : 'ні' : value}</li>);
 						})}
 					</ul>
 					<div className="virovni">
@@ -180,7 +216,7 @@ const Orders = ({orders}) => {
 									<TableRow
 										key={index}
 										sx={{'&:last-child td, &:last-child th': {border: 0}}}
-										className={`orders-row ${index === pickedOrderIndex ? 'active' : '' }`}
+										className={`orders-row ${index === pickedOrderIndex ? 'active' : '' } ${row.approved ? 'approved' : ''}`}
 										onClick={(e) => handleOrderClick(row._id, e)}
 									>
 										<TableCell scope="row">

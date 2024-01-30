@@ -9,7 +9,13 @@
     overflow: visible;
 }
 .orders__container .table .orders-row:hover {
-    background-color: #d9d9d9;
+    background-color: #eaeaea;
+}
+.orders__container .table .orders-row.approved {
+    background-color: #c0f8c0;
+}
+.orders__container .table .orders-row.approved:hover {
+    background-color: #cef8ce;
 }
 .orders__container .table .tracking-number {
     position: absolute;
@@ -33,6 +39,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     list-style: none;
+    padding: 25px;
 }
 .hover-info ul li {
     width: 30%;
