@@ -59,6 +59,7 @@
         display: block;
         margin-top: 0;
         margin-bottom: 16px;
+        opacity: 0;
     }
     .cart-total .cart-total__check-out{
         background-color: black;
