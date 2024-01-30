@@ -1,5 +1,6 @@
 import axios from "axios";
-import {isProduction} from "config";
+import {isProduction} from "../../config";
+
 
 export const server = axios.create({
 	baseURL: isProduction ? 'https://shtor.com.ua/api' : 'http://localhost:3001/api',
@@ -10,7 +11,6 @@ export const server = axios.create({
 })
 
 export const imageServer = axios.create({
-	// baseURL: 'https://shtor.com.ua/api/admin/upload/image',
 	baseURL: 'http://localhost:3001/api/admin/upload/image',
 	headers: {
 		'Content-Type': 'multipart/form-data',

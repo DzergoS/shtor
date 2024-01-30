@@ -3,7 +3,12 @@ const express = require('express'),
     sendResponse = require('../utils/response'),
     { Subscriber } = require('../models'),
     { sendActivationEmail } = require('../services/email'),
-    { validateActivationToken } = require('../utils/tokens')
+    { validateActivationToken } = require('../utils/tokens'),
+    { HOSTNAME, PORT } = require('../config');
+  
+
+const HOST = HOSTNAME === 'localhost' ? `${HOSTNAME}:${PORT}` : HOSTNAME
+const PROTOCOL = HOSTNAME === 'localhost' ? 'http' : 'https';
     
 
 subscriberRouter.post('/', async (req, res) => {
@@ -42,7 +47,8 @@ subscriberRouter.get('/activate/:userId/:token/:lang', async (req, res) => {
       subscriber.mailing_language = lang
       await subscriber.save()
   
-      return sendResponse(res, 200, true, {}, 'Thank You for subscribing!')
+      const thankYouSubscribe = `${PROTOCOL}://${HOST}/thank-you-subscribe`;
+      return res.redirect(thankYouSubscribe)
     } catch (error) {
       return sendResponse(res, 500, false, {}, 'Error activating subscription')
     }
