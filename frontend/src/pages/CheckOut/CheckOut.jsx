@@ -12,6 +12,7 @@ import {Button} from "@mui/material";
 import api from "../../api";
 import DeletePopUp from "../../ui-components/DeletePopUp";
 import {DECREMENT_PRODUCT} from "../../provider/actions/cart";
+import {isProduction} from "../../config";
 
 const basicDelivery = {
 	countryRegion: '',
@@ -73,7 +74,7 @@ const ShoppingCart = () => {
 			amount: 100,
 			order_desc: orderDesc,
 			lang: lang === 'ua' ? 'uk' : 'en',
-			response_url: 'http://localhost:3001/api/orders/send-order-details',
+			response_url: (isProduction ? 'https://shtor.com.ua' : 'http://localhost:3001') + '/api/orders/send-order-details',
 		}
 	})
 

@@ -11,7 +11,7 @@ export const server = axios.create({
 })
 
 export const imageServer = axios.create({
-	baseURL: 'http://localhost:3001/api/admin/upload/image',
+	baseURL: isProduction ? 'https://shtor.com.ua/api' : 'http://localhost:3001/api',
 	headers: {
 		'Content-Type': 'multipart/form-data',
 	},
