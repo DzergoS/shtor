@@ -71,8 +71,9 @@ const Orders = ({orders}) => {
 	const [redirect, setRedirect] = useState(false);
 
 	// Function to handle the click event and set redirect state
-	const handleOrderClick = (orderId) => {
-		setRedirect(`/admin/order/${orderId}`);
+	const handleOrderClick = (orderId, e) => {
+		console.log('e.target.tagName', e.target.tagName)
+		if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') setRedirect(`/admin/order/${orderId}`);
 	};
 
 	const pickedOrder = useMemo(() => orders.find(item => item?._id === id), [id, orders])
@@ -104,6 +105,9 @@ const Orders = ({orders}) => {
 			console.error(e)
 		}
 	}
+
+	const [search, setSearch] = useState('')
+	const onSearch = (e) => setSearch(e.target.value)
 
 	return (
 		<div className="orders__container">
@@ -156,59 +160,62 @@ const Orders = ({orders}) => {
 						</Button>
 					</div>
 				</div>
-				: <TableContainer component={Paper}>
-					<Table className="table" sx={{minWidth: 650}} size="small" aria-label="a dense table">
-						<TableHead>
-							<TableRow>
-								<TableCell>Опис</TableCell>
-								<TableCell align="center">Actions</TableCell>
-								<TableCell align="center">Ім'я</TableCell>
-								<TableCell align="center">Адреса</TableCell>
-								<TableCell align="center">Сума</TableCell>
-								<TableCell align="center">Час</TableCell>
-								<TableCell align="center">Дата</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{orders?.map((row, index) => (
-								<TableRow
-									key={index}
-									sx={{'&:last-child td, &:last-child th': {border: 0}}}
-									className={`orders-row ${index === pickedOrderIndex ? 'active' : '' }`}
-									onClick={() => handleOrderClick(row._id)}
-								>
-									<TableCell scope="row">
-										{row.approved && !row.trackingSent ? <Button variant="contained" onClick={() => setPickedOrderIndex(index)}>трекінг</Button> : ''}
-									</TableCell>
-									<TableCell component="th" scope="row">
-										{row.orderDescription}
-										{index === pickedOrderIndex
-											? <div className="tracking-number">
-												<TextField id="filled-basic" label="Tracking Number" value={trackingNumber} onChange={e => setTrackingNumber(e.target.value)}/>
-												<Button variant="contained" onClick={sendTrackingNumber}>
-													{isLoading === 'loading'
-														? <PendingIcon/>
-														:  isLoading === 'success'
-															? <DoneAllIcon/>
-															: isLoading === 'error'
-																? <ReportGmailerrorredIcon/>
-																: <>Віправити на {row.email}</>}
-												</Button>
-												<Button variant="outlined" onClick={() => setPickedOrderIndex(-1)}>Скасувати</Button>
-											</div>
-											: ""
-										}
-									</TableCell>
-									<TableCell align="center">{row.shippingInfo.firstName} {row.shippingInfo.lastName}</TableCell>
-									<TableCell align="center">{row.shippingInfo.city}, {row.shippingInfo.countryRegion}</TableCell>
-									<TableCell align="center">{row.amount} {row.language === 'uk' ? translations.product.currency.ua : translations.product.currency.en}</TableCell>
-									<TableCell align="center">{formatTime(row.createdAt)}</TableCell>
-									<TableCell align="center">{formatDate(row.createdAt)}</TableCell>
+				: <>
+					{/*<TextField variant="outlined" value={search} onChange={onSearch}/>*/}
+					<TableContainer component={Paper}>
+						<Table className="table" sx={{minWidth: 650}} size="small" aria-label="a dense table">
+							<TableHead>
+								<TableRow>
+									<TableCell>Опис</TableCell>
+									<TableCell align="center">Actions</TableCell>
+									<TableCell align="center">Ім'я</TableCell>
+									<TableCell align="center">Адреса</TableCell>
+									<TableCell align="center">Сума</TableCell>
+									<TableCell align="center">Час</TableCell>
+									<TableCell align="center">Дата</TableCell>
 								</TableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
+							</TableHead>
+							<TableBody>
+								{orders?.map((row, index) => (
+									<TableRow
+										key={index}
+										sx={{'&:last-child td, &:last-child th': {border: 0}}}
+										className={`orders-row ${index === pickedOrderIndex ? 'active' : '' }`}
+										onClick={(e) => handleOrderClick(row._id, e)}
+									>
+										<TableCell scope="row">
+											{row.approved && !row.trackingSent ? <Button variant="contained" onClick={() => setPickedOrderIndex(index)}>трекінг</Button> : ''}
+										</TableCell>
+										<TableCell component="th" scope="row">
+											{row.orderDescription}
+											{index === pickedOrderIndex
+												? <div className="tracking-number">
+													<TextField id="filled-basic" label="Tracking Number" value={trackingNumber} onChange={e => setTrackingNumber(e.target.value)}/>
+													<Button variant="contained" onClick={sendTrackingNumber}>
+														{isLoading === 'loading'
+															? <PendingIcon/>
+															:  isLoading === 'success'
+																? <DoneAllIcon/>
+																: isLoading === 'error'
+																	? <ReportGmailerrorredIcon/>
+																	: <>Віправити на {row.email}</>}
+													</Button>
+													<Button variant="outlined" onClick={() => setPickedOrderIndex(-1)}>Скасувати</Button>
+												</div>
+												: ""
+											}
+										</TableCell>
+										<TableCell align="center">{row.shippingInfo.firstName} {row.shippingInfo.lastName}</TableCell>
+										<TableCell align="center">{row.shippingInfo.city}, {row.shippingInfo.countryRegion}</TableCell>
+										<TableCell align="center">{row.amount} {row.language === 'uk' ? translations.product.currency.ua : translations.product.currency.en}</TableCell>
+										<TableCell align="center">{formatTime(row.createdAt)}</TableCell>
+										<TableCell align="center">{formatDate(row.createdAt)}</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</TableContainer>
+				</>
 			}
 			{redirect && <Redirect to={redirect} />}
 		</div>
