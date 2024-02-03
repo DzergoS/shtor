@@ -72,8 +72,18 @@ const copyProductById = async (req, res) => {
 
 		const {_id, ...newProduct} = productToCopy.toObject()
 
-		// Create a copy of the product
-		const copiedProduct = new Product({...newProduct});
+		// Find the maximum orderIndex value
+		const maxOrderIndexProduct = await Product.findOne().sort({orderIndex: -1});
+		let orderIndex = 1; // Default value if no products exist
+		if (maxOrderIndexProduct) {
+			orderIndex = maxOrderIndexProduct.orderIndex + 1;
+		}
+
+		// Create a copy of the product with the new orderIndex
+		const copiedProduct = new Product({
+			...newProduct,
+			orderIndex: orderIndex
+		});
 
 		// Save the copied product to the database
 		await copiedProduct.save();
@@ -96,6 +106,14 @@ const deleteProductById = async (req, res) => {
 			return sendResponse(res, 404, false, null, "Product not found.");
 		}
 
+		// Find all products with orderIndex greater than the deleted product's orderIndex
+		const productsToUpdate = await Product.find({ orderIndex: { $gt: deletedProduct.orderIndex } });
+		// Update the orderIndex of each subsequent product
+		for (const product of productsToUpdate) {
+			product.orderIndex -= 1;
+			await product.save();
+		}
+
 		// Respond with a success message
 		return sendResponse(res, 200, true, null, "Product deleted successfully.");
 	} catch (error) {
@@ -104,6 +122,7 @@ const deleteProductById = async (req, res) => {
 		return sendResponse(res, 500, false, null, "Internal server error.");
 	}
 };
+
 
 const updateProductsOrder = async (req, res) => {
 	console.log('req.body', req.body)
