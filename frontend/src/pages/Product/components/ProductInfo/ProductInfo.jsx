@@ -26,8 +26,8 @@ const ProductInfo = ({
 
     const images = useMemo(() => ([
         ...(product?.variations?.flatMap(variant => variant?.images) || []),
-        ...(product?.images || []),
         ...(product?.seashells?.flatMap(array => array) || []),
+        ...(product?.images || []),
     ]), [product]);
 
     const { group, size, color, seashells, variations } = product || {};
