@@ -14,18 +14,18 @@ const Product = ({match}) => {
 	const {params: { id, variationIndex }} = match
 	const [currentVariationIndex, setCurrentVariationIndex] = useState(variationIndex ? Number(variationIndex) : 0)
 
-	const {state: { lang, products: { allProducts } }} = useAPI()
+	const {state: { lang, products }} = useAPI()
 
-	const [product, setProduct] = useState(getSortedAttachmentsProduct(allProducts.find((product) => product._id === id)));
+	const [product, setProduct] = useState(getSortedAttachmentsProduct(((Array.isArray(products) ? products : []).find((product) => product._id === id))));
 	const [currentOptions, setCurrentOptions] = useState(getDefaultOptions(product, currentVariationIndex))
 
 	useEffect(() => {
-		if (allProducts.length) {
-			const foundProduct = getSortedAttachmentsProduct(allProducts.find((product) => product._id === id))
+		if (products?.length) {
+			const foundProduct = getSortedAttachmentsProduct(products.find((product) => product._id === id))
 			setProduct(foundProduct)
 			setCurrentOptions(getDefaultOptions(foundProduct, currentVariationIndex))
 		}
-	}, [allProducts.length, id, variationIndex]);
+	}, [products.length, id, variationIndex]);
 
 	const getProductProperty = (property) =>
 		capitalizeFirstLetter(product?.[property]?.[lang] || product?.variations?.[currentVariationIndex]?.[property]?.[lang]);

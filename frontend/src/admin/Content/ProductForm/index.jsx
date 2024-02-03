@@ -10,7 +10,7 @@ import {attachmentOptions, inputsData, OBJECT, requiredInputs} from "./constants
 import {Button, Typography} from "@mui/material";
 import api from "../../../api";
 
-const ProductForm = ({ type }) => {
+const ProductForm = () => {
 	const [form, setForm] = useState({
 		group: OBJECT,
 	});

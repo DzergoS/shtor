@@ -9,7 +9,6 @@ import {
 import {ReactComponent as Cross} from "assets/cross.svg";
 
 import './CheckOutProducts.css'
-import isMobile from "utils/isMobile";
 import {translations} from "info";
 import ProductImage from "ui-components/ProductImage";
 import {getProductImageName} from "utils/getProduct";
@@ -20,7 +19,7 @@ const PLUS = 'PLUS'
 
 const CheckOutProducts = () => {
 
-	const {state: {cart, lang, products: {allProducts}}, dispatch} = useAPI();
+	const {state: {cart, lang, isMobile}, dispatch} = useAPI();
 	const [deleteIndex, setDeleteIndex] = useState(-1);
 
 	const onChangeQuantity = (index, sign) => {

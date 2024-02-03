@@ -20,18 +20,6 @@ const Admin = () => {
 			.finally(() => setIsLoading(false))
 	}, [])
 
-	const [orders, setOrders] = useState([])
-	useEffect(() => {
-		const requestData = async () => {
-			const {data} = await api.order.get()
-			setOrders(Array.isArray(data.data) ? data.data : [])
-		}
-
-		requestData()
-	}, [])
-
-	console.log('orders', orders)
-
 	return (<>
 
 		{isLoading
@@ -44,7 +32,7 @@ const Admin = () => {
 
 					<Menu/>
 
-					<Content orderList={orders}/>
+					<Content/>
 
 				</main>
 

@@ -2,14 +2,14 @@ const express = require('express'),
     subscriberRouter = express.Router(),
     sendResponse = require('../utils/response'),
     { Subscriber } = require('../models'),
-    { sendActivationEmail } = require('../services/email'),
+    { sendActivationEmail } = require('../controllers/email'),
     { validateActivationToken } = require('../utils/tokens'),
     { HOSTNAME, PORT } = require('../config');
-  
+
 
 const HOST = HOSTNAME === 'localhost' ? `${HOSTNAME}:${PORT}` : HOSTNAME
 const PROTOCOL = HOSTNAME === 'localhost' ? 'http' : 'https';
-    
+
 
 subscriberRouter.post('/', async (req, res) => {
     const { email } = req.body
@@ -36,17 +36,17 @@ subscriberRouter.get('/activate/:userId/:token/:lang', async (req, res) => {
     if (!validateActivationToken(userId, token)) {
       return sendResponse(res, 400, false, {}, 'Invalid activation token')
     }
-  
+
     try {
       const subscriber = await Subscriber.findById(userId)
       if (!subscriber) {
         return sendResponse(res, 404, false, {}, 'Subscriber not found')
       }
-  
+
       subscriber.is_active = true
       subscriber.mailing_language = lang
       await subscriber.save()
-  
+
       const thankYouSubscribe = `${PROTOCOL}://${HOST}/thank-you-subscribe`;
       return res.redirect(thankYouSubscribe)
     } catch (error) {
@@ -60,7 +60,7 @@ subscriberRouter.get('/deactivate/:userId/:token', async (req, res) => {
     if (!validateDeactivationToken(userId, token)) {
       return sendResponse(res, 400, false, {}, 'Invalid deactivation token')
     }
-  
+
     try {
       const subscriber = await Subscriber.findById(userId)
       if (!subscriber) {
@@ -69,10 +69,10 @@ subscriberRouter.get('/deactivate/:userId/:token', async (req, res) => {
       if (!subscriber.is_active) {
         return sendResponse(res, 400, false, {}, 'This email is already inactive')
       }
-  
+
       subscriber.is_active = false
       await subscriber.save()
-  
+
       return sendResponse(res, 200, true, {}, 'Subscription removed successfully')
     } catch (error) {
       console.error('Error removing subscription:', error.message)

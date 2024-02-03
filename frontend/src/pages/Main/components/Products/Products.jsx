@@ -8,7 +8,7 @@ import ProductItem from "./ProductItem/ProductItem";
 
 const Products = () => {
 
-	const {state: { products: {productsToShow} }} = useAPI()
+	const {state: { products }} = useAPI()
 	const rotateElementRef = useRef(null);
 	const [animation, setAnimation] = useState({
 		on: false,
@@ -33,11 +33,14 @@ const Products = () => {
 		}, 2200);
 	};
 
+	console.log('flex')
+	console.log('products', products)
+
 	return (<>
 		<div className="product-list" id="product-list">
-			{productsToShow.slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
+			{(Array.isArray(products) ? products : []).filter(product => product.inStock).slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
 		</div>
-		{maxElements < productsToShow?.length
+		{maxElements < products?.length
 			? <div
 				className="see-more"
 				onClick={handleRotateClick}

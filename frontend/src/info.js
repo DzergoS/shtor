@@ -297,6 +297,10 @@ export const translations = {
 			ua: 'Ви впевнені, що хочете видалити',
 			en: 'Are you sure you want to delete'
 		},
+		copy: {
+			ua: 'Ви впевнені, що хочете скопіювати',
+			en: 'Are you sure you want to copy'
+		},
 		deliveryHint: {
 			ua: 'Доставка, податки та коди знижки розраховуються під час оформлення замовлення.',
 			en: 'Shopping,taxes and discount codes calculated at checkout.',

@@ -2,11 +2,10 @@ import React from 'react';
 
 import './CheckOutTotal.css'
 import useAPI from "provider/useAPI";
-import isMobile from "utils/isMobile";
 import {translations} from "info";
 
 const CheckOutTotal = (props) => {
-	const {state: {cart, lang}} = useAPI();
+	const {state: {lang}} = useAPI();
 
 	return (
 		<div className="checkout-total">

@@ -6,7 +6,7 @@ const express = require('express'),
 	authMiddleware = require('../middleware/auth'),
 	{ HOSTNAME, PORT } = require('../config'),
 	{ Order } = require('../models'),
-	{ sendOrderDetails, sendTrackingId } = require('../services/email');
+	{ sendOrderDetails, sendTrackingId } = require('../controllers/email');
 const genericController = require("../controllers");
 
 

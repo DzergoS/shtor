@@ -2,7 +2,17 @@
     border-bottom: 1px solid gray;
     padding: 15px;
     background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .header__admin .logo {
     width: 120px;
+}
+
+.header__admin .change__language {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+    cursor: pointer;
 }

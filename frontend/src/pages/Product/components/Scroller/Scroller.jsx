@@ -11,7 +11,7 @@ import {Link, useParams} from "react-router-dom";
 
 const Scroller = () => {
     const { id, variationIndex } = useParams()
-    const {state: { products: {productsToShow}, lang }} = useAPI();
+    const {state: { products, lang }} = useAPI();
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const settings = useMemo(() => ({
@@ -37,7 +37,7 @@ const Scroller = () => {
                 },
             },
         ],
-    }), [productsToShow.length])
+    }), [products?.length])
 
     const shuffledProducts = useMemo(() => {
         const shuffleArray = (array) => {
@@ -48,8 +48,8 @@ const Scroller = () => {
             return array;
         };
 
-        return shuffleArray([...productsToShow]);
-    }, [productsToShow.length, id, variationIndex]);
+        return shuffleArray([...(Array.isArray(products) ? products : [])]);
+    }, [products.length, id, variationIndex]);
 
     return (
         <div className="scroller-container">

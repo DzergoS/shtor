@@ -9,9 +9,9 @@ import '@fontsource/roboto/700.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <APIProvider>
       <Root />
     </APIProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ReactComponent as CartIcon } from 'assets/cart.svg';
 import { ReactComponent as MenuIcon } from 'assets/menu.svg';
 import { ReactComponent as CrossIcon } from 'assets/cross.svg';
 import logo from 'assets/logo.png';
 import { CHANGE_LANG } from 'provider/actions/lang';
-import isMobile from 'utils/isMobile';
 
 import './Header.css';
 import {translations} from "../../info";
@@ -13,7 +12,7 @@ import useAPI from "../../provider/useAPI";
 import FooterLinks, {HEADER_MENU} from "../FooterLinks";
 
 const Header = () => {
-    const { state: { lang, cart }, dispatch } = useAPI();
+    const { state: { lang, cart, isMobile }, dispatch} = useAPI();
     const location = useLocation();
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
@@ -27,6 +26,10 @@ const Header = () => {
     const sumOfQuantities = cart.reduce((accumulator, currentObject) => {
         return accumulator + currentObject.quantity;
     }, 0);
+
+    useEffect(() => {
+        setIsOpenMenu(false)
+    }, [isMobile])
 
     return (
         <header className={`header ${isMainPage ? 'absolute' : ''}`}>

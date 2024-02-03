@@ -7,7 +7,6 @@ import CheckOutTotal from "./CheckOutTotal/CheckOutTotal";
 import {Link} from "react-router-dom";
 import {countries, translations} from "../../info";
 import CustomRadio from "../../ui-components/CustomRadio";
-import isMobile from "../../utils/isMobile";
 import {Button} from "@mui/material";
 import api from "../../api";
 import DeletePopUp from "../../ui-components/DeletePopUp";
@@ -44,7 +43,7 @@ const fondyOptions = {
 }
 
 const ShoppingCart = () => {
-	const {state: {cart, lang}} = useAPI()
+	const {state: {cart, lang, isMobile}} = useAPI()
 	const [isPaying, setIsPaying] = useState(false);
 	const [showError, setShowError] = useState(false);
 	const [deliveryDetails, setDeliveryDetails] = useState(basicDelivery)

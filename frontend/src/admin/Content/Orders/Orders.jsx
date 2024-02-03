@@ -15,24 +15,11 @@ import PendingIcon from '@mui/icons-material/Pending';
 import Button from "@mui/material/Button";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
-import product from "../../../pages/Product/Product";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ProductImage from "../../../ui-components/ProductImage";
 import {useParams, Redirect} from "react-router-dom";
-
-const ukrainianMonths = {
-	'01': 'січня',
-	'02': 'лютого',
-	'03': 'березня',
-	'04': 'квітня',
-	'05': 'травня',
-	'06': 'червня',
-	'07': 'липення',
-	'08': 'серпення',
-	'09': 'вересня',
-	'10': 'жовтня',
-	'11': 'листопаду',
-	'12': 'груденя'
-};
+import formatDate from "../../../utils/formatDate";
+import formatTime from "../../../utils/formatTime";
 
 const orderKeys = {
 	amount: 'Вартість',
@@ -62,46 +49,30 @@ const deliveryTranslations = {
 	phone: 'Телефон'
 };
 
-function formatDate(dateString) {
-	const date = new Date(dateString);
-
-	// Extract components
-	const day = ('0' + date.getDate()).slice(-2);
-	const month = ukrainianMonths[(('0' + (date.getMonth() + 1)).slice(-2))];
-	const year = date.getFullYear().toString();
-
-	// Construct the formatted date string
-	return `${day} ${month} ${year}`;
-}
-
-const formatTime = (dateString) => {
-	const date = new Date(dateString);
-
-	const hours = ('0' + date.getHours()).slice(-2);
-	const minutes = ('0' + date.getMinutes()).slice(-2);
-
-	return `${hours}:${minutes}`
-}
-
-const originalDateString = '2024-01-28T20:38:21.946Z';
-const formattedDate = formatDate(originalDateString);
-console.log(formattedDate); // Output: 20:38 28.01.24
-
-
-const Orders = ({orders}) => {
-	console.log('page', orders)
+const Orders = () => {
 	const [trackingNumber, setTrackingNumber] = useState("")
 	const [pickedOrderIndex, setPickedOrderIndex] = useState(-1)
 	const [isLoading, setIsLoading] = useState("");
 
 	const { id } = useParams()
 
+	const [orders, setOrders] = useState([])
+	useEffect(() => {
+		if (!id) {
+			const requestData = async () => {
+				const {data} = await api.order.get()
+				setOrders(Array.isArray(data.data) ? data.data : [])
+			}
+
+			requestData()
+		}
+	}, [id])
+
 	const [redirect, setRedirect] = useState(false);
 
 	// Function to handle the click event and set redirect state
 	const handleOrderClick = (orderId, e) => {
-		console.log('e.target.tagName', e.target.tagName)
-		if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') setRedirect(`/admin/order/${orderId}`);
+		if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') setRedirect(`/admin/orders/${orderId}`);
 	};
 
 	const pickedOrder = useMemo(() => orders.find(item => item?._id === id), [id, orders])
@@ -140,37 +111,36 @@ const Orders = ({orders}) => {
 
 	return (
 		<div className="orders__container">
-			<Typography variant="h4" gutterBottom>Замовлення {id ? `#${id}` : ''}</Typography>
+			<Typography variant="h5" gutterBottom className="admin-product-title">
+				{id ? <ArrowBackIcon onClick={() => setRedirect('/admin/orders')}/> : ""}
+				Замовлення {id ? `#${id}` : ''}
+			</Typography>
 
 			{id && pickedOrder
 				? <div className="hover-info">
+					<ul className="products-listed">
+						{pickedOrder.products?.map((product, index) => (
+							<li className="products-li" key={index} style={{marginBottom: '10px'}}>
+								<div>
+									<ProductImage imageName={product.image}/>
+								</div>
+								<div className="product-details">{product.name.en} {product.quantity}x</div>
+								<div>
+									{pickedOrder?.language === 'uk'
+										? product.price.ua * product.quantity
+										: product.price.en * product.quantity}
+									{translations.product.currency[pickedOrder?.language === 'uk' ? 'ua' : 'en']}
+								</div>
+								{product?.attachment ? <p>Підвіс: {product?.attachment}</p> : ""}
+								{typeof product?.color === 'string' ? <p>Колір: {product?.color}</p> : ""}
+								{product?.material ? <p>Матеріал: {product?.material}</p> : ""}
+								{product?.size ? <p>Розмір: {product?.size}</p> : ""}
+							</li>
+						))}
+					</ul>
 					<ul>
 						{Object.entries(pickedOrder).map(([key, value]) => {
-							if (key === 'billingAddress' || key === 'shippingInfo' || key === '_id') return;
-							if (key === 'products') {
-								return value.map((product, index) => {
-									console.log('products value', product)
-									return (
-										<li className="products-li" key={index} style={{marginBottom: '10px'}}>
-											<div>
-												<ProductImage imageName={product.image}/>
-											</div>
-											<div className="product-details" style={{display: 'flex'}}>
-												<div>{product.name.en} {product.quantity}</div>
-												<div style={{marginLeft: 'auto'}}>
-													{pickedOrder?.language === 'uk'
-														? product.price.ua * product.quantity
-														: product.price.en * product.quantity}
-													{translations.product.currency[pickedOrder?.language === 'uk' ? 'ua' : 'en']}
-												</div>
-											</div>
-											{product?.attachment ? <p>Підвіс: {product?.attachment}</p> : ""}
-											{product?.color ? <p>Колір: {product?.color}</p> : ""}
-											{product?.material ? <p>Матеріал: {product?.material}</p> : ""}
-											{product?.size ? <p>Розмір: {product?.size}</p> : ""}
-										</li>
-									)});
-							}
+							if (key === 'products' || key === 'billingAddress' || key === 'shippingInfo' || key === '_id') return;
 							if (key === 'amount') return (<li key={key}><h4>{orderKeys[key]}: </h4>{value} {pickedOrder?.currency}</li>);
 							if (value) return (<li key={key}><h4>{orderKeys[key]}: </h4>{typeof value === 'boolean' ? value ? 'так' : 'ні' : value}</li>);
 						})}
@@ -215,12 +185,12 @@ const Orders = ({orders}) => {
 							<TableHead>
 								<TableRow>
 									<TableCell>Опис</TableCell>
-									<TableCell align="center">Actions</TableCell>
 									<TableCell align="center">Ім'я</TableCell>
 									<TableCell align="center">Адреса</TableCell>
 									<TableCell align="center">Сума</TableCell>
 									<TableCell align="center">Час</TableCell>
 									<TableCell align="center">Дата</TableCell>
+									<TableCell align="center">Actions</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
@@ -231,9 +201,6 @@ const Orders = ({orders}) => {
 										className={`orders-row ${index === pickedOrderIndex ? 'active' : '' } ${row.approved ? 'approved' : ''}`}
 										onClick={(e) => handleOrderClick(row._id, e)}
 									>
-										<TableCell scope="row">
-											{row.approved && !row.trackingSent ? <Button variant="contained" onClick={() => setPickedOrderIndex(index)}>трекінг</Button> : ''}
-										</TableCell>
 										<TableCell component="th" scope="row">
 											{row.orderDescription}
 											{index === pickedOrderIndex
@@ -258,6 +225,9 @@ const Orders = ({orders}) => {
 										<TableCell align="center">{row.amount} {row.language === 'uk' ? translations.product.currency.ua : translations.product.currency.en}</TableCell>
 										<TableCell align="center">{formatTime(row.createdAt)}</TableCell>
 										<TableCell align="center">{formatDate(row.createdAt)}</TableCell>
+										<TableCell scope="row">
+											{row.approved && !row.trackingSent ? <Button variant="contained" onClick={() => setPickedOrderIndex(index)}>трекінг</Button> : ''}
+										</TableCell>
 									</TableRow>
 								))}
 							</TableBody>

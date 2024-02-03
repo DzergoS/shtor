@@ -1,10 +1,8 @@
 const { Schema, model } = require('mongoose');
 
 const productSchema = new Schema({
-	group: {
-		type: String,
-		required: true,
-	},
+	group: {type: String, required: true},
+	inStock: {type: Boolean, default: true, required: true},
 	name: {
 		en: { type: String },
 		ua: { type: String }
@@ -17,21 +15,12 @@ const productSchema = new Schema({
 		en: { type: Number, min: 0 },
 		ua: { type: Number, min: 0 },
 	},
-	color: [{
-		type: String
-	}],
-	size: [{
-		type: String,
-	}],
-	seashells: [[{
-		type: String,
-	}]],
-	images: [{
-		type: String,
-	}],
-	feature: {
-		type: String,
-	},
+	color: [{type: String}],
+	size: [{type: String}],
+	seashells: [[{type: String}]],
+	images: [{type: String}],
+	feature: {type: String},
+	orderIndex: {type: Number, required: true, unique: true},
 	variations: [{
 		name: {
 			en: { type: String },
@@ -45,21 +34,11 @@ const productSchema = new Schema({
 			en: { type: Number, min: 0 },
 			ua: { type: Number, min: 0 },
 		},
-		color: {
-			type: String
-		},
-		material: {
-			type: String
-		},
-		size: [{
-			type: String,
-		}],
-		images: [{
-			type: String,
-		}],
-		attachment: {
-			type: String,
-		},
+		color: {type: String},
+		material: {type: String},
+		size: [{type: String}],
+		images: [{type: String}],
+		attachment: {type: String},
 	}]
 });
 

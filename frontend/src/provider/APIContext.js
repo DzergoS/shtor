@@ -1,13 +1,15 @@
 import {createContext} from "react";
+import isMobile from "../utils/isMobile";
 
 export const APIContext = createContext({
   state: {
     cart: [],
     lang: '',
     products: {
-      allProducts: [],
-      productsToShow: [],
+      products: [],
+      products: [],
     },
+    isMobile,
   },
   dispatch: () => {},
 });
