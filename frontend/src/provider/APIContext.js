@@ -5,10 +5,8 @@ export const APIContext = createContext({
   state: {
     cart: [],
     lang: '',
-    products: {
-      products: [],
-      products: [],
-    },
+    currency: '',
+    products: [],
     isMobile,
   },
   dispatch: () => {},

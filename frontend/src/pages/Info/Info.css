@@ -44,12 +44,12 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
     .info-page-wrapper ol li,
     .info-page-wrapper ul li {
         padding-left: 0;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 
     .info-page-wrapper p,

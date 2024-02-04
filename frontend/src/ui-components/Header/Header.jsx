@@ -16,7 +16,9 @@ const Header = () => {
     const location = useLocation();
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
-    const closeMenu = () => setIsOpenMenu(false)
+    const closeMenu = (e) => {
+        if (isMobile && !e.target.className.includes('main-language')) setIsOpenMenu(false)
+    }
     const openMenu = () => setIsOpenMenu(true)
 
     const toggleLanguage = () => dispatch({ type: CHANGE_LANG, payload: lang === 'en' ? 'ua' : 'en' });
@@ -49,7 +51,7 @@ const Header = () => {
                         <div className="menu-link-mobile__container">
                             <CrossIcon className="cross-icon"/>
                             <NavLink className="nav-link" to="/#about-us" onClick={closeMenu}>{translations.header.aboutUs[lang]}</NavLink>
-                            <NavLink className="nav-link"  to="/#product-list" onClick={closeMenu}>{translations.header.shop[lang]}</NavLink>
+                            <NavLink className="nav-link" to="/#product-list" onClick={closeMenu}>{translations.header.shop[lang]}</NavLink>
                             <NavLink className="nav-link cart-link" onClick={closeMenu} to="/cart">
                                 {translations.cart.title[lang]}
                                 <span className="cart-icon__container">

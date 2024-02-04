@@ -21,7 +21,7 @@
     margin-top: 0;
 }
 
-.footer .custom-language {
+.custom-language {
     margin-bottom: 42px;
     color: #000;
     font-size: 20px;
@@ -29,6 +29,29 @@
     font-weight: 400;
     line-height: normal;
     cursor: pointer;
+    position: relative;
+    background-color: #fff;
+}
+.custom-language .main-language {
+    font-weight: 400;
+}
+.custom-language .custom-language__menu{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    opacity: 0;
+    top: -71px;
+    padding: 0 10px;
+    left: -10px;
+}
+.custom-language .custom-language__menu .language__menu-item {
+    display: inline-block;
+    margin-bottom: 9px;
+    font-weight: 300;
+}
+.custom-language.active .custom-language__menu {
+    opacity: 1;
 }
 
 .footer .link-instagram {
@@ -70,6 +93,8 @@
 
 @media(max-width: 445px) {
     .footer .footer-links.social {
-        align-items: flex-start;
+        align-items: flex-end;
+        min-height: 90px;
+        justify-content: flex-start;
     }
 }

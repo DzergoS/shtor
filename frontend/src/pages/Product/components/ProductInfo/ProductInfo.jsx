@@ -14,12 +14,13 @@ import {isProductToSetVariationBySliding} from "./filters";
 import {getImageIndexInVariation, getSeashellIndex} from "../../../../utils/getImageIndexInVariation";
 import Description from "./Description/Description";
 import CartPickerPopUp from "../CartPickerPopUp/CartPickerPopUp";
+import {formatPrice} from "../../../../utils/formatPrice";
 
 const ProductInfo = ({
      product, currentOptions, setCurrentOptions,
      currentVariationIndex, setCurrentVariationIndex, productText,
 }) => {
-    const {state: { lang, cart }, dispatch} = useAPI()
+    const {state: { lang, cart, currency }, dispatch} = useAPI()
     const [slider, setSlider] = useState(null)
     const [popUpSlider, setPopUpSlider] = useState();
     const [showPicker, setShowPicker] = useState(false);
@@ -164,7 +165,7 @@ const ProductInfo = ({
                                 />
                             </div>
                             : ""}
-                        <p className="price">{translations.product.currency[lang]}{price}</p>
+                        <p className="price">{translations.currencySymbol[currency]}{formatPrice(price)}</p>
                         <Button className="add-to-cart" onClick={() => setShowPicker(true)}>
                             <CheckIcon/>
                             <span>{translations.product.addToCart[lang]}</span>

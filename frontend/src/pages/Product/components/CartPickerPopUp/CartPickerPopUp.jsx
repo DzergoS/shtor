@@ -9,15 +9,14 @@ import {translations} from "../../../../info";
 import ProductImage from "../../../../ui-components/ProductImage";
 import CheckIcon from "@mui/icons-material/Check";
 import {getSeashellVariationsIndxBySlide} from "../../../../utils/getImageIndexInVariation";
+import {formatPrice} from "../../../../utils/formatPrice";
 
 const CartPickerPopUp = ({ popUpSlider, setPopUpSlider, currentSlide, currentVariationIndex, setCurrentSlide, isAddingAnimation, setShowPicker, currentOptions, product, productTitle, showPicker, initialSlide, images, addToCart, price, variationContainer }) => {
 	const isSeashell = useMemo(() => !!product?.seashells?.length, [product]);
 
 	const [quantity, setQuantity] = useState(1);
-	const {state: {lang}} = useAPI();
+	const {state: {lang, currency}} = useAPI();
 	const [popUpSlide, setPopUpSlide] = useState(0)
-
-	const currency = translations.product.currency[lang]
 
 	useEffect(() => {
 		if (!showPicker) setQuantity(1)
@@ -61,7 +60,7 @@ const CartPickerPopUp = ({ popUpSlider, setPopUpSlider, currentSlide, currentVar
 					{quantity}
 					<button className="plus"  onClick={() => setQuantity(quantity + 1)}>+</button>
 				</div>
-				<div className="popup-price">{currency}{price * quantity}</div>
+				<div className="popup-price">{translations.currencySymbol[currency]}{formatPrice(price * quantity)}</div>
 			</div>
 			{variationContainer}
 			<button className={`popup__add-to-card ${isAddingAnimation ? 'adding-animation' : ''}`} onClick={() => !isAddingAnimation && addToCart(quantity, popUpSlide)}>

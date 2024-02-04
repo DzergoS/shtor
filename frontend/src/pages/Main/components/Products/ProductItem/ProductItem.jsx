@@ -5,10 +5,12 @@ import useAPI from "../../../../../provider/useAPI";
 import capitalizeFirstLetter from "../../../../../utils/capitalizeFirstLetter";
 import {getProductImageName, getProductImageNameHover, getProductName} from "../../../../../utils/getProduct";
 import ProductImage from "../../../../../ui-components/ProductImage";
+import {translations} from "../../../../../info";
+import {formatPrice} from "../../../../../utils/formatPrice";
 
 const ProductItem = ({product}) => {
 
-	const { state: { lang } } = useAPI()
+	const { state: { lang, currency } } = useAPI()
 	const { group, price, variations, link } = product
 
 	const imageName = getProductImageName(product)
@@ -26,7 +28,7 @@ const ProductItem = ({product}) => {
 
 				<h3>{group}/{capitalizeFirstLetter(getProductName(product, lang))}</h3>
 
-				<p>{lang === 'ua' ? '₴' : '$'}{price?.[lang] || variations[0].price[lang]}</p>
+				<p>{translations.currencySymbol[currency]}{formatPrice(price?.[lang] || variations[0].price[lang])}</p>
 
 			</div>
 		</Link>

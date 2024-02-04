@@ -3,23 +3,26 @@ import React from 'react';
 import './CheckOutTotal.css'
 import useAPI from "provider/useAPI";
 import {translations} from "info";
+import {formatPrice} from "../../../utils/formatPrice";
 
 const CheckOutTotal = (props) => {
-	const {state: {lang}} = useAPI();
+	const {state: {lang, currency}} = useAPI();
+
+	const currencySymbol = translations.currencySymbol[currency]
 
 	return (
 		<div className="checkout-total">
 			<h4 className="checkout-total__subtotal">
 				{translations.cart.subTotal[lang]}
-				<span>{translations.product.currency[lang]}{props.sumOfPrices}</span>
+				<span>{currencySymbol}{formatPrice(props.sumOfPrices)}</span>
 			</h4>
 			<h4 className="checkout-total__subtotal">
 				{translations.cart.delivery[lang]}
-				<span>{props.deliveryPrice ? `${translations.product.currency[lang]}${props.deliveryPrice}` : translations.cart.free[lang]}</span>
+				<span>{props.deliveryPrice ? `${currencySymbol}${props.deliveryPrice}` : translations.cart.free[lang]}</span>
 			</h4>
 			<p className="checkout-total__total">
 				{translations.cart.total[lang]}:
-				<span><bdi>{translations.money[lang]}</bdi> {translations.product.currency[lang]}{props.sumOfPrices + props.deliveryPrice}</span>
+				<span><bdi>{currency.toUpperCase()}</bdi> {currencySymbol}{formatPrice(props.sumOfPrices + props.deliveryPrice)}</span>
 			</p>
 		</div>
 

@@ -19,7 +19,7 @@ const PLUS = 'PLUS'
 
 const CheckOutProducts = () => {
 
-	const {state: {cart, lang, isMobile}, dispatch} = useAPI();
+	const {state: {cart, lang, isMobile, currency}, dispatch} = useAPI();
 	const [deleteIndex, setDeleteIndex] = useState(-1);
 
 	const onChangeQuantity = (index, sign) => {
@@ -32,7 +32,7 @@ const CheckOutProducts = () => {
 
 	const deleteProductFromCart = (index) => setDeleteIndex(index);
 
-	const currency = translations.product.currency[lang]
+	const currencySymbol = translations.currencySymbol[currency];
 	const formatDesc = (description) => description[description?.length - 1] === '.'
 		? description.slice(0, -1)
 		: description;
@@ -59,7 +59,7 @@ const CheckOutProducts = () => {
 										{item.quantity}
 										<button className="plus"  onClick={() => onChangeQuantity(index, PLUS)}>+</button>
 									</div>
-									<div className="price">{currency}{item.price[lang] * item.quantity}</div>
+									<div className="price">{currencySymbol}{item.price[lang] * item.quantity}</div>
 								</div>
 							</>
 							: <>
@@ -74,7 +74,7 @@ const CheckOutProducts = () => {
 											{item.quantity}
 											<button className="plus"  onClick={() => onChangeQuantity(index, PLUS)}>+</button>
 										</div>
-										<div className="price">{currency}{item.price[lang] * item.quantity}</div>
+										<div className="price">{currencySymbol}{item.price[lang] * item.quantity}</div>
 									</div>
 								</div>
 							</>

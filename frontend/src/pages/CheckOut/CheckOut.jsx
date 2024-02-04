@@ -43,7 +43,7 @@ const fondyOptions = {
 }
 
 const ShoppingCart = () => {
-	const {state: {cart, lang, isMobile}} = useAPI()
+	const {state: {cart, lang, isMobile, currency}} = useAPI()
 	const [isPaying, setIsPaying] = useState(false);
 	const [showError, setShowError] = useState(false);
 	const [deliveryDetails, setDeliveryDetails] = useState(basicDelivery)
@@ -68,7 +68,7 @@ const ShoppingCart = () => {
 			merchant_id: 1538293,
 			// merchant_id: 1396424,
 			order_id,
-			currency: lang === 'ua' ? 'UAH' : 'USD',
+			currency: currency.toUpperCase(),
 			// amount: (orderPrice + deliveryPrice) * 100,
 			amount: 100,
 			order_desc: orderDesc,
@@ -157,9 +157,7 @@ const ShoppingCart = () => {
 							<h3>{translations.cart.delivery[lang]}</h3>
 							<select name="countryRegion" className={`country-region ${handleError(deliveryDetails.countryRegion)}`} onChange={handleDeliveryDetailsChange}>
 								<option disabled selected> {translations.cart.countryRegion[lang]}</option>
-								{countries.map(item => (
-									<option value={item}>{item}</option>))
-								}
+								{countries.map(item => <option value={item}>{item}</option>)}
 							</select>
 							<div className="double">
 								<input required name="firstName" type="text" className={`firstName ${handleError(deliveryDetails.firstName)}`} placeholder={translations.cart.firstName[lang]} onChange={handleDeliveryDetailsChange}/>

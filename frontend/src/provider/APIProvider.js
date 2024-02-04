@@ -6,6 +6,7 @@ import emailReducer from "./reducers/email";
 import productsReducer from "./reducers/products";
 import mobileReducer from "./reducers/mobile";
 import {CHANGE_IS_MOBILE} from "./actions/mobile";
+import currencyReducer from "./reducers/currency";
 
 const APIProvider = (props) => {
 
@@ -13,6 +14,7 @@ const APIProvider = (props) => {
 	const [state, dispatch] = useReducer(
 		(state, action) => ({
 			lang: langReducer(state.lang, action),
+			currency: currencyReducer(state.currency, action),
 			cart: cartReducer(state.cart, action),
 			email: emailReducer(state.email, action),
 			products: productsReducer(state.products, action),
@@ -20,6 +22,7 @@ const APIProvider = (props) => {
 		}),
 		{
 			lang: 'ua',
+			currency: 'uah',
 			cart: [],
 			email: '',
 			products: [],

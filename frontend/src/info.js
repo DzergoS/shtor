@@ -419,9 +419,15 @@ export const translations = {
 		en: "No",
 	},
 	money: {
-		en: 'USD',
-		ua: 'UAH',
-	}
+		eur: 'EUR',
+		usd: 'USD',
+		uah: 'UAH',
+	},
+	currencySymbol: {
+		eur: '€',
+		usd: '$',
+		uah: '₴',
+	},
 }
 
 export const countries = [

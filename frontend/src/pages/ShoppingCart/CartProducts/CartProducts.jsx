@@ -13,13 +13,14 @@ import {translations} from "info";
 import ProductImage from "ui-components/ProductImage";
 import {getProductImageName} from "utils/getProduct";
 import DeletePopUp from "../../../ui-components/DeletePopUp";
+import {formatPrice} from "../../../utils/formatPrice";
 
 const MINUS = 'MINUS'
 const PLUS = 'PLUS'
 
 const CartProducts = () => {
 
-	const {state: {cart, lang, isMobile}, dispatch} = useAPI();
+	const {state: {cart, lang, isMobile, currency}, dispatch} = useAPI();
 	const [deleteIndex, setDeleteIndex] = useState(-1);
 
 	const onChangeQuantity = (index, sign) => {
@@ -31,7 +32,7 @@ const CartProducts = () => {
 	}
 
 	const deleteProductFromCart = (index) => setDeleteIndex(index);
-	const currency = translations.product.currency[lang]
+	const currencyValue = translations.currencySymbol[currency]
 	const formatDesc = (description) => description[description?.length - 1] === '.'
 		? description.slice(0, -1)
 		: description;
@@ -40,7 +41,9 @@ const CartProducts = () => {
 		<div className="cart-products">
 			{cart.map((item, index) => (
 				<div className="cart-product" key={index}>
-					<ProductImage imageName={getProductImageName(item)} alt="product" className="cart-product__img"/>
+					<div className="cart-product__img__container">
+						<ProductImage imageName={getProductImageName(item)} alt="product" className="cart-product__img"/>
+					</div>
 					<div className="cart-product-desc">
 						{!isMobile
 							? <>
@@ -54,7 +57,7 @@ const CartProducts = () => {
 										<button className="plus"  onClick={() => onChangeQuantity(index, PLUS)}>+</button>
 									</div>
 								</div>
-								<div className="price">{currency}{item.price[lang] * item.quantity}</div>
+								<div className="price">{currencyValue}{formatPrice(item.price[lang] * item.quantity)}</div>
 							</>
 							: <>
 								<div className="top">
@@ -70,7 +73,7 @@ const CartProducts = () => {
 											<button className="plus"  onClick={() => onChangeQuantity(index, PLUS)}>+</button>
 										</div>
 									</div>
-									<div className="price">{currency}{item.price[lang] * item.quantity}</div>
+									<div className="price">{currencyValue}{formatPrice(item.price[lang] * item.quantity)}</div>
 								</div>
 							</>
 						}
