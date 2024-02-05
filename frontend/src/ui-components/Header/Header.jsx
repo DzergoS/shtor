@@ -10,6 +10,7 @@ import './Header.css';
 import {translations} from "../../info";
 import useAPI from "../../provider/useAPI";
 import FooterLinks, {HEADER_MENU} from "../FooterLinks";
+import {CHANGE_CURRENCY} from "../../provider/actions/currency";
 
 const Header = () => {
     const { state: { lang, cart, isMobile }, dispatch} = useAPI();
@@ -21,7 +22,10 @@ const Header = () => {
     }
     const openMenu = () => setIsOpenMenu(true)
 
-    const toggleLanguage = () => dispatch({ type: CHANGE_LANG, payload: lang === 'en' ? 'ua' : 'en' });
+    const toggleLanguage = () => {
+        dispatch({ type: CHANGE_LANG, payload: lang === 'en' ? 'ua' : 'en' });
+        dispatch({ type: CHANGE_CURRENCY, payload: lang === 'en' ? 'usd' : 'uah' });
+    }
 
     const isMainPage = location.pathname === '/'
 
