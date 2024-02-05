@@ -65,8 +65,8 @@ const ShoppingCart = () => {
 	const Options = (order_id) => ({
 		options: fondyOptions,
 		params: {
-			// merchant_id: 1538293,
-			merchant_id: 1396424,
+			merchant_id: 1538293,
+			// merchant_id: 1396424,
 			order_id,
 			currency: currency.toUpperCase(),
 			amount: (orderPrice + deliveryPrice) * 100,
