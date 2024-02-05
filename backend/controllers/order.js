@@ -1,5 +1,4 @@
 const { Order } = require("../models"),
-	  genericController = require("../controllers"),
 	  sendResponse = require('./../utils/response')
 
 const createOrder = async (req, res) => {

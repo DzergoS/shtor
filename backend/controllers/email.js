@@ -43,12 +43,22 @@ function getMailOptions(
   }
 }
 
-
 function productImagesAttachment(products) {
   return products.map((product, index) => ({
     path: path.join(ProductImagePath, product.image),
     cid: `product_${index}`
   }))
+}
+
+function getCurrencySymbol(currency) {
+  switch(currency) {
+      case 'UAH':
+        return '₴'
+      case 'EUR':
+        return '€' 
+      case 'USD':
+        return '$'
+  }
 }
 
 
@@ -76,7 +86,7 @@ async function sendOrderDetails(language, email, products, currency, amount, shi
   const templateContent = await fs.readFile(orderDetailsTemplate, 'utf-8')
 
   const total_products = products.reduce((sum, product) => sum + product.quantity, 0)
-  const currency_symbol = currency === 'UAH' ? '₴' : '$'
+  const currency_symbol = getCurrencySymbol(currency)
 
   const htmlContent = ejs.render(
     templateContent,

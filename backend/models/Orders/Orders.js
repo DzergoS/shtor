@@ -12,7 +12,7 @@ const baseAddressFields = (required) => ({
 })
 
 const orderSchema = new Schema({
-	currency: {type: String, enum: ['UAH', 'USD'], required: true},
+	currency: {type: String, enum: ['UAH', 'USD', 'EUR'], required: true},
 	amount: {type: Number, min: 0, required: true},
 	orderDescription: {type: String, required: true},
 	language: {type: String, enum: ['en', 'uk'], required: true},

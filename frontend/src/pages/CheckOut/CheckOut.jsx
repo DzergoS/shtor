@@ -65,8 +65,8 @@ const ShoppingCart = () => {
 	const Options = (order_id) => ({
 		options: fondyOptions,
 		params: {
-			merchant_id: 1538293,
-			// merchant_id: 1396424,
+			// merchant_id: 1538293,
+			merchant_id: 1396424,
 			order_id,
 			currency: currency.toUpperCase(),
 			amount: (orderPrice + deliveryPrice) * 100,
@@ -103,7 +103,7 @@ const ShoppingCart = () => {
 		const newOrderId = `shtor_order_${Date.now()}`;
 		if (!hasErrors) {
 			const newOrder = {
-				currency: lang === 'ua' ? 'UAH' : 'USD',
+				currency: currency.toUpperCase(),
 				amount: orderPrice + deliveryPrice,
 				orderDescription: orderDesc,
 				language: lang === 'ua' ? 'uk' : 'en',

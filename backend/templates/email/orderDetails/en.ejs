@@ -32,11 +32,7 @@
       <div style="display: flex;">
         <div><%= product.name.en %> x<%= product.quantity %></div>
         <div style="margin-left: auto;">
-          <%= currency_symbol %>
-            <%= currency_symbol === '₴'
-                ? product.price.ua * product.quantity
-                : product.price.en * product.quantity
-            %>
+          <%= currency_symbol %><%= currency_symbol === '₴'? product.price.ua * product.quantity: product.price.en * product.quantity%>
         </div>
       </div>
     </div>
