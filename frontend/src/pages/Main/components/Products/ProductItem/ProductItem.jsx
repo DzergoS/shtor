@@ -17,11 +17,14 @@ const ProductItem = ({product}) => {
 	const hoverImageName = getProductImageNameHover(product)
 
 	return (
-		<Link to={link} className="product-list__item">
+		<Link to={product.inStock ? link : "#"} className={`product-list__item ${!product.inStock ? 'empty' : ''}`}>
 
 			<div className="image__container">
 				<ProductImage className="image" imageName={getProductImageName(product)} alt="product list item image"/>
 				{imageName !== hoverImageName ? <ProductImage className="hover-image" imageName={getProductImageNameHover(product)} alt="product item image hover"/> : ""}
+				{!product.inStock && (<div className="outOfStock">
+					{translations.product.outOfStock[lang]}
+				</div>)}
 			</div>
 
 			<div className="product-list__item-info">

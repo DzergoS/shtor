@@ -287,6 +287,10 @@ export const translations = {
 			ua: 'Додати у кошик',
 			en: 'Add to cart'
 		},
+		outOfStock: {
+			ua: 'Немає в наявності',
+			en: 'Out of stock',
+		},
 	},
 	cart: {
 		title: {

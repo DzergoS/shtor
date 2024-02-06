@@ -35,7 +35,7 @@ const Products = () => {
 
 	return (<>
 		<div className="product-list" id="product-list">
-			{(Array.isArray(products) ? products : []).filter(product => product.inStock).slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
+			{(Array.isArray(products) ? products : []).slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
 		</div>
 		{maxElements < products?.length
 			? <div

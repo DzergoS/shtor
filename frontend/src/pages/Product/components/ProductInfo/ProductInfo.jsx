@@ -167,10 +167,10 @@ const ProductInfo = ({
                             </div>
                             : ""}
                         <p className="price">{translations.currencySymbol[currency]}{formatPrice(price)}</p>
-                        <Button className="add-to-cart" onClick={() => setShowPicker(true)}>
+                        {product.inStock && (<Button className="add-to-cart" onClick={() => setShowPicker(true)}>
                             <CheckIcon/>
                             <span>{translations.product.addToCart[lang]}</span>
-                        </Button>
+                        </Button>)}
                     </div>
                     <CartPickerPopUp
                         popUpSlider={popUpSlider}

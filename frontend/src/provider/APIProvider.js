@@ -13,6 +13,8 @@ import axios from "axios";
 import {CHANGE_LANG} from "./actions/lang";
 import {CHANGE_CURRENCY} from "./actions/currency";
 
+const euroCountries = ['AT', 'BE', 'CY', 'EE', 'FI', 'FR', 'DE', 'GR', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PT', 'SK', 'SI', 'ES'];
+
 const APIProvider = (props) => {
 
 	const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -39,7 +41,6 @@ const APIProvider = (props) => {
 		const fetchUserCountry = async () => {
 			try {
 				const {data: {country_code}} = await axios.get('https://ipapi.co/json/');
-				const euroCountries = ['AT', 'BE', 'CY', 'EE', 'FI', 'FR', 'DE', 'GR', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PT', 'SK', 'SI', 'ES'];
 				if (euroCountries.includes(country_code)) {
 					dispatch({
 						type: CHANGE_LANG,
