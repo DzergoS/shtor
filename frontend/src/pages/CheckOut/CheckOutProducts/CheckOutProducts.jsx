@@ -13,6 +13,7 @@ import {translations} from "info";
 import ProductImage from "ui-components/ProductImage";
 import {getProductImageName} from "utils/getProduct";
 import DeletePopUp from "../../../ui-components/DeletePopUp";
+import {formatDesc} from "../../ShoppingCart/CartProducts/CartProducts";
 
 const MINUS = 'MINUS'
 const PLUS = 'PLUS'
@@ -33,9 +34,6 @@ const CheckOutProducts = () => {
 	const deleteProductFromCart = (index) => setDeleteIndex(index);
 
 	const currencySymbol = translations.currencySymbol[currency];
-	const formatDesc = (description) => description[description?.length - 1] === '.'
-		? description.slice(0, -1)
-		: description;
 
 	return (
 		<div className="checkout-products">

@@ -15,7 +15,7 @@ const MINUS = 'MINUS'
 const PLUS = 'PLUS'
 
 
-const formatDesc = (description) => {
+export const formatDesc = (description) => {
 	// Find the index of the first newline character
 	const newlineIndex = description.indexOf('\n');
 
