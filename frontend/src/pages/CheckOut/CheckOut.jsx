@@ -65,7 +65,7 @@ const CheckOut = () => {
 	const Options = (order_id) => ({
 		options: fondyOptions,
 		params: {
-			merchant_id: process.env.REACT_APP_MERCH_ID,
+			merchant_id: Number(process.env.REACT_APP_MERCH_ID),
 			// merchant_id: process.env.REACT_APP_TEST_MERCH_ID,
 			order_id,
 			currency: currency.toUpperCase(),
