@@ -2,7 +2,7 @@ const express = require('express'),
     subscriberRouter = express.Router(),
     sendResponse = require('../utils/response'),
     { Subscriber } = require('../models'),
-    { sendActivationEmail } = require('../controllers/email'),
+    { sendActivationEmail } = require('../services/email'),
     { validateActivationToken } = require('../utils/tokens'),
     { HOSTNAME, PORT } = require('../config');
 

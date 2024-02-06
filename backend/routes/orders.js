@@ -5,7 +5,7 @@ const express = require('express'),
 	authMiddleware = require('../middleware/auth'),
 	{ HOSTNAME, PORT } = require('../config'),
 	{ Order } = require('../models'),
-	{ sendOrderDetails, sendTrackingId } = require('../controllers/email');
+	{ sendOrderDetails, sendTrackingId } = require('../services/email');
 const genericController = require("../controllers");
 
 
@@ -59,7 +59,7 @@ orderRouter.post('/send-tracking-id', authMiddleware, async (req, res) => {
 			{ $set: {trackingSent: true}},
 			{ new: true }
 		)
-		return sendResponse(res, 500, false, {}, `Tracking id sent on: ${requestData.email}`)
+		return sendResponse(res, 200, true, {}, `Tracking id sent on: ${requestData.email}`)
 	} catch (err) {
 		return sendResponse(res, 500, false, {}, `Error sending tracking id: ${err}`)
 	}

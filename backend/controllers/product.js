@@ -35,7 +35,7 @@ const updateProductById = async (req, res) => {
 
 const updateProductKeyById = async (req, res) => {
 	const { id } = req.params;
-	const updateData = req.body; // Update data containing key-value pairs
+	const updateData = req.body; 
 
 	try {
 		const product = await Product.findById(id);
@@ -44,14 +44,12 @@ const updateProductKeyById = async (req, res) => {
 			return sendResponse(res, 404, false, {}, 'Product not found');
 		}
 
-		// Update product fields based on the provided key-value pairs
 		for (const key in updateData) {
 			if (Object.prototype.hasOwnProperty.call(updateData, key)) {
 				product[key] = updateData[key];
 			}
 		}
 
-		// Save the updated product
 		const updatedProduct = await product.save();
 
 		return sendResponse(res, 200, true, { data: updatedProduct }, 'Product updated successfully');
@@ -125,12 +123,10 @@ const deleteProductById = async (req, res) => {
 
 
 const updateProductsOrder = async (req, res) => {
-	console.log('req.body', req.body)
 	const productIds = req.body;
 
 	try {
 		await Product.collection.dropIndex("orderIndex_1");
-		// Loop through productIds and update orderIndex accordingly
 		for (let i = 0; i < productIds.length; i++) {
 			const productId = productIds[i];
 			await Product.findByIdAndUpdate(productId, { orderIndex: i });

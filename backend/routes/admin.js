@@ -21,6 +21,18 @@ adminRouter.post('/product/:id/copy', productController.copyProductById);
 adminRouter.delete('/product/:id', productController.deleteProductById);
 
 
-adminRouter.post('/upload/image', uploadMiddleware.single('image'), imageController.uploadImage);
+// adminRouter.post('/upload/image', uploadMiddleware.single('image'), imageController.uploadImage);
+
+adminRouter.post('/product/:id/images/create', uploadMiddleware.single('image'), imageController.uploadProductImage)
+adminRouter.put('/product/:id/images/update/:imageName', uploadMiddleware.single('image'), imageController.editProductImage)
+adminRouter.delete('/product/:id/images/delete/:imageName', imageController.deleteProductImage)
+
+// adminRouter.post('/product/:id/variation-images/create', imageController)
+// adminRouter.put('/product/:id/variation-images/update', imageController)
+// adminRouter.delete('/product/:id/variation-images/delete', imageController)
+
+// adminRouter.post('/product/:id/seashells-images/create', imageController)
+// adminRouter.put('/product/:id/seashells-images/update', imageController)
+// adminRouter.delete('/product/:id/seashells-images/delete', imageController)
 
 module.exports = adminRouter;

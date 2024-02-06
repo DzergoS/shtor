@@ -5,9 +5,8 @@ const express = require('express'),
       cookieParser = require('cookie-parser'),
       connectToDB = require('./config/db'),
       genericRouter = require('./routes/index'),
-      checkFileExists = require('./utils/checkFileExists'),
+      { checkFileExists } = require('./utils/storage'),
       { PORT, HOSTNAME, FRONTEND_ORIGIN } = require('./config')
-
 
 
 const corsOptions = {
@@ -23,14 +22,11 @@ const startServer = async () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser(process.env.COOKIE_SECRET));
-  app.use('/api', genericRouter);
-
   app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-  // Serve static files from the ../productPhotos directory
+  
+  app.use('/api', genericRouter);
   app.use('/productPhotos', checkFileExists, express.static(path.join(__dirname, '../productPhotos')));
 
-// Handle other routes by serving the index.html
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
   });
