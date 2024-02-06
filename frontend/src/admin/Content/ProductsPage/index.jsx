@@ -138,74 +138,77 @@ const ProductsPage = () => {
 				? <div className="product__edit">
 					<Button className="delete__product" onClick={() => setDeleting(pickedProduct)}>Видалити товар</Button>
 					<div className="images__edit images">
-						{pickedProduct?.images?.length
-							? pickedProduct.images.map(item => {
-									return (<div className="images__edit-item">
-										<ProductImage imageName={item}/>
-										<div className="actions__images">
-											<InputFileUpload/>
-											{pickedProduct.images.length !== 1
-												? <Button className="delete" onClick={(e) => deleteImg(e, item)}>
-													<i className="bi bi-trash"></i></Button>
-												: ""}
-										</div>
-									</div>)
-								})
-							: pickedProduct?.seashells?.length
-								? pickedProduct?.seashells.map((seashellArr, index) => (
-									<div className="images__row variation">
-										Мушля {index}
-										{seashellArr.map(seashell => {
-											return (<div className="images__edit-item">
-												<ProductImage imageName={seashell}/>
-												<div className="actions__images">
-													<InputFileUpload/>
-													{seashellArr.length !== 1
-														? <Button className="delete" onClick={(e) => deleteSeashell(e, seashell)}>
-															<i className="bi bi-trash"></i></Button>
-														: ""}
-												</div>
-											</div>)
-										})}
-										<div className="general__actions">
-											<InputFileUpload title="Додати фото"/>
-											{pickedProduct.variations.length !== 1 && pickedProduct.variations[0].images.length !== 1
-												? <Button className="delete" onClick={(e) => deleteVariationsImg(e)}>
-													Видалити мушлю <i className="bi bi-trash"></i>
-												</Button>
-												: ""}
-										</div>
-									</div>
-								))
-								: pickedProduct?.variations?.length
-									? pickedProduct?.variations.map((variation, index) => (
-										<div className="images__row variation">
-											Варіація {index + 1}
-											{variation.images.map(img => {
-												return (<div className="images__edit-item">
-													<ProductImage imageName={img}/>
-													<div className="actions__images">
-														<InputFileUpload/>
-														{variation.images.length !== 1
-															? <Button className="delete" onClick={(e) => deleteVariationsImg(e, img)}>
-																<i className="bi bi-trash"></i></Button>
-															: ""}
-													</div>
-												</div>)
-											})}
-											<div className="general__actions">
-												<InputFileUpload title="Додати фото"/>
-												{pickedProduct.variations.length !== 1 && pickedProduct.variations[0].images.length !== 1
-													? <Button className="delete" onClick={(e) => deleteVariationsImg(e)}>
-														Видалити варіацію <i className="bi bi-trash"></i>
-													</Button>
+						{Boolean(pickedProduct?.seashells?.length) && (<>
+							<h5>Seashells Images</h5>
+							{pickedProduct?.seashells.map((seashellArr, index) => (
+								<div className="images__row variation">
+									Мушля {index}
+									{seashellArr.map(seashell => {
+										return (<div className="images__edit-item">
+											<ProductImage imageName={seashell}/>
+											<div className="actions__images">
+												<InputFileUpload/>
+												{seashellArr.length !== 1
+													? <Button className="delete" onClick={(e) => deleteSeashell(e, seashell)}>
+														<i className="bi bi-trash"></i></Button>
 													: ""}
 											</div>
-										</div>
-									))
-									: ""
-
-						}
+										</div>)
+									})}
+									<div className="general__actions">
+										<InputFileUpload title="Додати фото"/>
+										{pickedProduct.variations.length !== 1 && pickedProduct.variations[0].images.length !== 1
+											? <Button className="delete" onClick={(e) => deleteVariationsImg(e)}>
+												Видалити мушлю <i className="bi bi-trash"></i>
+											</Button>
+											: ""}
+									</div>
+								</div>
+							))}
+						</>)}
+						{Boolean(pickedProduct?.variations?.length && pickedProduct.variations[0].images?.length) && (<>
+							<h5>Variation Images</h5>
+							{pickedProduct?.variations.map((variation, index) => (
+								<div className="images__row variation">
+									Варіація {index + 1}
+									{variation.images.map(img => {
+										return (<div className="images__edit-item">
+											<ProductImage imageName={img}/>
+											<div className="actions__images">
+												<InputFileUpload/>
+												{variation.images.length !== 1
+													? <Button className="delete" onClick={(e) => deleteVariationsImg(e, img)}>
+														<i className="bi bi-trash"></i></Button>
+													: ""}
+											</div>
+										</div>)
+									})}
+									<div className="general__actions">
+										<InputFileUpload title="Додати фото"/>
+										{pickedProduct.variations.length !== 1 && pickedProduct.variations[0].images.length !== 1
+											? <Button className="delete" onClick={(e) => deleteVariationsImg(e)}>
+												Видалити варіацію <i className="bi bi-trash"></i>
+											</Button>
+											: ""}
+									</div>
+								</div>
+							))}
+						</>)}
+						{Boolean(pickedProduct?.images?.length) && (<>
+							<h5>General Images</h5>
+							{pickedProduct.images.map(item => {
+								return (<div className="images__edit-item">
+									<ProductImage imageName={item}/>
+									<div className="actions__images">
+										<InputFileUpload/>
+										{pickedProduct.images.length !== 1
+											? <Button className="delete" onClick={(e) => deleteImg(e, item)}>
+												<i className="bi bi-trash"></i></Button>
+											: ""}
+									</div>
+								</div>)
+							})}
+						</>)}
 					</div>
 					{Object.keys(pickedProduct).map(key => {
 						if (key === '_id' || key !== 'variations' || key === 'colors' || key === 'size' || key === 'images') {

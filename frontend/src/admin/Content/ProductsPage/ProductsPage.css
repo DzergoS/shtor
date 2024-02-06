@@ -155,7 +155,7 @@
 
 .images__edit {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     overflow-x: scroll;
     margin-bottom: 20px;
@@ -163,6 +163,9 @@
 }
 .images__edit .images__edit-item {
     margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #a4a4a4;
 }
 .images__edit .images__edit-item img {
     width: 200px;
@@ -187,6 +190,7 @@
     padding: 8px;
     border-radius: 5px;
     background-color: #a4a4a4;
+    margin-bottom: 10px;
 }
 .images__edit .images__row .general__actions {
     display: flex;
