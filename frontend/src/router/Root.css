@@ -20,6 +20,10 @@ body {
   overflow-x: hidden;
 }
 
+body.no__moves-buddy {
+  overflow: hidden;
+}
+
 @media (max-width: 768px) {
   body {
     padding: 20px;

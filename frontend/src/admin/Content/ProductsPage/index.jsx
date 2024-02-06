@@ -30,7 +30,7 @@ export const ATTACHMENTS = "ATTACHMENTS";
 
 const ProductsPage = () => {
 
-	const {state: {products, lang}, dispatch} = useAPI();
+	const {state: {products, lang}} = useAPI();
 	const [data, setData] = useState(products)
 	const [redirect, setRedirect] = useState(false);
 	const [loading, setLoading] = useState(false)
@@ -46,26 +46,6 @@ const ProductsPage = () => {
 			scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
 		}
 	};
-
-	const getProducts = async () => {
-		try {
-			const {data: {data: payload}} = await api.products.get()
-			dispatch({
-				type: ADD_PRODUCTS,
-				payload,
-			})
-		} catch (e) {
-			dispatch({
-				type: ADD_PRODUCTS,
-				payload: data,
-			})
-			console.error(e)
-		}
-	}
-
-	useEffect(() => {
-		if (!id) getProducts();
-	}, [])
 
 	useEffect(() => setData(products), [products])
 
@@ -110,7 +90,6 @@ const ProductsPage = () => {
 		setLoading(_id)
 		try {
 			const {data: { success, data: responseData }} = await api.products.copyById({_id})
-			console.log('responseData', responseData)
 			if (success) {
 				setData(curData => ([...curData, {...responseData, active: true}]))
 				scrollDown();

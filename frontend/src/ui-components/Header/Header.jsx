@@ -17,14 +17,29 @@ const Header = () => {
     const location = useLocation();
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
+    const addBodyNoScroll = () => document.body.classList.add("no__moves-buddy")
+    const removeBodyNoScroll = () => document.body.classList.remove("no__moves-buddy")
     const closeMenu = (e) => {
-        if (isMobile && !e.target.className.includes('main-language')) setIsOpenMenu(false)
+        if (e) {
+            if (isMobile && !e.target.className.includes('main-language')) {
+                setIsOpenMenu(false)
+                removeBodyNoScroll()
+            }
+        } else {
+            setIsOpenMenu(false)
+            removeBodyNoScroll()
+        }
     }
-    const openMenu = () => setIsOpenMenu(true)
+    const openMenu = () => {
+        if (isMobile) {
+            setIsOpenMenu(true)
+            addBodyNoScroll()
+        }
+    }
 
     const toggleLanguage = () => {
+        dispatch({ type: CHANGE_CURRENCY, payload: lang === 'en' ? 'uah' : 'usd' });
         dispatch({ type: CHANGE_LANG, payload: lang === 'en' ? 'ua' : 'en' });
-        dispatch({ type: CHANGE_CURRENCY, payload: lang === 'en' ? 'usd' : 'uah' });
     }
 
     const isMainPage = location.pathname === '/'
@@ -34,7 +49,7 @@ const Header = () => {
     }, 0);
 
     useEffect(() => {
-        setIsOpenMenu(false)
+        closeMenu()
     }, [isMobile])
 
     return (

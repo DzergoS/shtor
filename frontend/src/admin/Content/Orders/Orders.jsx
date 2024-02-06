@@ -107,7 +107,6 @@ const Orders = () => {
 
 	const [search, setSearch] = useState('')
 	const onSearch = (e) => setSearch(e.target.value)
-	console.log('pickedOrder', pickedOrder)
 
 	return (
 		<div className="orders__container">

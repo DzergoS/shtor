@@ -409,6 +409,18 @@ export const translations = {
 			ua: "Використовувати іншу платіжну адресу",
 			en: "Use a different billing address",
 		},
+		attachment: {
+			ua: (attachment) => {
+				if (attachment === 'Срібна орбіта') return "зі срібною орбітою"
+				if (attachment === 'Срібний ланцюг') return "зі срібним ланцюгом"
+				return ""
+			},
+			en: (attachment) => {
+				if (attachment === 'Срібна орбіта') return "with silver orbit"
+				if (attachment === 'Срібний ланцюг') return "with silver chain"
+				return ""
+			},
+		}
 	},
 	yes: {
 		ua: "Так",

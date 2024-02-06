@@ -11,7 +11,7 @@ import {Button} from "@mui/material";
 import api from "../../api";
 import DeletePopUp from "../../ui-components/DeletePopUp";
 import {DECREMENT_PRODUCT} from "../../provider/actions/cart";
-import {isProduction} from "../../config";
+import {appURL} from "../../config";
 
 const basicDelivery = {
 	countryRegion: '',
@@ -65,15 +65,15 @@ const ShoppingCart = () => {
 	const Options = (order_id) => ({
 		options: fondyOptions,
 		params: {
-			merchant_id: 1538293,
-			// merchant_id: 1396424,
+			merchant_id: process.env.REACT_APP_MERCH_ID,
+			// merchant_id: process.env.REACT_APP_TEST_MERCH_ID,
 			order_id,
 			currency: currency.toUpperCase(),
 			amount: (orderPrice + deliveryPrice) * 100,
 			// amount: 100,
 			order_desc: orderDesc,
 			lang: lang === 'ua' ? 'uk' : 'en',
-			response_url: (isProduction ? 'https://shtor.com.ua' : 'http://localhost:3001') + '/api/orders/send-order-details',
+			response_url: appURL + '/api/orders/send-order-details',
 		}
 	})
 

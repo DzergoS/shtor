@@ -33,9 +33,6 @@ const Products = () => {
 		}, 2200);
 	};
 
-	console.log('flex')
-	console.log('products', products)
-
 	return (<>
 		<div className="product-list" id="product-list">
 			{(Array.isArray(products) ? products : []).filter(product => product.inStock).slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}

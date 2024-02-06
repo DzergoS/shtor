@@ -88,6 +88,9 @@
         font-weight: 300;
         line-height: normal;
     }
+    .custom-language .custom-language__menu {
+        top: 23px;
+    }
 }
 
 
@@ -96,5 +99,8 @@
         align-items: flex-end;
         min-height: 90px;
         justify-content: flex-start;
+    }
+    .menu-footer-mobile__container .custom-language__menu {
+        top: 33px;
     }
 }

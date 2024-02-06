@@ -7,6 +7,8 @@ import productsReducer from "./reducers/products";
 import mobileReducer from "./reducers/mobile";
 import {CHANGE_IS_MOBILE} from "./actions/mobile";
 import currencyReducer from "./reducers/currency";
+import api from "../api";
+import {ADD_PRODUCTS} from "./actions/products";
 
 const APIProvider = (props) => {
 
@@ -42,6 +44,19 @@ const APIProvider = (props) => {
 			mediaQuery.removeListener(handleTabletChange)
 		}
 	},[])
+
+	const getProducts = async () => {
+		try {
+			const {data: {data: payload}} = await api.products.get()
+			dispatch({
+				type: ADD_PRODUCTS,
+				payload,
+			})
+		} catch (e) {
+			console.error(e)
+		}
+	}
+	useEffect(() => {getProducts()}, [])
 
 	const contextValue = useMemo(
 		() => ({state, dispatch}),

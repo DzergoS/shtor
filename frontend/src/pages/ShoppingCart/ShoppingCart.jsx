@@ -18,7 +18,6 @@ const ShoppingCart = () => {
 
 
 	const orderDesc = cart?.map(({ name, quantity }) => `${name[lang]} x${quantity}`).join(' ')
-	console.log('cart', cart)
 
 	const onCheckoutClick = () => {
 		history.push('/checkout')

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {isProduction} from "config";
+import {appURL} from "../../config";
 
-const addFolderLocation = (url) => isProduction ? `https://shtor.com.ua/productPhotos/${url}` : `http://localhost:3000/productPhotos/${url}` ;
-const getFileNameAndExtension = (fullFileName) => {
-	const lastDotIndex = fullFileName.lastIndexOf('.');
-	const fileName = lastDotIndex !== -1 ? fullFileName.substring(0, lastDotIndex) : fullFileName;
-	const fileExtension = lastDotIndex !== -1 ? fullFileName.substring(lastDotIndex + 1) : '';
+const addFolderLocation = (url) => `${appURL}/productPhotos/${url}`;
 
-	return { fileName, fileExtension };
-}
+// const getFileNameAndExtension = (fullFileName) => {
+// 	const lastDotIndex = fullFileName.lastIndexOf('.');
+// 	const fileName = lastDotIndex !== -1 ? fullFileName.substring(0, lastDotIndex) : fullFileName;
+// 	const fileExtension = lastDotIndex !== -1 ? fullFileName.substring(lastDotIndex + 1) : '';
+//
+// 	return { fileName, fileExtension };
+// }
 
 const ProductImage = ({ imageName = '', ...props }) => {
 	const [imageExists, setImageExists] = useState(true);

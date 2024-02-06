@@ -9,7 +9,6 @@ const PRODUCTS_TO_SPREAD_VARIATIONS_FOR_LIST = [
 const productsReducer = (state, action) => {
 	switch (action.type) {
 		case ADD_PRODUCTS:
-			// console.log('action.payload', action.payload)
 			return Array.isArray(action.payload)
 				? action.payload
 					.map(item => ({...item, link: `/${item._id}`}))

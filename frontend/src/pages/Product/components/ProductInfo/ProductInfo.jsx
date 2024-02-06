@@ -15,6 +15,7 @@ import {getImageIndexInVariation, getSeashellIndex} from "../../../../utils/getI
 import Description from "./Description/Description";
 import CartPickerPopUp from "../CartPickerPopUp/CartPickerPopUp";
 import {formatPrice} from "../../../../utils/formatPrice";
+import {formatSize} from "../../../../utils/formatSize";
 
 const ProductInfo = ({
      product, currentOptions, setCurrentOptions,
@@ -88,7 +89,7 @@ const ProductInfo = ({
 
         let pickedProduct = {...productData}
         if (variations?.length) pickedProduct = { ...productData, ...variations[currentVariationIndex], _product_id:  productData?._id}
-        if (!isSizeInVariations && currentSize) pickedProduct.size = currentSize
+        if (!isSizeInVariations && currentSize) pickedProduct.size = formatSize(currentSize, product.name)
         if (!isColorInVariations && currentColor) pickedProduct.color = currentColor
         if (!isMaterialInVariations && currentMaterial) pickedProduct.material = currentMaterial
         if (!isAttachmentInVariations && currentAttachment) pickedProduct.attachment = currentAttachment

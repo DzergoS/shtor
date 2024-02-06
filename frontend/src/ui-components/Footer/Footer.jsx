@@ -38,7 +38,6 @@ const Footer = () => {
 		try {
 			await reqSubscribe()
 			setIsSuccess(true)
-			// console.log('Subscribe successful:', response);
 		} catch (error) {
 			setError(true);
 			console.error('Subscribe failed:', error);
