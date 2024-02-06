@@ -33,6 +33,7 @@
 .checkout-product .checkout-product-desc, .checkout-product .checkout-product-desc .checkout-product__title {
     font-weight: 400;
     font-size: 16px;
+    padding-right: 25px;
 }
 
 .checkout-product .checkout-product-desc .checkout-product__title strong,
@@ -107,7 +108,6 @@
 
     .checkout-product .checkout-product-desc .checkout-product__title {
         margin-bottom: 14px;
-        padding-right: 25px;
     }
 
     .checkout-product .checkout-product-desc .checkout-product__desc {
