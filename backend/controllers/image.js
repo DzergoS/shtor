@@ -147,6 +147,74 @@ const deleteVariationImage = async (req, res) => {
 }
 
 
+const createSeashellImages = async (req, res) => {
+  try {
+    const { id } = req.params
+    const files = req.files
+
+    if (!files || files.length !== 2) {
+      return sendResponse(res, 400, false, {}, 'Error uploading images. Please, ensure 2 files given')
+    }
+
+    const fileNames = files.map(file => file.filename)
+    await Product.findByIdAndUpdate(
+      id,
+      { $push: { seashells: fileNames }},
+      { new: true }
+    );
+
+    return sendResponse(res, 200, true, {}, `Images was uploaded successfully`)
+  } catch (error) {
+    return sendResponse(res, 500, false, {error}, 'Error uploading an image')
+  }
+}
+
+const editSeashellImages = async (req, res) => {
+  try {
+    const { id, seashellIndex } = req.params
+    const files = req.files
+    
+    if (!files || files.length !== 2) {
+      return sendResponse(res, 400, false, {}, 'Error uploading images. Please, ensure 2 files given')
+    }
+
+    const product = await Product.findById(id)
+    const imagesToDelete = product.seashells[seashellIndex]
+    imagesToDelete.forEach(filename => {
+      deleteImage(filename)
+    })
+    
+    const fileNames = files.map(file => file.filename)
+    await Product.findByIdAndUpdate(
+      id,
+      { $set: { [`seashells.${seashellIndex}`]: fileNames }},
+      { new: true }
+    );
+
+    return sendResponse(res, 200, true, {}, `Images changed successfully`)
+  } catch (error) {
+    return sendResponse(res, 500, false, {}, 'Error changing an image')
+  }
+}
+
+const deleteSeashellImages = async (req, res) => {
+  try{
+      const { id, seashellIndex } = req.params 
+
+      const product = await Product.findById(id)
+      const imagesToDelete = product.seashells[seashellIndex]
+      imagesToDelete.forEach(filename => {
+        deleteImage(filename)
+      })
+  
+      product.seashells.splice(seashellIndex, 1);
+      await product.save();
+
+      return sendResponse(res, 200, true, {}, `Images deleted successfully`)
+  } catch (error) {
+      return sendResponse(res, 500, false, {}, 'Error deleting an image')
+  }
+}
 
 
 module.exports = {
@@ -155,5 +223,8 @@ module.exports = {
     deleteProductImage,
     addVariationImage,
     editVariationImage,
-    deleteVariationImage
+    deleteVariationImage,
+    createSeashellImages,
+    editSeashellImages,
+    deleteSeashellImages
 }

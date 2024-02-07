@@ -1,7 +1,7 @@
 const express = require('express');
 const adminRouter = express.Router();
 const sendResponse = require('./../utils/response');
-const uploadMiddleware = require("../middleware/upload");
+const { uploadMiddleware, errorHandler } = require("../middleware/upload");
 const productController = require("../controllers/product");
 const imageController = require("../controllers/image");
 
@@ -31,8 +31,15 @@ adminRouter.post('/product/:id/variations/:variationIndex/images/create', upload
 adminRouter.put('/product/:id/variations/:variationIndex/images/update/:imageName', uploadMiddleware.single('image'), imageController.editVariationImage)
 adminRouter.delete('/product/:id/variations/:variationIndex/images/delete/:imageName', imageController.deleteVariationImage)
 
-// adminRouter.post('/product/:id/seashells-images/create', imageController)
-// adminRouter.put('/product/:id/seashells-images/update', imageController)
-// adminRouter.delete('/product/:id/seashells-images/delete', imageController)
+adminRouter.post('/product/:id/seashells/create',
+				 uploadMiddleware.array('images', 2),
+				 errorHandler,
+				 imageController.createSeashellImages)
+adminRouter.put('/product/:id/seashells/:seashellIndex/update',
+				uploadMiddleware.array('images', 2),
+				errorHandler,
+				imageController.editSeashellImages)
+adminRouter.delete('/product/:id/seashells/:seashellIndex/delete', imageController.deleteSeashellImages)
 
 module.exports = adminRouter;
+
