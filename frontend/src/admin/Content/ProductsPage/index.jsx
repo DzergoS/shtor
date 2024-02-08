@@ -39,6 +39,7 @@ const ProductsPage = () => {
 	const [pageLoading, setPageLoading] = useState(false)
 	const {id} = useParams()
 	const [pickedProduct, setPickedProduct] = useState({});
+	const [rerender, setRerender] = useState(false);
 
 	const scrollRef = useRef(null);
 
@@ -218,6 +219,11 @@ const ProductsPage = () => {
 		return newFile;
 	}
 
+	useEffect(() => {
+		console.log('flex')
+		setRerender(true)
+		setTimeout(() => setRerender(false), 500)
+	}, [lang, currency])
 	return (
 		<div className={`list__container ${id && pickedProduct ? 'flex' : ''}`}>
 			<Typography variant="h5" gutterBottom className="admin-product-title">
@@ -225,7 +231,7 @@ const ProductsPage = () => {
 				{id ? `Товар #${id}` : ''}
 			</Typography>
 
-			{id && pickedProduct
+			{id && pickedProduct && !rerender
 				? <div className="product__edit">
 					<Button className="delete__product" onClick={() => setDeleting(pickedProduct)}>Видалити товар</Button>
 					<div className="images__edit images">
