@@ -148,6 +148,7 @@
         display: flex;
         justify-content: space-between;
         flex-direction: column;
+        z-index: 10;
     }
     .header .menu__container-mobile.opened {
         transform: translateX(0);

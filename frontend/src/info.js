@@ -45,6 +45,10 @@ export const translations = {
 		shop: {
 			ua: "Магазин",
 			en: "Shop",
+		},
+		chat: {
+			en: "Chat",
+			ua: "Чат",
 		}
 	},
 	main: {

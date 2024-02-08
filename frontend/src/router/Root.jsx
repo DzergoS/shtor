@@ -1,7 +1,7 @@
 // Router.js
 import ScrollToTop from "../utils/ScrollToTop";
 import React, {useEffect} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Info from "../pages/Info/Info";
 import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 import CheckOut from "../pages/CheckOut/CheckOut";
@@ -96,6 +96,7 @@ const Root = () => {
 							</Route>
 							<Route path="/cart" component={ShoppingCart}/>
 							<Route path="/checkout" component={CheckOut}/>
+							<Route path="/chat"><Redirect to="https://t.me/@gala_butnotdalis" /></Route>
 							<Route path="/:id" exact component={Product}/>
 							<Route path="/:id/:variationIndex" component={Product}/>
 						</Switch>

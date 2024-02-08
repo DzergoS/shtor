@@ -30,7 +30,7 @@ export const ATTACHMENTS = "ATTACHMENTS";
 
 const ProductsPage = () => {
 
-	const {state: {products, lang}} = useAPI();
+	const {state: {products, lang, currency}} = useAPI();
 	const [data, setData] = useState(products)
 	const [redirect, setRedirect] = useState(false);
 	const [loading, setLoading] = useState(false)
@@ -38,6 +38,7 @@ const ProductsPage = () => {
 	const [copy, setCopy] = useState(false)
 	const [pageLoading, setPageLoading] = useState(false)
 	const {id} = useParams()
+	const [pickedProduct, setPickedProduct] = useState({});
 
 	const scrollRef = useRef(null);
 
@@ -79,11 +80,10 @@ const ProductsPage = () => {
 		}
 	}
 
-	const pickedProduct = useMemo(() => Array.isArray(data) ? data?.find(item => item?._id === id) : [], [id, data])
+	useEffect(() => {
+		if (id) setPickedProduct(Array.isArray(data) ? data?.find(item => item?._id === id) : []);
+	}, [id, data])
 
-	const deleteImg = () => {}
-	const deleteSeashell = () => {}
-	const deleteVariationsImg = () => {}
 
 	const copyProduct = async () => {
 		const {_id} = copy
@@ -126,6 +126,97 @@ const ProductsPage = () => {
 		}
 	};
 
+	const updateKey = async (key, newValue, hasLang) => {
+		if ((!hasLang ? pickedProduct[key] !== newValue : pickedProduct[key][lang] !== newValue) && (newValue)) {
+			const {data: {data: responseData, success}} = await api.products.updateKeyValueById({
+				_id: pickedProduct._id,
+				[key]: hasLang
+					? ({
+						...pickedProduct[key],
+						[lang]: newValue,
+					})
+					: newValue
+			})
+			if (success) {
+				setPickedProduct(responseData)
+			}
+		}
+	}
+
+	const handleNewImage = async (newValueObj) => {
+		try {
+			const {data: {data: updatedProduct}} = await api.products.updateKeyValueById({_id: pickedProduct._id, ...newValueObj});
+			console.log(updatedProduct)
+			setPickedProduct(updatedProduct)
+		} catch (e) {
+			console.error(e)
+		}
+	}
+
+// Callback for uploading an image
+	const uploadImage = async (event) => {
+		const file = event.target.files[0];
+		try {
+			const formData = new FormData();
+			formData.append('image', file);
+			await api.products.createProductImage(formData);
+			console.log('Image uploaded successfully');
+		} catch (error) {
+			console.error('Error uploading image:', error);
+		}
+	};
+
+// Callback for deleting an image
+	const deleteImage = async (imageName) => {
+		try {
+			// Here, you need to specify the image name or ID to delete
+			await api.products.deleteProductImage({ imageName });
+			console.log('Image deleted successfully');
+		} catch (error) {
+			console.error('Error deleting image:', error);
+		}
+	};
+
+// Callback for editing an image
+	const editImage = async (event, imageToDelete) => {
+		const file = event.target.files[0];
+		console.log('file', file)
+		try {
+			const formData = new FormData();
+			formData.append('image', file);
+			await deleteImage(imageToDelete);
+			await uploadImage(event);
+		} catch (error) {
+			console.error('Error editing image:', error);
+		}
+	};
+
+	const handleDeleteImage = async (newValueObj, imageName) => {
+		try {
+			await deleteImage(imageName);
+			const {data: { data: updatedProduct}} = await api.products.updateKeyValueById({_id: pickedProduct._id, ...newValueObj});
+			setPickedProduct(updatedProduct)
+		} catch (e) {
+			console.error(e)
+		}
+	}
+
+	function generateNewFileName(originalFileName) {
+		const dotIndex = originalFileName.lastIndexOf('.');
+		const extension = originalFileName.substring(dotIndex);
+		const newName = `${Date.now()}${extension}`;
+		return newName;
+	}
+
+	function createNewFileWithModifiedName(originalFile) {
+		// Generate a new name for the file
+		const newFileName = generateNewFileName(originalFile.name);
+
+		// Create a new File object with the modified name
+		const newFile = new File([originalFile], newFileName, { type: originalFile.type });
+
+		return newFile;
+	}
 
 	return (
 		<div className={`list__container ${id && pickedProduct ? 'flex' : ''}`}>
@@ -138,86 +229,200 @@ const ProductsPage = () => {
 				? <div className="product__edit">
 					<Button className="delete__product" onClick={() => setDeleting(pickedProduct)}>Видалити товар</Button>
 					<div className="images__edit images">
-						{Boolean(pickedProduct?.seashells?.length) && (<>
-							<h5>Seashells Images</h5>
-							{pickedProduct?.seashells.map((seashellArr, index) => (
-								<div className="images__row variation">
-									Мушля {index}
-									{seashellArr.map(seashell => {
-										return (<div className="images__edit-item">
-											<ProductImage imageName={seashell}/>
-											<div className="actions__images">
-												<InputFileUpload/>
-												{seashellArr.length !== 1
-													? <Button className="delete" onClick={(e) => deleteSeashell(e, seashell)}>
-														<i className="bi bi-trash"></i></Button>
-													: ""}
+						{Boolean(pickedProduct?.seashells?.length) && (
+							<>
+								<h5>Seashells Images</h5>
+								{pickedProduct?.seashells.map((seashellArr, index) => (
+									<div className="images__row variation" key={index}>
+										Мушля {index}
+										{seashellArr.map((seashell, undix) => (
+											<div className="images__edit-item" key={seashell}>
+												<ProductImage imageName={seashell}/>
+												<div className="actions__images">
+													<InputFileUpload onChange={async (e) => {
+														const originalFile = e.target.files[0];
+														const newFile = createNewFileWithModifiedName(originalFile);
+														await editImage({target: {files: [newFile]}}, pickedProduct.seashells[index][undix]);
+														await handleNewImage({
+															seashells: pickedProduct.seashells.map((item, flex) => item.map((unit, flex2) => index === flex && undix === flex2
+																? newFile.name
+																: unit
+															))
+														})
+													}}/>
+													{seashellArr.length !== 1 ? (
+														<Button className="delete" onClick={async (e) => {
+															console.log('e.target.files[0].name', pickedProduct?.seashells?.[index][undix])
+															await deleteImage(pickedProduct?.seashells?.[index]?.[undix]);
+															await handleNewImage({
+																seashells: pickedProduct.seashells.map((item) => item.filter((unit) => unit !== pickedProduct?.seashells?.[index][undix]))
+															})
+														}}>
+															<i className="bi bi-trash"></i>
+														</Button>
+													) : ""}
+												</div>
 											</div>
-										</div>)
-									})}
-									<div className="general__actions">
-										<InputFileUpload title="Додати фото"/>
-										{pickedProduct.variations.length !== 1 && pickedProduct.variations[0].images.length !== 1
-											? <Button className="delete" onClick={(e) => deleteVariationsImg(e)}>
-												Видалити мушлю <i className="bi bi-trash"></i>
-											</Button>
-											: ""}
+										))}
+										<div className="general__actions">
+											<InputFileUpload title="Додати фото" onChange={async (e) => {
+												const originalFile = e.target.files[0];
+												const newFile = createNewFileWithModifiedName(originalFile);
+												await uploadImage({target: {files: [newFile]}});
+												console.log('e.target.files[0].name', newFile.name)
+												await handleNewImage({
+													seashells: pickedProduct.seashells.map((itm, idx) => idx === index
+														? [...pickedProduct.seashells[idx], newFile.name]
+														: itm
+													),
+												})
+											}}/>
+											{pickedProduct.seashells.length !== 1 ? (
+												<Button className="delete" onClick={async () => {
+													pickedProduct.seashells[index].map(async item => await deleteImage(item))
+													console.log('pickedProduct seashells', pickedProduct.seashells)
+													console.log('pickedProduct filtered', pickedProduct.seashells.filter((itm, idx) => idx !== (pickedProduct.seashells.length - 1)),)
+													await handleNewImage({
+														seashells: pickedProduct.seashells.filter((itm, idx) => idx !== (pickedProduct.seashells.length - 1)),
+													})
+												}}>
+													Видалити мушлю <i className="bi bi-trash"></i>
+												</Button>
+											) : ""}
+										</div>
 									</div>
-								</div>
-							))}
-						</>)}
-						{Boolean(pickedProduct?.variations?.length && pickedProduct.variations[0].images?.length) && (<>
-							<h5>Variation Images</h5>
-							{pickedProduct?.variations.map((variation, index) => (
-								<div className="images__row variation">
-									Варіація {index + 1}
-									{variation.images.map(img => {
-										return (<div className="images__edit-item">
-											<ProductImage imageName={img}/>
-											<div className="actions__images">
-												<InputFileUpload/>
-												{variation.images.length !== 1
-													? <Button className="delete" onClick={(e) => deleteVariationsImg(e, img)}>
-														<i className="bi bi-trash"></i></Button>
-													: ""}
-											</div>
-										</div>)
-									})}
-									<div className="general__actions">
-										<InputFileUpload title="Додати фото"/>
-										{pickedProduct.variations.length !== 1 && pickedProduct.variations[0].images.length !== 1
-											? <Button className="delete" onClick={(e) => deleteVariationsImg(e)}>
-												Видалити варіацію <i className="bi bi-trash"></i>
-											</Button>
-											: ""}
-									</div>
-								</div>
-							))}
-						</>)}
-						{Boolean(pickedProduct?.images?.length) && (<>
-							<h5>General Images</h5>
-							{pickedProduct.images.map(item => {
-								return (<div className="images__edit-item">
-									<ProductImage imageName={item}/>
+								))}
+								<div className="images__edit-item add">
 									<div className="actions__images">
-										<InputFileUpload/>
-										{pickedProduct.images.length !== 1
-											? <Button className="delete" onClick={(e) => deleteImg(e, item)}>
-												<i className="bi bi-trash"></i></Button>
-											: ""}
+										<InputFileUpload title="Додати Seashell" onChange={async (e) => {
+											const originalFile = e.target.files[0];
+											const newFile = createNewFileWithModifiedName(originalFile);
+											await uploadImage({target: {files: [newFile]}});
+											console.log('e.target.files[0].name', newFile.name)
+											await handleNewImage({
+												seashells: [...pickedProduct.seashells, [newFile.name]],
+											})
+										}}/>
 									</div>
-								</div>)
-							})}
-						</>)}
-					</div>
-					{Object.keys(pickedProduct).map(key => {
-						if (key === '_id' || key !== 'variations' || key === 'colors' || key === 'size' || key === 'images') {
-							return (
-								<div className="edit__item">
-									{key}: {pickedProduct[key]?.[lang]}
 								</div>
-							)
-						}
+							</>
+						)}
+						{Boolean(pickedProduct?.variations?.length && pickedProduct.variations[0].images?.length) && (
+							<>
+								<h5>Variation Images</h5>
+								{pickedProduct?.variations.map((variation, index) => (
+									<div className="images__row variation" key={index}>
+										Варіація {index + 1}
+										{variation.images.map((img, imgIndex) => (
+											<div className="images__edit-item" key={img}>
+												<ProductImage imageName={img}/>
+												<div className="actions__images">
+													<InputFileUpload onChange={async (e) => {
+														const originalFile = e.target.files[0];
+														const newFile = createNewFileWithModifiedName(originalFile);
+														await editImage({target: {files: [newFile]}}, img);
+														let newVariations = [...pickedProduct.variations]
+														newVariations[index].images[imgIndex] = newFile.name
+														await handleNewImage({
+															variations: newVariations
+														})
+													}}/>
+													{variation.images.length !== 1
+														? (<Button
+															className="delete"
+															onClick={async (e) => {
+																await deleteImage(img);
+																let newVariations = [...pickedProduct.variations]
+																newVariations[index].images = newVariations[index].images.filter((itm, idx) => itm !== img)
+																await handleNewImage({
+																	variations: newVariations
+																})
+															}}>
+																<i className="bi bi-trash"></i>
+															</Button>)
+														: ""}
+												</div>
+											</div>
+										))}
+										<div className="general__actions">
+											<InputFileUpload title="Додати фото" onChange={async (e) => {
+												const originalFile = e.target.files[0];
+												const newFile = createNewFileWithModifiedName(originalFile);
+												await uploadImage({target: {files: [newFile]}});
+												console.log('e.target.files[0].name', newFile.name)
+												let newVariations = [...pickedProduct.variations]
+												newVariations[index].images = [...newVariations[index].images, newFile.name]
+												await handleNewImage({
+													variations: newVariations,
+												})
+											}}/>
+										</div>
+									</div>
+								))}
+							</>
+						)}
+						{Boolean(pickedProduct?.images?.length) && (
+							<>
+								<h5>General Images</h5>
+								{pickedProduct.images.map((item, index) => (
+									<div className="images__edit-item" key={item}>
+										<ProductImage imageName={item}/>
+										<div className="actions__images">
+											<InputFileUpload onChange={async (e) => {
+												const originalFile = e.target.files[0];
+												const newFile = createNewFileWithModifiedName(originalFile);
+												await editImage({target: {files: [newFile]}}, item);
+												await handleNewImage({
+													images: pickedProduct.images.map((vibe, flex) => index === flex ? newFile.name : vibe),
+												})
+											}}/>
+											{pickedProduct.images.length !== 1 ? (
+												<Button className="delete" onClick={async (e) => {
+													await deleteImage(item);
+													await handleNewImage({
+														images: pickedProduct.images.filter((filterItem) => filterItem !== item),
+													})
+												}}>
+													<i className="bi bi-trash"></i>
+												</Button>
+											) : ""}
+										</div>
+									</div>
+								))}
+								<div className="images__edit-item add">
+									<div className="actions__images">
+										<InputFileUpload title="Додати General" onChange={async (e) => {
+											const originalFile = e.target.files[0];
+											const newFile = createNewFileWithModifiedName(originalFile);
+											await uploadImage({target: {files: [newFile]}});
+											await handleNewImage({
+												images: [...pickedProduct.images, newFile.name],
+											})
+										}}/>
+									</div>
+								</div>
+							</>
+						)}
+					</div>
+					{Object.keys(pickedProduct)
+						.filter(key => Array.isArray(pickedProduct[key]) ? pickedProduct[key].length : true)
+						.map(key => {
+							if (key !== 'variations' && key !== '_id' && key !== 'seashells' && key !== 'images' && key !== 'orderIndex' && key !== 'inStock' && key !== '__v' && key !== 'link' && key !== 'material') {
+								return (
+									<div className="edit__item" key={key}>
+										{key}: {pickedProduct[key]?.[lang]
+											? key === 'description'
+												? <textarea name={key} defaultValue={pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/>
+												: <><input name={key} defaultValue={pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/> {key === 'price' ? translations.currencySymbol[currency] : ""}</>
+											: Array.isArray(pickedProduct[key])
+												? pickedProduct[key].map( item => Array.isArray(item)
+													? item.join(', ')
+													: `${item}, `)
+												: <input name={key} defaultValue={pickedProduct[key]} onBlur={(e) => updateKey(key, e.target.value)}/>
+										}
+									</div>
+								)
+							}
 					})}
 				</div>
 				: <>

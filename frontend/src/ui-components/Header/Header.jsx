@@ -20,16 +20,15 @@ const Header = () => {
     const addBodyNoScroll = () => document.body.classList.add("no__moves-buddy")
     const removeBodyNoScroll = () => document.body.classList.remove("no__moves-buddy")
     const closeMenu = (e) => {
-        if (e) {
-            if (isMobile && !e.target.className.includes('main-language')) {
-                setIsOpenMenu(false)
-                removeBodyNoScroll()
+        if (isMobile) {
+            console.log()
+            if (!e || !e.target.classList.contains('main-language')) {
+                setIsOpenMenu(false);
+                removeBodyNoScroll();
             }
-        } else {
-            setIsOpenMenu(false)
-            removeBodyNoScroll()
         }
-    }
+    };
+
     const openMenu = () => {
         if (isMobile) {
             setIsOpenMenu(true)
@@ -71,18 +70,18 @@ const Header = () => {
                             <CrossIcon className="cross-icon"/>
                             <NavLink className="nav-link" to="/#about-us" onClick={closeMenu}>{translations.header.aboutUs[lang]}</NavLink>
                             <NavLink className="nav-link" to="/#product-list" onClick={closeMenu}>{translations.header.shop[lang]}</NavLink>
-                            <NavLink className="nav-link cart-link" onClick={closeMenu} to="/cart">
-                                {translations.cart.title[lang]}
-                                <span className="cart-icon__container">
-                                    <CartIcon />
-                                    <bdi className="cart-count">{sumOfQuantities ? sumOfQuantities : ''}</bdi>
-                                </span>
-                            </NavLink>
+                            <a className="nav-link" href="https://t.me/gala_butnotdalis" target="_blank">{translations.header.chat[lang]}</a>
                         </div>
                         <div className="menu-footer-mobile__container">
                             <FooterLinks type={HEADER_MENU}/>
                         </div>
                     </div>
+                    <NavLink className="nav-link-menu cart-link" onClick={closeMenu} to="/cart">
+                        <span className="cart-icon__container">
+                            <CartIcon />
+                            <bdi className="cart-count">{sumOfQuantities ? sumOfQuantities : ''}</bdi>
+                        </span>
+                    </NavLink>
                 </>
             ) : (
                 <div className="lang-cart">

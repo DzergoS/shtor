@@ -16,17 +16,41 @@ const checkFileExists = (req, res, next) => {
 	});
 };
 
-
-const deleteImage = (filename) => {
-	fs.unlink(path.join(imageDirectory, filename), (err) => {
-		if (err) {
-			throw new Error(`Error deleting image ${filename}:`, err)
-		}
+const isFileExists = (filePath) => {
+	return new Promise((resolve, reject) => {
+		fs.stat(filePath, (err, stats) => {
+			if (err) {
+				if (err.code === 'ENOENT') {
+					// File does not exist
+					resolve(false);
+				} else {
+					// Other error occurred
+					reject(err);
+				}
+			} else {
+				// File exists
+				resolve(true);
+			}
+		});
 	});
 };
 
+const deleteImage = async (filename) => {
+	console.log('filename, imageDirectory', filename, imageDirectory)
+	const filePath = path.join(imageDirectory, filename);
+	const isTrue = await isFileExists(filePath)
+	console.log(isTrue)
+	if (isTrue) {
+		fs.unlink(path.join(imageDirectory, filename), (err) => {
+			if (err) {
+				throw new Error(`Error deleting image ${filename}:`, err)
+			}
+		});
+	}
+};
 
-module.exports = { 
+
+module.exports = {
 	checkFileExists,
 	deleteImage
 };

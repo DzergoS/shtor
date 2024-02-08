@@ -175,10 +175,17 @@
     display: flex;
     justify-content: space-between;
 }
+/*.images__edit .delete {*/
 .images__edit .delete {
     background-color: red;
     color: #fff;
     height: 36.5px;
+}
+.images__edit .images__edit-item.add {
+    min-height: 324px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .images__edit .images__edit-item .delete {
     aspect-ratio: 1 / 1;
@@ -216,4 +223,14 @@
 .product__edit .delete__product:hover {
     background-color: red;
     color: #fff;
+}
+
+.product__edit .edit__item {
+    margin-bottom: 10px;
+}
+.product__edit .edit__item textarea {
+    min-height: 120px;
+}
+.product__edit .edit__item input {
+    min-width: 300;
 }

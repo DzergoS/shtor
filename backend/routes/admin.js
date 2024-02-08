@@ -21,25 +21,9 @@ adminRouter.post('/product/:id/copy', productController.copyProductById);
 adminRouter.delete('/product/:id', productController.deleteProductById);
 
 
-// adminRouter.post('/upload/image', uploadMiddleware.single('image'), imageController.uploadImage);
-
-adminRouter.post('/product/:id/images/create', uploadMiddleware.single('image'), imageController.createProductImage)
-adminRouter.put('/product/:id/images/update/:imageName', uploadMiddleware.single('image'), imageController.editProductImage)
-adminRouter.delete('/product/:id/images/delete/:imageName', imageController.deleteProductImage)
-
-adminRouter.post('/product/:id/variations/:variationIndex/images/create', uploadMiddleware.single('image'), imageController.addVariationImage)
-adminRouter.put('/product/:id/variations/:variationIndex/images/update/:imageName', uploadMiddleware.single('image'), imageController.editVariationImage)
-adminRouter.delete('/product/:id/variations/:variationIndex/images/delete/:imageName', imageController.deleteVariationImage)
-
-adminRouter.post('/product/:id/seashells/create',
-				 uploadMiddleware.array('images', 2),
-				 errorHandler,
-				 imageController.createSeashellImages)
-adminRouter.put('/product/:id/seashells/:seashellIndex/update',
-				uploadMiddleware.array('images', 2),
-				errorHandler,
-				imageController.editSeashellImages)
-adminRouter.delete('/product/:id/seashells/:seashellIndex/delete', imageController.deleteSeashellImages)
+adminRouter.post('/upload/image', uploadMiddleware.single('image'), imageController.createProductImage);
+adminRouter.post('/edit/image', uploadMiddleware.single('image'), imageController.editProductImage);
+adminRouter.post('/delete/image', imageController.deleteProductImage);
 
 module.exports = adminRouter;
 

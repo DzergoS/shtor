@@ -5,226 +5,66 @@ const sendResponse = require('./../utils/response'),
 
 const createProductImage = async (req, res) => {
     try {
-      if (req.fileValidationError) {
-        return sendResponse(res, 400, false, {}, req.fileValidationError)
-      }
-  
-      const { id } = req.params
-      const file = req.file
-  
-      if (!file) {
-        return sendResponse(res, 400, false, {}, 'Image file not found')
-      }
-  
-      await Product.findByIdAndUpdate(
-        id,
-        { $push: { images: file.filename } },
-        { new: true }
-      )
-  
-      return sendResponse(res, 200, true, {}, `Image ${file.filename} uploaded successfully`)
+        const file = req.file;
+        return sendResponse(res, 200, true, { }, `Image ${file.filename} uploaded successfully`);
     } catch (error) {
-      return sendResponse(res, 500, false, {}, 'Error uploading an image')
+        return sendResponse(res, 500, false, {}, 'Error uploading an image');
     }
-}
+};
 
 const editProductImage = async (req, res) => {
-  try {
-    if (req.fileValidationError) {
-        return sendResponse(res, 400, false, {}, req.fileValidationError)
+    try {
+        if (req.fileValidationError) {
+            return res.status(400).json({success: false, message: req.fileValidationError});
+        }
+
+        const {imageName, imageToDelete} = req.body; // Assuming imageToDelete is sent in the request body
+        const file = req.file;
+
+        if (!file) {
+            return res.status(400).json({success: false, message: 'Image file not found'});
+        }
+
+        // Delete the old image if imageToDelete is provided
+        if (imageToDelete) {
+            deleteImage(imageToDelete);
+        }
+
+        // Here you can process the new image file (file.filename) as needed
+
+        return res.status(200).json({
+            success: true,
+            message: `Image changed to ${file.filename} successfully`
+        });
+    } catch (error) {
+        console.error('Error editing an image:', error);
+        return res.status(500).json({success: false, message: 'Error changing an image'});
     }
-
-    const { id, imageName } = req.params
-    const file = req.file
-    
-
-    if (!file) {
-        return sendResponse(res, 400, false, {}, 'Image file not found')
-    }
-
-    deleteImage(imageName)
-
-    await Product.findOneAndUpdate(
-        { _id: id, 'images': imageName },
-        { $set: { 'images.$': file.filename } },
-        { new: true }
-    )
-
-    return sendResponse(res, 200, true, {}, `Image changed on ${file.filename} successfully`)
-  } catch (error) {
-    return sendResponse(res, 500, false, {}, 'Error changing an image')
-  }
 }
 
 const deleteProductImage = async (req, res) => {
-    try{
-        const { id, imageName } = req.params 
+    try {
+        const { imageName } = req.body;
+        console.log('req.body', req.body)
+        // Verify if imageName exists
+        if (!imageName) {
+            return sendResponse(res, 400, false, {}, 'Image name is missing in the request');
+        }
 
-        await Product.findOneAndUpdate(
-            { _id: id },
-            { $pull: { images: imageName } },
-            { new: true }
-        );
+        // Perform the image deletion
+        deleteImage(imageName);
 
-        deleteImage(imageName)
-
-        return sendResponse(res, 200, true, {}, `Image ${imageName} deleted successfully`)
+        return sendResponse(res, 200, true, {}, `Image ${imageName} deleted successfully`);
     } catch (error) {
-        return sendResponse(res, 500, false, {}, 'Error deleting an image')
+        console.error('Error deleting image:', error);
+        return sendResponse(res, 500, false, {}, 'Error deleting an image');
     }
-}
+};
 
-
-const addVariationImage = async (req, res) => {
-  try {
-    if (req.fileValidationError) {
-      return sendResponse(res, 400, false, {}, req.fileValidationError)
-    }
-
-    const { id, variationIndex } = req.params
-    const file = req.file
-
-    if (!file) {
-      return sendResponse(res, 400, false, {}, 'Image file not found')
-    }
-
-    const updatedProduct = await Product.findByIdAndUpdate(
-      id,
-      { $push: { [`variations.${variationIndex}.images`]: file.filename } },
-      { new: true }
-  )
-
-    return sendResponse(res, 200, true, {updatedProduct}, `Image ${file.filename} uploaded successfully`)
-  } catch (error) {
-    return sendResponse(res, 500, false, {}, 'Error uploading an image')
-  }
-}
-
-const editVariationImage = async (req, res) => {
-  try {
-    if (req.fileValidationError) {
-        return sendResponse(res, 400, false, {}, req.fileValidationError)
-    }
-
-    const { id, variationIndex, imageName } = req.params
-    const file = req.file
-    
-
-    if (!file) {
-        return sendResponse(res, 400, false, {}, 'Image file not found')
-    }
-
-    deleteImage(imageName)
-
-    await Product.findOneAndUpdate(
-      { _id: id, [`variations.${variationIndex}.images`]: imageName },
-      { $set: { [`variations.${variationIndex}.images.$`]: file.filename } },
-      { new: true }
-    )
-
-    return sendResponse(res, 200, true, {}, `Image changed on ${file.filename} successfully`)
-  } catch (error) {
-    return sendResponse(res, 500, false, {}, 'Error changing an image')
-  }
-}
-
-const deleteVariationImage = async (req, res) => {
-  try{
-      const { id, variationIndex, imageName } = req.params 
-
-      await Product.findOneAndUpdate(
-        { _id: id },
-        { $pull: { [`variations.${variationIndex}.images`]: imageName } },
-        { new: true },
-      );
-
-      deleteImage(imageName)
-
-      return sendResponse(res, 200, true, {}, `Image ${imageName} deleted successfully`)
-  } catch (error) {
-      return sendResponse(res, 500, false, {}, 'Error deleting an image')
-  }
-}
-
-
-const createSeashellImages = async (req, res) => {
-  try {
-    const { id } = req.params
-    const files = req.files
-
-    if (!files || files.length !== 2) {
-      return sendResponse(res, 400, false, {}, 'Error uploading images. Please, ensure 2 files given')
-    }
-
-    const fileNames = files.map(file => file.filename)
-    await Product.findByIdAndUpdate(
-      id,
-      { $push: { seashells: fileNames }},
-      { new: true }
-    );
-
-    return sendResponse(res, 200, true, {}, `Images was uploaded successfully`)
-  } catch (error) {
-    return sendResponse(res, 500, false, {error}, 'Error uploading an image')
-  }
-}
-
-const editSeashellImages = async (req, res) => {
-  try {
-    const { id, seashellIndex } = req.params
-    const files = req.files
-    
-    if (!files || files.length !== 2) {
-      return sendResponse(res, 400, false, {}, 'Error uploading images. Please, ensure 2 files given')
-    }
-
-    const product = await Product.findById(id)
-    const imagesToDelete = product.seashells[seashellIndex]
-    imagesToDelete.forEach(filename => {
-      deleteImage(filename)
-    })
-    
-    const fileNames = files.map(file => file.filename)
-    await Product.findByIdAndUpdate(
-      id,
-      { $set: { [`seashells.${seashellIndex}`]: fileNames }},
-      { new: true }
-    );
-
-    return sendResponse(res, 200, true, {}, `Images changed successfully`)
-  } catch (error) {
-    return sendResponse(res, 500, false, {}, 'Error changing an image')
-  }
-}
-
-const deleteSeashellImages = async (req, res) => {
-  try{
-      const { id, seashellIndex } = req.params 
-
-      const product = await Product.findById(id)
-      const imagesToDelete = product.seashells[seashellIndex]
-      imagesToDelete.forEach(filename => {
-        deleteImage(filename)
-      })
-  
-      product.seashells.splice(seashellIndex, 1);
-      await product.save();
-
-      return sendResponse(res, 200, true, {}, `Images deleted successfully`)
-  } catch (error) {
-      return sendResponse(res, 500, false, {}, 'Error deleting an image')
-  }
-}
 
 
 module.exports = {
 	  createProductImage,
     editProductImage,
     deleteProductImage,
-    addVariationImage,
-    editVariationImage,
-    deleteVariationImage,
-    createSeashellImages,
-    editSeashellImages,
-    deleteSeashellImages
 }

@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const productSchema = new Schema({
 	group: {type: String, required: true},
-	inStock: {type: Boolean, default: true, required: true},
+	inStock: {type: Boolean, default: false, required: true},
 	name: {
 		en: { type: String },
 		ua: { type: String }

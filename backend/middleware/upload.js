@@ -12,7 +12,7 @@ const uploadMiddleware = multer({
   storage: multer.diskStorage({
     destination: '../productPhotos/',
     filename: (req, file, cb) => {
-		  cb(null, `${Date.now()}-${file.originalname}`)
+		  cb(null, file.originalname)
     },
   }),
   fileFilter: (req, file, cb) => {
@@ -24,7 +24,7 @@ const uploadMiddleware = multer({
 })
 
 const errorHandler = (err, req, res, next) => {
-  if (err) { 
+  if (err) {
     return sendResponse(res, 400, false, {}, `Error uploading an image - ${err.message}`)
   }
 }
