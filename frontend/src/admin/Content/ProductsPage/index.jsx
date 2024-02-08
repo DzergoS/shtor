@@ -220,7 +220,6 @@ const ProductsPage = () => {
 	}
 
 	useEffect(() => {
-		console.log('flex')
 		setRerender(true)
 		setTimeout(() => setRerender(false), 500)
 	}, [lang, currency])
