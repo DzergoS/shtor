@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './FooterLinks.css'
 import FooterIcon from "../../assets/arrow-email.svg";
 import {Link} from "react-router-dom";
-import {PaymentAndDeliveryTitle, PrivacyPolicyTitle, ReturnsAndExchangeTitle} from "info";
+import {PaymentAndDeliveryTitle, PrivacyPolicyTitle, ReturnsAndExchangeTitle, translations} from "info";
 import useAPI from "provider/useAPI";
 import {CHANGE_LANG} from "provider/actions/lang";
 import {ReactComponent as InstIcon} from "assets/inst.svg";
@@ -49,6 +49,9 @@ const FooterLinks = ({ type }) => {
 				<Link className="links-text" to={'/returns'}>
 					<ReturnsAndExchangeTitle lang={lang}/>
 				</Link>
+				<a className="links-text" href="https://t.me/gala_butnotdalis" target="_blank">
+					{translations.header.chat[lang]}
+				</a>
 			</div>
 			<div className="footer-links social">
 				{type === HEADER_MENU

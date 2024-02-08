@@ -201,6 +201,7 @@
     .header .menu-footer-mobile__container .footer-links .links-text {
         margin-top: 16px;
         display: inline-block;
+        cursor: pointer;
     }
     .header .menu-footer-mobile__container .footer-links .links-text:first-of-type {
         margin-top: 0;
@@ -220,5 +221,14 @@
         font-weight: 300;
         line-height: normal;
         cursor: pointer;
+    }
+    .header.absolute .cart-icon__container svg {
+        filter: invert(1);
+    }
+    .footer .custom-language .custom-language__menu {
+        top: 23px;
+    }
+    .header .custom-language .custom-language__menu {
+        top: 33px;
     }
 }
