@@ -6,9 +6,13 @@ import Content from "./Content";
 import {useHistory} from "react-router-dom";
 import api from "../api";
 import Loader from "ui-components/Loader";
+import useAPI from "../provider/useAPI";
+import {CHANGE_CURRENCY} from "../provider/actions/currency";
+import {CHANGE_LANG} from "../provider/actions/lang";
 
 const Admin = () => {
 
+	const {dispatch} = useAPI();
 	const [isLoading, setIsLoading] = useState(true);
 	const history = useHistory();
 
@@ -17,7 +21,18 @@ const Admin = () => {
 	useEffect(() => {
 		reqAuth()
 			.catch(e => history.push('/auth/login'))
-			.finally(() => setIsLoading(false))
+			.finally(() => {
+				setIsLoading(false)
+			})
+
+		dispatch({
+			type: CHANGE_CURRENCY,
+			payload: 'uah',
+		})
+		dispatch({
+			type: CHANGE_LANG,
+			payload: 'ua',
+		})
 	}, [])
 
 	return (<>

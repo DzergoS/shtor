@@ -18,14 +18,20 @@ const Header = () => {
 		<header className="header__admin">
 			<img src={logo} alt="logo" className="logo"/>
 			<div className="lang_currency">
-				<button className={`change__value currency ${currency === 'uah' ? 'active' : ''}`} onClick={() => toggleCurrency('uah')}>uah</button>
+				{/*<button className={`change__value currency ${currency === 'uah' ? 'active' : ''}`} onClick={() => toggleCurrency('uah')}>uah</button>*/}
+				{/*|*/}
+				{/*<button className={`change__value currency ${currency === 'usd' ? 'active' : ''}`} onClick={() => toggleCurrency('usd')}>usd</button>*/}
+				{/*|*/}
+				{/*<button className={`change__value currency ${currency === 'eur' ? 'active' : ''}`} onClick={() => toggleCurrency('eur')}>eur</button>*/}
+				<button className={`change__value language ml20 ${lang === 'ua' ? 'active' : ''}`} onClick={() => {
+					toggleLanguage('ua')
+					toggleCurrency('uah')
+				}}>ua</button>
 				|
-				<button className={`change__value currency ${currency === 'usd' ? 'active' : ''}`} onClick={() => toggleCurrency('usd')}>usd</button>
-				|
-				<button className={`change__value currency ${currency === 'eur' ? 'active' : ''}`} onClick={() => toggleCurrency('eur')}>eur</button>
-				<button className={`change__value language ml20 ${lang === 'ua' ? 'active' : ''}`} onClick={() => toggleLanguage('ua')}>ua</button>
-				|
-				<button className={`change__value language ${lang === 'en' ? 'active' : ''}`} onClick={() => toggleLanguage('en')}>en</button>
+				<button className={`change__value language ${lang === 'en' ? 'active' : ''}`} onClick={() => {
+					toggleLanguage('en')
+					toggleCurrency('usd')
+				}}>en</button>
 			</div>
 		</header>
 	);
