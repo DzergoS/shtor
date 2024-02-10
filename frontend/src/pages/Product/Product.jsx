@@ -36,6 +36,13 @@ const Product = ({match}) => {
 		price: getProductProperty('price'),
 	}), [product, currentVariationIndex, lang])
 
+	useEffect(() => {
+		document.body.classList.add('max1279')
+		return () => {
+			document.body.classList.remove('max1279')
+		}
+	}, [])
+
 	return (
 		<>
 			<Breadcrumbs group={product?.group} name={productText.title} lang={lang}/>

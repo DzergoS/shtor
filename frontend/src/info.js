@@ -2,7 +2,7 @@ import Info from "./pages/Info/Info";
 
 export const PaymentAndDeliveryTitle = ({lang}) => lang === 'ua'
 	? "Оплата і доставка"
-	: "Payment and delivery"
+	: "Payment and Delivery"
 export const PaymentAndDeliveryText = ({lang}) => lang === 'ua'
 	? <>
 
@@ -14,7 +14,7 @@ export const PaymentAndDeliveryText = ({lang}) => lang === 'ua'
 
 export const ReturnsAndExchangeTitle = ({lang}) => lang === 'ua'
 	? "Повернення та обмін"
-	: "Returns and Delivery"
+	: "Returns"
 export const ReturnsAndExchangeText = ({lang}) => lang === 'ua'
 	? <>
 
