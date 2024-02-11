@@ -53,8 +53,18 @@ export const translations = {
 	},
 	main: {
 		utp: {
-			ua: "Над уособленням бренду в одному образі довго думати не довелося. На фото молода Людмила - моя мати. Більшої свободи, чуттєвості, самобутності, сили у погляді ніде не зустрічала. Це те, що транслюю і про що я говорю своїми виробами ",
-			en: "I didn't have to think for long about embodying the brand in a single image. In the photo, a young Lyudmila is my mother. I haven't encountered greater freedom, sensitivity, authenticity, and strength in a gaze anywhere else. This is what I convey and talk about through my products at ",
+			ua: "«Назва SHTOR походить від мого прізвища та є ідеальним симбіозом цінностей, які батьки заклали у виховання. Батько казав: «Правда - гарний шлях до реального себе, без ілюзій і гарних слів.» Це не завжди легко збагнути. Але що б ми робили, якби у нашому житті не було одночасно і чорного і білого. Саме тому, чорний і білий - основні кольори, які використовуються у позиціонуванні. \n" +
+				"Мама ж займає вагоме місце в моєму житті. Вона познайомила мене з мистецтвом, і навчила бачити цей світ прекрасним.\n" +
+				"\n" +
+				"Над ідеєю я замислилась під час перегляду старих родинних фотографій, коли я випадково натрапила на знімок моєї мами. На фото їй тільки 16 років, вона ще не поїхала зі свого маленького рідного села, але вже сповнена віри у себе та майбутнє. Найбільше мене вразив її сильний погляд сповнений цілковитою свободою. І саме цей образ самобутності покладений у бренд.»\n" +
+				"\n" +
+				"-Галина Штор, власниця бренду \n",
+			en: "The name SHTOR comes from my surname and is a perfect symbiosis of my parents and the values they instilled in me. My father always said: \"The truth is a good way to the real you, without illusions and pretty words.\" This is not always easy to understand. But what would we do without black and white in our lives? That is why black and white are the primary colors used in the brand positioning. \n" +
+				"As for my mother, she taught me to see this world as beautiful, introduced me to art, and supported me in all my wildest desires. \n" +
+				"\n" +
+				"As for the idea, it came to my mind while looking through old family photos when I came across a picture of my mother. In the shot, she was only 16 years old and still living in a small village. But she was full of faith in herself and the future. And what struck me the most was her intense look, a whole of complete freedom. This image of identity is embodied in the brand.»\n" +
+				"\n" +
+				"-Galina Shtor, the brand owner",
 		}
 	},
 	footer: {
