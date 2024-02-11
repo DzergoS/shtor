@@ -94,6 +94,9 @@
     }
 }
 @media (max-width: 768px) {
+    .scroller-container {
+        margin-top: 41px;
+    }
     .scroller-container .product-item {
         width: calc(50% - 18px);
     }

@@ -1,14 +1,13 @@
 .utp {
     display: flex;
     flex-direction: row-reverse;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     padding: 240px 0;
 }
 
 .utp h1 {
     margin-top: 0;
-    margin-bottom: 138px;
     white-space: nowrap;
     text-align: right;
     color: black;
@@ -18,7 +17,7 @@
 }
 
 .utp p {
-    margin-top: 102.5px;
+    margin-top: 150px;
     margin-bottom: 0;
     color: black;
     font-size: 18px;
