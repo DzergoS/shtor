@@ -12,13 +12,14 @@ const Products = () => {
 	const rotateElementRef = useRef(null);
 	const [animation, setAnimation] = useState({
 		on: false,
-		maxElements: 15,
+		maxElements: localStorage.getItem('maxElements') ? parseInt(localStorage.getItem('maxElements')) : 15,
 		classList: '',
 	});
 
 	const { on, classList, maxElements } = animation;
 
 	const handleRotateClick = () => {
+		localStorage.setItem('maxElements', "30")
 		setAnimation((prevAnimation) => ({
 			...prevAnimation,
 			on: true,

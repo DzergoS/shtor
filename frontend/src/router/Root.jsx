@@ -41,8 +41,11 @@ const Root = () => {
 				console.error(e)
 			}
 		}
-
 		getProducts();
+
+		const handleBeforeUnload = () => localStorage.removeItem('maxElements');
+		window.addEventListener('beforeunload', handleBeforeUnload);
+		return () => window.removeEventListener('beforeunload', handleBeforeUnload);
 	}, [])
 
 	const { infoPages: { paymentDelivery, care, privacyPolicy, returnsExchange, thankYou, thankYouSubscribe } } = translations;
