@@ -6,7 +6,7 @@
     align-items: flex-end;
 }
 
-.footer  .footer-title {
+.footer .footer-title {
     margin-bottom: 24px;
     margin-top: 0;
 }
@@ -70,8 +70,17 @@
         align-items: flex-start;
     }
 
+
+    .footer .homeBtn {
+        margin-bottom: 16px;
+    }
+    .footer .footer-title {
+        margin-bottom: 12px;
+        padding-right: 14%;
+    }
+
     .footer .footer-logo {
-        margin-bottom: 50px;
+        margin-bottom: 42px;
         width: 100%;
     }
 

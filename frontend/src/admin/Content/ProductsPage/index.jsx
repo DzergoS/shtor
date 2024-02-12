@@ -83,6 +83,7 @@ const ProductsPage = () => {
 
 	useEffect(() => {
 		if (id) setPickedProduct(Array.isArray(data) ? data?.find(item => item?._id === id) : []);
+		else setPickedProduct({})
 	}, [id, data])
 
 
@@ -288,7 +289,7 @@ const ProductsPage = () => {
 													console.log('pickedProduct seashells', pickedProduct.seashells)
 													console.log('pickedProduct filtered', pickedProduct.seashells.filter((itm, idx) => idx !== (pickedProduct.seashells.length - 1)),)
 													await handleNewImage({
-														seashells: pickedProduct.seashells.filter((itm, idx) => idx !== (pickedProduct.seashells.length - 1)),
+														seashells: pickedProduct.seashells.filter((itm, idx) => idx !== index),
 													})
 												}}>
 													Видалити мушлю <i className="bi bi-trash"></i>
@@ -417,8 +418,8 @@ const ProductsPage = () => {
 									<div className="edit__item" key={key}>
 										{key}: {pickedProduct[key]?.[lang]
 											? key === 'description'
-												? <textarea name={key} defaultValue={pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/>
-												: <><input name={key} defaultValue={pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/> {key === 'price' ? translations.currencySymbol[currency] : ""}</>
+												? <textarea name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/>
+												: <><input name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/> {key === 'price' ? translations.currencySymbol[currency] : ""}</>
 											: Array.isArray(pickedProduct[key])
 												? pickedProduct[key].map( item => Array.isArray(item)
 													? item.join(', ')

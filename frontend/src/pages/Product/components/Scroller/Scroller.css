@@ -106,6 +106,7 @@
     }
     .scroller-container .progress-bar__container {
         position: relative;
+        padding-top: 28px;
     }
     .scroller-container .progress-bar__container .progress-bar {
         display: block;

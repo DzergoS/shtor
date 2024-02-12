@@ -109,7 +109,7 @@ const ProductInfo = ({
     const pickVariation = (variationIndex, key) => {
         if (slider) {
             if (key !== 'seashell') setCurrentVariationIndex(variationIndex)
-            if (isImagesInVariations || (isSeashellsInProduct && key === 'seashell')) {
+            if (isSeashellsInProduct && key === 'seashell') {
                 const slideIndex = isSeashellsInProduct ? getSeashellIndex(seashells, variationIndex) : getImageIndexInVariation(variations, variationIndex)
                 slider.slickGoTo(slideIndex);
                 popUpSlider?.slickGoTo(slideIndex);
