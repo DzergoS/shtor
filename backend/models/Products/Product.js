@@ -15,12 +15,13 @@ const productSchema = new Schema({
 		en: { type: Number, min: 0 },
 		ua: { type: Number, min: 0 },
 	},
-	color: [{type: String}],
+	color: [{type: String}], 
 	size: [{type: String}],
 	seashells: [[{type: String}]],
 	images: [{type: String}],
 	feature: {type: String},
 	orderIndex: {type: Number, required: true, unique: true},
+	isVisible: {type: Boolean, default: false, required: true},
 	variations: [{
 		name: {
 			en: { type: String },
