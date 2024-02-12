@@ -48,7 +48,7 @@ const Scroller = () => {
             return array;
         };
 
-        return shuffleArray([...(Array.isArray(products) ? products : [])]);
+        return shuffleArray([...(Array.isArray(products) ? products.filter(product => product.isVisible) : [])]);
     }, [products.length, id, variationIndex]);
 
     return (

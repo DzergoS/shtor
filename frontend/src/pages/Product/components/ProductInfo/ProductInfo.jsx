@@ -16,11 +16,12 @@ import Description from "./Description/Description";
 import CartPickerPopUp from "../CartPickerPopUp/CartPickerPopUp";
 import {formatPrice} from "../../../../utils/formatPrice";
 import {formatSize} from "../../../../utils/formatSize";
+import formatDescForSilverAttach from "../../../../utils/formatDescForSilverAttach";
 
 const ProductInfo = ({
      product, currentOptions, setCurrentOptions,
      currentVariationIndex, setCurrentVariationIndex, productText,
-}) => {
+ }) => {
     const {state: { lang, cart, currency }, dispatch} = useAPI()
     const [slider, setSlider] = useState(null)
     const [popUpSlider, setPopUpSlider] = useState();
@@ -122,12 +123,6 @@ const ProductInfo = ({
     const showImagePicker = product?.name?.en?.toLowerCase() === 'seashell pendant' || product?.name?.en?.toLowerCase() === 'seashell set'
     const productTitle = useMemo(() => `${group}/${title}`, [product, lang])
 
-    console.log('currentAttachment', currentAttachment)
-    console.log('product', product)
-    const showPearlDesc = useMemo(() => {
-        return product?.name?.en === "pearl pendant" && currentAttachment === 'Срібний ланцюг';
-    }, [params.id, lang, currentAttachment])
-
     return (
         <div className={`product-info ${images?.length ? 'slides' : ''}`}>
             {product
@@ -143,7 +138,12 @@ const ProductInfo = ({
                     />
                     <div className="info-right">
                         <h2 className="product-title">{productTitle}</h2>
-                        <Description description={showPearlDesc ? translations.product.pearlDesc[lang] : description} currentSize={currentSize}/>
+                        <Description
+                            description={isAttachmentInVariations
+                                ? formatDescForSilverAttach(description, currentAttachment, lang)
+                                : description}
+                            currentSize={currentSize}
+                        />
 
                         {showVariations
                             ? <div className="tabs-variations">

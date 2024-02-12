@@ -21,7 +21,6 @@ const Header = () => {
     const removeBodyNoScroll = () => document.body.classList.remove("no__moves-buddy")
     const closeMenu = (e) => {
         if (isMobile) {
-            console.log()
             if (!e || !e.target.classList.contains('main-language')) {
                 setIsOpenMenu(false);
                 removeBodyNoScroll();

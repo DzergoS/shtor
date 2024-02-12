@@ -52,7 +52,6 @@
 
 .product-list__item.empty {
     pointer-events: none;
-    display: none;
 }
 
 .product-list__item .outOfStock {

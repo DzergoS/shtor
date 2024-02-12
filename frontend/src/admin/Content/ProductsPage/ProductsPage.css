@@ -234,3 +234,7 @@
 .product__edit .edit__item input {
     min-width: 300px;
 }
+
+.inShow svg {
+    fill: burlywood;
+}

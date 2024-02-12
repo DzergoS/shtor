@@ -148,7 +148,6 @@ const ProductsPage = () => {
 	const handleNewImage = async (newValueObj) => {
 		try {
 			const {data: {data: updatedProduct}} = await api.products.updateKeyValueById({_id: pickedProduct._id, ...newValueObj});
-			console.log(updatedProduct)
 			setPickedProduct(updatedProduct)
 		} catch (e) {
 			console.error(e)
@@ -344,8 +343,8 @@ const ProductsPage = () => {
 																	variations: newVariations
 																})
 															}}>
-																<i className="bi bi-trash"></i>
-															</Button>)
+															<i className="bi bi-trash"></i>
+														</Button>)
 														: ""}
 												</div>
 											</div>
@@ -417,19 +416,19 @@ const ProductsPage = () => {
 								return (
 									<div className="edit__item" key={key}>
 										{key}: {pickedProduct[key]?.[lang]
-											? key === 'description'
-												? <textarea name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/>
-												: <><input name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/> {key === 'price' ? translations.currencySymbol[currency] : ""}</>
-											: Array.isArray(pickedProduct[key])
-												? pickedProduct[key].map( item => Array.isArray(item)
-													? item.join(', ')
-													: `${item}, `)
-												: <input name={key} defaultValue={pickedProduct[key]} onBlur={(e) => updateKey(key, e.target.value)}/>
-										}
+										? key === 'description'
+											? <textarea name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/>
+											: <><input name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/> {key === 'price' ? translations.currencySymbol[currency] : ""}</>
+										: Array.isArray(pickedProduct[key])
+											? pickedProduct[key].map( item => Array.isArray(item)
+												? item.join(', ')
+												: `${item}, `)
+											: <input name={key} defaultValue={pickedProduct[key]} onBlur={(e) => updateKey(key, e.target.value)}/>
+									}
 									</div>
 								)
 							}
-					})}
+						})}
 				</div>
 				: <>
 					<label className="search__label">
@@ -438,6 +437,7 @@ const ProductsPage = () => {
 					</label>
 
 					<div className="list-titles">
+						<div className="pro-image">Show</div>
 						<div className="pro-image">В наявності</div>
 						<div className="pro-image">Картинка</div>
 						<div className="pro-title">Ім'я</div>
@@ -465,8 +465,15 @@ const ProductsPage = () => {
 															{...provided.dragHandleProps}
 															{...provided.draggableProps}
 														>
-															<div className="inUse">
+															<div className="inShow">
 																<Loader isActive={loading === item?._id}/>
+																<Checkbox checked={item?.isVisible}
+																		  onChange={() => changeKeyValue({
+																			  _id: item._id,
+																			  isVisible: !item.isVisible
+																		  })}/>
+															</div>
+															<div className="inUse">
 																<Checkbox checked={item?.inStock}
 																		  onChange={() => changeKeyValue({
 																			  _id: item._id,

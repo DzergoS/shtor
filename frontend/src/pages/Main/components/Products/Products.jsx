@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 import seeMore from 'assets/seeMore.jpg'
 
@@ -16,7 +16,7 @@ const Products = () => {
 		classList: '',
 	});
 
-	const { on, classList, maxElements } = animation;
+	const { maxElements } = animation;
 
 	const handleRotateClick = () => {
 		localStorage.setItem('maxElements', "30")
@@ -36,7 +36,7 @@ const Products = () => {
 
 	return (<>
 		<div className="product-list" id="product-list">
-			{(Array.isArray(products) ? products : []).filter(product => product.inStock).slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
+			{(Array.isArray(products) ? products : []).filter(product => product.isVisible).slice(0, maxElements).map((product, index) => <ProductItem product={product} key={index} index={index}/>)}
 		</div>
 		{maxElements < products?.length
 			? <div
