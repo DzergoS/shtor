@@ -19,20 +19,20 @@ module.exports = [
 			"Brown"
 		],
 		"images": [
-			"IMG_1030.png",
-			"IMG_1058.png",
-			"IMG_1061.png",
+			"IMG_1030.jpg",
+			"IMG_1058.jpg",
+			"IMG_1061.jpg",
 		],
 		"size": ["21,5", "22", "23,4", "25"],
 		"variations": [{
 			"color": "Black",
-			"images": ["IMG_4014.png", "IMG_4015.png"],
+			"images": ["IMG_4014.jpg", "IMG_4015.jpg"],
 		},{
 			"color": "Dark Brown",
-			"images": ["IMG_4016.png", "IMG_4017.png"],
+			"images": ["IMG_4016.jpg", "IMG_4017.jpg"],
 		},{
 			"color": "Dark Brown",
-			"images": ["IMG_4018.png", "IMG_4019.png"],
+			"images": ["IMG_4018.jpg", "IMG_4019.jpg"],
 		}]
 	},
 	{
@@ -68,7 +68,7 @@ module.exports = [
 				"ua": "Срібло з покриттям родій. Матовий фініш.\nРічкові перли.\nРучна робота. Кожна унікальна.",
 				"en": "Silver with rhodium. Matte finish.\nRiver pearls.\nHandcrafted. Each piece is unique."
 			},
-			"images": ['IMG_0070.png', 'IMG_1042.png'],
+			"images": ['IMG_0070.jpg', 'IMG_1042.jpg'],
 		},{
 			"material": "gold",
 			"description": {
@@ -76,9 +76,9 @@ module.exports = [
 				"en": "Silver with gilding. Matte finish.\nRiver pearl.\nHandcrafted. Each piece is unique."
 			},
 			"images": [
-				'IMG_1316.png',
-				'IMG_1730_2.png',
-				'IMG_1062_1.png',
+				'IMG_1316.jpg',
+				'IMG_1730_2.jpg',
+				'IMG_1062_1.jpg',
 			],
 		}]
 	},
@@ -156,17 +156,17 @@ module.exports = [
 				"ua": "Латунь з нікелем.\nВ комплекті три вощених шнура: 1/2мм чорні,1мм молочний.\nРучна робота. Кожна унікальна."
 			},
 			"images": [
-				'IMG_1770.png',
-				'IMG_1774 8.png',
-				'IMG_1049.png',
-				'IMG_1050.png',
+				'IMG_1770.jpg',
+				'IMG_1774 8.jpg',
+				'IMG_1049.jpg',
+				'IMG_1050.jpg',
 			],
 		}, {
 			"material": "gold",
 			"images": [
-				'IMG_1769.png',
-				'IMG_1066_2.png',
-				'IMG_1775_1.png'
+				'IMG_1769.jpg',
+				'IMG_1066_2.jpg',
+				'IMG_1775_1.jpg'
 			],
 			"description": {
 				"en": "Brass-gilding 24k.\nThree waxed cords included: 1/2mm black, 1mm milky color.\nHandcrafted. Each piece is unique.",
@@ -189,7 +189,7 @@ module.exports = [
 		"variations": [{
 			"attachment": "Срібний ланцюг",
 			"images": [
-				'IMG_1171.png'
+				'IMG_1171.jpg'
 			],
 			"price": {
 				"en": 90,
@@ -197,7 +197,7 @@ module.exports = [
 			},
 		},{
 			"images": [
-				'IMG_1195.png'
+				'IMG_1195.jpg'
 			],
 			"attachment": "Без підвісу",
 			"price": {
@@ -206,7 +206,7 @@ module.exports = [
 			},
 		}, {
 			"attachment": "Срібна орбіта",
-			"images": ['IMG_1729_1.png'],
+			"images": ['IMG_1729_1.jpg'],
 			"price": {
 				"en": 140,
 				"ua": 5500
@@ -231,8 +231,8 @@ module.exports = [
 			"ua": 2300
 		},
 		"images": [
-			'IMG_1188.png',
-			'IMG_1054_1.png',
+			'IMG_1188.jpg',
+			'IMG_1054_1.jpg',
 		]
 	},
 	{
@@ -247,7 +247,7 @@ module.exports = [
 			"ua": "Барочна перлина.\nСрібне вушко.\nКожна унікальна. В комплекті три вощених шнура: 1/2мм чорні, 1мм молочний."
 		},
 		"material": "silver",
-		"images": ['IMG_1167.png'],
+		"images": ['IMG_1167.jpg'],
 		"variations": [{
 			"price": {
 				"en": 85,
@@ -282,7 +282,7 @@ module.exports = [
 		"variations": [{
 			"material": "silver",
 			"images": [
-				'IMG_1314.png'
+				'IMG_1314.jpg'
 			],
 			"description": {
 				"en": "Brass with nickel.\nHandcrafted",
@@ -291,7 +291,7 @@ module.exports = [
 		}, {
 			"material": "gold",
 			"images": [
-				'IMG_1315.png'
+				'IMG_1315.jpg'
 			],
 			"description": {
 				"en": "Brass with gilding 24K.\nHandcrafted",
@@ -305,7 +305,7 @@ module.exports = [
 			"ua": "підвіс мушля"
 		},
 		"size": ["12x6"],
-		"images": ['IMG_1240.png'],
+		"images": ['IMG_1240.jpg'],
 
 		"variations": [{
 			"description": {
@@ -350,7 +350,7 @@ module.exports = [
 		},
 		feature: "w/stone",
 		"size": ["12x6"],
-		"images": ['IMG_1264.png'],
+		"images": ['IMG_1264.jpg'],
 		"variations": [{
 			"price": {
 				"en": 100,
@@ -383,32 +383,32 @@ module.exports = [
 		},
 		"variations": [{
 			"images": [
-				'photo_2023-10-24_11.32_2.png',
+				'photo_2023-10-24_11.32_2.jpg',
 			],
 			"price": {
 				"en": 350,
 				"ua": 13000
 			}
 		}, {
-			"images": ['photo_2023-10-24_11.37_2.png'],
+			"images": ['photo_2023-10-24_11.37_2.jpg'],
 			"price": {
 				"en": 260,
 				"ua": 10000
 			}
 		}, {
-			"images": ['photo_2023-10-24_11.43_1.png'],
+			"images": ['photo_2023-10-24_11.43_1.jpg'],
 			"price": {
 				"en": 230,
 				"ua": 8600
 			}
 		}, {
-			"images": ['photo_2023-10-24_11.45_2.png'],
+			"images": ['photo_2023-10-24_11.45_2.jpg'],
 			"price": {
 				"en": 210,
 				"ua": 8000
 			}
 		}, {
-			"images": ['photo_2023-10-24_11.46_1.png'],
+			"images": ['photo_2023-10-24_11.46_1.jpg'],
 			"price": {
 				"en": 230,
 				"ua": 8600
@@ -420,19 +420,19 @@ module.exports = [
 				"ua": 11800
 			}
 		}, {
-			"images": ['IMAGE_2023-10-24_11_49_41_1.png'],
+			"images": ['IMAGE_2023-10-24_11_49_41_1.jpg'],
 			"price": {
 				"en": 315,
 				"ua": 12000
 			}
 		}, {
-			"images": ['photo_2023-10-24_11.52_1.png'],
+			"images": ['photo_2023-10-24_11.52_1.jpg'],
 			"price": {
 				"en": 600,
 				"ua": 23000
 			}
 		}, {
-			"images": ['photo_2023-10-24_11.53_1.png'],
+			"images": ['photo_2023-10-24_11.53_1.jpg'],
 			"price": {
 				"en": 800,
 				"ua": 30000

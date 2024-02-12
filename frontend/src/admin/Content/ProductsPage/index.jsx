@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import './ProductsPage.css'
-import logo from '../../../assets/product1.png';
+import logo from '../../../assets/product1.jpg';
 import {Redirect, useHistory, useParams} from "react-router-dom";
 import Input from "../../../ui-components/Admin/Input";
 import SubmitButton from "../../../ui-components/Admin/SubmitButton";

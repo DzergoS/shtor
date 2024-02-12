@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import seeMore from 'assets/seeMore.png'
+import seeMore from 'assets/seeMore.jpg'
 
 import './Products.css'
 import useAPI from "provider/useAPI";
