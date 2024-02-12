@@ -241,6 +241,18 @@ export const translations = {
 			ua: "Опис",
 			en: "Description",
 		},
+		pearlDesc: {
+			ua: ("Барочна перлина\n" +
+				"Срібне вушко\n" +
+				"В комплекті три вощених шнура: 1/2мм чорні, 1мм молочний\n" +
+				"Срібний ланцюг з регульованою довжіною 65см і 80см\n" +
+				"Кожна унікальна").split('\n'),
+			en: ("Baroque pearl\n" +
+				"Silver eyelet\n" +
+				"Three waxed cords included: 1/2mm black, 1mm milky color\n" +
+				"Silver chain with adjustable length 65cm and 80cm\n" +
+				"Each piece is unique").split('\n'),
+		},
 		size: {
 			title: {
 				ua: "Розмір",

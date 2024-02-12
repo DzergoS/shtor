@@ -5,6 +5,7 @@ import './Description.css'
 
 const Description = ({description, currentSize}) => {
 	const {state: {lang}} = useAPI();
+	console.log('description', description)
 	return (
 		<div className="tabs-description">
 			<div className="tab-buttons">

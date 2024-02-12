@@ -34,6 +34,8 @@ const ProductInfo = ({
 
     const { group, size, color, seashells, variations } = product || {};
 
+    const params = useParams();
+
     const initialSlide = getImageIndexInVariation(variations, currentVariationIndex) === -1
         ? 0
         : getImageIndexInVariation(variations, currentVariationIndex)
@@ -120,6 +122,11 @@ const ProductInfo = ({
     const showImagePicker = product?.name?.en?.toLowerCase() === 'seashell pendant' || product?.name?.en?.toLowerCase() === 'seashell set'
     const productTitle = useMemo(() => `${group}/${title}`, [product, lang])
 
+    console.log('currentAttachment', currentAttachment)
+    console.log('product', product)
+    const showPearlDesc = useMemo(() => {
+        return product?.name?.en === "pearl pendant" && currentAttachment === 'Срібний ланцюг';
+    }, [params.id, lang, currentAttachment])
 
     return (
         <div className={`product-info ${images?.length ? 'slides' : ''}`}>
@@ -136,7 +143,7 @@ const ProductInfo = ({
                     />
                     <div className="info-right">
                         <h2 className="product-title">{productTitle}</h2>
-                        <Description description={description} currentSize={currentSize}/>
+                        <Description description={showPearlDesc ? translations.product.pearlDesc[lang] : description} currentSize={currentSize}/>
 
                         {showVariations
                             ? <div className="tabs-variations">
