@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './Header.css'
-import logo from '../../assets/logo.jpg';
+import logo from '../../assets/logo.png';
 import useAPI from "../../provider/useAPI";
 import {CHANGE_LANG} from "../../provider/actions/lang";
 import {CHANGE_CURRENCY} from "../../provider/actions/currency";

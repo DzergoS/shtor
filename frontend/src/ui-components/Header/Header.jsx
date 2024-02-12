@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { ReactComponent as CartIcon } from 'assets/cart.svg';
 import { ReactComponent as MenuIcon } from 'assets/menu.svg';
 import { ReactComponent as CrossIcon } from 'assets/cross.svg';
-import logo from 'assets/logo.jpg';
+import logo from 'assets/logo.png';
 import { CHANGE_LANG } from 'provider/actions/lang';
 
 import './Header.css';

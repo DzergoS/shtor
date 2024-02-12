@@ -1,7 +1,7 @@
 // Header.js
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import FooterLogo from "assets/logo-black.jpg";
+import FooterLogo from "assets/logo-black.png";
 import FooterIcon from "assets/arrow-email.svg";
 import './Footer.css';
 import FooterLinks from "../FooterLinks";

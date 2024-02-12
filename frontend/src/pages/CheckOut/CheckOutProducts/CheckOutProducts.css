@@ -18,10 +18,18 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    background-color: black;
 }
 
 .checkout-product .checkout-product__img {
     width: 100%;
+}
+.checkout-product .checkout-product__img.set8jpg {
+    transform: scale(0.75);
+    top: -15%;
+}
+.checkout-product .checkout-product__img.set9jpg {
+    top: 54%;
 }
 
 .checkout-product .checkout-product-desc {
@@ -79,6 +87,11 @@
     cursor: pointer;
 }
 
+@media (min-width: 770px) {
+    .checkout-product__quantity {
+        margin-right: -25px;
+    }
+}
 .checkout-product .price {
     /*min-width: 101px;*/
 }
