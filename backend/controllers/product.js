@@ -68,7 +68,7 @@ const copyProductById = async (req, res) => {
 			return sendResponse(res, 404, false, null, "Product not found.");
 		}
 
-		const {_id, inStock, ...newProduct} = productToCopy.toObject()
+		const {_id, inStock, isVisible, ...newProduct} = productToCopy.toObject()
 
 		// Find the maximum orderIndex value
 		const maxOrderIndexProduct = await Product.findOne().sort({orderIndex: -1});
