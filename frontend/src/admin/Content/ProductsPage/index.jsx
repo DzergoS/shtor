@@ -1,9 +1,6 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './ProductsPage.css'
-import logo from '../../../assets/product1.jpg';
-import {Redirect, useHistory, useParams} from "react-router-dom";
-import Input from "../../../ui-components/Admin/Input";
-import SubmitButton from "../../../ui-components/Admin/SubmitButton";
+import {Redirect, useParams} from "react-router-dom";
 import api from "../../../api";
 import useAPI from "../../../provider/useAPI";
 import {getProductImageName} from "../../../utils/getProduct";
@@ -11,7 +8,6 @@ import ProductImage from "../../../ui-components/ProductImage";
 import {translations} from "../../../info";
 import Checkbox from '@mui/material/Checkbox';
 import {ADD_PRODUCTS} from "../../../provider/actions/products";
-import {data} from "../../../data";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -30,7 +26,7 @@ export const ATTACHMENTS = "ATTACHMENTS";
 
 const ProductsPage = () => {
 
-	const {state: {products, lang, currency}} = useAPI();
+	const {state: {products, lang, currency}, dispatch} = useAPI();
 	const [data, setData] = useState(products)
 	const [redirect, setRedirect] = useState(false);
 	const [loading, setLoading] = useState(false)
@@ -56,7 +52,10 @@ const ProductsPage = () => {
 		setLoading(_id)
 		try {
 			const {data: {success}} = await api.products.deleteById({_id})
-			if (success) setData(curData => curData.filter(prod => prod._id !== _id))
+			if (success) dispatch({
+				type: ADD_PRODUCTS,
+				payload: products.filter(prod => prod._id !== _id),
+			})
 		} catch (e) {
 			console.error(e)
 		} finally {
@@ -73,7 +72,10 @@ const ProductsPage = () => {
 		setLoading(newObj._id)
 		try {
 			const {data: {success, data: responseData}} = await api.products.updateKeyValueById(newObj)
-			if (success) setData(curData => curData.map(prod => prod._id === responseData._id ? responseData : prod))
+			if (success) dispatch({
+				type: ADD_PRODUCTS,
+				payload: products.map(prod => prod._id === responseData._id ? responseData : prod),
+			})
 		} catch (e) {
 			console.error(e)
 		} finally {
@@ -93,7 +95,10 @@ const ProductsPage = () => {
 		try {
 			const {data: { success, data: responseData }} = await api.products.copyById({_id})
 			if (success) {
-				setData(curData => ([...curData, {...responseData, active: true}]))
+				dispatch({
+					type: ADD_PRODUCTS,
+					payload: [...products, {...responseData, active: true}],
+				})
 				scrollDown();
 			}
 		} catch (e) {
@@ -117,7 +122,10 @@ const ProductsPage = () => {
 		// Add dropped item
 		updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
 		// Update State
-		setData(updatedList);
+		dispatch({
+			type: ADD_PRODUCTS,
+			payload: updatedList,
+		})
 		try {
 			setPageLoading(true)
 			api.products.updateOrder(updatedList.map(item => item._id))
@@ -139,22 +147,26 @@ const ProductsPage = () => {
 					})
 					: newValue
 			})
-			if (success) {
-				setPickedProduct(responseData)
-			}
+			if (success) dispatch({
+				type: ADD_PRODUCTS,
+				payload: products.map(prod => prod._id === responseData._id ? responseData : prod),
+			})
 		}
 	}
 
 	const handleNewImage = async (newValueObj) => {
 		try {
-			const {data: {data: updatedProduct}} = await api.products.updateKeyValueById({_id: pickedProduct._id, ...newValueObj});
-			setPickedProduct(updatedProduct)
+			const {data: {data: responseData, success}} = await api.products.updateKeyValueById({_id: pickedProduct._id, ...newValueObj});
+			if (success) dispatch({
+				type: ADD_PRODUCTS,
+				payload: products.map(prod => prod._id === responseData._id ? responseData : prod),
+			})
 		} catch (e) {
 			console.error(e)
 		}
 	}
 
-// Callback for uploading an image
+	// Callback for uploading an image
 	const uploadImage = async (event) => {
 		const file = event.target.files[0];
 		try {
@@ -167,7 +179,7 @@ const ProductsPage = () => {
 		}
 	};
 
-// Callback for deleting an image
+	// Callback for deleting an image
 	const deleteImage = async (imageName) => {
 		try {
 			// Here, you need to specify the image name or ID to delete
@@ -178,7 +190,7 @@ const ProductsPage = () => {
 		}
 	};
 
-// Callback for editing an image
+	// Callback for editing an image
 	const editImage = async (event, imageToDelete) => {
 		const file = event.target.files[0];
 		console.log('file', file)
@@ -192,21 +204,10 @@ const ProductsPage = () => {
 		}
 	};
 
-	const handleDeleteImage = async (newValueObj, imageName) => {
-		try {
-			await deleteImage(imageName);
-			const {data: { data: updatedProduct}} = await api.products.updateKeyValueById({_id: pickedProduct._id, ...newValueObj});
-			setPickedProduct(updatedProduct)
-		} catch (e) {
-			console.error(e)
-		}
-	}
-
 	function generateNewFileName(originalFileName) {
 		const dotIndex = originalFileName.lastIndexOf('.');
 		const extension = originalFileName.substring(dotIndex);
-		const newName = `${Date.now()}${extension}`;
-		return newName;
+		return `${Date.now()}${extension}`;
 	}
 
 	function createNewFileWithModifiedName(originalFile) {
@@ -214,9 +215,7 @@ const ProductsPage = () => {
 		const newFileName = generateNewFileName(originalFile.name);
 
 		// Create a new File object with the modified name
-		const newFile = new File([originalFile], newFileName, { type: originalFile.type });
-
-		return newFile;
+		return new File([originalFile], newFileName, {type: originalFile.type});
 	}
 
 	useEffect(() => {
