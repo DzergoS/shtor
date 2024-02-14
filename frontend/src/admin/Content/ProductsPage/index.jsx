@@ -182,8 +182,31 @@ const ProductsPage = () => {
 	// Callback for deleting an image
 	const deleteImage = async (imageName) => {
 		try {
+			let deleteImage = true;
+			if (pickedProduct?.copiedFromId) {
+				const copiedFromProduct = data.find(product => product._id === pickedProduct.copiedFromId)
+				if (copiedFromProduct?.seashells?.length) {
+					copiedFromProduct.seashells.map(seashellArr =>
+						seashellArr.map(seashell => {
+							if (seashell === imageName) deleteImage = false
+						})
+					)
+				}
+				if (copiedFromProduct?.images?.length) {
+					copiedFromProduct.images.map(image => {
+						if (image === imageName) deleteImage = false
+					})
+				}
+				if (copiedFromProduct?.variations?.length && copiedFromProduct?.variations?.[0]?.images?.length) {
+					copiedFromProduct.variations.map(variation =>
+						variation.images.map(image => {
+							if (image === imageName) deleteImage = false
+						})
+					)
+				}
+			}
 			// Here, you need to specify the image name or ID to delete
-			await api.products.deleteProductImage({ imageName });
+			if (deleteImage) await api.products.deleteProductImage({ imageName });
 			console.log('Image deleted successfully');
 		} catch (error) {
 			console.error('Error deleting image:', error);

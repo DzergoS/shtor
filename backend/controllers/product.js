@@ -80,6 +80,7 @@ const copyProductById = async (req, res) => {
 		// Create a copy of the product with the new orderIndex
 		const copiedProduct = new Product({
 			...newProduct,
+			copiedFromId: _id,
 			orderIndex: orderIndex
 		});
 
