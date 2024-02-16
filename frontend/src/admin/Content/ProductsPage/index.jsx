@@ -182,31 +182,42 @@ const ProductsPage = () => {
 	// Callback for deleting an image
 	const deleteImage = async (imageName) => {
 		try {
-			let deleteImage = true;
-			if (pickedProduct?.copiedFromId) {
-				const copiedFromProduct = data.find(product => product._id === pickedProduct.copiedFromId)
-				if (copiedFromProduct?.seashells?.length) {
-					copiedFromProduct.seashells.map(seashellArr =>
-						seashellArr.map(seashell => {
-							if (seashell === imageName) deleteImage = false
-						})
-					)
-				}
-				if (copiedFromProduct?.images?.length) {
-					copiedFromProduct.images.map(image => {
-						if (image === imageName) deleteImage = false
-					})
-				}
-				if (copiedFromProduct?.variations?.length && copiedFromProduct?.variations?.[0]?.images?.length) {
-					copiedFromProduct.variations.map(variation =>
-						variation.images.map(image => {
-							if (image === imageName) deleteImage = false
-						})
-					)
-				}
-			}
+			const deleteImageIfNotUsed = () => {
+				const otherProducts = data.filter(product => product._id !== pickedProduct._id)
+				return otherProducts.reduce((deleteImage, otherProduct) => {
+					if (!deleteImage) return false; // If deleteImage is already false, return false
+
+					if (otherProduct?.seashells?.length) {
+						otherProduct.seashells.map(seashellArr =>
+							seashellArr.map(seashell => {
+								if (seashell === imageName) deleteImage = false;
+							})
+						);
+					}
+					if (otherProduct?.images?.length) {
+						otherProduct.images.map(image => {
+							if (image === imageName) deleteImage = false;
+						});
+					}
+					if (otherProduct?.variations?.length && otherProduct?.variations?.[0]?.images?.length) {
+						otherProduct.variations.map(variation =>
+							variation.images.map(image => {
+								if (image === imageName) deleteImage = false;
+							})
+						);
+					}
+
+					return deleteImage;
+				}, true); // Initialize deleteImage as true
+			};
 			// Here, you need to specify the image name or ID to delete
-			if (deleteImage) await api.products.deleteProductImage({ imageName });
+			// if (deleteImageIfNotUsed()) await api.products.deleteProductImage({ imageName });
+			if (deleteImageIfNotUsed()) {
+				await api.products.deleteProductImage({ imageName });
+				console.log('Image deleted successfully');
+			} else {
+				console.log('Image is used in other products. Not deleted.');
+			}
 			console.log('Image deleted successfully');
 		} catch (error) {
 			console.error('Error deleting image:', error);
