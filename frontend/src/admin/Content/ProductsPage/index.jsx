@@ -218,7 +218,6 @@ const ProductsPage = () => {
 			} else {
 				console.log('Image is used in other products. Not deleted.');
 			}
-			console.log('Image deleted successfully');
 		} catch (error) {
 			console.error('Error deleting image:', error);
 		}
