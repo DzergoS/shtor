@@ -451,11 +451,15 @@ const ProductsPage = () => {
 										? key === 'description'
 											? <textarea name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/>
 											: <><input name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/> {key === 'price' ? translations.currencySymbol[currency] : ""}</>
-										: Array.isArray(pickedProduct[key])
-											? pickedProduct[key].map( item => Array.isArray(item)
-												? item.join(', ')
-												: `${item}, `)
-											: <input name={key} defaultValue={pickedProduct[key]} onBlur={(e) => updateKey(key, e.target.value)}/>
+										: key === 'size'
+											? pickedProduct.size.length === 1
+												? <><input name={key} defaultValue={rerender ? "" : pickedProduct.size[0]} onBlur={(e) => updateKey(key, [e.target.value])}/> {translations.product.size.cm[lang]}</>
+												: <>{pickedProduct[key].join(' ')} {translations.product.size.cm[lang]}</>
+											: Array.isArray(pickedProduct[key])
+												? pickedProduct[key].map( item => Array.isArray(item)
+													? item.join(', ')
+													: `${item}, `)
+												: <input name={key} defaultValue={pickedProduct[key]} onBlur={(e) => updateKey(key, e.target.value)}/>
 									}
 									</div>
 								)
