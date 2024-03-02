@@ -241,6 +241,12 @@
 }
 
 @media (max-width: 768px) {
+    .product__edit .delete__product {
+        top: initial;
+        background-color: red;
+        color: #fff;
+        bottom: -90px;
+    }
     .list__container .list-items,
     .list__container .list-titles {
         min-width: 858px;
