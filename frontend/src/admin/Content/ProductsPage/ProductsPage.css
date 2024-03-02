@@ -239,3 +239,10 @@
 .inShow svg {
     fill: burlywood;
 }
+
+@media (max-width: 768px) {
+    .list__container .list-items,
+    .list__container .list-titles {
+        min-width: 858px;
+    }
+}

@@ -94,3 +94,16 @@
 .menu__container .link__container.active .link-title {
     color: #fff;
 }
+
+@media (max-width: 768px) {
+    .menu__container {
+        min-width: initial;
+    }
+    .menu__container .menu__container-link {
+        font-size: 0;
+        display: initial;
+    }
+    .menu__container a i {
+        font-size: initial;
+    }
+}
