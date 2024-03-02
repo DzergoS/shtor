@@ -406,8 +406,8 @@ export const translations = {
 			en: "Shipping method",
 		},
 		novaPost: {
-			ua: "Нова Пошта",
-			en: "NOVA POST",
+			ua: "Нова Пошта (доставка тільки по Україні)",
+			en: "NOVA POST (only for Ukraine shipping)",
 		},
 		billingAddress: {
 			ua: "Платіжна адреса",
