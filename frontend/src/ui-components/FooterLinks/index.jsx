@@ -2,7 +2,11 @@ import React, {useState} from 'react';
 import './FooterLinks.css'
 import FooterIcon from "../../assets/arrow-email.svg";
 import {Link} from "react-router-dom";
-import {PaymentAndDeliveryTitle, PrivacyPolicyTitle, ReturnsAndExchangeTitle, translations} from "info";
+import {PaymentAndDeliveryTitle,
+		PrivacyPolicyTitle,
+		ReturnsAndExchangeTitle,
+		SizesTitle,
+		translations} from "info";
 import useAPI from "provider/useAPI";
 import {CHANGE_LANG} from "provider/actions/lang";
 import {ReactComponent as InstIcon} from "assets/inst.svg";
@@ -52,6 +56,9 @@ const FooterLinks = ({ type }) => {
 				<a className="links-text" href="https://t.me/gala_butnotdalis" target="_blank">
 					{translations.header.chat[lang]}
 				</a>
+				<Link className="links-text" to={'/size-guide'}>
+					<SizesTitle lang={lang}/>
+				</Link>
 			</div>
 			<div className="footer-links social">
 				{type === HEADER_MENU
@@ -62,8 +69,8 @@ const FooterLinks = ({ type }) => {
 						<div className={`custom-language ${showMenu ? 'active' : ''}`}>
 							<span className="language__menu-item main-language" onClick={toggleMenu}>{fullSetting}</span>
 							<div className="custom-language__menu">
-								{LANGUAGES.filter(langItem => langItem !== fullSetting).map(langItem =>
-									<span className="language__menu-item" onClick={() => changeItem(langItem)}>{langItem}</span>
+								{LANGUAGES.filter(langItem => langItem !== fullSetting).map((langItem, index) =>
+									<span key={index} className="language__menu-item" onClick={() => changeItem(langItem)}>{langItem} </span>
 								)}
 							</div>
 						</div>
@@ -72,8 +79,8 @@ const FooterLinks = ({ type }) => {
 						<div className={`custom-language ${showMenu ? 'active' : ''}`}>
 							<span className="language__menu-item main-language" onClick={toggleMenu}>{fullSetting}</span>
 							<div className="custom-language__menu">
-								{LANGUAGES.filter(langItem => langItem !== fullSetting).map(langItem =>
-									<span className="language__menu-item" onClick={() => changeItem(langItem)}>{langItem}</span>
+								{LANGUAGES.filter(langItem => langItem !== fullSetting).map((langItem, index) =>
+									<span key={index} className="language__menu-item" onClick={() => changeItem(langItem)}>{langItem}</span>
 								)}
 							</div>
 						</div>

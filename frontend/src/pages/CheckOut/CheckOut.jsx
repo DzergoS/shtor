@@ -66,7 +66,7 @@ const CheckOut = () => {
 		options: fondyOptions,
 		params: {
 			merchant_id: Number(process.env.REACT_APP_MERCH_ID),
-			// merchant_id: process.env.REACT_APP_TEST_MERCH_ID,
+			// merchant_id: Number(process.env.REACT_APP_TEST_MERCH_ID),
 			order_id,
 			currency: currency.toUpperCase(),
 			amount: (orderPrice + deliveryPrice) * 100,
@@ -169,8 +169,8 @@ const CheckOut = () => {
 									? <input name="additional" type="text" className={`additional ${handleError(deliveryDetails.additional)}`} placeholder={translations.cart.apartment[lang]} onChange={handleDeliveryDetailsChange}/>
 									: <div className="click-me" onClick={() => setIsAddDetails(true)}>
 										<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M12 7V17" stroke="#2A353D" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M7 12H17" stroke="#2A353D" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M12 7V17" stroke="#2A353D" stroke-linecap="round" strokeLinejoin="round"/>
+											<path d="M7 12H17" stroke="#2A353D" stroke-linecap="round" strokeLinejoin="round"/>
 										</svg>
 										{translations.cart.addApartment[lang]}
 									</div>

@@ -1,5 +1,3 @@
-import Info from "./pages/Info/Info";
-
 export const PaymentAndDeliveryTitle = ({lang}) => lang === 'ua'
 	? "Оплата і доставка"
 	: "Payment and Delivery"
@@ -35,6 +33,9 @@ export const PrivacyPolicyText = ({lang}) => lang === 'ua'
 
 	</>
 
+export const SizesTitle = ({lang}) => lang === 'ua'
+	? "Розмірна сітка"
+	: "Size guide"
 
 export const translations = {
 	header: {
@@ -99,28 +100,42 @@ export const translations = {
 			},
 			text : {
 				ua: <>
-					<p>- Знімайте прикраси перед контактом з водою та початком процедур по догляду за шкірою обличчя та рук;</p>
-					<p>- Не розпилюйте парфуми, лак для волосся та інші хімічні речовини безпосередньо на виріб;</p>
-					<p>- Уникати взаємодії виробу з лужними миючими засобами, речовинами, що містять хлор і йод, кремами та мазями;</p>
-					<p>- Після кожного використання прикрас необхідно їх протирати м’якою тканиною без ворсу;</p>
-					<p>- Зберігати прикраси потрібно в мішечках, окремо від інших;</p>
-					<p>- Намагайтесь щоб вироби не торкались будь-яких твердих матеріалів, таких як метал;</p>
-					<p>- Під час чистки виробів не користуйтесь водою, будь-якими полірувальними засобами які містять в собі спирт, або ультразвуковими полірувальними засобами;</p>
-					<p>- Не мийте вироби з перлинами - ніжна очистка м’якою тканиною без ворсу буде достатньою;</p>
-					<p>- Метал та природні камені необхідно чистити тільки сухою тканиною та м’якою щіточкою;</p>
-					<p>- Надягати прикраси слід в останню чергу -коли Ви вже одягнені.</p>
-				</>,
+					<h2>Прикраси:</h2>
+					<br></br>
+					<p>- знімайте прикраси перед контактом з водою та початком процедур по догляду за шкірою обличчя та рук;</p>
+					<p>- не розпилюйте парфуми, лак для волосся та інші хімічні речовини безпосередньо на виріб;</p>
+					<p>- уникайте взаємодії виробу з лужними миючими засобами, речовинами, що містять хлор і йод, кремами та мазями;</p>
+					<p>- після кожного використання прикрас необхідно їх протирати м’якою тканиною без ворсу;</p>
+					<p>- зберігати прикраси потрібно в мішечках, окремо від інших;</p>
+					<p>- намагайтесь щоб вироби не торкались будь-яких твердих матеріалів, таких як метал;</p>
+					<p>- метал та природні камені необхідно чистити тільки сухою тканиною та м’якою щіточкою;</p>
+					<p>- надягати прикраси слід в останню чергу - коли ви вже одягнені.</p>
+					<h2>Одяг:</h2>
+					<br></br>
+					<p>- професійна делікатна хімчистка;</p>
+					<p>- допускається делікатне ручне прання;</p>
+					<p>- не можна замочувати вироби з деревиною більше ніж 10 хвилин;</p>
+					<p>- не використовуйте агресивні хімічні речовини при пранні виробів з деревиною;</p>
+					</>,
 				en: <>
-					<p>Exchange and return of products are possible within 14 days after receiving the order.To arrange a return or an exchange of goods, please contact us at: info@shtor.com.ua</p>
-					<p>Make sure that the returned product has not been used, is placed in its original packaging, and contains original tags, price tags, and all additional attachments.</p>
-					<ul>
-						<li>We reserve the right to refuse returns or exchanges if the item does not comply with the above-mentioned rules.</li>
-					</ul>
-					<p>Goods from the OUTLET section and products made according to individual measurements are not subject to return and exchange.</p>
-					<p>You can use any express delivery service for a return (please note that the delivery time should NOT exceed 10 days). SHTOR is not responsible for return shipping costs and customs duties.</p>
-					<p>After dispatching the package, please let us know the tracking number of the parcel and leave a link to the tracking website.</p>
-					<p>Any disputes which do not fall under the Returns and Exchange policy are subject to individual resolvement through negotiation between the parties involved.</p>
-				</>
+					<h2>Jewelry:</h2>
+					<br></br>
+					<p>- remove jewelry before contact with water and starting face and hand skin care procedures;</p>
+					<p>- do not spray perfume, hairspray and other chemicals directly on the product;</p>
+					<p>- avoid interaction of the product with alkaline detergents, substances containing chlorine and iodine, creams and ointments;</p>
+					<p>- after each use of jewelry, it is necessary to wipe them with a soft, lint-free cloth;</p>
+					<p>- jewelry should be stored in bags, separately from others;</p>
+					<p>- try not to let the products touch any hard materials, such as metal;</p>
+					<p>- when cleaning products, do not use water, any polishing agents that contain alcohol, or ultrasonic polishing agents;</p>
+					<p>- metal and natural stones must be cleaned only with a dry cloth and a soft brush;</p>
+					<p>- jewelry should be put on last - when you are already dressed.</p>
+					<h2>Clothes:</h2>
+					<br></br>
+					<p>- professional dry cleaning;</p>
+					<p>- delicate hand wash possible;</p>
+					<p>- don’t soak clothes with wooden details for more than 10 minutes;</p>
+					<p>- don’t use aggressive chemicals for cleaning clothes with wooden details;</p>
+					</>
 			}
 		},
 		paymentDelivery: {
@@ -233,6 +248,28 @@ export const translations = {
 					</ul>
 					<p>If you have subscribed to one of our newsletters, we will process your name, email address, country and information on whether you are interested in womenswear or menswear for the purpose of sending out such a newsletter. You are entitled to unsubscribe to our newsletter at any time by clicking on the unsubscribe link included in each newsletter or by contacting customer service at info@shtor.com.ua </p>
 				</>
+			}
+		},
+		sizeGuide: {
+			title: {
+				ua: "Розмірна сітка",
+				en: "Size guide"
+			},
+			size: {
+				ua: "РОЗМІР",
+				en: "SIZE"
+			},
+			bust: {
+				ua: "ОБ’ЄМ БЮСТУ",
+				en: "BUST"
+			},
+			waist: {
+				ua: "ОБ’ЄМ ТАЛІЇ",
+				en: "WAIST"
+			},
+			hips: {
+				ua: "ОБ’ЄМ СТЕГОН",
+				en: "HIPS"
 			}
 		}
 	},

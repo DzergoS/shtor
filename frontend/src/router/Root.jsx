@@ -6,6 +6,7 @@ import Info from "../pages/Info/Info";
 import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
 import CheckOut from "../pages/CheckOut/CheckOut";
 import Product from "../pages/Product/Product";
+import SizeGuide from "../pages/SizeGuide/index"
 import Header from "../ui-components/Header/Header";
 import Footer from "../ui-components/Footer/Footer";
 import './Root.css';
@@ -48,7 +49,10 @@ const Root = () => {
 		return () => window.removeEventListener('beforeunload', handleBeforeUnload);
 	}, [])
 
-	const { infoPages: { paymentDelivery, care, privacyPolicy, returnsExchange, thankYou, thankYouSubscribe } } = translations;
+	const { infoPages: {
+		paymentDelivery, care, privacyPolicy,
+		returnsExchange, thankYou, thankYouSubscribe
+	} } = translations;
 
 	return (
 		<Router>
@@ -79,6 +83,7 @@ const Root = () => {
 									text={privacyPolicy.text}
 								/>
 							</Route>
+							<Route path="/size-guide" component={SizeGuide}/>
 							<Route path="/care">
 								<Info
 									title={care.title}
