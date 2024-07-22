@@ -154,6 +154,22 @@ const ProductsPage = () => {
 		}
 	}
 
+	const updateKeyWithoutLang = async (key, newValue) => {
+		const updatedSizes = newValue.map((size, index) => ({ index, size }));
+		
+		const {data: {data: responseData, success}} = await api.products.updateKeyValueById({
+		  _id: pickedProduct._id,
+		  [key]: updatedSizes.map(item => item.size),
+		});
+	  
+		if (success) {
+		  dispatch({
+			type: ADD_PRODUCTS,
+			payload: products.map(prod => prod._id === responseData._id ? responseData : prod),
+		  });
+		}
+	  };
+
 	const handleNewImage = async (newValueObj) => {
 		try {
 			const {data: {data: responseData, success}} = await api.products.updateKeyValueById({_id: pickedProduct._id, ...newValueObj});
@@ -451,10 +467,15 @@ const ProductsPage = () => {
 										? key === 'description'
 											? <textarea name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/>
 											: <><input name={key} defaultValue={rerender ? "" : pickedProduct[key][lang]} onBlur={(e) => updateKey(key, e.target.value, true)}/> {key === 'price' ? translations.currencySymbol[currency] : ""}</>
-										: key === 'size'
-											? pickedProduct.size.length === 1
-												? <><input name={key} defaultValue={rerender ? "" : pickedProduct.size[0]} onBlur={(e) => updateKey(key, [e.target.value])}/> {translations.product.size.cm[lang]}</>
-												: <>{pickedProduct[key].join(' ')} {translations.product.size.cm[lang]}</>
+										: key === 'size' ? (
+											<>
+											  <input 
+												name={key} 
+												defaultValue={rerender ? "" : pickedProduct.size.join(' ')} 
+												onBlur={(e) => updateKeyWithoutLang(key, e.target.value.split(' '))} 
+											  /> 
+											  {translations.product.size.cm[lang]}
+											</>)
 											: Array.isArray(pickedProduct[key])
 												? pickedProduct[key].map( item => Array.isArray(item)
 													? item.join(', ')
@@ -464,7 +485,8 @@ const ProductsPage = () => {
 									</div>
 								)
 							}
-						})}
+						})
+					}
 				</div>
 				: <>
 					<label className="search__label">
