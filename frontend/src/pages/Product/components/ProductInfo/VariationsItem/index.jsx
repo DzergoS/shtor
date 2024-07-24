@@ -24,7 +24,7 @@ const VariationsItem = ({variations, currentVariation, setCurrentOption, isInVar
 				const value = typeof variation === 'object' ? variation[0] : variation
 				if (name === 'attachment' && value === 'Без підвісу') return null;
 				return (
-					<li key={variation}>
+					<li key={index}>
 						<CustomRadio
 							checked={value === currentVariation}
 							name={name}

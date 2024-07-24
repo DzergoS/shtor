@@ -73,6 +73,10 @@
 .product-info .tabs-variations .size li:nth-of-type(4) .custom-radio__value::before {
     content: "L";
 }
+.product-info .tabs-variations .size li:nth-of-type(5) .custom-radio__value::before {
+    content: "XL";
+}
+
 
 .product-info .price {
     font-size: 18px;
