@@ -474,7 +474,7 @@ const ProductsPage = () => {
 												defaultValue={rerender ? "" : pickedProduct.size.join(' ')} 
 												onBlur={(e) => updateKeyWithoutLang(key, e.target.value.split(' '))} 
 											  /> 
-											  {translations.product.size.cm[lang]}
+											  {/* {translations.product.size.cm[lang]} */}
 											</>)
 											: Array.isArray(pickedProduct[key])
 												? pickedProduct[key].map( item => Array.isArray(item)

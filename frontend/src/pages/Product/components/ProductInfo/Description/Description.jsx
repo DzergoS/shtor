@@ -22,7 +22,7 @@ const Description = ({description, currentSize}) => {
 					))}
 					{currentSize
 						? <li>
-							{translations.product.size.title[lang]}: {currentSize} {translations.product.size.cm[lang]}
+							{translations.product.size.title[lang]}: {currentSize}
 						</li>
 						: ""
 					}
