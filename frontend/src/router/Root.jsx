@@ -50,7 +50,7 @@ const Root = () => {
 	}, [])
 
 	const { infoPages: {
-		paymentDelivery, care, privacyPolicy,
+		paymentDelivery, care, privacyPolicy, publicOffer, 
 		returnsExchange, thankYou, thankYouSubscribe
 	} } = translations;
 
@@ -81,6 +81,12 @@ const Root = () => {
 								<Info
 									title={privacyPolicy.title}
 									text={privacyPolicy.text}
+								/>
+							</Route>
+							<Route path="/public-offer">
+								<Info
+									title={publicOffer.title}
+									text={publicOffer.text}
 								/>
 							</Route>
 							<Route path="/size-guide" component={SizeGuide}/>

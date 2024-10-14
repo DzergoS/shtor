@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {PaymentAndDeliveryTitle,
 		PrivacyPolicyTitle,
 		ReturnsAndExchangeTitle,
+		PublicOfferTitle,
 		SizesTitle,
 		translations} from "info";
 import useAPI from "provider/useAPI";
@@ -53,12 +54,25 @@ const FooterLinks = ({ type }) => {
 				<Link className="links-text" to={'/returns'}>
 					<ReturnsAndExchangeTitle lang={lang}/>
 				</Link>
+				<Link className="links-text" to={'/public-offer'}>
+					<PublicOfferTitle lang={lang}/>
+				</Link>
 				<a className="links-text" href="https://t.me/gala_butnotdalis" target="_blank">
 					{translations.header.chat[lang]}
 				</a>
 				<Link className="links-text" to={'/size-guide'}>
 					<SizesTitle lang={lang}/>
 				</Link>
+				<div className='paymentCards-container'>
+					<div className='cardImage-container'>
+						<img src='https://pay.fondy.eu/icons/dist/svg/card/mastercard.svg'></img>
+						<span>Mastercard</span>
+					</div>
+					<div className='cardImage-container'>
+						<img src='https://pay.fondy.eu/icons/dist/svg/card/visa.svg'></img>
+						<span>Visa</span>
+					</div>
+				</div>
 			</div>
 			<div className="footer-links social">
 				{type === HEADER_MENU

@@ -61,6 +61,25 @@
     cursor: pointer;
 }
 
+.paymentCards-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.paymentCards-container .cardImage-container {
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.paymentCards-container .cardImage-container span {
+    font-size: 10px;
+}
 
 @media(max-width: 768px) {
     .footer .footer-links {
@@ -94,8 +113,10 @@
     .custom-language .custom-language__menu {
         top: 23px;
     }
+    .paymentCards-container {
+        justify-content: unset;
+    }
 }
-
 
 @media(max-width: 445px) {
     .menu-footer-mobile__container .custom-language__menu {
