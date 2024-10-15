@@ -149,20 +149,18 @@ export const translations = {
 			},
 			text: {
 				ua: <>
-					<p><strong>Шановні клієнти,</strong></p>
-					<p><strong>Зверніть увагу, що всі відправлення здійснюються з нашого складу в Одесі (Україна). У зв'язку з війною в нашій країні визначні зміни в термінах доставки. Виготовлення товару триватиме до 10 робочих днів. Зверніть увагу, що бренд не несе відповідальності за місцеві податки.</strong></p>
+					<p>Шановні клієнти,</p>
+					<p>Зверніть увагу, що всі відправлення здійснюються з нашого складу в Одесі (Україна). У зв'язку з війною в нашій країні визначні зміни в термінах доставки. Виготовлення товару триватиме до 10 робочих днів. Зверніть увагу, що бренд не несе відповідальності за місцеві податки.</p>
 					<ul>
 						<li>ДОСТАВКА В РОСІЮ ТА БІЛОРУСЬ НЕ ДОСТУПНА. Молимося за мир! Стоїмо з Україною!</li>
 					</ul>
-					<p><strong>Міжнародні замовлення:</strong></p>
+					<p>Міжнародні замовлення:</p>
 					<p>Усі міжнародні замовлення відправляються службою Укрпошта та DHL Express.</p>
 					<ul>
 						<li>Стандартна доставка - $30 (10-20 робочих днів)</li>
-						<li>Експрес-доставка - $60 (5-10 робочих днів)</li>
 					</ul>
-					<p><strong>Україна:</strong></p>
+					<p>Україна:</p>
 					<p>Всі замовлення по Україні будуть доставлені службою «Нова Пошта». Термін доставки під час воєнного стану 2-5 робочих днів.</p>
-					<p>Безкоштовна доставка</p>
 				</>,
 				en: <>
 					<p>Dear customers,</p>
@@ -170,15 +168,13 @@ export const translations = {
 					<ul>
 						<li>DELIVERY TO RUSSIA AND BELARUS IS NOT AVAILABLE. We are praying for peace!Stand with Ukraine!</li>
 					</ul>
-					<p><strong>International orders:</strong></p>
+					<p>International orders:</p>
 					<p>All international orders will be shipped by Ukrposhta service and DHL Express.</p>
 					<ul>
 						<li>Standard delivery - $30 (10-20 business days)</li>
-						<li>Express delivery - $60 (5-10 business days)</li>
 					</ul>
-					<p><strong>Ukraine:</strong></p>
+					<p>Ukraine:</p>
 					<p>All orders within Ukraine we will be delivered via the Nova Poshta service. The delivery time during martial law is 2-5 business days.</p>
-					<p>Free delivery</p>
 				</>
 			}
 		},
@@ -598,8 +594,8 @@ export const translations = {
 			en: "Add apartment, suite, etc.",
 		},
 		postalCode: {
-			ua: "Поштовий код",
-			en: "Postal code",
+			ua: "Поштовий код / ВІДДІЛЕННЯ НОВОЇ ПОШТИ (УКРАЇНА)",
+			en: "Postal code / NEW POST OFFICE (UKRAINE)",
 		},
 		city: {
 			ua: "Місто",
