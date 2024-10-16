@@ -70,10 +70,19 @@ const Orders = () => {
 
 	const [redirect, setRedirect] = useState(false);
 
-	// Function to handle the click event and set redirect state
 	const handleOrderClick = (orderId, e) => {
 		if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') setRedirect(`/admin/orders/${orderId}`);
 	};
+
+	const deleteOrder = async (_id) => {
+		setIsLoading("loading")
+		try {
+			await api.order.deleteById({_id})
+			window.location.href = '/admin/orders/';
+		} catch (e) {
+			console.error(e)
+		} 
+	}
 
 	const pickedOrder = useMemo(() => orders.find(item => item?._id === id), [id, orders])
 
@@ -225,7 +234,12 @@ const Orders = () => {
 										<TableCell align="center">{formatTime(row.createdAt)}</TableCell>
 										<TableCell align="center">{formatDate(row.createdAt)}</TableCell>
 										<TableCell scope="row">
-											{row.approved && !row.trackingSent ? <Button variant="contained" onClick={() => setPickedOrderIndex(index)}>трекінг</Button> : ''}
+											<div className='actions'>
+												{row.approved && !row.trackingSent ? <Button variant="contained" onClick={() => setPickedOrderIndex(index)}>трекінг</Button> : ''}
+												<Button className="delete" onClick={() => deleteOrder(row._id)}>
+													<i className="bi bi-trash"></i>
+												</Button>
+											</div>
 										</TableCell>
 									</TableRow>
 								))}

@@ -84,3 +84,13 @@
         width: 100%;
     }
 }
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.actions .delete {
+    color: black;
+}

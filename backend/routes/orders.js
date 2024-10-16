@@ -65,4 +65,6 @@ orderRouter.post('/send-tracking-id', authMiddleware, async (req, res) => {
 	}
 })
 
+orderRouter.delete('/delete/:id', authMiddleware, orderController.deleteOrderById);
+
 module.exports = orderRouter
