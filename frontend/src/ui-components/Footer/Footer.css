@@ -1,9 +1,11 @@
 .footer {
     margin-top: 90px;
     margin-bottom: 287px;
+}
+
+.footer div.columns-container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
 }
 
 .footer .footer-title {
@@ -63,11 +65,10 @@
 }
 
 @media(max-width: 768px) {
-    .footer {
-        margin-top: 90px;
+    .footer div.columns-container {
         margin-bottom: calc(100vh - 350px);
         flex-wrap: wrap;
-        align-items: flex-start;
+        align-items: flex-end;
     }
 
 

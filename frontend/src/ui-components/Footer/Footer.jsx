@@ -53,28 +53,30 @@ const Footer = () => {
 
 	return (
 		<footer className="footer">
-			<div className="footer-logo">
-				<Link to="/" className='homeBtn'>
-					<img src={FooterLogo} alt="footer-main__logo"/>
-				</Link>
-				<p className="footer-title">{translations.footer.stayInformed[lang]}</p>
-				<form method='POST' onSubmit={onSubmit}>
-					<div className={`email-input ${isSuccess ? 'success' : ''} ${error ? 'error' : ''}`}>
-						<input
-							className="email-send"
-							type="email"
-							placeholder="Email"
-							value={isSuccess || error ? translations.footer[isSuccess ? 'thanksSubscribe' : 'tryAgain'][lang] : email}
-							onChange={onChange}
-							disabled={isSuccess || isLoading}
-							onFocus={() => setFocus(true)}
-							onBlur={() => setFocus(false)}
-						/>
-						{focus || isSuccess || error ? "" : <img className="icon-img" src={FooterIcon} alt="icon-arrow" onClick={onSubmit}/>}
-					</div>
-				</form>
+			<Link to="/" className='homeBtn'>
+				<img src={FooterLogo} alt="footer-main__logo"/>
+			</Link>
+			<div className='columns-container'>
+				<div className="footer-logo">
+					<p className="footer-title">{translations.footer.stayInformed[lang]}</p>
+					<form method='POST' onSubmit={onSubmit}>
+						<div className={`email-input ${isSuccess ? 'success' : ''} ${error ? 'error' : ''}`}>
+							<input
+								className="email-send"
+								type="email"
+								placeholder="Email"
+								value={isSuccess || error ? translations.footer[isSuccess ? 'thanksSubscribe' : 'tryAgain'][lang] : email}
+								onChange={onChange}
+								disabled={isSuccess || isLoading}
+								onFocus={() => setFocus(true)}
+								onBlur={() => setFocus(false)}
+							/>
+							{focus || isSuccess || error ? "" : <img className="icon-img" src={FooterIcon} alt="icon-arrow" onClick={onSubmit}/>}
+						</div>
+					</form>
+				</div>
+				<FooterLinks/>
 			</div>
-			<FooterLinks/>
 		</footer>
 	);
 };

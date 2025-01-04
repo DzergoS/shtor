@@ -3,10 +3,6 @@
     flex-direction: column;
     align-items: flex-end;
 }
-.footer .footer-links.social {
-    justify-content: flex-end;
-    align-items: flex-end;
-}
 
 .footer .links-text {
     margin-top: 12px;
@@ -88,9 +84,8 @@
 
     .footer .footer-links.social {
         flex-direction: column-reverse;
-        height: 116px;
-        align-items: flex-end;
-        justify-content: flex-start;
+        height: 100px;
+        justify-content: start;
     }
 
     .footer .link-instagram {
